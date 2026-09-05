@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme {
+  /* Trax brand — warm red scale */
+  --color-brand-50:  #fef5f2;
+  --color-brand-100: #fce8e0;
+  --color-brand-200: #f9cbb9;
+  --color-brand-300: #f4a484;
+  --color-brand-400: #ee7150;
+  --color-brand-500: #e7040d;
+  --color-brand-600: #cb030b;
+  --color-brand-700: #a80209;
+  --color-brand-800: #840108;
+  --color-brand-900: #5e0106;
+  --color-brand-950: #3d0004;
+
+  /* Neutral grays (design system) */
+  --color-neutral-50:  #f7f7f9;
+  --color-neutral-100: #ededf1;
+  --color-neutral-200: #d9d9e0;
+  --color-neutral-300: #b8b8c4;
+  --color-neutral-400: #9090a0;
+  --color-neutral-500: #64656f;
+  --color-neutral-600: #4a4b54;
+  --color-neutral-700: #35363d;
+  --color-neutral-800: #22232a;
+  --color-neutral-900: #14151a;
+  --color-neutral-950: #0f1012;
+}
+
+@layer base {
+  :root {
+    --color-trax-red: #e7040d;
+    --color-trax-red-hover: #cb030b;
+    --color-trax-red-light: #fef5f2;
+    --color-trax-peach: #fce8e0;
+    --color-trax-dark: #0f1012;
+    --color-trax-surface: #f7f7f9;
+    --color-trax-border: #e6e6ec;
+    --color-trax-muted: #64656f;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #0f1012;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+/* Custom utility classes */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Infinite vertical scroll ticker */
+@keyframes scroll-up {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+.ticker-scroll {
+  animation: scroll-up 18s linear infinite;
+}
+
+.ticker-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Hide scrollbar completely across browsers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Infinite horizontal marquee ticker */
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-scroll {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 32s linear infinite;
+}
+
+.marquee-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Subtle thin custom scrollbar for filter card */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa;
+}
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #d4d4d8 transparent;
+}
+

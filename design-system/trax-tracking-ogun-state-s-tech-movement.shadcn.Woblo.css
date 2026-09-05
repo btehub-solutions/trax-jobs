@@ -1,0 +1,23 @@
+/* shadcn theme generated from Trax | Tracking Ogun State's Tech Movement */
+:root {
+    --background: #fafafa;
+    --foreground: #07070a;
+    --card: #fafafa;
+    --card-foreground: #07070a;
+    --popover: #fafafa;
+    --popover-foreground: #07070a;
+    --primary: #ff3333;
+    --primary-foreground: #07070a;
+    --ring: #ff3333;
+    --secondary: #eaeaf1;
+    --secondary-foreground: #0c1222;
+    --muted: #eaeaf1;
+    --muted-foreground: #71717a;
+    --accent: #e7040d;
+    --accent-foreground: #07070a;
+    --destructive: #ef4444;
+    --destructive-foreground: #f4f4fb;
+    --border: #d4d4d8;
+    --input: #d4d4d8;
+    --radius: 0.5rem;
+}
