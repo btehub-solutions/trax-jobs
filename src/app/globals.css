@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Trax brand — warm red scale */
+  /* Trax brand: warm red scale */
   --color-brand-50:  #fef5f2;
   --color-brand-100: #fce8e0;
   --color-brand-200: #f9cbb9;

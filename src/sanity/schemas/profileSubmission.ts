@@ -154,7 +154,7 @@ export const profileSubmission = defineType({
     prepare({ title, subtitle, media, status }) {
       return {
         title: title || "Unnamed submission",
-        subtitle: `${subtitle || "No role"} — ${status || "pending"}`,
+        subtitle: `${subtitle || "No role"} · ${status || "pending"}`,
         media,
       };
     },

@@ -125,7 +125,7 @@ export const jobSubmission = defineType({
     prepare({ title, subtitle, media, status }) {
       return {
         title: title || "Untitled submission",
-        subtitle: `${subtitle || "Unknown company"} — ${status || "pending"}`,
+        subtitle: `${subtitle || "Unknown company"} · ${status || "pending"}`,
         media,
       };
     },

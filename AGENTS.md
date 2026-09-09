@@ -1,4 +1,4 @@
-# AGENTS.md — Trax Jobs
+# AGENTS.md: Trax Jobs
 
 This file gives instructions to any AI coding agent (Claude Code, Cursor, Copilot, or similar) working in this repository. Read this file first, before writing, editing, or generating any code.
 

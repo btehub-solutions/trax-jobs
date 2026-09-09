@@ -226,7 +226,7 @@ export default function AboutPage() {
 
                 <div className="pt-8 sm:pt-10">
                   <Link
-                    href="/submit-job"
+                    href="/about?tab=contact&topic=hiring"
                     className="inline-flex items-center justify-center px-8 py-3.5 rounded-none bg-[#0C1222] hover:bg-[#070b14] text-white text-[14px] font-bold transition-all shadow-xs cursor-pointer"
                   >
                     Hire with Trax Jobs

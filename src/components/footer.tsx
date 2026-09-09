@@ -66,7 +66,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/submit-profile" className="text-zinc-400 hover:text-[#E7040D] transition-colors font-medium inline-flex items-center gap-1">
+                <Link href="/about?tab=contact&topic=talent" className="text-zinc-400 hover:text-[#E7040D] transition-colors font-medium inline-flex items-center gap-1">
                   <span>Submit your profile</span>
                   <ArrowUpRight size={13} weight="bold" />
                 </Link>
@@ -86,7 +86,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/submit-job" className="text-zinc-400 hover:text-[#E7040D] transition-colors font-medium inline-flex items-center gap-1">
+                <Link href="/about?tab=contact&topic=hiring" className="text-zinc-400 hover:text-[#E7040D] transition-colors font-medium inline-flex items-center gap-1">
                   <span>Post an open job</span>
                   <ArrowUpRight size={13} weight="bold" />
                 </Link>

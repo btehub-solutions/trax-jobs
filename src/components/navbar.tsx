@@ -58,7 +58,7 @@ export function Navbar() {
           {/* Right: Submit a Job Pill Button */}
           <div className="hidden sm:flex items-center gap-4">
             <Link
-              href="/submit-job"
+              href="/about?tab=contact&topic=hiring"
               className="inline-flex items-center justify-center px-7 py-2.5 rounded-full text-[14px] font-semibold bg-[#fce8e0] text-[#E7040D] hover:bg-[#f9cbb9] transition-colors"
             >
               Submit a job
@@ -68,7 +68,7 @@ export function Navbar() {
           {/* Mobile menu button */}
           <div className="flex md:hidden items-center gap-3">
             <Link
-              href="/submit-job"
+              href="/about?tab=contact&topic=hiring"
               className="px-4 py-1.5 rounded-full text-xs font-semibold bg-[#fce8e0] text-[#E7040D]"
             >
               Submit a job

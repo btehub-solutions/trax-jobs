@@ -97,8 +97,8 @@ export function TestimonialsTrustSection() {
         }}
       />
 
+      {/* Header: constrained */}
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
-        
         {/* Header Row */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
           <div>
@@ -106,7 +106,7 @@ export function TestimonialsTrustSection() {
               <Quotes size={14} weight="bold" />
               <span>Verified Candidate Stories</span>
             </div>
-            
+
             <h2 className="text-[32px] sm:text-[44px] lg:text-[48px] font-extrabold tracking-[-0.03em] text-zinc-950 leading-[1.15]">
               Why people trust us
             </h2>
@@ -133,68 +133,67 @@ export function TestimonialsTrustSection() {
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Testimonials Scrolling Marquee (Infinite & Hover Pause) */}
-        <div className="overflow-hidden w-full -mx-6 sm:-mx-10 lg:-mx-16 px-6 sm:px-10 lg:px-16">
-          <div className="marquee-scroll flex gap-6 pb-6 pt-2">
-            {[...TESTIMONIALS, ...TESTIMONIALS].map((t, idx) => (
-              <div
-                key={idx}
-                className="w-[310px] sm:w-[350px] shrink-0 bg-white rounded-none border border-zinc-200/80 shadow-[0_8px_24px_-4px_rgba(15,16,18,0.05)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.1)] hover:-translate-y-1 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between group cursor-grab active:cursor-grabbing"
-              >
-                {/* User Identity & Avatar */}
-                <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="flex items-center gap-3">
-                      <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-white shadow-xs shrink-0 ring-1 ring-zinc-200/80 bg-[#fce8e0] flex items-center justify-center">
-                        <Image
-                          src={t.avatar}
-                          alt={t.name}
-                          fill
-                          unoptimized
-                          sizes="44px"
-                          className="object-cover object-top"
-                        />
+      {/* Marquee: full bleed */}
+      <div className="w-full overflow-hidden relative z-10">
+        <div className="marquee-scroll flex gap-6 pb-6 pt-2 pl-6 sm:pl-10 lg:pl-16">
+          {[...TESTIMONIALS, ...TESTIMONIALS].map((t, idx) => (
+            <div
+              key={idx}
+              className="w-[310px] sm:w-[350px] shrink-0 bg-white rounded-none border border-zinc-200/80 shadow-[0_8px_24px_-4px_rgba(15,16,18,0.05)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.1)] hover:-translate-y-1 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between group cursor-grab active:cursor-grabbing"
+            >
+              {/* User Identity & Avatar */}
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-white shadow-xs shrink-0 ring-1 ring-zinc-200/80 bg-[#fce8e0] flex items-center justify-center">
+                      <Image
+                        src={t.avatar}
+                        alt={t.name}
+                        fill
+                        unoptimized
+                        sizes="44px"
+                        className="object-cover object-top"
+                      />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-1">
+                        <h3 className="text-[15px] font-bold text-zinc-950 leading-tight">
+                          {t.name}
+                        </h3>
+                        <SealCheck size={14} weight="fill" className="text-[#E7040D]" />
                       </div>
-                      <div>
-                        <div className="flex items-center gap-1">
-                          <h3 className="text-[15px] font-bold text-zinc-950 leading-tight">
-                            {t.name}
-                          </h3>
-                          <SealCheck size={14} weight="fill" className="text-[#E7040D]" />
-                        </div>
-                        <p className="text-[11.5px] font-medium text-zinc-500">
-                          {t.role}
-                        </p>
-                      </div>
+                      <p className="text-[11.5px] font-medium text-zinc-500">
+                        {t.role}
+                      </p>
                     </div>
                   </div>
-
-                  {/* Quote Body */}
-                  <p className="text-[13.5px] sm:text-[14px] text-zinc-600 leading-[1.7] mb-6">
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
                 </div>
 
-                {/* Footer Rating & Verified Hire Chip */}
-                <div className="pt-4 border-t border-zinc-100 flex items-center justify-between">
-                  {/* 5 Stars */}
-                  <div className="flex items-center gap-0.5 text-amber-400">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={15} weight="fill" />
-                    ))}
-                  </div>
-
-                  {/* Tag */}
-                  <span className="text-[10.5px] font-bold text-[#E7040D] bg-[#fce8e0] px-2.5 py-0.5 rounded-full">
-                    {t.hireType}
-                  </span>
-                </div>
+                {/* Quote Body */}
+                <p className="text-[13.5px] sm:text-[14px] text-zinc-600 leading-[1.7] mb-6">
+                  &ldquo;{t.quote}&rdquo;
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
 
+              {/* Footer Rating & Verified Hire Chip */}
+              <div className="pt-4 border-t border-zinc-100 flex items-center justify-between">
+                {/* 5 Stars */}
+                <div className="flex items-center gap-0.5 text-amber-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={15} weight="fill" />
+                  ))}
+                </div>
+
+                {/* Tag */}
+                <span className="text-[10.5px] font-bold text-[#E7040D] bg-[#fce8e0] px-2.5 py-0.5 rounded-full">
+                  {t.hireType}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-# Trax Jobs — Product Requirements Document
+# Trax Jobs: Product Requirements Document
 
 **Product:** Trax Jobs
 **Parent brand:** Trax Media Ltd (trax.ng)
@@ -96,15 +96,15 @@ flowchart TD
 **Purpose:** Convert visitors into job seekers or submitters. Establish trust through Trax's existing brand authority.
 
 **Sections, top to bottom:**
-1. Navbar — Find Jobs, Hire a Talent, Companies, About Us, Submit a Job (button)
-2. Hero — headline, subhead, search bar (role, skill, or company)
-3. Explore opportunities that match your experience — experience level filter chips (Entry, Mid, Senior, Internship) plus a horizontal job card row, links into Jobs listing pre filtered
-4. Everyone is learning these now — editorial content curated by Trax, showing hub names and the skills currently trending there. Static, no public links out, no submission flow
-5. Level up your career — three to four value proposition cards
-6. We are here for every step of your search — three step process block: Search, Apply, Grow
-7. Why people trust us — trust signals (stats and or credibility statements)
-8. CTA band — Submit Your Profile
-9. Discover opportunity in your field — category grid linking into filtered Jobs listing
+1. Navbar: Find Jobs, Hire a Talent, Companies, About Us, Submit a Job (button)
+2. Hero: headline, subhead, search bar (role, skill, or company)
+3. Explore opportunities that match your experience: experience level filter chips (Entry, Mid, Senior, Internship) plus a horizontal job card row, links into Jobs listing pre filtered
+4. Everyone is learning these now: editorial content curated by Trax, showing hub names and the skills currently trending there. Static, no public links out, no submission flow
+5. Level up your career: three to four value proposition cards
+6. We are here for every step of your search: three step process block: Search, Apply, Grow
+7. Why people trust us: trust signals (stats and or credibility statements)
+8. CTA band: Submit Your Profile
+9. Discover opportunity in your field: category grid linking into filtered Jobs listing
 10. Footer
 
 **States:** No empty state needed, this is a static marketing page. Job card rows should have a loading skeleton while data fetches.
@@ -182,14 +182,14 @@ flowchart TD
 
 ### 5.5 About Us (tab group)
 
-- **About Us** — Trax Jobs is the employment arm of Trax, the newsroom already tracking Africa's tech movement. Same standards, same ecosystem, now applied to hiring.
-- **Careers** — Trax's own internal openings, reusing the existing Careers page pattern (role overview, what you will do, what we look for, apply CTA). Content pulled directly from the live Trax Careers page.
-- **FAQ** — sample entries to seed the section:
+- **About Us**: Trax Jobs is the employment arm of Trax, the newsroom already tracking Africa's tech movement. Same standards, same ecosystem, now applied to hiring.
+- **Careers**: Trax's own internal openings, reusing the existing Careers page pattern (role overview, what you will do, what we look for, apply CTA). Content pulled directly from the live Trax Careers page.
+- **FAQ**: sample entries to seed the section:
   - How do listings get on Trax Jobs? Every job, company, and talent profile is reviewed by the Trax team before it goes live.
   - Can I post a job myself? Not directly. Submit your opening and Trax will review and publish it.
   - Is Trax Jobs free for job seekers? Yes, browsing and applying is free.
-- **Safety** — guidance for job seekers: verify company details before sharing personal information, never pay to apply for a role, report any listing that feels off directly to Trax.
-- **Contact** — general contact form: name, email, message. Intro line: "Have a question we have not answered yet? Reach out directly."
+- **Safety**: guidance for job seekers: verify company details before sharing personal information, never pay to apply for a role, report any listing that feels off directly to Trax.
+- **Contact**: general contact form: name, email, message. Intro line: "Have a question we have not answered yet? Reach out directly."
 
 ---
 

@@ -11,9 +11,14 @@ import {
   Users,
   Clock,
 } from "@phosphor-icons/react";
-import { COURSES_DATA } from "@/data/courses";
+import { COURSES_DATA, CourseDetail } from "@/data/courses";
 
-export function TrendingSkillsSection() {
+interface TrendingSkillsSectionProps {
+  courses?: CourseDetail[];
+}
+
+export function TrendingSkillsSection({ courses }: TrendingSkillsSectionProps = {}) {
+  const displayCourses = courses && courses.length > 0 ? courses : COURSES_DATA;
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = (direction: "left" | "right") => {
@@ -83,10 +88,10 @@ export function TrendingSkillsSection() {
           ref={scrollContainerRef}
           className="flex items-stretch gap-6 overflow-x-auto pb-4 pt-1 snap-x scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
         >
-          {COURSES_DATA.map((course) => (
+          {displayCourses.map((course) => (
             <Link
-              key={course.id}
-              href={`/learning/${course.id}`}
+              key={course.id || course.slug}
+              href={`/learning/${course.slug || course.id}`}
               className="w-[320px] sm:w-[360px] md:w-[380px] shrink-0 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start cursor-pointer block"
             >
               <div>

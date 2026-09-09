@@ -30,6 +30,8 @@ export interface CourseDetail {
     requirement: string;
     bulletPoints: string[];
   };
+  enrollmentLink?: string;
+  whatsappNumber?: string;
 }
 
 export const COURSES_DATA: CourseDetail[] = [

@@ -18,7 +18,14 @@ import { Job } from "@/types";
 /* ─────────────────────────────────────────────────────────────
    Company Logos (Authentic Vector Marks & Brand Geometry)
 ───────────────────────────────────────────────────────────── */
-function CompanyMark({ name }: { name: string }) {
+function CompanyMark({ name, logo }: { name: string; logo?: string }) {
+  if (logo) {
+    return (
+      <div className="w-12 h-12 rounded-none bg-white border border-zinc-200/90 flex items-center justify-center p-1 shrink-0 overflow-hidden shadow-2xs">
+        <Image src={logo} alt={name} width={44} height={44} className="w-full h-full object-contain" />
+      </div>
+    );
+  }
   const n = name.toLowerCase();
   if (n.includes("paystack")) {
     return (
@@ -139,16 +146,19 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
       <div>
         <div className="flex items-start justify-between gap-6 mb-3">
           <div className="flex items-start gap-4">
-            <CompanyMark name={job.company.name} />
+            <CompanyMark name={job.company.name} logo={job.company.logo} />
             <div>
-              <Link href={`/jobs/${job.id}`}>
+              <Link href={`/jobs/${job.slug || job.id}`}>
                 <h3 className="text-[18px] sm:text-[20px] font-black text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight">
                   {job.title}
                 </h3>
               </Link>
-              <p className="text-[14px] font-medium text-zinc-700 mt-0.5">
+              <Link
+                href={`/companies/${job.company.slug || job.company.name.toLowerCase()}`}
+                className="text-[14px] font-medium text-zinc-700 hover:text-[#E7040D] transition-colors mt-0.5 inline-block"
+              >
                 {job.company.name}
-              </p>
+              </Link>
             </div>
           </div>
 
@@ -262,7 +272,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
 
         {/* Details Button (Navigates to Job Detail Page) */}
         <Link
-          href={`/jobs/${job.id}`}
+          href={`/jobs/${job.slug || job.id}`}
           className="inline-flex items-center gap-1.5 px-4 py-2 rounded-none bg-[#E7040D] hover:bg-[#CB030B] text-white text-[12.5px] font-bold shadow-2xs transition-all cursor-pointer"
         >
           <span>Details</span>

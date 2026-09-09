@@ -6,6 +6,10 @@ import {
   COMPANY_BY_SLUG_QUERY,
   PUBLISHED_TALENT_QUERY,
   TALENT_BY_SLUG_QUERY,
+  PUBLISHED_COURSES_QUERY,
+  COURSE_BY_SLUG_QUERY,
+  PUBLISHED_GUIDES_QUERY,
+  GUIDE_BY_SLUG_QUERY,
 } from "./queries";
 
 /**
@@ -45,4 +49,24 @@ export async function fetchPublishedTalent() {
 
 export async function fetchTalentBySlug(slug: string) {
   return sanityClient.fetch(TALENT_BY_SLUG_QUERY, { slug });
+}
+
+// ---- Courses ----
+
+export async function fetchPublishedCourses() {
+  return sanityClient.fetch(PUBLISHED_COURSES_QUERY);
+}
+
+export async function fetchCourseBySlug(slug: string) {
+  return sanityClient.fetch(COURSE_BY_SLUG_QUERY, { slug });
+}
+
+// ---- Guides & Playbooks ----
+
+export async function fetchPublishedGuides() {
+  return sanityClient.fetch(PUBLISHED_GUIDES_QUERY);
+}
+
+export async function fetchGuideBySlug(slug: string) {
+  return sanityClient.fetch(GUIDE_BY_SLUG_QUERY, { slug });
 }

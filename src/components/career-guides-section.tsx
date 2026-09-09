@@ -81,15 +81,30 @@ const GUIDES = [
   },
 ];
 
+export interface CareerGuideItem {
+  slug: string;
+  category: string;
+  title: string;
+  tagline?: string;
+  description: string;
+  image: string;
+  readTime: string;
+  href?: string;
+}
+
+interface CareerGuidesSectionProps {
+  guides?: CareerGuideItem[];
+}
+
 /* ─────────────────────────────────────────────────────────────
    Main Component
 ───────────────────────────────────────────────────────────── */
-export function CareerGuidesSection() {
+export function CareerGuidesSection({ guides }: CareerGuidesSectionProps = {}) {
   const [activeTab, setActiveTab] = useState("job-hunters");
 
-  const visibleGuides = GUIDES.filter(
-    (g) => g.category === activeTab || activeTab === "job-hunters"
-  ).slice(0, 3);
+  const allGuides = guides && guides.length > 0 ? guides : GUIDES;
+  const filtered = allGuides.filter((g) => g.category === activeTab);
+  const visibleGuides = (filtered.length > 0 ? filtered : allGuides).slice(0, 3);
 
   return (
     <section className="w-full bg-[#FAF8F5] py-24 sm:py-32 relative overflow-hidden">
@@ -147,8 +162,8 @@ export function CareerGuidesSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl">
           {visibleGuides.map((guide, idx) => (
             <Link
-              key={idx}
-              href={guide.href}
+              key={guide.slug || idx}
+              href={guide.href || `/guides/${guide.slug}`}
               className="bg-white rounded-none border border-zinc-200/80 overflow-hidden shadow-[0_6px_20px_-4px_rgba(15,16,18,0.05)] hover:shadow-[0_16px_32px_-6px_rgba(231,4,13,0.1)] hover:-translate-y-1 transition-all duration-300 flex flex-col group"
             >
               {/* Image Container */}

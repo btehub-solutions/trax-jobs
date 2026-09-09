@@ -9,8 +9,8 @@ interface ContactFormProps {
 
 export default function ContactForm({ initialTopic }: ContactFormProps) {
   const getInitialInquiry = (topic?: string | null) => {
-    if (topic === "job") return "Hiring / Post a Job";
-    if (topic === "profile") return "Submit Talent Profile";
+    if (topic === "job" || topic === "hiring") return "Hiring / Post a Job";
+    if (topic === "profile" || topic === "talent") return "Submit Talent Profile";
     if (topic === "company") return "Submit Company Profile";
     return "";
   };

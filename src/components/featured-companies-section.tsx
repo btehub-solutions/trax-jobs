@@ -16,7 +16,14 @@ import {
 /* ─────────────────────────────────────────────────────────────
    Company Logos (Authentic Vector SVGs)
 ───────────────────────────────────────────────────────────── */
-function CompanyVector({ name }: { name: string }) {
+function CompanyVector({ name, logo }: { name: string; logo?: string }) {
+  if (logo) {
+    return (
+      <div className="w-10 h-10 rounded-xl bg-white border border-zinc-200 flex items-center justify-center shrink-0 shadow-xs overflow-hidden p-1">
+        <Image src={logo} alt={name} width={36} height={36} className="w-full h-full object-contain" />
+      </div>
+    );
+  }
   if (name === "Paystack") {
     return (
       <div className="w-10 h-10 rounded-xl bg-[#E8F8FF] border border-[#C7EFFF] flex items-center justify-center shrink-0 shadow-xs">
@@ -111,7 +118,21 @@ const CATEGORIES = [
   "Banking Infrastructure",
 ];
 
-const COMPANIES = [
+export interface FeaturedCompanyItem {
+  name: string;
+  slug: string;
+  category?: string;
+  size?: string;
+  location?: string;
+  industry?: string;
+  subIndustry?: string;
+  description?: string;
+  openRoles?: number;
+  coverImage?: string;
+  logo?: string;
+}
+
+const COMPANIES: FeaturedCompanyItem[] = [
   {
     name: "Paystack",
     slug: "paystack",
@@ -213,17 +234,20 @@ const COMPANIES = [
 /* ─────────────────────────────────────────────────────────────
    Main Section Component
 ───────────────────────────────────────────────────────────── */
-export function FeaturedCompaniesSection() {
+export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { companies?: FeaturedCompanyItem[] } = {}) {
   const [activeCategory, setActiveCategory] = useState("Highlight");
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  const activeList = dynamicCompanies && dynamicCompanies.length > 0 ? dynamicCompanies : COMPANIES;
+
   const filteredCompanies =
     activeCategory === "Highlight"
-      ? COMPANIES
-      : COMPANIES.filter(
+      ? activeList
+      : activeList.filter(
           (c) =>
-            c.category.toLowerCase() === activeCategory.toLowerCase() ||
-            c.subIndustry.toLowerCase().includes(activeCategory.toLowerCase())
+            (c.category && c.category.toLowerCase().includes(activeCategory.toLowerCase())) ||
+            (c.subIndustry && c.subIndustry.toLowerCase().includes(activeCategory.toLowerCase())) ||
+            (c.industry && c.industry.toLowerCase().includes(activeCategory.toLowerCase()))
         );
 
   const handleScroll = (direction: "left" | "right") => {
@@ -246,7 +270,7 @@ export function FeaturedCompaniesSection() {
             Choose the company that&apos;s meant for you
           </h2>
           <p className="text-[15px] sm:text-[17px] text-zinc-600 leading-[1.7] max-w-2xl mb-8">
-            Get to know leading companies across Nigeria and Africa &mdash; their engineering story, team culture, and active openings. When you find the right one, you will just know.
+            Get to know leading companies across Nigeria and Africa. Explore their engineering story, team culture, and active openings. When you find the right one, you will just know.
           </p>
           <div>
             <Link
@@ -315,7 +339,7 @@ export function FeaturedCompaniesSection() {
               <div>
                 <div className="relative h-[145px] w-full bg-zinc-100 overflow-hidden rounded-none">
                   <Image
-                    src={company.coverImage}
+                    src={company.coverImage || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800"}
                     alt={`${company.name} office`}
                     fill
                     sizes="255px"
@@ -335,7 +359,7 @@ export function FeaturedCompaniesSection() {
                 <div className="p-4">
                   {/* Logo + Name */}
                   <div className="flex items-center gap-2.5 mb-3.5">
-                    <CompanyVector name={company.name} />
+                    <CompanyVector name={company.name} logo={company.logo} />
                     <div className="min-w-0">
                       <div className="flex items-center gap-1">
                         <h3 className="text-[14.5px] font-bold text-zinc-950 truncate tracking-tight">
@@ -348,21 +372,29 @@ export function FeaturedCompaniesSection() {
 
                   {/* Metadata Badges */}
                   <div className="flex flex-wrap items-center gap-1.5">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
-                      <Users size={12} weight="bold" className="text-zinc-400" />
-                      {company.size}
-                    </span>
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
-                      <MapPin size={12} weight="bold" className="text-zinc-400" />
-                      <span dangerouslySetInnerHTML={{ __html: company.location.split("&bull;")[0] }} />
-                    </span>
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
-                      <Tag size={12} weight="bold" className="text-zinc-400" />
-                      {company.industry}
-                    </span>
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
-                      {company.subIndustry}
-                    </span>
+                    {company.size && (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
+                        <Users size={12} weight="bold" className="text-zinc-400" />
+                        {company.size}
+                      </span>
+                    )}
+                    {company.location && (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
+                        <MapPin size={12} weight="bold" className="text-zinc-400" />
+                        <span dangerouslySetInnerHTML={{ __html: company.location.split("&bull;")[0] }} />
+                      </span>
+                    )}
+                    {company.industry && (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
+                        <Tag size={12} weight="bold" className="text-zinc-400" />
+                        {company.industry}
+                      </span>
+                    )}
+                    {company.subIndustry && (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
+                        {company.subIndustry}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>

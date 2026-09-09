@@ -215,7 +215,7 @@ export const talent = defineType({
     prepare({ title, subtitle, media, status }) {
       return {
         title,
-        subtitle: `${subtitle || "No title"} — ${status || "pending"}`,
+        subtitle: `${subtitle || "No title"} · ${status || "pending"}`,
         media,
       };
     },

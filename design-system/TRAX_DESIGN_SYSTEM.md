@@ -1,4 +1,4 @@
-# Trax Jobs — Official Design System & UI Specifications
+# Trax Jobs: Official Design System & UI Specifications
 
 This document defines the **single source of truth** for all visual styles, geometry, tokens, components, and data schemas across the Trax Jobs platform. Every new page, modal, card, backend query, and interaction **must follow this specification with 100% fidelity**.
 

@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "tsc --noEmit",
+    "upload:courses": "node --env-file=.env.local --import tsx scripts/upload-courses-to-sanity.ts",
+    "upload:guides": "node --env-file=.env.local --import tsx scripts/upload-guides-to-sanity.ts"
   },
   "dependencies": {
+    "@mux/playback-core": "^0.35.2",
     "@phosphor-icons/react": "^2.1.10",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^6.12.0",

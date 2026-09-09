@@ -93,14 +93,14 @@ export function AppHeader({ activeTab = "jobs", children, className = "" }: AppH
             {activeTab === "talent" ? (
               <>
                 <Link
-                  href="/submit-job"
+                  href="/about?tab=contact&topic=hiring"
                   className="hidden sm:inline-flex items-center px-4 py-2 text-[13.5px] font-bold text-zinc-800 hover:text-zinc-950 transition-all"
                 >
                   Post a job
                 </Link>
 
                 <Link
-                  href="/submit-profile"
+                  href="/about?tab=contact&topic=talent"
                   className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl bg-[#0C1222] hover:bg-[#070b14] text-white text-[13.5px] font-bold transition-all shadow-2xs"
                 >
                   Submit Your Profile
@@ -109,14 +109,14 @@ export function AppHeader({ activeTab = "jobs", children, className = "" }: AppH
             ) : activeTab === "companies" ? (
               <>
                 <Link
-                  href="/submit-job"
+                  href="/about?tab=contact&topic=hiring"
                   className="hidden sm:inline-flex items-center px-4 py-2 text-[13.5px] font-bold text-zinc-800 hover:text-zinc-950 transition-all"
                 >
                   Post a job
                 </Link>
 
                 <Link
-                  href="/about"
+                  href="/about?tab=contact&topic=company"
                   className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl bg-[#0C1222] hover:bg-[#070b14] text-white text-[13.5px] font-bold transition-all shadow-2xs"
                 >
                   Submit Company Profile
@@ -132,7 +132,7 @@ export function AppHeader({ activeTab = "jobs", children, className = "" }: AppH
                 </Link>
 
                 <Link
-                  href="/submit-job"
+                  href="/about?tab=contact&topic=hiring"
                   className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl bg-[#0C1222] hover:bg-[#070b14] text-white text-[13.5px] font-bold transition-all shadow-2xs"
                 >
                   Submit a job

@@ -3,9 +3,9 @@ import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provi
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Trax Jobs — Curated Tech Opportunities in Africa",
+  title: "Trax Jobs: Curated Tech Opportunities in Africa",
   description:
-    "Curated tech jobs, talent, and companies across the African startup ecosystem.",
+    "Curated tech opportunities and elite talent from Ogun State and across Africa. Verified listings, direct hiring, and transparent compensation.",
 };
 
 export default function RootLayout({

@@ -132,6 +132,7 @@ export const PUBLISHED_TALENT_QUERY = `
     title,
     category,
     avatar,
+    coverImage,
     experienceLevel,
     experienceYears,
     location,
@@ -183,5 +184,109 @@ export const TALENT_BY_SLUG_QUERY = `
     verified,
     featured,
     publishedAt
+  }
+`;
+
+// Published courses
+export const PUBLISHED_COURSES_QUERY = `
+  *[_type == "course" && status == "published"] | order(_createdAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    level,
+    durationWeeks,
+    duration,
+    image,
+    bannerImage,
+    rating,
+    ratingsCount,
+    lessonsCount,
+    studentsCount,
+    language,
+    platform,
+    instructor,
+    instructorTitle,
+    summary,
+    description,
+    skills,
+    includes,
+    learningOutcomes,
+    targetAudience,
+    syllabus,
+    certificateDetails,
+    enrollmentLink,
+    whatsappNumber
+  }
+`;
+
+// Single course by slug
+export const COURSE_BY_SLUG_QUERY = `
+  *[_type == "course" && slug.current == $slug && status == "published"][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    level,
+    durationWeeks,
+    duration,
+    image,
+    bannerImage,
+    rating,
+    ratingsCount,
+    lessonsCount,
+    studentsCount,
+    language,
+    platform,
+    instructor,
+    instructorTitle,
+    summary,
+    description,
+    skills,
+    includes,
+    learningOutcomes,
+    targetAudience,
+    syllabus,
+    certificateDetails,
+    enrollmentLink,
+    whatsappNumber
+  }
+`;
+
+// Published Guides & Playbooks
+export const PUBLISHED_GUIDES_QUERY = `
+  *[_type == "guide" && status == "published"] | order(_createdAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    categoryLabel,
+    tagline,
+    breadcrumb,
+    date,
+    readTime,
+    lead,
+    image,
+    author,
+    content,
+    topics
+  }
+`;
+
+// Single Guide by slug
+export const GUIDE_BY_SLUG_QUERY = `
+  *[_type == "guide" && slug.current == $slug && status == "published"][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    categoryLabel,
+    tagline,
+    breadcrumb,
+    date,
+    readTime,
+    lead,
+    image,
+    author,
+    content,
+    topics
   }
 `;

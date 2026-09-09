@@ -216,7 +216,7 @@ export const job = defineType({
     prepare({ title, subtitle, status }) {
       return {
         title,
-        subtitle: `${subtitle || "No company"} — ${status || "pending"}`,
+        subtitle: `${subtitle || "No company"} · ${status || "pending"}`,
       };
     },
   },
