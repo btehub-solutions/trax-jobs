@@ -258,7 +258,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
   };
 
   return (
-    <section className="w-full bg-[#fbf9f6] py-20 sm:py-28 border-t border-zinc-200/60 relative">
+    <section className="w-full bg-[#fbf9f6] py-20 sm:py-28 border-t border-zinc-200/60 relative overflow-x-hidden">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
         
         {/* Section Header */}
@@ -412,61 +412,54 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
           ))}
         </div>
 
-        {/* Seamless Hiring Callout & Big Bold Wordmarks (Directly underneath cards) */}
-        <div className="mt-12">
-          <p className="text-[14.5px] sm:text-[15.5px] text-zinc-900 font-normal mb-8">
+        {/* Seamless Hiring Callout */}
+        <div className="mt-14 sm:mt-16">
+          <p className="text-[14.5px] sm:text-[15.5px] text-zinc-900 font-normal">
             Are you{" "}
-            <span className="font-semibold underline decoration-[#E7040D] decoration-2 underline-offset-4 cursor-pointer hover:text-[#E7040D] transition-colors">
+            <Link
+              href="/about?tab=contact&topic=hiring"
+              className="font-semibold underline decoration-[#E7040D] decoration-2 underline-offset-4 cursor-pointer hover:text-[#E7040D] transition-colors"
+            >
               hiring?
-            </span>{" "}
+            </Link>{" "}
             See how we help companies find the right people.
           </p>
+        </div>
+      </div>
 
-          {/* Bold, Clean Company Wordmark Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-y-6 gap-x-8 lg:gap-x-12">
-            {/* Paystack Wordmark */}
-            <div className="flex items-center hover:opacity-100 transition-opacity cursor-pointer">
-              <span className="text-[23px] sm:text-[26px] font-black tracking-[-0.04em] text-zinc-950">
-                paystack
+      {/* Full-Bleed Infinite Horizontal Marquee Ticker (Cuts edge-to-edge across entire screen) */}
+      <div className="w-full overflow-hidden py-4 mt-8">
+        <div className="marquee-scroll flex items-center gap-12 sm:gap-20 select-none">
+          {[
+            { name: "paystack", style: "font-black tracking-[-0.04em]" },
+            { name: "flutterwave", style: "font-extrabold tracking-[-0.03em]" },
+            { name: "moniepoint", style: "font-extrabold tracking-[-0.03em]" },
+            { name: "interswitch", style: "font-bold tracking-[-0.02em]", dot: true },
+            { name: "kuda", style: "font-black tracking-[-0.04em]", dot: true },
+            { name: "piggyvest", style: "font-black tracking-[-0.03em]" },
+            { name: "andela", style: "font-black tracking-[-0.02em]" },
+            { name: "moove", style: "font-extrabold tracking-[-0.02em]" },
+            { name: "cowrywise", style: "font-black tracking-[-0.03em]" },
+            { name: "paystack", style: "font-black tracking-[-0.04em]" },
+            { name: "flutterwave", style: "font-extrabold tracking-[-0.03em]" },
+            { name: "moniepoint", style: "font-extrabold tracking-[-0.03em]" },
+            { name: "interswitch", style: "font-bold tracking-[-0.02em]", dot: true },
+            { name: "kuda", style: "font-black tracking-[-0.04em]", dot: true },
+            { name: "piggyvest", style: "font-black tracking-[-0.03em]" },
+            { name: "andela", style: "font-black tracking-[-0.02em]" },
+            { name: "moove", style: "font-extrabold tracking-[-0.02em]" },
+            { name: "cowrywise", style: "font-black tracking-[-0.03em]" },
+          ].map((brand, idx) => (
+            <div
+              key={`${brand.name}-${idx}`}
+              className="flex items-center gap-1 shrink-0 opacity-80 hover:opacity-100 transition-opacity cursor-pointer text-zinc-950"
+            >
+              <span className={`text-[22px] sm:text-[28px] ${brand.style}`}>
+                {brand.name}
+                {brand.dot && <span className="text-[#E7040D]">.</span>}
               </span>
             </div>
-
-            {/* Flutterwave Wordmark */}
-            <div className="flex items-center hover:opacity-100 transition-opacity cursor-pointer">
-              <span className="text-[21px] sm:text-[24px] font-extrabold tracking-[-0.03em] text-zinc-950">
-                flutterwave
-              </span>
-            </div>
-
-            {/* Moniepoint Wordmark */}
-            <div className="flex items-center hover:opacity-100 transition-opacity cursor-pointer">
-              <span className="text-[22px] sm:text-[25px] font-extrabold tracking-[-0.03em] text-zinc-950">
-                moniepoint
-              </span>
-            </div>
-
-            {/* Interswitch Wordmark */}
-            <div className="flex items-center gap-1.5 hover:opacity-100 transition-opacity cursor-pointer">
-              <span className="text-[21px] sm:text-[24px] font-bold tracking-[-0.02em] text-zinc-950">
-                interswitch
-              </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E7040D] -mt-2"></span>
-            </div>
-
-            {/* Kuda Wordmark */}
-            <div className="flex items-center hover:opacity-100 transition-opacity cursor-pointer">
-              <span className="text-[25px] sm:text-[28px] font-black tracking-[-0.04em] text-zinc-950">
-                kuda<span className="text-[#E7040D]">.</span>
-              </span>
-            </div>
-
-            {/* Piggyvest Wordmark */}
-            <div className="flex items-center hover:opacity-100 transition-opacity cursor-pointer">
-              <span className="text-[22px] sm:text-[25px] font-black tracking-[-0.03em] text-zinc-950">
-                piggyvest
-              </span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

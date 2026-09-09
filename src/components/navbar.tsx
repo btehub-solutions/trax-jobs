@@ -105,20 +105,14 @@ export function Navbar() {
           </div>
 
           {/* Mobile menu trigger */}
-          <div className="flex md:hidden items-center gap-3">
-            <Link
-              href="/about?tab=contact&topic=hiring"
-              className="px-4 py-1.5 rounded-full text-xs font-semibold bg-[#fce8e0] text-[#E7040D]"
-            >
-              Submit a job
-            </Link>
+          <div className="flex md:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="p-2 rounded-lg text-zinc-800 hover:bg-zinc-100 transition-colors cursor-pointer"
+              className="p-2 -mr-1.5 rounded-lg text-zinc-800 hover:bg-zinc-100 transition-colors cursor-pointer"
               aria-label="Open navigation menu"
               aria-expanded={mobileMenuOpen}
             >
-              <List size={24} weight="bold" />
+              <List size={26} weight="bold" />
             </button>
           </div>
         </div>

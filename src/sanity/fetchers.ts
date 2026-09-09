@@ -13,60 +13,100 @@ import {
 } from "./queries";
 
 /**
- * Typed fetch functions for public content.
+ * Typed fetch functions for public content with offline resilience.
  *
- * These return raw Sanity results. The consuming pages/components
- * are responsible for mapping Sanity image references through urlForImage()
- * when needed. Shape matches the existing TypeScript interfaces so
- * components can swap data sources without layout changes.
+ * When internet is disconnected or Sanity is unreachable, each fetcher
+ * catches the network error and safely returns null so pages seamlessly
+ * fall back to local mock data without crashing with a 500 server error.
  */
 
 // ---- Jobs ----
 
 export async function fetchPublishedJobs() {
-  return sanityClient.fetch(PUBLISHED_JOBS_QUERY);
+  try {
+    return await sanityClient.fetch(PUBLISHED_JOBS_QUERY);
+  } catch {
+    return null;
+  }
 }
 
 export async function fetchJobBySlug(slug: string) {
-  return sanityClient.fetch(JOB_BY_SLUG_QUERY, { slug });
+  try {
+    return await sanityClient.fetch(JOB_BY_SLUG_QUERY, { slug });
+  } catch {
+    return null;
+  }
 }
 
 // ---- Companies ----
 
 export async function fetchCompanies() {
-  return sanityClient.fetch(ALL_COMPANIES_QUERY);
+  try {
+    return await sanityClient.fetch(ALL_COMPANIES_QUERY);
+  } catch {
+    return null;
+  }
 }
 
 export async function fetchCompanyBySlug(slug: string) {
-  return sanityClient.fetch(COMPANY_BY_SLUG_QUERY, { slug });
+  try {
+    return await sanityClient.fetch(COMPANY_BY_SLUG_QUERY, { slug });
+  } catch {
+    return null;
+  }
 }
 
 // ---- Talent ----
 
 export async function fetchPublishedTalent() {
-  return sanityClient.fetch(PUBLISHED_TALENT_QUERY);
+  try {
+    return await sanityClient.fetch(PUBLISHED_TALENT_QUERY);
+  } catch {
+    return null;
+  }
 }
 
 export async function fetchTalentBySlug(slug: string) {
-  return sanityClient.fetch(TALENT_BY_SLUG_QUERY, { slug });
+  try {
+    return await sanityClient.fetch(TALENT_BY_SLUG_QUERY, { slug });
+  } catch {
+    return null;
+  }
 }
 
 // ---- Courses ----
 
 export async function fetchPublishedCourses() {
-  return sanityClient.fetch(PUBLISHED_COURSES_QUERY);
+  try {
+    return await sanityClient.fetch(PUBLISHED_COURSES_QUERY);
+  } catch {
+    return null;
+  }
 }
 
 export async function fetchCourseBySlug(slug: string) {
-  return sanityClient.fetch(COURSE_BY_SLUG_QUERY, { slug });
+  try {
+    return await sanityClient.fetch(COURSE_BY_SLUG_QUERY, { slug });
+  } catch {
+    return null;
+  }
 }
 
 // ---- Guides & Playbooks ----
 
 export async function fetchPublishedGuides() {
-  return sanityClient.fetch(PUBLISHED_GUIDES_QUERY);
+  try {
+    return await sanityClient.fetch(PUBLISHED_GUIDES_QUERY);
+  } catch {
+    return null;
+  }
 }
 
 export async function fetchGuideBySlug(slug: string) {
-  return sanityClient.fetch(GUIDE_BY_SLUG_QUERY, { slug });
+  try {
+    return await sanityClient.fetch(GUIDE_BY_SLUG_QUERY, { slug });
+  } catch {
+    return null;
+  }
 }
+
