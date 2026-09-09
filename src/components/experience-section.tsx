@@ -85,20 +85,20 @@ export function ExperienceSection() {
           </p>
         </div>
 
-        {/* 6 Portrait Cards Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
+        {/* Mobile Single-Line Carousel / Desktop 6-Column Grid */}
+        <div className="flex sm:grid sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5 overflow-x-auto sm:overflow-visible no-scrollbar snap-x snap-mandatory pb-4 sm:pb-0 -mx-6 px-6 sm:mx-0 sm:px-0">
           {experienceLevels.map((level) => (
             <Link
               key={level.id}
               href={level.href}
-              className="group relative h-[320px] sm:h-[380px] lg:h-[410px] rounded-none overflow-hidden bg-zinc-100 flex flex-col justify-end shadow-xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5"
+              className="group relative shrink-0 snap-start w-[280px] sm:w-auto h-[460px] sm:h-[390px] lg:h-[420px] overflow-hidden bg-zinc-100 flex flex-col justify-end shadow-xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5"
             >
               {/* Studio Portrait Image */}
               <Image
                 src={level.image}
                 alt={level.alt}
                 fill
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+                sizes="(max-width: 640px) 280px, (max-width: 1024px) 33vw, 16vw"
                 className="object-cover object-[center_15%] group-hover:scale-105 transition-transform duration-500 ease-out"
               />
 
