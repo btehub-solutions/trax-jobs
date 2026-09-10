@@ -59,7 +59,7 @@ export function HeroSection() {
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
                 placeholder="Search title, keywords or company"
-                className="w-full bg-transparent text-sm sm:text-[16px] text-zinc-900 placeholder:text-zinc-500 focus:outline-hidden font-normal"
+                className="w-full bg-transparent text-[16px] text-zinc-900 placeholder:text-zinc-500 focus:outline-hidden font-normal"
               />
             </div>
 
@@ -78,7 +78,7 @@ export function HeroSection() {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 placeholder="Location"
-                className="w-full bg-transparent text-sm sm:text-[16px] text-zinc-900 placeholder:text-zinc-500 focus:outline-hidden font-normal"
+                className="w-full bg-transparent text-[16px] text-zinc-900 placeholder:text-zinc-500 focus:outline-hidden font-normal"
               />
             </div>
 

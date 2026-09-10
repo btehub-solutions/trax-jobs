@@ -91,7 +91,7 @@ export default async function Home() {
   }));
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col w-full max-w-full overflow-x-clip">
       {/* 1. Navbar */}
       <Navbar />
 

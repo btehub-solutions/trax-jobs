@@ -54,10 +54,10 @@ export function SocialProofSection() {
           </div>
 
           {/* Right Column: Layered Collage with Floating Cards */}
-          <div className="lg:col-span-7 relative min-h-[480px] sm:min-h-[540px] flex items-center justify-center pt-8 pb-10">
+          <div className="lg:col-span-7 relative min-h-[440px] sm:min-h-[540px] flex items-center justify-center pt-6 sm:pt-8 pb-8 sm:pb-10">
             
             {/* Center Main Photograph */}
-            <div className="relative w-[300px] sm:w-[380px] md:w-[420px] h-[360px] sm:h-[420px] rounded-[28px] overflow-hidden shadow-[0_20px_50px_-10px_rgba(15,16,18,0.15)] border-4 border-white">
+            <div className="relative w-[260px] xs:w-[290px] sm:w-[380px] md:w-[420px] h-[320px] xs:h-[360px] sm:h-[420px] rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-[0_20px_50px_-10px_rgba(15,16,18,0.15)] border-4 border-white">
               <Image
                 src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=900"
                 alt="African tech team collaborating"
@@ -69,38 +69,38 @@ export function SocialProofSection() {
             </div>
 
             {/* Floating Card 1: Top Right (Cream Yellow Post-it) */}
-            <div className="absolute top-0 right-0 sm:right-4 md:right-8 w-[190px] sm:w-[220px] bg-[#FEF6E4] rounded-2xl p-4 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#F6E6BF] hover:-translate-y-1 transition-transform duration-300">
-              <p className="text-[17px] sm:text-[19px] font-black text-zinc-950 leading-tight mb-1.5">
+            <div className="absolute top-0 right-0 sm:right-4 md:right-8 w-[155px] xs:w-[175px] sm:w-[220px] bg-[#FEF6E4] rounded-2xl p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#F6E6BF] hover:-translate-y-1 transition-transform duration-300">
+              <p className="text-[15px] sm:text-[19px] font-black text-zinc-950 leading-tight mb-1">
                 Every <br />minute
               </p>
-              <p className="text-[11.5px] sm:text-[12px] text-zinc-700 leading-snug">
+              <p className="text-[10.5px] sm:text-[12px] text-zinc-700 leading-snug">
                 a verified role or profile is published on Trax Jobs.
               </p>
             </div>
 
             {/* Floating Card 2: Left Side (Testimonial Card) */}
-            <div className="absolute bottom-12 -left-2 sm:left-0 md:left-2 w-[210px] sm:w-[240px] bg-[#FEFBEA] rounded-2xl p-4 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#F4EDB8] hover:-translate-y-1 transition-transform duration-300">
-              <div className="flex items-center gap-1.5 text-zinc-900 mb-2">
-                <Quotes size={16} weight="fill" className="text-[#E7040D]" />
-                <span className="text-[11.5px] font-bold">Amara&apos;s story</span>
+            <div className="absolute bottom-8 left-0 sm:bottom-12 sm:left-0 md:left-2 w-[170px] xs:w-[195px] sm:w-[240px] bg-[#FEFBEA] rounded-2xl p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#F4EDB8] hover:-translate-y-1 transition-transform duration-300">
+              <div className="flex items-center gap-1.5 text-zinc-900 mb-1.5 sm:mb-2">
+                <Quotes size={15} weight="fill" className="text-[#E7040D]" />
+                <span className="text-[10.5px] sm:text-[11.5px] font-bold">Amara&apos;s story</span>
               </div>
-              <p className="text-[11px] sm:text-[11.5px] text-zinc-700 leading-relaxed mb-3 italic">
+              <p className="text-[10px] sm:text-[11.5px] text-zinc-700 leading-relaxed mb-2.5 sm:mb-3 italic">
                 &ldquo;When you find a team that respects your craft, work stops being a grind and starts being real.&rdquo;
               </p>
               <Link
                 href="/about"
-                className="inline-block px-3 py-1 rounded-md bg-zinc-950 text-white text-[10.5px] font-bold hover:bg-[#E7040D] transition-colors"
+                className="inline-block px-2.5 sm:px-3 py-1 rounded-md bg-zinc-950 text-white text-[9.5px] sm:text-[10.5px] font-bold hover:bg-[#E7040D] transition-colors"
               >
                 Read story
               </Link>
             </div>
 
             {/* Floating Card 3: Bottom Center-Right (Soft Lime/Mint Metric) */}
-            <div className="absolute -bottom-4 right-2 sm:right-12 md:right-20 w-[190px] sm:w-[220px] bg-[#EDFBEF] rounded-2xl p-4 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#D1F2D6] hover:-translate-y-1 transition-transform duration-300 z-20">
-              <p className="text-[26px] sm:text-[30px] font-black text-zinc-950 leading-tight mb-1">
+            <div className="absolute -bottom-2 right-1 sm:-bottom-4 sm:right-12 md:right-20 w-[155px] xs:w-[175px] sm:w-[220px] bg-[#EDFBEF] rounded-2xl p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#D1F2D6] hover:-translate-y-1 transition-transform duration-300 z-20">
+              <p className="text-[22px] sm:text-[30px] font-black text-zinc-950 leading-tight mb-0.5 sm:mb-1">
                 84%
               </p>
-              <p className="text-[11px] sm:text-[11.5px] text-zinc-700 leading-snug">
+              <p className="text-[10px] sm:text-[11.5px] text-zinc-700 leading-snug">
                 of candidates say Trax helped them find the right team, not just a job.
               </p>
             </div>

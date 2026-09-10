@@ -72,7 +72,7 @@ const experienceLevels: ExperienceLevel[] = [
 
 export function ExperienceSection() {
   return (
-    <section className="w-full bg-white py-16 sm:py-20 px-6 sm:px-10 lg:px-16 border-b border-zinc-100">
+    <section className="w-full bg-white py-16 sm:py-20 px-6 sm:px-10 lg:px-16 border-b border-zinc-100 overflow-hidden">
       <div className="max-w-[1440px] mx-auto">
         {/* Section Header */}
         <div className="mb-10 sm:mb-12">
@@ -91,7 +91,7 @@ export function ExperienceSection() {
             <Link
               key={level.id}
               href={level.href}
-              className="group relative shrink-0 snap-start w-[280px] sm:w-auto h-[460px] sm:h-[390px] lg:h-[420px] overflow-hidden bg-zinc-100 flex flex-col justify-end shadow-xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5"
+              className="group relative shrink-0 snap-start w-[260px] xs:w-[280px] sm:w-auto h-[440px] sm:h-[390px] lg:h-[420px] overflow-hidden bg-zinc-100 flex flex-col justify-end shadow-xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5"
             >
               {/* Studio Portrait Image */}
               <Image

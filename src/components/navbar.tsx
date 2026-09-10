@@ -58,7 +58,7 @@ export function Navbar() {
 
   return (
     <header className="w-full bg-white border-b border-zinc-100 relative z-40">
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16">
         <div className="flex items-center justify-between h-20">
           {/* Left: Brand Logo & Desktop Nav Links */}
           <div className="flex items-center gap-10 lg:gap-14">
@@ -129,14 +129,14 @@ export function Navbar() {
 
       {/* Mobile Slide-Out Side Drawer (Jobberman layout structure, Trax design system) */}
       <aside
-        className={`fixed top-0 right-0 bottom-0 w-[82%] max-w-[320px] bg-white z-50 shadow-2xl flex flex-col justify-between transform transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed top-0 right-0 bottom-0 w-[82%] max-w-[320px] bg-white z-50 shadow-2xl flex flex-col justify-between transform transition-transform duration-300 ease-in-out md:hidden overscroll-contain ${
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"
         aria-modal="true"
         aria-label="Navigation Menu"
       >
-        <div className="p-6 overflow-y-auto">
+        <div className="p-6 overflow-y-auto overscroll-contain">
           {/* Top Close Button (Pinned Right) */}
           <div className="flex items-center justify-end pb-3">
             <button
