@@ -45,7 +45,7 @@ export function TrendingSkillsSection({ courses }: TrendingSkillsSectionProps = 
         }}
       />
 
-      <div className="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-16 relative z-10 space-y-8">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10 space-y-8">
         
         {/* Section Header with Trax Context and Carousel Controls */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -86,24 +86,23 @@ export function TrendingSkillsSection({ courses }: TrendingSkillsSectionProps = 
         {/* Horizontal Carousel Cards (Zero Scrollbar Track, Pure Scroll) */}
         <div
           ref={scrollContainerRef}
-          className="flex items-stretch gap-4 sm:gap-6 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-pl-5 sm:scroll-pl-10 lg:scroll-pl-16"
+          className="flex items-stretch gap-6 overflow-x-auto pb-4 pt-1 snap-x scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
         >
           {displayCourses.map((course) => (
             <Link
               key={course.id || course.slug}
               href={`/learning/${course.slug || course.id}`}
-              className="w-[84vw] min-w-[280px] max-w-[350px] sm:w-[350px] md:w-[380px] shrink-0 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start cursor-pointer block"
+              className="w-[320px] sm:w-[360px] md:w-[380px] shrink-0 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start cursor-pointer block"
             >
               <div>
                 {/* 1. Top Image Thumbnail Container */}
-                <div className="relative h-48 sm:h-52 w-full bg-zinc-100 overflow-hidden">
+                <div className="relative h-52 w-full bg-zinc-100 overflow-hidden">
                   <Image
-                    src={course.image || "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=800"}
+                    src={course.image}
                     alt={course.title}
                     fill
-                    sizes="(max-width: 640px) 84vw, 380px"
+                    sizes="380px"
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    unoptimized
                   />
 
                   {/* Top-Right Floating Duration Badge (Yellow Accent) */}
