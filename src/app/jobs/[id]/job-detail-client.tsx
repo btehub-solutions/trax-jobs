@@ -165,16 +165,16 @@ export default function JobDetailClient({
     <div className="min-h-screen bg-[#FAFAFA] text-[#1F1F1F] flex flex-col font-sans">
       <AppHeader activeTab="jobs" />
 
-      {/* Sticky top bar */}
+      {/* Desktop Sticky top bar (hidden on mobile to prevent navbar collision) */}
       {showStickyNav && (
-        <div className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-zinc-200 shadow-sm transition-all duration-200">
+        <div className="hidden sm:block fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-zinc-200 shadow-sm transition-all duration-200">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 py-3 flex items-center justify-between gap-4">
             <div className="flex items-center gap-6 min-w-0">
               <button onClick={() => router.back()} className="inline-flex items-center gap-1.5 text-[13px] font-bold text-zinc-700 hover:text-[#E7040D] active:scale-95 transition-all cursor-pointer shrink-0">
                 <CaretLeft size={16} weight="bold" />
                 <span>Back</span>
               </button>
-              <div className="min-w-0 hidden sm:block">
+              <div className="min-w-0">
                 <h2 className="text-[15px] font-black text-[#1F1F1F] truncate">{job.title}</h2>
                 <p className="text-[12px] text-zinc-500 font-medium truncate">
                   {job.contractType === "Permanent" ? "Permanent contract" : `${job.contractType} contract`} • Salary: {job.salary?.formatted || "Not specified"} • {job.location}
@@ -195,6 +195,36 @@ export default function JobDetailClient({
         </div>
       )}
 
+      {/* Mobile Sticky Bottom Action Bar (Thumb-accessible, zero top collision) */}
+      {showStickyNav && (
+        <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-zinc-200/90 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] px-4 py-3 flex items-center justify-between gap-3">
+          <button onClick={() => router.back()} className="inline-flex items-center gap-1 px-2.5 py-2 text-[13px] font-bold text-zinc-700 hover:text-[#E7040D] active:scale-95 transition-all cursor-pointer shrink-0">
+            <CaretLeft size={16} weight="bold" />
+            <span>Back</span>
+          </button>
+          <div className="flex items-center gap-2 flex-1 justify-end">
+            <button
+              onClick={toggleSave}
+              className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 text-[12.5px] font-semibold border active:scale-90 transition-all cursor-pointer select-none ${
+                isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"
+              }`}
+            >
+              <BookmarkSimple size={15} weight={isSaved ? "fill" : "bold"} className={isSaved ? "scale-110 transition-transform" : "transition-transform"} />
+              <span>{isSaved ? "Saved" : "Save"}</span>
+            </button>
+            <a
+              href={job.applicationLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 max-w-[180px] inline-flex items-center justify-center gap-1.5 px-5 py-2.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] text-white text-[13px] font-bold shadow-2xs transition-all cursor-pointer select-none"
+            >
+              <span>Apply</span>
+              <ArrowSquareOut size={14} weight="bold" />
+            </a>
+          </div>
+        </div>
+      )}
+
       <div className="bg-[#FAFAFA]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-6 pb-2">
           <button onClick={() => router.back()} className="inline-flex items-center gap-1.5 text-[13.5px] font-bold text-zinc-700 hover:text-[#E7040D] active:scale-95 transition-all cursor-pointer">
@@ -204,7 +234,7 @@ export default function JobDetailClient({
         </div>
       </div>
 
-      <main className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-8 lg:px-12 py-4 pb-16">
+      <main className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-8 lg:px-12 py-4 pb-24 sm:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
           {/* Left Column */}

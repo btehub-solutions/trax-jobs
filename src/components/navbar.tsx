@@ -31,7 +31,13 @@ const mobileNavLinks = [
   { name: "About Us", href: "/about", icon: Info },
 ];
 
-export function Navbar() {
+export interface NavbarProps {
+  children?: React.ReactNode;
+  activeTab?: string;
+  className?: string;
+}
+
+export function Navbar({ children, activeTab, className = "" }: NavbarProps = {}) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -57,7 +63,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="w-full bg-white border-b border-zinc-100 relative z-40">
+    <header className={`w-full bg-white border-b border-zinc-100 relative z-40 ${className}`}>
       <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16">
         <div className="flex items-center justify-between h-20">
           {/* Left: Brand Logo & Desktop Nav Links */}
@@ -76,7 +82,12 @@ export function Navbar() {
             {/* Desktop Navigation Links */}
             <nav className="hidden md:flex items-center gap-8 lg:gap-10">
               {desktopNavLinks.map((link) => {
-                const isActive = pathname === link.href;
+                const isActive = activeTab
+                  ? (activeTab === "jobs" && link.href === "/jobs") ||
+                    (activeTab === "talent" && link.href === "/talent") ||
+                    (activeTab === "companies" && link.href === "/companies") ||
+                    (activeTab === "about" && link.href === "/about")
+                  : pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
                 return (
                   <Link
                     key={link.name}
@@ -116,6 +127,13 @@ export function Navbar() {
             </button>
           </div>
         </div>
+
+        {/* Optional Sub-Header for Search/Filters (e.g. on /companies and /talent) */}
+        {children && (
+          <div className="w-full pb-4">
+            {children}
+          </div>
+        )}
       </div>
 
       {/* Mobile Drawer Backdrop Overlay */}
@@ -170,7 +188,12 @@ export function Navbar() {
           <nav className="space-y-1">
             {mobileNavLinks.map((item) => {
               const Icon = item.icon;
-              const isActive = pathname === item.href;
+              const isActive = activeTab
+                ? (activeTab === "jobs" && item.href === "/jobs") ||
+                  (activeTab === "talent" && item.href === "/talent") ||
+                  (activeTab === "companies" && item.href === "/companies") ||
+                  (activeTab === "about" && item.href === "/about")
+                : pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
               return (
                 <Link
                   key={item.name}
