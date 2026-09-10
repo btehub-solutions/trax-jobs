@@ -36,74 +36,77 @@ export function GuidesClient({ guides }: GuidesClientProps) {
       </div>
 
       <main className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-8 lg:px-12 py-4 pb-20">
-        {/* Header Banner */}
-        <div className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 sm:p-10 mb-8">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#fce8e0] text-[#E7040D] text-[11px] font-black uppercase tracking-wider mb-3">
+        {/* Editorial Masthead */}
+        <div className="border-b border-zinc-200/80 pt-2 pb-8 sm:pb-10 mb-10 sm:mb-12">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#fce8e0] text-[#E7040D] text-[11px] font-black uppercase tracking-wider mb-3.5">
             <BookOpen size={14} weight="fill" />
             <span>Trax Career Intelligence</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-[#1F1F1F] tracking-[-0.02em] mb-2">
+          <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-[#1F1F1F] tracking-[-0.03em] leading-[1.12] mb-3">
             Career Guides & Ecosystem Insights
           </h1>
-          <p className="text-[14.5px] text-zinc-600 max-w-2xl leading-relaxed">
+          <p className="text-[15px] sm:text-[16px] text-zinc-600 max-w-2xl leading-relaxed">
             Practical breakdowns on interviewing, compensation negotiation, and engineering leadership across Nigeria and Africa&apos;s tech hubs.
           </p>
         </div>
 
         {/* Guides Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-8 lg:gap-10">
           {guides.map((article) => (
             <Link
               key={article.slug}
               href={`/guides/${article.slug}`}
-              className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgba(231,4,13,0.06)] hover:border-[#E7040D]/40 transition-all flex flex-col justify-between overflow-hidden group"
+              className="flex flex-col group cursor-pointer transition-transform duration-200 hover:-translate-y-1"
             >
-              <div>
-                <div className="relative aspect-[16/9] w-full bg-zinc-100 overflow-hidden">
+              {/* Image with Peach Geometric Offset Background (Stacked Card Depth) */}
+              <div className="relative pt-3.5 pr-3.5 sm:pt-4 sm:pr-4 mb-5">
+                <div className="absolute top-0 right-0 w-[92%] h-[92%] bg-[#FCE8E0] rounded-none z-0" />
+                <div className="relative z-10 w-full aspect-[16/10] sm:aspect-[16/9] bg-zinc-100 overflow-hidden rounded-none border border-zinc-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.06)] group-hover:shadow-[0_12px_28px_rgba(15,16,18,0.09)] transition-shadow duration-300">
                   <Image
                     src={article.image}
                     alt={article.title}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
-                  <div className="absolute top-3 left-3 px-2.5 py-1 bg-white/95 backdrop-blur-md text-[11px] font-bold text-[#1F1F1F] uppercase tracking-wide">
+                  <div className="absolute top-3 left-3 px-2.5 py-1 bg-white/95 backdrop-blur-md text-[10.5px] font-bold text-[#1F1F1F] uppercase tracking-wider border border-zinc-200/40">
                     {article.categoryLabel}
                   </div>
                 </div>
-
-                <div className="p-6">
-                  <div className="flex items-center gap-3 text-[12px] text-zinc-400 mb-2">
-                    <span className="inline-flex items-center gap-1">
-                      <CalendarBlank size={13} weight="regular" />
-                      {article.date}
-                    </span>
-                    <span>•</span>
-                    <span className="inline-flex items-center gap-1">
-                      <Clock size={13} weight="regular" />
-                      {article.readTime}
-                    </span>
-                  </div>
-
-                  <h2 className="text-[17px] font-black text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug mb-3 tracking-tight">
-                    {article.title}
-                  </h2>
-
-                  <p className="text-[13px] text-zinc-600 leading-relaxed line-clamp-3">
-                    {article.lead}
-                  </p>
-                </div>
               </div>
 
-              <div className="p-6 pt-0 flex items-center justify-between border-t border-zinc-100 mt-4">
-                <span className="text-[12.5px] font-bold text-zinc-500 group-hover:text-[#E7040D] transition-colors">
-                  Read Full Guide
-                </span>
-                <ArrowUpRight
-                  size={14}
-                  weight="bold"
-                  className="text-zinc-400 group-hover:text-[#E7040D] transition-colors"
-                />
+              {/* Text Information Below Card (Unboxed) */}
+              <div className="flex flex-col flex-1 px-0.5">
+                <div className="flex items-center gap-3 text-[12px] text-zinc-500 mb-2">
+                  <span className="inline-flex items-center gap-1 font-medium">
+                    <CalendarBlank size={13} weight="regular" />
+                    {article.date}
+                  </span>
+                  <span>•</span>
+                  <span className="inline-flex items-center gap-1 font-medium">
+                    <Clock size={13} weight="regular" />
+                    {article.readTime}
+                  </span>
+                </div>
+
+                <h2 className="text-[17px] sm:text-[18.5px] font-black text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug mb-2.5 tracking-tight">
+                  {article.title}
+                </h2>
+
+                <p className="text-[13.5px] text-zinc-600 leading-relaxed line-clamp-3 mb-4">
+                  {article.lead}
+                </p>
+
+                <div className="mt-auto pt-2 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 text-[13px] font-bold text-zinc-900 group-hover:text-[#E7040D] transition-colors">
+                    Read Full Guide
+                    <ArrowUpRight
+                      size={14}
+                      weight="bold"
+                      className="text-zinc-400 group-hover:text-[#E7040D] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
+                    />
+                  </span>
+                </div>
               </div>
             </Link>
           ))}

@@ -35,23 +35,49 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://trax.ng").replace(/\/$/, "");
+  const pageUrl = `${siteUrl}/guides/${article.slug}`;
   const title = `${article.title} • Trax Playbook`;
   const description = article.lead || "Practical engineering guides and career playbooks for African tech professionals.";
+
+  // Ensure absolute image URL with fallback for WhatsApp and social scrapers
+  let ogImageUrl = article.image;
+  if (ogImageUrl && !ogImageUrl.startsWith("http://") && !ogImageUrl.startsWith("https://")) {
+    ogImageUrl = `${siteUrl}${ogImageUrl.startsWith("/") ? "" : "/"}${ogImageUrl}`;
+  }
+  if (!ogImageUrl) {
+    ogImageUrl = `${siteUrl}/images/trax-logo.png`;
+  }
 
   return {
     title,
     description,
+    alternates: {
+      canonical: pageUrl,
+    },
     openGraph: {
       title,
       description,
+      url: pageUrl,
+      siteName: "Trax Jobs",
       type: "article",
-      images: article.image ? [{ url: article.image, alt: article.title }] : undefined,
+      publishedTime: article.date,
+      authors: [article.author.name],
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: article.image ? [article.image] : undefined,
+      creator: "@traxmedia",
+      images: [ogImageUrl],
     },
   };
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/navbar";
@@ -11,6 +11,7 @@ import {
   FacebookLogo,
   XLogo,
   LinkedinLogo,
+  WhatsappLogo,
   Clock,
   Check,
   ShareNetwork,
@@ -22,13 +23,48 @@ interface GuideDetailClientProps {
 
 export function GuideDetailClient({ article }: GuideDetailClientProps) {
   const [copied, setCopied] = useState(false);
+  const [shareUrl, setShareUrl] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setShareUrl(window.location.href);
+    }
+  }, []);
+
+  const currentUrl = shareUrl || `https://trax.ng/guides/${article.slug}`;
+  const encodedUrl = encodeURIComponent(currentUrl);
+  const encodedTitle = encodeURIComponent(article.title);
+  const whatsappShareText = encodeURIComponent(`${article.title}\n\n${currentUrl}`);
+
+  const shareLinks = {
+    whatsapp: `https://api.whatsapp.com/send?text=${whatsappShareText}`,
+    twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+  };
 
   const handleCopyLink = () => {
     if (typeof window !== "undefined") {
-      navigator.clipboard.writeText(window.location.href);
+      navigator.clipboard.writeText(currentUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
+  };
+
+  const handleNativeShare = async () => {
+    if (typeof navigator !== "undefined" && navigator.share) {
+      try {
+        await navigator.share({
+          title: article.title,
+          text: article.lead || article.title,
+          url: currentUrl,
+        });
+        return;
+      } catch {
+        // User dismissed sheet or failed, fallback to copy
+      }
+    }
+    handleCopyLink();
   };
 
   return (
@@ -63,13 +99,18 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
           </div>
 
           {/* Social Share Buttons */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <span className="text-[12px] font-bold uppercase tracking-wider text-zinc-400 hidden sm:inline-block mr-1">
+              Share:
+            </span>
+
+            {/* Copy Article Link */}
             <button
               type="button"
               onClick={handleCopyLink}
               className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-zinc-100 active:scale-90 flex items-center justify-center text-zinc-600 transition-all cursor-pointer select-none"
               aria-label="Copy article link"
-              title="Copy Link"
+              title={copied ? "Link Copied!" : "Copy Link"}
             >
               {copied ? (
                 <Check size={16} weight="bold" className="text-emerald-600" />
@@ -78,45 +119,53 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
               )}
             </button>
 
-            {/* Author / Profile Social Buttons */}
-            {article.author.facebook && (
-              <a
-                href={article.author.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-zinc-100 flex items-center justify-center text-zinc-600 hover:text-zinc-900 transition-colors"
-                aria-label="Author Facebook Profile"
-                title="Facebook"
-              >
-                <FacebookLogo size={16} weight="fill" />
-              </a>
-            )}
+            {/* WhatsApp Share Intent */}
+            <a
+              href={shareLinks.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-emerald-50 hover:border-[#25D366]/40 hover:text-[#25D366] flex items-center justify-center text-zinc-600 transition-colors"
+              aria-label="Share on WhatsApp"
+              title="Share on WhatsApp"
+            >
+              <WhatsappLogo size={16} weight="fill" />
+            </a>
 
-            {article.author.twitter && (
-              <a
-                href={article.author.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-zinc-100 flex items-center justify-center text-zinc-600 hover:text-zinc-900 transition-colors"
-                aria-label="Author X (Twitter) Profile"
-                title="X / Twitter"
-              >
-                <XLogo size={15} weight="bold" />
-              </a>
-            )}
+            {/* X / Twitter Share Intent */}
+            <a
+              href={shareLinks.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-zinc-100 hover:text-black flex items-center justify-center text-zinc-600 transition-colors"
+              aria-label="Share on X (Twitter)"
+              title="Share on X"
+            >
+              <XLogo size={15} weight="bold" />
+            </a>
 
-            {article.author.linkedin && (
-              <a
-                href={article.author.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-zinc-100 flex items-center justify-center text-zinc-600 hover:text-zinc-900 transition-colors"
-                aria-label="Author LinkedIn Profile"
-                title="LinkedIn"
-              >
-                <LinkedinLogo size={16} weight="fill" />
-              </a>
-            )}
+            {/* LinkedIn Share Intent */}
+            <a
+              href={shareLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-blue-50 hover:border-[#0077B5]/40 hover:text-[#0077B5] flex items-center justify-center text-zinc-600 transition-colors"
+              aria-label="Share on LinkedIn"
+              title="Share on LinkedIn"
+            >
+              <LinkedinLogo size={16} weight="fill" />
+            </a>
+
+            {/* Facebook Share Intent */}
+            <a
+              href={shareLinks.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-blue-50 hover:border-[#1877F2]/40 hover:text-[#1877F2] flex items-center justify-center text-zinc-600 transition-colors"
+              aria-label="Share on Facebook"
+              title="Share on Facebook"
+            >
+              <FacebookLogo size={16} weight="fill" />
+            </a>
           </div>
         </div>
 
@@ -242,6 +291,46 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
                     <p className="text-[12.5px] text-zinc-500 font-medium mt-0.5 leading-snug">
                       {article.author.role}
                     </p>
+
+                    {/* Author Personal Social Profiles */}
+                    <div className="flex items-center gap-2.5 mt-2 text-zinc-400">
+                      {article.author.twitter && (
+                        <a
+                          href={article.author.twitter}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-zinc-900 transition-colors"
+                          aria-label={`${article.author.name} on X`}
+                          title="Author on X"
+                        >
+                          <XLogo size={14} weight="bold" />
+                        </a>
+                      )}
+                      {article.author.linkedin && (
+                        <a
+                          href={article.author.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-zinc-900 transition-colors"
+                          aria-label={`${article.author.name} on LinkedIn`}
+                          title="Author on LinkedIn"
+                        >
+                          <LinkedinLogo size={14} weight="fill" />
+                        </a>
+                      )}
+                      {article.author.facebook && (
+                        <a
+                          href={article.author.facebook}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-zinc-900 transition-colors"
+                          aria-label={`${article.author.name} on Facebook`}
+                          title="Author on Facebook"
+                        >
+                          <FacebookLogo size={14} weight="fill" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -288,7 +377,7 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
       <div className="fixed bottom-6 left-6 z-40">
         <button
           type="button"
-          onClick={handleCopyLink}
+          onClick={handleNativeShare}
           className="inline-flex items-center gap-2 px-4 py-2.5 bg-black hover:bg-zinc-800 text-white text-[13px] font-bold rounded-none shadow-lg cursor-pointer transition-all active:scale-[0.98]"
         >
           <ShareNetwork size={16} weight="bold" />
