@@ -45,7 +45,7 @@ export function HeroSection() {
         <div className="w-full max-w-4xl mx-auto">
           <form
             onSubmit={handleSearch}
-            className="bg-white rounded-2xl p-2 sm:p-2.5 shadow-2xl flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-0"
+            className="bg-white rounded-2xl p-2 sm:p-2.5 shadow-2xl flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-0 border border-transparent focus-within:border-[#E7040D]/30 focus-within:ring-4 focus-within:ring-[#E7040D]/10 transition-all duration-200"
           >
             {/* Role / Keyword Input */}
             <div className="flex-1 flex items-center gap-3 px-4 py-2 sm:py-2">
@@ -85,7 +85,7 @@ export function HeroSection() {
             {/* Trax Brand Red Search Button */}
             <button
               type="submit"
-              className="inline-flex items-center justify-center px-10 py-3.5 sm:py-4 rounded-xl bg-[#E7040D] hover:bg-[#CB030B] text-white text-[16px] font-semibold transition-all active:scale-[0.99] shadow-sm shrink-0 cursor-pointer"
+              className="inline-flex items-center justify-center px-10 py-3.5 sm:py-4 rounded-xl bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.97] hover:shadow-[0_10px_26px_-4px_rgba(231,4,13,0.35)] text-white text-[16px] font-semibold transition-all duration-150 shadow-sm shrink-0 cursor-pointer select-none"
             >
               Search
             </button>

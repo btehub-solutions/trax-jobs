@@ -290,19 +290,19 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
           </div>
 
           {/* Sector, Size, Language Dropdowns */}
-          <div className="flex items-center divide-x divide-zinc-200/80 shrink-0">
+          <div className="flex items-center divide-x divide-zinc-200/80 overflow-x-auto no-scrollbar max-w-full border-b md:border-b-0 shrink-0">
             {/* Sector */}
-            <div className="relative">
+            <div className="relative shrink-0">
               <button
                 type="button"
                 onClick={() => setOpenDropdown(openDropdown === "sector" ? null : "sector")}
-                className={`px-4 py-3 flex items-center gap-2 text-[13px] font-semibold transition-colors cursor-pointer select-none ${selectedSector ? "text-[#E7040D] font-bold bg-red-50/50" : "text-zinc-700 hover:text-zinc-950"}`}
+                className={`px-4 py-3 flex items-center gap-2 text-[13px] font-semibold transition-colors cursor-pointer select-none whitespace-nowrap ${selectedSector ? "text-[#E7040D] font-bold bg-red-50/50" : "text-zinc-700 hover:text-zinc-950"}`}
               >
                 <span className="max-w-[120px] truncate">{selectedSector || "Sector"}</span>
                 <CaretDown size={13} weight="bold" className="text-zinc-400 shrink-0" />
               </button>
               {openDropdown === "sector" && (
-                <div className="absolute top-full left-0 mt-1 w-72 bg-white border border-zinc-200/90 shadow-2xl py-1 z-50 max-h-72 overflow-y-auto">
+                <div className="absolute top-full left-0 mt-1 w-72 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 shadow-2xl py-1 z-50 max-h-72 overflow-y-auto">
                   {SECTORS.map((sec) => (
                     <button
                       key={sec}
@@ -320,17 +320,17 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
             </div>
 
             {/* Size */}
-            <div className="relative">
+            <div className="relative shrink-0">
               <button
                 type="button"
                 onClick={() => setOpenDropdown(openDropdown === "size" ? null : "size")}
-                className={`px-4 py-3 flex items-center gap-2 text-[13px] font-semibold transition-colors cursor-pointer select-none ${selectedSize ? "text-[#E7040D] font-bold bg-red-50/50" : "text-zinc-700 hover:text-zinc-950"}`}
+                className={`px-4 py-3 flex items-center gap-2 text-[13px] font-semibold transition-colors cursor-pointer select-none whitespace-nowrap ${selectedSize ? "text-[#E7040D] font-bold bg-red-50/50" : "text-zinc-700 hover:text-zinc-950"}`}
               >
                 <span className="max-w-[100px] truncate">{selectedSize ? "Selected" : "Size"}</span>
                 <CaretDown size={13} weight="bold" className="text-zinc-400 shrink-0" />
               </button>
               {openDropdown === "size" && (
-                <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-zinc-200/90 shadow-2xl py-1 z-50">
+                <div className="absolute top-full left-0 mt-1 w-64 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 shadow-2xl py-1 z-50">
                   {SIZES.map((sz) => (
                     <button
                       key={sz}
@@ -348,17 +348,17 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
             </div>
 
             {/* Languages */}
-            <div className="relative">
+            <div className="relative shrink-0">
               <button
                 type="button"
                 onClick={() => setOpenDropdown(openDropdown === "language" ? null : "language")}
-                className={`px-4 py-3 flex items-center gap-2 text-[13px] font-semibold transition-colors cursor-pointer select-none ${selectedLanguage ? "text-[#E7040D] font-bold bg-red-50/50" : "text-zinc-700 hover:text-zinc-950"}`}
+                className={`px-4 py-3 flex items-center gap-2 text-[13px] font-semibold transition-colors cursor-pointer select-none whitespace-nowrap ${selectedLanguage ? "text-[#E7040D] font-bold bg-red-50/50" : "text-zinc-700 hover:text-zinc-950"}`}
               >
                 <span>{selectedLanguage || "Languages"}</span>
                 <CaretDown size={13} weight="bold" className="text-zinc-400 shrink-0" />
               </button>
               {openDropdown === "language" && (
-                <div className="absolute top-full right-0 mt-1 w-56 bg-white border border-zinc-200/90 shadow-2xl py-1 z-50">
+                <div className="absolute top-full right-0 sm:right-0 mt-1 w-56 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 shadow-2xl py-1 z-50">
                   {LANGUAGES.map((lang) => (
                     <button
                       key={lang}
@@ -390,13 +390,13 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
       {/* Main Content */}
       <main className="flex-1 w-full max-w-[1360px] mx-auto py-8 px-6 sm:px-8 lg:px-10 space-y-10">
         <div>
-          <div className="flex items-center justify-between pb-3.5 border-b border-zinc-200/80">
-            <h1 className="text-[26px] sm:text-[30px] font-black text-[#1F1F1F] tracking-tight">
+          <div className="flex items-center justify-between pb-3.5 border-b border-zinc-200/80 gap-3">
+            <h1 className="text-[24px] sm:text-[30px] font-black text-[#1F1F1F] tracking-tight min-w-0">
               New companies to explore
             </h1>
             <button
               onClick={resetFilters}
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-none bg-white border border-zinc-200/90 text-[12.5px] font-bold text-[#1F1F1F] hover:bg-zinc-50 transition-all shadow-2xs cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-none bg-white border border-zinc-200/90 text-[12.5px] font-bold text-[#1F1F1F] hover:bg-zinc-50 transition-all shadow-2xs cursor-pointer shrink-0 whitespace-nowrap"
             >
               <span>Discover all</span>
               <CaretRight size={13} weight="bold" />
@@ -409,7 +409,7 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
               return (
                 <div
                   key={comp.id}
-                  className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group"
+                  className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_14px_32px_-6px_rgba(15,16,18,0.08)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
                 >
                   {/* Cover Banner */}
                   <Link href={`/companies/${comp.slug}`} className="block relative h-32 w-full bg-[#E5E7EB] overflow-hidden">
@@ -460,11 +460,12 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                     {/* Follow Button */}
                     <div className="pt-6">
                       <button
+                        type="button"
                         onClick={() => toggleFollow(comp.id)}
-                        className={`w-full py-2 rounded-none text-[12.5px] font-bold border transition-all cursor-pointer text-center ${
+                        className={`w-full py-2 rounded-none text-[12.5px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${
                           isFollowed
-                            ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]"
-                            : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F] shadow-2xs"
+                            ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D] shadow-2xs"
+                            : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F] shadow-2xs hover:border-zinc-300"
                         }`}
                       >
                         {isFollowed ? "Following" : "Follow"}

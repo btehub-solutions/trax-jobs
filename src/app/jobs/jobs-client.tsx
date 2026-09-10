@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, Suspense } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { JobCard } from "@/components/jobs/job-card";
 import { JobsFilterSidebar } from "@/components/jobs/jobs-filter-sidebar";
@@ -10,6 +10,7 @@ import {
   CaretDown,
   CaretLeft,
   CaretRight,
+  Faders,
 } from "@phosphor-icons/react";
 
 export interface SanityJob {
@@ -51,7 +52,25 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
 
   const [sortBy, setSortBy] = useState<"any-time" | "latest" | "salary-high" | "past-24h" | "past-week" | "past-month">("any-time");
   const [currentPage, setCurrentPage] = useState(1);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const ITEMS_PER_PAGE = 10;
+
+  // Lock body scroll and handle ESC key when mobile filter drawer is open
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileFiltersOpen(false);
+    };
+    if (mobileFiltersOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [mobileFiltersOpen]);
 
   const [filters, setFilters] = useState<JobFilterState>({
     search: titleParam,
@@ -61,6 +80,17 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
     contractTypes: [],
     workplaceTypes: [],
   });
+
+  const activeFiltersCount = useMemo(() => {
+    return (
+      (filters.search ? 1 : 0) +
+      filters.roles.length +
+      filters.experienceLevels.length +
+      filters.locations.length +
+      filters.workplaceTypes.length +
+      filters.contractTypes.length
+    );
+  }, [filters]);
 
   const handleResetFilters = () => {
     setFilters({ search: "", roles: [], experienceLevels: [], locations: [], contractTypes: [], workplaceTypes: [] });
@@ -186,19 +216,38 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
             onReset={handleResetFilters}
             onOpenWizard={() => {}}
             totalMatches={filteredJobs.length}
+            className="hidden lg:block w-[395px] shrink-0 sticky top-20"
           />
 
           <div className="flex-1 w-full space-y-5">
-            <div id="jobs-results-heading" className="flex items-center justify-between pb-1">
-              <h1 className="text-[26px] sm:text-[30px] font-extrabold text-zinc-950 tracking-tight">
-                {filteredJobs.length} {filteredJobs.length === 1 ? "job" : "jobs"}
-              </h1>
+            <div id="jobs-results-heading" className="flex items-center justify-between pb-1 gap-3">
+              <div className="flex items-center gap-3 min-w-0">
+                <h1 className="text-[26px] sm:text-[30px] font-extrabold text-zinc-950 tracking-tight shrink-0">
+                  {filteredJobs.length} {filteredJobs.length === 1 ? "job" : "jobs"}
+                </h1>
 
-              <div className="relative">
+                {/* Mobile Filter Trigger (< lg) */}
+                <button
+                  type="button"
+                  onClick={() => setMobileFiltersOpen(true)}
+                  className="lg:hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-zinc-200/90 text-[13px] font-bold text-zinc-800 shadow-2xs hover:border-zinc-300 active:scale-95 transition-all cursor-pointer"
+                  aria-label="Open job filters"
+                >
+                  <Faders size={15} weight="bold" className="text-[#E7040D]" />
+                  <span>Filters</span>
+                  {activeFiltersCount > 0 && (
+                    <span className="inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-[#E7040D] text-white text-[10px] font-extrabold">
+                      {activeFiltersCount}
+                    </span>
+                  )}
+                </button>
+              </div>
+
+              <div className="relative shrink-0">
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="appearance-none pl-4 pr-9 py-2 rounded-xl bg-white border border-zinc-200/90 text-[13.5px] font-bold text-zinc-800 shadow-2xs focus:outline-hidden cursor-pointer hover:border-zinc-300"
+                  className="appearance-none pl-3.5 pr-8 py-2 rounded-xl bg-white border border-zinc-200/90 text-[13px] sm:text-[13.5px] font-bold text-zinc-800 shadow-2xs focus:outline-hidden cursor-pointer hover:border-zinc-300"
                 >
                   <option value="any-time">Any time</option>
                   <option value="past-24h">Past 24 hours</option>
@@ -207,7 +256,7 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
                   <option value="salary-high">Salary: High to Low</option>
                   <option value="latest">Latest posted</option>
                 </select>
-                <CaretDown size={14} weight="bold" className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 pointer-events-none" />
+                <CaretDown size={14} weight="bold" className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-500 pointer-events-none" />
               </div>
             </div>
 
@@ -277,6 +326,37 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
 
         </div>
       </main>
+
+      {/* Mobile Filter Drawer (< lg) */}
+      <div
+        className={`fixed inset-0 z-50 lg:hidden flex justify-end transition-opacity duration-300 ${
+          mobileFiltersOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
+          onClick={() => setMobileFiltersOpen(false)}
+          aria-hidden="true"
+        />
+        <div
+          className={`relative w-full max-w-[400px] h-full bg-white z-10 shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out overscroll-contain ${
+            mobileFiltersOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Filter Jobs"
+        >
+          <JobsFilterSidebar
+            filters={filters}
+            onChange={handleFilterChange}
+            onReset={handleResetFilters}
+            onOpenWizard={() => {}}
+            totalMatches={filteredJobs.length}
+            className="w-full h-full flex flex-col"
+            onCloseMobile={() => setMobileFiltersOpen(false)}
+          />
+        </div>
+      </div>
     </div>
   );
 }

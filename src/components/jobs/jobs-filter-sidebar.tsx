@@ -20,6 +20,8 @@ interface JobsFilterSidebarProps {
   onReset: () => void;
   onOpenWizard: () => void;
   totalMatches?: number;
+  className?: string;
+  onCloseMobile?: () => void;
 }
 
 const EXPERIENCE_OPTIONS = [
@@ -47,6 +49,8 @@ export function JobsFilterSidebar({
   onChange,
   onReset,
   totalMatches,
+  className,
+  onCloseMobile,
 }: JobsFilterSidebarProps) {
   const [openSections, setOpenSections] = useState({
     role: true,
@@ -81,7 +85,9 @@ export function JobsFilterSidebar({
       locations: nextLocations,
     });
 
-    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+    if (onCloseMobile) {
+      onCloseMobile();
+    } else if (typeof window !== "undefined" && window.innerWidth < 1024) {
       document.getElementById("jobs-results-heading")?.scrollIntoView({ behavior: "smooth" });
     }
   };
@@ -144,21 +150,40 @@ export function JobsFilterSidebar({
     filters.contractTypes.length > 0;
 
   return (
-    <aside className="w-full lg:w-[395px] shrink-0 sticky top-20">
-      <div className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-5 max-h-[calc(100vh-120px)] flex flex-col justify-between">
+    <aside className={className || "w-full lg:w-[395px] shrink-0 sticky top-20"}>
+      <div className={`bg-white rounded-none p-5 flex flex-col justify-between ${onCloseMobile ? "h-full max-h-full border-0 shadow-none" : "border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] max-h-[calc(100vh-120px)]"}`}>
         {/* Pinned Top Header: "Filter" */}
         <div className="flex items-center justify-between pb-3 border-b border-zinc-100 shrink-0">
-          <h2 className="text-[14px] font-bold text-[#1F1F1F]">Filters</h2>
-          {hasActiveFilters && (
-            <button
-              type="button"
-              onClick={handleResetAll}
-              className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#E7040D] hover:underline cursor-pointer"
-            >
-              <ArrowClockwise size={13} weight="bold" />
-              <span>Reset all</span>
-            </button>
-          )}
+          <div className="flex items-center gap-2">
+            <h2 className="text-[14px] font-bold text-[#1F1F1F]">Filters</h2>
+            {totalMatches !== undefined && (
+              <span className="text-[11px] font-bold text-zinc-500 bg-zinc-100 px-2 py-0.5 rounded-full">
+                {totalMatches}
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-3">
+            {hasActiveFilters && (
+              <button
+                type="button"
+                onClick={handleResetAll}
+                className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#E7040D] hover:underline cursor-pointer"
+              >
+                <ArrowClockwise size={13} weight="bold" />
+                <span>Reset all</span>
+              </button>
+            )}
+            {onCloseMobile && (
+              <button
+                type="button"
+                onClick={onCloseMobile}
+                className="p-1 -mr-1 rounded-lg text-zinc-500 hover:text-zinc-950 hover:bg-zinc-100 transition-colors cursor-pointer"
+                aria-label="Close filters"
+              >
+                <X size={18} weight="bold" />
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Scrollable Middle Body Area */}

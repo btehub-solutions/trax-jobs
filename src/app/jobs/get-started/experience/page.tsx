@@ -133,7 +133,7 @@ function ExperienceLevelContent() {
                   key={option}
                   type="button"
                   onClick={() => toggleLevel(option)}
-                  className={`px-4 py-1.5 rounded-lg text-[12.5px] font-medium transition-all duration-150 flex items-center justify-center gap-1.5 cursor-pointer ${
+                  className={`px-4 py-1.5 rounded-lg text-[12.5px] font-medium transition-all duration-150 flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 select-none ${
                     isSelected
                       ? "bg-[#E7040D] text-white shadow-xs font-semibold"
                       : "bg-[#F4F4F5] hover:bg-[#EBEBEF] text-zinc-800 border border-zinc-200/60"
@@ -150,16 +150,16 @@ function ExperienceLevelContent() {
           <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
             <button
               onClick={handleBack}
-              className="px-5 py-2 rounded-lg text-[13.5px] font-bold text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 transition-all cursor-pointer"
+              className="px-5 py-2 rounded-lg text-[13.5px] font-bold text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 active:scale-95 transition-all cursor-pointer select-none"
             >
               Back
             </button>
 
             <button
               onClick={handleNext}
-              className={`px-7 py-2 rounded-lg text-[13.5px] font-bold transition-all cursor-pointer ${
+              className={`px-7 py-2 rounded-lg text-[13.5px] font-bold transition-all cursor-pointer select-none ${
                 selectedLevels.length > 0
-                  ? "bg-[#E7040D] hover:bg-[#CB030B] text-white shadow-xs active:scale-98"
+                  ? "bg-[#E7040D] hover:bg-[#CB030B] text-white shadow-xs active:scale-[0.98]"
                   : "bg-zinc-100 text-zinc-400 cursor-not-allowed"
               }`}
             >

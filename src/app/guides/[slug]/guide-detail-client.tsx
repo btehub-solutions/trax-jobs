@@ -67,7 +67,7 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
             <button
               type="button"
               onClick={handleCopyLink}
-              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-zinc-100 flex items-center justify-center text-zinc-600 transition-colors cursor-pointer"
+              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-zinc-100 active:scale-90 flex items-center justify-center text-zinc-600 transition-all cursor-pointer select-none"
               aria-label="Copy article link"
               title="Copy Link"
             >

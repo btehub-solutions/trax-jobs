@@ -62,16 +62,16 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
       <main className="flex-1 w-full max-w-[1200px] mx-auto pt-6 pb-16 px-4 sm:px-6 lg:px-8">
         
         {/* Breadcrumb Navigation (Trax Brand Tokens) */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-[13.5px] mb-6 select-none">
-          <Link href="/" className="text-[#E7040D] hover:underline flex items-center gap-1">
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-[13.5px] mb-6 select-none min-w-0">
+          <Link href="/" className="text-[#E7040D] hover:underline flex items-center gap-1 shrink-0 whitespace-nowrap">
             <House size={16} weight="fill" className="text-[#E7040D]" />
           </Link>
-          <CaretRight size={13} weight="bold" className="text-zinc-400" />
-          <Link href="/" className="text-[#E7040D] hover:underline font-medium">
+          <CaretRight size={13} weight="bold" className="text-zinc-400 shrink-0" />
+          <Link href="/learning" className="text-[#E7040D] hover:underline font-medium shrink-0 whitespace-nowrap">
             All Courses
           </Link>
-          <CaretRight size={13} weight="bold" className="text-zinc-400" />
-          <span className="text-zinc-500 truncate max-w-[320px] sm:max-w-none">
+          <CaretRight size={13} weight="bold" className="text-zinc-400 shrink-0" />
+          <span className="text-zinc-500 truncate min-w-0 flex-1">
             {course.title}
           </span>
         </nav>
@@ -301,7 +301,7 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
                   <button
                     type="button"
                     onClick={handleCopyLink}
-                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 rounded-none text-[12.5px] font-medium text-zinc-700 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-zinc-50 hover:bg-zinc-100 active:scale-95 border border-zinc-200 rounded-none text-[12.5px] font-medium text-zinc-700 transition-all cursor-pointer select-none"
                   >
                     {copied ? (
                       <>
@@ -323,7 +323,7 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
                       const url = window.location.href;
                       window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, "_blank");
                     }}
-                    className="w-9 h-9 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 rounded-none flex items-center justify-center text-zinc-600 transition-colors cursor-pointer"
+                    className="w-9 h-9 bg-zinc-50 hover:bg-zinc-100 active:scale-90 border border-zinc-200 rounded-none flex items-center justify-center text-zinc-600 transition-all cursor-pointer select-none"
                     aria-label="Share on Facebook"
                   >
                     <FacebookLogo size={16} weight="fill" />

@@ -140,7 +140,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
   const photoSet = CULTURE_SETS[Math.abs(job.title.length) % CULTURE_SETS.length];
 
   return (
-    <div className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgba(231,4,13,0.06)] hover:border-[#E7040D]/40 transition-all duration-200 p-6 sm:p-7 flex flex-col justify-between group relative overflow-hidden">
+    <div className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_14px_32px_-6px_rgba(231,4,13,0.08)] hover:border-[#E7040D]/40 hover:-translate-y-0.5 transition-all duration-200 p-6 sm:p-7 flex flex-col justify-between group relative overflow-hidden">
       
       {/* Top Section: Logo, Title, Company & Right-side 3-Photo Collage Widget */}
       <div>
@@ -239,7 +239,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
           {job.tags.slice(0, 1).map((tag) => (
             <span
               key={tag}
-              className="inline-flex items-center gap-1 px-3 py-1 rounded-none bg-[#F5F5F7] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/50"
+              className="inline-flex items-center gap-1 px-3 py-1 rounded-none bg-[#F5F5F7] hover:bg-[#ECECF0] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/50 hover:border-zinc-300 transition-colors duration-150 select-none cursor-default"
             >
               <span>{tag}</span>
             </span>
@@ -252,14 +252,15 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
         <div className="flex items-center gap-3">
           {/* Save Button with 90-degree edges */}
           <button
+            type="button"
             onClick={toggleSave}
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none text-[12.5px] font-semibold border transition-all cursor-pointer ${
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none text-[12.5px] font-semibold border transition-all duration-150 cursor-pointer select-none active:scale-90 ${
               isSaved
                 ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]"
                 : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F] shadow-2xs"
             }`}
           >
-            <BookmarkSimple size={14} weight={isSaved ? "fill" : "bold"} />
+            <BookmarkSimple size={14} weight={isSaved ? "fill" : "bold"} className={isSaved ? "scale-110 transition-transform text-[#E7040D]" : "transition-transform"} />
             <span>{isSaved ? "Saved" : "Save"}</span>
           </button>
 
@@ -273,7 +274,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
         {/* Details Button (Navigates to Job Detail Page) */}
         <Link
           href={`/jobs/${job.slug || job.id}`}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-none bg-[#E7040D] hover:bg-[#CB030B] text-white text-[12.5px] font-bold shadow-2xs transition-all cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-none bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] text-white text-[12.5px] font-bold shadow-2xs transition-all duration-150 cursor-pointer select-none whitespace-nowrap"
         >
           <span>Details</span>
           <ArrowUpRight size={13} weight="bold" />

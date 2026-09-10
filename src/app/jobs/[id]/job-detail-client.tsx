@@ -167,10 +167,10 @@ export default function JobDetailClient({
 
       {/* Sticky top bar */}
       {showStickyNav && (
-        <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-zinc-200 shadow-sm transition-all duration-200">
+        <div className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-zinc-200 shadow-sm transition-all duration-200">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 py-3 flex items-center justify-between gap-4">
             <div className="flex items-center gap-6 min-w-0">
-              <button onClick={() => router.back()} className="inline-flex items-center gap-1.5 text-[13px] font-bold text-zinc-700 hover:text-[#E7040D] transition-colors cursor-pointer shrink-0">
+              <button onClick={() => router.back()} className="inline-flex items-center gap-1.5 text-[13px] font-bold text-zinc-700 hover:text-[#E7040D] active:scale-95 transition-all cursor-pointer shrink-0">
                 <CaretLeft size={16} weight="bold" />
                 <span>Back</span>
               </button>
@@ -182,12 +182,12 @@ export default function JobDetailClient({
               </div>
             </div>
             <div className="flex items-center gap-3 shrink-0">
-              <a href={job.applicationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-5 py-2 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13px] font-bold shadow-2xs transition-all cursor-pointer">
+              <a href={job.applicationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-5 py-2 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] hover:shadow-[0_8px_20px_-4px_rgba(231,4,13,0.35)] text-white text-[13px] font-bold shadow-2xs transition-all cursor-pointer select-none">
                 <span>Apply</span>
                 <ArrowSquareOut size={14} weight="bold" />
               </a>
-              <button onClick={toggleSave} className={`inline-flex items-center gap-1.5 px-3.5 py-2 text-[12.5px] font-semibold border transition-all cursor-pointer ${isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"}`}>
-                <BookmarkSimple size={15} weight={isSaved ? "fill" : "bold"} />
+              <button onClick={toggleSave} className={`inline-flex items-center gap-1.5 px-3.5 py-2 text-[12.5px] font-semibold border active:scale-90 transition-all cursor-pointer select-none ${isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"}`}>
+                <BookmarkSimple size={15} weight={isSaved ? "fill" : "bold"} className={isSaved ? "scale-110 transition-transform" : "transition-transform"} />
                 <span>{isSaved ? "Saved" : "Save"}</span>
               </button>
             </div>
@@ -197,7 +197,7 @@ export default function JobDetailClient({
 
       <div className="bg-[#FAFAFA]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-6 pb-2">
-          <button onClick={() => router.back()} className="inline-flex items-center gap-1.5 text-[13.5px] font-bold text-zinc-700 hover:text-[#E7040D] transition-colors cursor-pointer">
+          <button onClick={() => router.back()} className="inline-flex items-center gap-1.5 text-[13.5px] font-bold text-zinc-700 hover:text-[#E7040D] active:scale-95 transition-all cursor-pointer">
             <CaretLeft size={16} weight="bold" />
             <span>Back</span>
           </button>
@@ -240,7 +240,7 @@ export default function JobDetailClient({
                   <h3 className="text-[11.5px] font-bold tracking-wider uppercase text-[#1F1F1F]">SKILLS &amp; EXPERTISE</h3>
                   <div className="flex flex-wrap items-center gap-2">
                     {job.tags.map((skill: string) => (
-                      <span key={skill} className="inline-flex items-center px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80">{skill}</span>
+                      <span key={skill} className="inline-flex items-center px-3 py-1.5 bg-[#FAFAFA] hover:bg-zinc-100 text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 transition-colors">{skill}</span>
                     ))}
                   </div>
                 </div>
@@ -257,12 +257,12 @@ export default function JobDetailClient({
 
               <div className="pt-6 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <a href={job.applicationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-6 py-2.5 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold shadow-2xs transition-all cursor-pointer">
+                  <a href={job.applicationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-6 py-2.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] hover:shadow-[0_10px_24px_-4px_rgba(231,4,13,0.35)] text-white text-[13.5px] font-bold shadow-2xs transition-all cursor-pointer select-none">
                     <span>Apply</span>
                     <ArrowSquareOut size={15} weight="bold" />
                   </a>
-                  <button onClick={toggleSave} className={`inline-flex items-center gap-1.5 px-4 py-2.5 text-[13px] font-semibold border transition-all cursor-pointer ${isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"}`}>
-                    <BookmarkSimple size={15} weight={isSaved ? "fill" : "bold"} />
+                  <button onClick={toggleSave} className={`inline-flex items-center gap-1.5 px-4 py-2.5 text-[13px] font-semibold border active:scale-90 transition-all cursor-pointer select-none ${isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"}`}>
+                    <BookmarkSimple size={15} weight={isSaved ? "fill" : "bold"} className={isSaved ? "scale-110 transition-transform" : "transition-transform"} />
                     <span>{isSaved ? "Saved" : "Save"}</span>
                   </button>
                 </div>
@@ -271,7 +271,7 @@ export default function JobDetailClient({
                     <CalendarBlank size={15} weight="regular" />
                     <span>{formattedRelativeDate}</span>
                   </div>
-                  <button onClick={handleShare} className="inline-flex items-center gap-1.5 text-zinc-700 hover:text-[#E7040D] font-semibold transition-colors cursor-pointer">
+                  <button onClick={handleShare} className="inline-flex items-center gap-1.5 text-zinc-700 hover:text-[#E7040D] active:scale-95 font-semibold transition-all cursor-pointer select-none">
                     {copied ? (
                       <>
                         <Check size={15} weight="bold" className="text-emerald-600" />
@@ -365,7 +365,7 @@ export default function JobDetailClient({
               <h3 className="text-xl font-black tracking-tight mb-2 text-white">Discover the company</h3>
               <p className="text-[13.5px] font-medium text-zinc-300 leading-relaxed mb-6">Explore the company&apos;s profile or follow them to find out if they&apos;re the right fit!</p>
               <div className="flex flex-col sm:flex-row items-center gap-3">
-                <Link href={`/companies/${job.company.slug}`} className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13px] font-bold transition-all text-center cursor-pointer">
+                <Link href={`/companies/${job.company.slug}`} className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] text-white text-[13px] font-bold transition-all text-center cursor-pointer select-none">
                   <span>Explore the company</span>
                   <ArrowUpRight size={14} weight="bold" />
                 </Link>
@@ -411,7 +411,7 @@ export default function JobDetailClient({
                   {showFullCompanyBio && (
                     <p>The company invests deeply in engineering talent, remote-first practices, and building robust platforms that serve thousands of businesses across Africa.</p>
                   )}
-                  <button onClick={() => setShowFullCompanyBio(!showFullCompanyBio)} className="inline-flex items-center gap-1 text-[12.5px] font-bold text-zinc-900 hover:text-[#E7040D] pt-1 cursor-pointer transition-colors">
+                  <button onClick={() => setShowFullCompanyBio(!showFullCompanyBio)} className="inline-flex items-center gap-1 text-[12.5px] font-bold text-zinc-900 hover:text-[#E7040D] active:scale-95 pt-1 cursor-pointer transition-all select-none">
                     <span>{showFullCompanyBio ? "View less" : "View more"}</span>
                     {showFullCompanyBio ? <CaretUp size={12} weight="bold" /> : <CaretDown size={12} weight="bold" />}
                   </button>

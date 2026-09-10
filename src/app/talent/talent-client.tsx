@@ -170,19 +170,19 @@ export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
             )}
           </div>
 
-          <div className="flex items-center divide-x divide-zinc-200/80 shrink-0">
+          <div className="flex items-center divide-x divide-zinc-200/80 overflow-x-auto no-scrollbar max-w-full border-b md:border-b-0 shrink-0">
             {[
               { key: "discipline", label: "Discipline", value: selectedDiscipline, set: setSelectedDiscipline, options: DISCIPLINES, allValue: "All Disciplines" },
               { key: "experience", label: "Experience", value: selectedExperience, set: setSelectedExperience, options: EXPERIENCES, allValue: "All Experience" },
               { key: "availability", label: "Availability", value: selectedAvailability, set: setSelectedAvailability, options: AVAILABILITIES, allValue: "All Availability" },
             ].map(({ key, label, value, set, options, allValue }) => (
-              <div key={key} className="relative">
-                <button type="button" onClick={() => setOpenDropdown(openDropdown === key as any ? null : key as any)} className={`px-4 py-3 flex items-center gap-2 text-[13px] font-semibold transition-colors cursor-pointer ${value ? "text-[#E7040D] font-bold bg-red-50/50" : "text-zinc-700 hover:text-zinc-950"}`}>
+              <div key={key} className="relative shrink-0">
+                <button type="button" onClick={() => setOpenDropdown(openDropdown === key as any ? null : key as any)} className={`px-4 py-3 flex items-center gap-2 text-[13px] font-semibold transition-colors cursor-pointer select-none whitespace-nowrap ${value ? "text-[#E7040D] font-bold bg-red-50/50" : "text-zinc-700 hover:text-zinc-950"}`}>
                   <span className="max-w-[120px] truncate">{value || label}</span>
                   <CaretDown size={13} weight="bold" className="text-zinc-400 shrink-0" />
                 </button>
                 {openDropdown === key && (
-                  <div className="absolute top-full left-0 mt-1 w-60 bg-white border border-zinc-200/90 shadow-xl py-1 z-50">
+                  <div className="absolute top-full left-0 sm:left-0 right-auto mt-1 w-60 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 shadow-xl py-1 z-50">
                     {options.map((opt) => (
                       <button key={opt} onClick={() => { set(opt === allValue ? "" : opt); setOpenDropdown(null); }} className="w-full text-left px-4 py-2 text-[13px] font-medium text-zinc-700 hover:bg-zinc-50 hover:text-black flex items-center justify-between cursor-pointer">
                         <span>{opt}</span>
@@ -204,9 +204,9 @@ export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
 
       <main className="flex-1 w-full max-w-[1360px] mx-auto py-8 px-6 sm:px-8 lg:px-10 space-y-10">
         <div>
-          <div className="flex items-center justify-between pb-3.5 border-b border-zinc-200/80">
-            <h1 className="text-[26px] sm:text-[30px] font-black text-[#1F1F1F] tracking-tight">Vetted talent to explore</h1>
-            <button onClick={resetFilters} className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-none bg-white border border-zinc-200/90 text-[12.5px] font-bold text-[#1F1F1F] hover:bg-zinc-50 transition-all shadow-2xs cursor-pointer">
+          <div className="flex items-center justify-between pb-3.5 border-b border-zinc-200/80 gap-3">
+            <h1 className="text-[24px] sm:text-[30px] font-black text-[#1F1F1F] tracking-tight min-w-0">Vetted talent to explore</h1>
+            <button onClick={resetFilters} className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-none bg-white border border-zinc-200/90 text-[12.5px] font-bold text-[#1F1F1F] hover:bg-zinc-50 active:scale-95 transition-all duration-150 shadow-2xs cursor-pointer shrink-0 whitespace-nowrap">
               <span>Discover all</span>
               <CaretRight size={13} weight="bold" />
             </button>
@@ -214,7 +214,7 @@ export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6">
             {filteredTalent.map((item) => (
-              <div key={item.id} className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group">
+              <div key={item.id} className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_-6px_rgba(231,4,13,0.08)] hover:border-[#E7040D]/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group">
                 <div className="relative h-32 w-full bg-[#E5E7EB] overflow-hidden">
                   {item.coverImage && (
                     <Image src={item.coverImage} alt="" fill sizes="320px" className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-90" unoptimized />
@@ -245,13 +245,18 @@ export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
                       </div>
                       <div className="flex items-center gap-2">
                         <Users size={14} weight="bold" className="text-zinc-400 shrink-0" />
-                        <span className="truncate">{item.experienceYears} • {item.availability}</span>
+                        <span className="truncate flex items-center gap-1.5">
+                          <span>{item.experienceYears} • {item.availability}</span>
+                          {item.availability?.toLowerCase().includes("immediately") && (
+                            <span className="inline-flex w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" title="Available now" />
+                          )}
+                        </span>
                       </div>
                     </div>
                   </div>
 
                   <div className="pt-6">
-                    <Link href={`/talent/${item.slug}`} className="block w-full py-2 rounded-none text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs transition-all cursor-pointer text-center group-hover:border-[#E7040D]">
+                    <Link href={`/talent/${item.slug}`} className="block w-full py-2 rounded-none text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] active:scale-[0.98] transition-all duration-150 cursor-pointer text-center group-hover:border-[#E7040D] whitespace-nowrap">
                       Hire Talent
                     </Link>
                   </div>

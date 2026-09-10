@@ -146,7 +146,7 @@ export function CareerGuidesSection({ guides }: CareerGuidesSectionProps = {}) {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-5 py-2.5 rounded-xl text-[13.5px] font-bold whitespace-nowrap transition-all duration-200 cursor-pointer ${
+                className={`px-5 py-2.5 rounded-xl text-[13.5px] font-bold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 select-none ${
                   isActive
                     ? "bg-[#E7040D] text-white shadow-xs"
                     : "bg-white text-zinc-700 hover:text-zinc-950 border border-zinc-200/80 hover:border-zinc-300 hover:bg-zinc-50"

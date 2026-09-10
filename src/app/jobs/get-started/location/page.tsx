@@ -142,14 +142,14 @@ function LocationPreferenceContent() {
           <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
             <button
               onClick={handleBack}
-              className="px-5 py-2 rounded-lg text-[13.5px] font-bold text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 transition-all cursor-pointer"
+              className="px-5 py-2 rounded-lg text-[13.5px] font-bold text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 active:scale-95 transition-all cursor-pointer select-none"
             >
               Back
             </button>
 
             <button
               onClick={handleFindJobs}
-              className="px-6 py-2 rounded-lg text-[13.5px] font-bold transition-all cursor-pointer bg-[#E7040D] hover:bg-[#CB030B] text-white shadow-xs active:scale-98"
+              className="px-6 py-2 rounded-lg text-[13.5px] font-bold transition-all cursor-pointer bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] select-none text-white shadow-xs"
             >
               <span>Find job matches</span>
             </button>

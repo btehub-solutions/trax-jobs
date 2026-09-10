@@ -293,7 +293,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-5 py-2.5 rounded-xl text-[13.5px] font-bold whitespace-nowrap transition-all duration-200 cursor-pointer ${
+                  className={`px-5 py-2.5 rounded-xl text-[13.5px] font-bold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 select-none ${
                     isActive
                       ? "bg-[#E7040D] text-white shadow-xs"
                       : "bg-white text-zinc-700 hover:text-zinc-950 border border-zinc-200/80 hover:border-zinc-300 hover:bg-zinc-50"
@@ -403,7 +403,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
               <div className="p-4 pt-0">
                 <Link
                   href={`/companies/${company.slug}`}
-                  className="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-white hover:bg-[#E7040D] text-zinc-800 hover:text-white text-[12px] font-semibold transition-all duration-200 border border-zinc-200/90 hover:border-[#E7040D] shadow-2xs"
+                  className="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-white hover:bg-[#E7040D] active:scale-95 select-none text-zinc-800 hover:text-white text-[12px] font-semibold transition-all duration-150 border border-zinc-200/90 hover:border-[#E7040D] shadow-2xs"
                 >
                   Explore
                 </Link>
