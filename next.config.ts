@@ -62,6 +62,20 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/submit-job",
+        destination: "/about?tab=contact&topic=hiring",
+        permanent: true,
+      },
+      {
+        source: "/submit-profile",
+        destination: "/about?tab=contact&topic=talent",
+        permanent: true,
+      },
+    ];
+  },
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,

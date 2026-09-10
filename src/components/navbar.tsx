@@ -34,12 +34,42 @@ const mobileNavLinks = [
 export interface NavbarProps {
   children?: React.ReactNode;
   activeTab?: string;
+  ctaText?: string;
+  ctaHref?: string;
   className?: string;
 }
 
-export function Navbar({ children, activeTab, className = "" }: NavbarProps = {}) {
-  const pathname = usePathname();
+export function Navbar({
+  children,
+  activeTab,
+  ctaText,
+  ctaHref,
+  className = "",
+}: NavbarProps = {}) {
+  const pathname = usePathname() || "";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Context-aware CTA button calculation
+  const isTalentPage = activeTab === "talent" || pathname.startsWith("/talent");
+  const isCompaniesPage = activeTab === "companies" || pathname.startsWith("/companies");
+  const isJobsPage = activeTab === "jobs" || pathname.startsWith("/jobs");
+
+  let defaultCtaText = "Submit a Job";
+  let defaultCtaHref = "/about?tab=contact&topic=hiring";
+
+  if (isTalentPage) {
+    defaultCtaText = "Submit Profile";
+    defaultCtaHref = "/about?tab=contact&topic=talent";
+  } else if (isCompaniesPage) {
+    defaultCtaText = "Submit Profile";
+    defaultCtaHref = "/about?tab=contact&topic=company";
+  } else if (isJobsPage) {
+    defaultCtaText = "Submit a Job";
+    defaultCtaHref = "/about?tab=contact&topic=hiring";
+  }
+
+  const finalCtaText = ctaText || defaultCtaText;
+  const finalCtaHref = ctaHref || defaultCtaHref;
 
   // Lock background body scroll when mobile drawer is open
   useEffect(() => {
@@ -105,13 +135,13 @@ export function Navbar({ children, activeTab, className = "" }: NavbarProps = {}
             </nav>
           </div>
 
-          {/* Right: Desktop Submit a Job Pill Button */}
+          {/* Right: Context-aware CTA Pill Button */}
           <div className="hidden sm:flex items-center gap-4">
             <Link
-              href="/submit-job"
-              className="inline-flex items-center justify-center px-7 py-2.5 rounded-full text-[14px] font-semibold bg-[#fce8e0] text-[#E7040D] hover:bg-[#f9cbb9] transition-colors cursor-pointer"
+              href={finalCtaHref}
+              className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-[14px] font-semibold bg-[#fce8e0] text-[#E7040D] hover:bg-[#f9cbb9] transition-colors cursor-pointer whitespace-nowrap"
             >
-              Submit a job
+              {finalCtaText}
             </Link>
           </div>
 
@@ -176,11 +206,11 @@ export function Navbar({ children, activeTab, className = "" }: NavbarProps = {}
               Hire Talent
             </Link>
             <Link
-              href="/submit-job"
+              href={finalCtaHref}
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center justify-center px-3 py-2.5 rounded-xl text-[13px] font-semibold bg-[#E7040D] hover:bg-[#CB030B] text-white transition-colors text-center shadow-xs"
             >
-              Submit a job
+              {finalCtaText}
             </Link>
           </div>
 

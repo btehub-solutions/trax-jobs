@@ -11,7 +11,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
   const getInitialInquiry = (topic?: string | null) => {
     if (topic === "job" || topic === "hiring") return "Hiring / Post a Job";
     if (topic === "profile" || topic === "talent") return "Submit Talent Profile";
-    if (topic === "company") return "Submit Company Profile";
+    if (topic === "company" || topic === "companies") return "Submit Company Profile";
     return "";
   };
 
@@ -58,10 +58,10 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               }}
               className="w-full sm:w-auto px-6 py-2.5 bg-[#1F1F1F] hover:bg-[#E7040D] text-white text-xs font-bold transition-all rounded-none cursor-pointer"
             >
-              Send another message
+              Send Another Inquiry
             </button>
             <a
-              href="https://wa.me/2348000008729?text=Hello%20Trax%20Jobs%20Team%2C%20I%20have%20an%20inquiry"
+              href="https://wa.me/2348000008729"
               target="_blank"
               rel="noreferrer"
               className="w-full sm:w-auto px-6 py-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold transition-all rounded-none flex items-center justify-center gap-1.5"
@@ -77,14 +77,19 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
             <h2 className="text-xl sm:text-2xl font-bold text-[#1F1F1F] tracking-tight">
               Start the conversation
             </h2>
-            {initialTopic === "job" && (
+            {(initialTopic === "job" || initialTopic === "hiring") && (
               <div className="p-3 bg-[#fdf2ee] border-l-2 border-[#E7040D] text-[13px] text-zinc-700 leading-relaxed">
                 <span className="font-semibold text-zinc-950">Submitting a Job:</span> You are connecting with the Trax Editorial Desk. Share your company name, role title, and contact details below. Our team will request the complete brief and manage publication.
               </div>
             )}
-            {initialTopic === "profile" && (
+            {(initialTopic === "profile" || initialTopic === "talent") && (
               <div className="p-3 bg-[#fdf2ee] border-l-2 border-[#E7040D] text-[13px] text-zinc-700 leading-relaxed">
                 <span className="font-semibold text-zinc-950">Submitting a Profile:</span> You are connecting with the Trax Talent Desk. Share your specialty, key metrics, and portfolio links below for editorial review.
+              </div>
+            )}
+            {(initialTopic === "company" || initialTopic === "companies") && (
+              <div className="p-3 bg-[#fdf2ee] border-l-2 border-[#E7040D] text-[13px] text-zinc-700 leading-relaxed">
+                <span className="font-semibold text-zinc-950">Submitting a Company Profile:</span> You are connecting with the Trax Editorial Desk. Share your company details, tech stack, and hiring focus below for editorial review.
               </div>
             )}
           </div>

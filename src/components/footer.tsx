@@ -28,7 +28,7 @@ const footerLinks: FooterSection[] = [
     links: [
       { name: "Explore open jobs", href: "/jobs" },
       { name: "Browse curated companies", href: "/companies" },
-      { name: "Submit your profile", href: "/submit-profile" },
+      { name: "Submit your profile", href: "/about?tab=contact&topic=talent" },
       { name: "Learning Hub", href: "/learning" },
       { name: "Career Guides", href: "/guides" },
     ],
@@ -37,7 +37,7 @@ const footerLinks: FooterSection[] = [
     title: "For Employers",
     links: [
       { name: "Explore talent directory", href: "/talent" },
-      { name: "Post an open job", href: "/submit-job" },
+      { name: "Post an open job", href: "/about?tab=contact&topic=hiring" },
       { name: "Contact editorial desk", href: "/about?tab=contact&topic=hiring" },
     ],
   },
