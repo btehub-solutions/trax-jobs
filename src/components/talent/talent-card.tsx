@@ -56,7 +56,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
             
             {/* Portrait Avatar */}
             <div className="relative">
-              <Link href={`/talent/${talent.id}`} className="block">
+              <Link href={`/talent/${talent.slug || talent.id}`} className="block">
                 <div className="w-20 h-20 rounded-none bg-white p-1 border-2 border-white shadow-md ring-1 ring-zinc-200/80 overflow-hidden bg-zinc-100 group-hover:ring-[#E7040D]/40 transition-all">
                   {!imageError ? (
                     <Image
@@ -101,7 +101,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
           {/* Name & Role Title */}
           <div className="mb-3">
             <div className="flex items-center gap-1.5 mb-1">
-              <Link href={`/talent/${talent.id}`}>
+              <Link href={`/talent/${talent.slug || talent.id}`}>
                 <h2 className="text-[18px] sm:text-[19px] font-black text-[#1F1F1F] tracking-tight group-hover:text-[#E7040D] transition-colors">
                   {talent.name}
                 </h2>
@@ -201,7 +201,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
 
           {/* Hire Talent CTA Button (Navigates to Talent Preview Page) */}
           <Link
-            href={`/talent/${talent.id}`}
+            href={`/talent/${talent.slug || talent.id}`}
             className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-none bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13px] font-bold transition-all shadow-xs cursor-pointer active:scale-98"
           >
             {talent.preferredContactMethod === "whatsapp" ? (

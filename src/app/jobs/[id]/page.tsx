@@ -1,27 +1,47 @@
 import type { Metadata } from "next";
 import { fetchJobBySlug, fetchPublishedJobs } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
+import { SAMPLE_JOBS } from "@/data/jobs";
 import { notFound } from "next/navigation";
 import JobDetailClient from "./job-detail-client";
 
 export const revalidate = 60;
+
+function findStaticJob(id: string) {
+  const norm = id.toLowerCase().trim();
+  return (
+    SAMPLE_JOBS.find(
+      (j) =>
+        j.id.toLowerCase() === norm ||
+        j.slug.toLowerCase() === norm ||
+        j.title.toLowerCase().replace(/\s+/g, "-") === norm
+    ) || null
+  );
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
   let rawJob = await fetchJobBySlug(id);
   if (!rawJob) {
     const all = await fetchPublishedJobs();
-    rawJob = all?.find((j: any) => j._id === id) ?? null;
+    rawJob = all?.find((j: any) => j._id === id || j.slug === id) ?? null;
   }
-  if (!rawJob) {
+  const staticJob = !rawJob ? findStaticJob(id) : null;
+
+  if (!rawJob && !staticJob) {
     return {
       title: "Job Opportunity",
     };
   }
 
-  const title = `${rawJob.title} at ${rawJob.company?.name || "Verified Company"}`;
-  const description = rawJob.summary || `Apply for ${rawJob.title} in ${rawJob.location || "Nigeria"}. Verified tech opportunity on Trax Jobs.`;
-  const companyLogo = urlForImage(rawJob.company?.logo);
+  const title = rawJob
+    ? `${rawJob.title} at ${rawJob.company?.name || "Verified Company"}`
+    : `${staticJob!.title} at ${staticJob!.company.name}`;
+  const description =
+    rawJob?.summary ||
+    staticJob?.summary ||
+    `Apply for ${rawJob?.title || staticJob?.title} in ${rawJob?.location || staticJob?.location}. Verified tech opportunity on Trax Jobs.`;
+  const companyLogo = rawJob ? urlForImage(rawJob.company?.logo) : null;
 
   return {
     title,
@@ -30,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       title,
       description,
       type: "article",
-      images: companyLogo ? [{ url: companyLogo, alt: rawJob.company?.name }] : undefined,
+      images: companyLogo ? [{ url: companyLogo, alt: rawJob?.company?.name }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
@@ -83,23 +103,72 @@ function mapJob(j: any) {
 export default async function JobDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
-  // Try by slug first, fallback to all jobs to find by _id
+  // Try by slug first, fallback to all jobs to find by _id or slug
   let rawJob = await fetchJobBySlug(id);
   if (!rawJob) {
     const all = await fetchPublishedJobs();
-    rawJob = all?.find((j: any) => j._id === id) ?? null;
+    rawJob = all?.find((j: any) => j._id === id || j.slug === id) ?? null;
   }
 
-  if (!rawJob) notFound();
+  const staticJob = !rawJob ? findStaticJob(id) : null;
 
-  const job = mapJob(rawJob);
+  if (!rawJob && !staticJob) notFound();
+
+  const job = rawJob
+    ? mapJob(rawJob)!
+    : {
+        id: staticJob!.id,
+        slug: staticJob!.slug || staticJob!.id,
+        title: staticJob!.title,
+        summary: staticJob!.summary,
+        description: staticJob!.description,
+        requirements: staticJob!.requirements,
+        benefits: staticJob!.benefits,
+        location: staticJob!.location,
+        workplaceType: staticJob!.workplaceType,
+        experienceLevel: staticJob!.experienceLevel,
+        roleCategory: staticJob!.roleCategory,
+        contractType: staticJob!.contractType,
+        salary: {
+          formatted: staticJob!.salary?.formatted ?? "",
+          rawMin: staticJob!.salary?.rawMin ?? 0,
+          rawMax: staticJob!.salary?.rawMax ?? 0,
+        },
+        tags: staticJob!.tags ?? [],
+        applicationLink: staticJob!.applicationLink ?? "#",
+        isFeatured: staticJob!.isFeatured ?? false,
+        isVerified: staticJob!.isVerified ?? false,
+        postedDate: staticJob!.postedDate ?? new Date().toISOString(),
+        company: {
+          id: staticJob!.company.slug,
+          name: staticJob!.company.name,
+          slug: staticJob!.company.slug,
+          logo: staticJob!.company.logo,
+          industry: staticJob!.company.industry,
+          location: staticJob!.company.hq,
+          employeesCount: staticJob!.company.employeesCount,
+          hq: staticJob!.company.hq,
+          bio: "",
+        },
+      };
 
   // Fetch all company jobs for the job count badge
+  let companyJobsCount = 1;
   const allRaw = await fetchPublishedJobs();
-  const allCompanyJobs = (allRaw ?? [])
-    .filter((j: any) => j.company?.slug === rawJob.company?.slug)
-    .map(mapJob)
-    .filter(Boolean);
+  if (allRaw && allRaw.length > 0) {
+    const allCompanyJobs = allRaw
+      .filter((j: any) => j.company?.slug === job.company.slug)
+      .map(mapJob)
+      .filter(Boolean);
+    companyJobsCount = allCompanyJobs.length || 1;
+  } else {
+    const staticCompanyJobs = SAMPLE_JOBS.filter(
+      (j) =>
+        j.company.slug.toLowerCase() === job.company.slug.toLowerCase() ||
+        j.company.name.toLowerCase() === job.company.name.toLowerCase()
+    );
+    companyJobsCount = staticCompanyJobs.length || 1;
+  }
 
-  return <JobDetailClient job={job} allCompanyJobsCount={allCompanyJobs.length} />;
+  return <JobDetailClient job={job} allCompanyJobsCount={companyJobsCount} />;
 }

@@ -426,7 +426,7 @@ export default function JobDetailClient({
               </div>
 
               <div className="flex items-center gap-3 pt-1 text-[13px] font-bold">
-                <Link href={`/companies/${job.company.slug}?tab=jobs`} className="inline-flex items-center gap-1.5 text-zinc-900 hover:text-[#E7040D] transition-colors">
+                <Link href={`/companies/${job.company.slug || job.company.name.toLowerCase().replace(/\s+/g, "-")}?tab=jobs`} className="inline-flex items-center gap-1.5 text-zinc-900 hover:text-[#E7040D] transition-colors">
                   <span>View all jobs</span>
                   <span className="px-1.5 py-0.5 rounded-none bg-[#fce8e0] text-[#E7040D] text-[11px] font-black border border-[#E7040D]/30">
                     {allCompanyJobsCount || 1}

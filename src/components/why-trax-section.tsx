@@ -433,7 +433,7 @@ const features = [
     title: "Employer vacancy submissions",
     description: "Post your team openings to a focused audience of African engineers, designers, and operators. Submissions are reviewed and published within one business day.",
     cta: "Submit an open job",
-    href: "/about?tab=contact&topic=hiring",
+    href: "/submit-job",
     component: <JobSubmissionCard />,
   },
   {

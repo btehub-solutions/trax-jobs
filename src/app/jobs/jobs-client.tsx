@@ -46,8 +46,22 @@ export interface SanityJob {
 
 function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
   const searchParams = useSearchParams();
-  const titleParam = searchParams.get("title") || "";
+  const titleParam = searchParams.get("title") || searchParams.get("q") || "";
   const expParam = searchParams.get("exp")?.split(",").filter(Boolean) || [];
+  const levelParam = searchParams.get("level") || "";
+  const initialExp: string[] = [...expParam];
+  if (levelParam) {
+    const l = levelParam.toLowerCase();
+    if (l.includes("no-experience") || l.includes("entry") || l.includes("internship") || l.includes("graduate")) {
+      initialExp.push("Entry-level. 0-1 years");
+    } else if (l.includes("mid")) {
+      initialExp.push("Mid-level. 3-5 years");
+    } else if (l.includes("senior")) {
+      initialExp.push("Senior. 5-10 years");
+    } else if (l.includes("executive")) {
+      initialExp.push("Expert. 10+ years");
+    }
+  }
   const locParam = searchParams.get("location") || "";
 
   const [sortBy, setSortBy] = useState<"any-time" | "latest" | "salary-high" | "past-24h" | "past-week" | "past-month">("any-time");
@@ -75,7 +89,7 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
   const [filters, setFilters] = useState<JobFilterState>({
     search: titleParam,
     roles: [],
-    experienceLevels: expParam as ExperienceTier[],
+    experienceLevels: initialExp as ExperienceTier[],
     locations: locParam ? [locParam] : [],
     contractTypes: [],
     workplaceTypes: [],
