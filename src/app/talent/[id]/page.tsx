@@ -1,9 +1,45 @@
+import type { Metadata } from "next";
 import { fetchTalentBySlug, fetchPublishedTalent } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { notFound } from "next/navigation";
 import TalentDetailClient from "./talent-detail-client";
 
 export const revalidate = 60;
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  let rawTalent = await fetchTalentBySlug(id);
+  if (!rawTalent) {
+    const all = await fetchPublishedTalent();
+    rawTalent = all?.find((t: any) => t._id === id) ?? null;
+  }
+  if (!rawTalent) {
+    return {
+      title: "Talent Profile",
+    };
+  }
+
+  const title = `${rawTalent.name} • ${rawTalent.title}`;
+  const description = rawTalent.bio || `Hire ${rawTalent.name}, ${rawTalent.title} located in ${rawTalent.location || "Nigeria"}. Verified African tech talent.`;
+  const avatarUrl = urlForImage(rawTalent.avatar);
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "profile",
+      images: avatarUrl ? [{ url: avatarUrl, alt: rawTalent.name }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: avatarUrl ? [avatarUrl] : undefined,
+    },
+  };
+}
 
 function mapTalent(t: any) {
   if (!t) return null;

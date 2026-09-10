@@ -1,9 +1,45 @@
+import type { Metadata } from "next";
 import { fetchJobBySlug, fetchPublishedJobs } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { notFound } from "next/navigation";
 import JobDetailClient from "./job-detail-client";
 
 export const revalidate = 60;
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  let rawJob = await fetchJobBySlug(id);
+  if (!rawJob) {
+    const all = await fetchPublishedJobs();
+    rawJob = all?.find((j: any) => j._id === id) ?? null;
+  }
+  if (!rawJob) {
+    return {
+      title: "Job Opportunity",
+    };
+  }
+
+  const title = `${rawJob.title} at ${rawJob.company?.name || "Verified Company"}`;
+  const description = rawJob.summary || `Apply for ${rawJob.title} in ${rawJob.location || "Nigeria"}. Verified tech opportunity on Trax Jobs.`;
+  const companyLogo = urlForImage(rawJob.company?.logo);
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      images: companyLogo ? [{ url: companyLogo, alt: rawJob.company?.name }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: companyLogo ? [companyLogo] : undefined,
+    },
+  };
+}
 
 function mapJob(j: any) {
   if (!j) return null;

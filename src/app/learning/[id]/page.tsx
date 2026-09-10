@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { fetchCourseBySlug, fetchPublishedCourses } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { COURSES_DATA, CourseDetail } from "@/data/courses";
@@ -5,6 +6,53 @@ import { notFound } from "next/navigation";
 import { CourseDetailClient } from "./course-detail-client";
 
 export const revalidate = 60;
+
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  let rawCourse = await fetchCourseBySlug(id);
+  if (!rawCourse) {
+    const allCourses = await fetchPublishedCourses();
+    rawCourse = (allCourses ?? []).find((c: any) => c._id === id || c.slug === id) ?? null;
+  }
+
+  let course: CourseDetail | null = null;
+  if (rawCourse) {
+    course = mapSanityCourse(rawCourse);
+  } else {
+    course = COURSES_DATA.find((c) => c.id === id || c.slug === id) || null;
+  }
+
+  if (!course) {
+    return {
+      title: "Course Overview",
+    };
+  }
+
+  const title = `${course.title} • Trax Learning`;
+  const description = course.summary || course.description || "Master high-demand tech skills through practical courses curated by African engineering leaders.";
+  const banner = course.bannerImage || course.image;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      images: banner ? [{ url: banner, alt: course.title }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: banner ? [banner] : undefined,
+    },
+  };
+}
 
 function mapSanityCourse(c: any): CourseDetail {
   return {
@@ -49,10 +97,6 @@ function mapSanityCourse(c: any): CourseDetail {
     enrollmentLink: c.enrollmentLink || "",
     whatsappNumber: c.whatsappNumber || "2348000008729",
   };
-}
-
-interface PageProps {
-  params: Promise<{ id: string }>;
 }
 
 export default async function CourseDetailPage({ params }: PageProps) {

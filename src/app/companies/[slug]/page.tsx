@@ -1,9 +1,41 @@
+import type { Metadata } from "next";
 import { fetchCompanyBySlug } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { notFound } from "next/navigation";
 import CompanyDetailClient from "./company-detail-client";
 
 export const revalidate = 60;
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const raw = await fetchCompanyBySlug(slug);
+  if (!raw) {
+    return {
+      title: "Company Profile",
+    };
+  }
+
+  const title = `${raw.name} Careers & Tech Culture`;
+  const description = raw.description || `Explore open roles, engineering culture, and team details at ${raw.name} on Trax Jobs.`;
+  const logoUrl = urlForImage(raw.logo);
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      images: logoUrl ? [{ url: logoUrl, alt: raw.name }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: logoUrl ? [logoUrl] : undefined,
+    },
+  };
+}
 
 export default async function CompanyDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
