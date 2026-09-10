@@ -93,14 +93,14 @@ export function AppHeader({ activeTab = "jobs", children, className = "" }: AppH
             {activeTab === "talent" ? (
               <>
                 <Link
-                  href="/about?tab=contact&topic=hiring"
+                  href="/submit-job"
                   className="hidden sm:inline-flex items-center px-4 py-2 text-[13.5px] font-bold text-zinc-800 hover:text-zinc-950 transition-all"
                 >
                   Post a job
                 </Link>
 
                 <Link
-                  href="/about?tab=contact&topic=talent"
+                  href="/submit-profile"
                   className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl bg-[#0C1222] hover:bg-[#070b14] text-white text-[13.5px] font-bold transition-all shadow-2xs"
                 >
                   Submit Your Profile
@@ -109,7 +109,7 @@ export function AppHeader({ activeTab = "jobs", children, className = "" }: AppH
             ) : activeTab === "companies" ? (
               <>
                 <Link
-                  href="/about?tab=contact&topic=hiring"
+                  href="/submit-job"
                   className="hidden sm:inline-flex items-center px-4 py-2 text-[13.5px] font-bold text-zinc-800 hover:text-zinc-950 transition-all"
                 >
                   Post a job
@@ -128,11 +128,11 @@ export function AppHeader({ activeTab = "jobs", children, className = "" }: AppH
                   href="/talent"
                   className="hidden sm:inline-flex items-center px-4 py-2 text-[13.5px] font-bold text-zinc-800 hover:text-zinc-950 transition-all"
                 >
-                  I&apos;m a recruiter
+                  Explore Talent
                 </Link>
 
                 <Link
-                  href="/about?tab=contact&topic=hiring"
+                  href="/submit-job"
                   className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl bg-[#0C1222] hover:bg-[#070b14] text-white text-[13.5px] font-bold transition-all shadow-2xs"
                 >
                   Submit a job

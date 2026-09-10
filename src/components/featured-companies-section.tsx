@@ -327,71 +327,72 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
         {/* Company Cards Carousel / Grid */}
         <div
           ref={scrollRef}
-          className="flex items-stretch gap-5 overflow-x-auto no-scrollbar pb-2 pt-2 snap-x snap-mandatory"
+          className="flex items-stretch gap-4 sm:gap-5 overflow-x-auto no-scrollbar pb-3 pt-2 snap-x snap-mandatory scroll-pl-5 sm:scroll-pl-10 lg:scroll-pl-16"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {filteredCompanies.map((company) => (
             <div
               key={company.name}
-              className="w-[245px] sm:w-[255px] shrink-0 bg-white rounded-none border border-zinc-200/80 shadow-[0_8px_24px_-4px_rgba(15,16,18,0.05)] hover:shadow-[0_16px_32px_-6px_rgba(231,4,13,0.1)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start"
+              className="w-[84vw] min-w-[280px] max-w-[340px] sm:w-[270px] md:w-[280px] shrink-0 bg-white rounded-none border border-zinc-200/80 shadow-[0_8px_24px_-4px_rgba(15,16,18,0.05)] hover:shadow-[0_16px_32px_-6px_rgba(231,4,13,0.1)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start"
             >
               {/* Cover Media */}
               <div>
-                <div className="relative h-[145px] w-full bg-zinc-100 overflow-hidden rounded-none">
+                <div className="relative h-[165px] sm:h-[150px] w-full bg-zinc-100 overflow-hidden rounded-none">
                   <Image
                     src={company.coverImage || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800"}
                     alt={`${company.name} office`}
                     fill
-                    sizes="255px"
+                    sizes="(max-width: 640px) 84vw, 280px"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    unoptimized
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                   
                   {/* Floating Open Roles Pill */}
-                  <div className="absolute top-2.5 right-2.5">
-                    <span className="px-2.5 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-zinc-950 font-bold text-[10px] shadow-xs border border-white/60">
+                  <div className="absolute top-3 right-3">
+                    <span className="px-3 py-1 rounded-full bg-white/95 backdrop-blur-xs text-zinc-950 font-bold text-[11px] sm:text-[10px] shadow-xs border border-white/60">
                       {company.openRoles} roles
                     </span>
                   </div>
                 </div>
 
                 {/* Company Details Body */}
-                <div className="p-4">
+                <div className="p-5 sm:p-4">
                   {/* Logo + Name */}
-                  <div className="flex items-center gap-2.5 mb-3.5">
+                  <div className="flex items-center gap-3 mb-3.5">
                     <CompanyVector name={company.name} logo={company.logo} />
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1">
-                        <h3 className="text-[14.5px] font-bold text-zinc-950 truncate tracking-tight">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5">
+                        <h3 className="text-[16px] sm:text-[14.5px] font-bold text-zinc-950 truncate tracking-tight">
                           {company.name}
                         </h3>
-                        <SealCheck size={14} weight="fill" className="text-[#E7040D] shrink-0" />
+                        <SealCheck size={16} weight="fill" className="text-[#E7040D] shrink-0" />
                       </div>
                     </div>
                   </div>
 
                   {/* Metadata Badges */}
-                  <div className="flex flex-wrap items-center gap-1.5">
+                  <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
                     {company.size && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
-                        <Users size={12} weight="bold" className="text-zinc-400" />
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11.5px] sm:text-[11px] font-medium">
+                        <Users size={13} weight="bold" className="text-zinc-400" />
                         {company.size}
                       </span>
                     )}
                     {company.location && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
-                        <MapPin size={12} weight="bold" className="text-zinc-400" />
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11.5px] sm:text-[11px] font-medium">
+                        <MapPin size={13} weight="bold" className="text-zinc-400" />
                         <span dangerouslySetInnerHTML={{ __html: company.location.split("&bull;")[0] }} />
                       </span>
                     )}
                     {company.industry && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
-                        <Tag size={12} weight="bold" className="text-zinc-400" />
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11.5px] sm:text-[11px] font-medium">
+                        <Tag size={13} weight="bold" className="text-zinc-400" />
                         {company.industry}
                       </span>
                     )}
                     {company.subIndustry && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11.5px] sm:text-[11px] font-medium">
                         {company.subIndustry}
                       </span>
                     )}
@@ -400,12 +401,12 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
               </div>
 
               {/* Card Footer Button */}
-              <div className="p-4 pt-0">
+              <div className="p-5 sm:p-4 pt-0">
                 <Link
                   href={`/companies/${company.slug}`}
-                  className="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-white hover:bg-[#E7040D] text-zinc-800 hover:text-white text-[12px] font-semibold transition-all duration-200 border border-zinc-200/90 hover:border-[#E7040D] shadow-2xs"
+                  className="w-full sm:w-auto inline-flex items-center justify-center px-5 py-2.5 sm:py-1.5 rounded-lg bg-zinc-50 hover:bg-[#E7040D] text-zinc-800 hover:text-white text-[13px] sm:text-[12px] font-bold transition-all duration-200 border border-zinc-200/90 hover:border-[#E7040D] shadow-2xs text-center"
                 >
-                  Explore
+                  Explore company
                 </Link>
               </div>
             </div>

@@ -97,7 +97,7 @@ export function Navbar() {
           {/* Right: Desktop Submit a Job Pill Button */}
           <div className="hidden sm:flex items-center gap-4">
             <Link
-              href="/about?tab=contact&topic=hiring"
+              href="/submit-job"
               className="inline-flex items-center justify-center px-7 py-2.5 rounded-full text-[14px] font-semibold bg-[#fce8e0] text-[#E7040D] hover:bg-[#f9cbb9] transition-colors cursor-pointer"
             >
               Submit a job
@@ -158,7 +158,7 @@ export function Navbar() {
               Hire Talent
             </Link>
             <Link
-              href="/about?tab=contact&topic=hiring"
+              href="/submit-job"
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center justify-center px-3 py-2.5 rounded-xl text-[13px] font-semibold bg-[#E7040D] hover:bg-[#CB030B] text-white transition-colors text-center shadow-xs"
             >
