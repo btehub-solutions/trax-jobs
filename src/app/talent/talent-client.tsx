@@ -65,7 +65,7 @@ function TalentSquareMark({ item }: { item: SanityTalentItem }) {
 
 export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState<string>("Nigeria");
+  const [selectedLocation, setSelectedLocation] = useState<string>("");
   const [selectedDiscipline, setSelectedDiscipline] = useState<string>("");
   const [selectedExperience, setSelectedExperience] = useState<string>("");
   const [selectedAvailability, setSelectedAvailability] = useState<string>("");
@@ -85,35 +85,149 @@ export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
 
   const filteredTalent = useMemo(() => {
     return talent.filter((item) => {
+      // 1. Search term match
       if (searchTerm) {
-        const q = searchTerm.toLowerCase();
+        const q = searchTerm.toLowerCase().trim();
         const match =
           item.name.toLowerCase().includes(q) ||
           item.title.toLowerCase().includes(q) ||
           item.bio.toLowerCase().includes(q) ||
+          item.location.toLowerCase().includes(q) ||
           item.skills.some((s) => s.toLowerCase().includes(q));
         if (!match) return false;
       }
+
+      // 2. Location match
       if (selectedLocation && selectedLocation !== "All Locations") {
-        const matchLoc = item.location.toLowerCase().includes(selectedLocation.toLowerCase());
-        const matchPref = item.workPreference.toLowerCase().includes(selectedLocation.toLowerCase());
-        if (selectedLocation === "Nigeria") {
-          if (!matchLoc && !item.location.toLowerCase().includes("lagos") && !item.location.toLowerCase().includes("abuja") && !item.location.toLowerCase().includes("ogun")) {
-            return false;
-          }
-        } else if (!matchLoc && !matchPref) {
-          return false;
+        const sel = selectedLocation.toLowerCase();
+        const loc = (item.location || "").toLowerCase();
+        const pref = (item.workPreference || "").toLowerCase();
+
+        let matchesLocation = false;
+        if (sel === "nigeria") {
+          matchesLocation =
+            loc.includes("nigeria") ||
+            loc.includes("lagos") ||
+            loc.includes("abuja") ||
+            loc.includes("ogun") ||
+            loc.includes("abeokuta") ||
+            loc.includes("ibadan") ||
+            pref.includes("nigeria");
+        } else if (sel.includes("lagos")) {
+          matchesLocation = loc.includes("lagos");
+        } else if (sel.includes("abuja")) {
+          matchesLocation = loc.includes("abuja");
+        } else if (sel.includes("abeokuta") || sel.includes("ogun")) {
+          matchesLocation = loc.includes("abeokuta") || loc.includes("ogun");
+        } else if (sel.includes("nairobi") || sel.includes("kenya")) {
+          matchesLocation = loc.includes("nairobi") || loc.includes("kenya");
+        } else if (sel.includes("accra") || sel.includes("ghana")) {
+          matchesLocation = loc.includes("accra") || loc.includes("ghana");
+        } else if (sel.includes("kigali") || sel.includes("rwanda")) {
+          matchesLocation = loc.includes("kigali") || loc.includes("rwanda");
+        } else if (sel.includes("cape town") || sel.includes("south africa")) {
+          matchesLocation = loc.includes("cape town") || loc.includes("south africa");
+        } else if (sel.includes("remote")) {
+          matchesLocation = loc.includes("remote") || pref.includes("remote");
+        } else {
+          matchesLocation = loc.includes(sel) || pref.includes(sel);
         }
+
+        if (!matchesLocation) return false;
       }
+
+      // 3. Discipline match
       if (selectedDiscipline && selectedDiscipline !== "All Disciplines") {
-        if (item.category !== selectedDiscipline) return false;
+        const cat = (item.category || "").toLowerCase();
+        const title = (item.title || "").toLowerCase();
+        const sel = selectedDiscipline.toLowerCase();
+
+        let matchesDiscipline = false;
+        if (sel.includes("engineer")) {
+          matchesDiscipline =
+            cat.includes("engineer") ||
+            title.includes("engineer") ||
+            title.includes("developer") ||
+            title.includes("architect");
+        } else if (sel.includes("design")) {
+          matchesDiscipline =
+            cat.includes("design") ||
+            title.includes("design") ||
+            title.includes("ui") ||
+            title.includes("ux");
+        } else if (sel.includes("product")) {
+          matchesDiscipline =
+            cat.includes("product") ||
+            title.includes("product") ||
+            title.includes("pm");
+        } else if (sel.includes("data") || sel.includes("ai")) {
+          matchesDiscipline =
+            cat.includes("data") ||
+            cat.includes("ai") ||
+            cat.includes("ml") ||
+            title.includes("data") ||
+            title.includes("ai") ||
+            title.includes("ml") ||
+            title.includes("machine learning");
+        } else if (sel.includes("devops") || sel.includes("cloud")) {
+          matchesDiscipline =
+            cat.includes("devops") ||
+            cat.includes("cloud") ||
+            cat.includes("sre") ||
+            title.includes("devops") ||
+            title.includes("cloud") ||
+            title.includes("infrastructure") ||
+            title.includes("sre");
+        } else {
+          matchesDiscipline = cat.includes(sel) || title.includes(sel);
+        }
+
+        if (!matchesDiscipline) return false;
       }
+
+      // 4. Experience match
       if (selectedExperience && selectedExperience !== "All Experience") {
-        if (item.experienceLevel !== selectedExperience) return false;
+        const exp = (item.experienceLevel || "").toLowerCase();
+        const years = (item.experienceYears || "").toLowerCase();
+        const sel = selectedExperience.toLowerCase();
+
+        let matchesExp = false;
+        if (sel.includes("junior") || sel.includes("1-3")) {
+          matchesExp = exp.includes("junior") || exp.includes("1-3") || years.includes("1") || years.includes("2") || years.includes("3");
+        } else if (sel.includes("mid") || sel.includes("3-5")) {
+          matchesExp = exp.includes("mid") || exp.includes("3-5") || years.includes("3") || years.includes("4") || years.includes("5");
+        } else if (sel.includes("senior") || sel.includes("5-8")) {
+          matchesExp = exp.includes("senior") || exp.includes("5-8") || years.includes("5") || years.includes("6") || years.includes("7") || years.includes("8");
+        } else if (sel.includes("lead") || sel.includes("staff") || sel.includes("8+")) {
+          matchesExp = exp.includes("lead") || exp.includes("staff") || exp.includes("8+") || years.includes("8") || years.includes("9") || years.includes("10");
+        } else if (sel.includes("expert") || sel.includes("10+")) {
+          matchesExp = exp.includes("expert") || exp.includes("10+") || years.includes("10") || years.includes("12") || years.includes("15");
+        } else {
+          matchesExp = exp.includes(sel) || years.includes(sel);
+        }
+
+        if (!matchesExp) return false;
       }
+
+      // 5. Availability match
       if (selectedAvailability && selectedAvailability !== "All Availability") {
-        if (item.availability !== selectedAvailability) return false;
+        const avail = (item.availability || "").toLowerCase();
+        const sel = selectedAvailability.toLowerCase();
+
+        let matchesAvail = false;
+        if (sel.includes("immediate")) {
+          matchesAvail = avail.includes("immediate");
+        } else if (sel.includes("notice") || sel.includes("2 week")) {
+          matchesAvail = avail.includes("notice") || avail.includes("week");
+        } else if (sel.includes("part-time") || sel.includes("contract")) {
+          matchesAvail = avail.includes("part-time") || avail.includes("contract") || avail.includes("freelance");
+        } else {
+          matchesAvail = avail.includes(sel);
+        }
+
+        if (!matchesAvail) return false;
       }
+
       return true;
     });
   }, [talent, searchTerm, selectedLocation, selectedDiscipline, selectedExperience, selectedAvailability]);
@@ -195,14 +309,22 @@ export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
             ))}
           </div>
 
-          <button onClick={() => setOpenDropdown(null)} className="flex items-center justify-center gap-2 px-8 py-3.5 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer shrink-0">
+          <button
+            type="button"
+            onClick={() => {
+              setOpenDropdown(null);
+              const el = document.getElementById("talent-results");
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+            className="flex items-center justify-center gap-2 px-8 py-3.5 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer shrink-0"
+          >
             <MagnifyingGlass size={16} weight="bold" />
             <span>Search</span>
           </button>
         </div>
       </AppHeader>
 
-      <main className="flex-1 w-full max-w-[1360px] mx-auto py-8 px-6 sm:px-8 lg:px-10 space-y-10">
+      <main id="talent-results" className="flex-1 w-full max-w-[1360px] mx-auto py-8 px-6 sm:px-8 lg:px-10 space-y-10">
         <div>
           <div className="flex items-center justify-between pb-3.5 border-b border-zinc-200/80 gap-3">
             <h1 className="text-[24px] sm:text-[30px] font-black text-[#1F1F1F] tracking-tight min-w-0">Vetted talent to explore</h1>

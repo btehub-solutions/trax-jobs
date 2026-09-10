@@ -47,8 +47,9 @@ const SECTORS = [
 
 const SIZES = [
   "All Sizes",
-  "Between 50 and 250 employees",
-  "Between 250 and 500 employees",
+  "1-50 employees",
+  "50-250 employees",
+  "250-500 employees",
   "500+ employees",
   "1,000+ employees",
 ];
@@ -57,9 +58,12 @@ const LOCATIONS = [
   "All Locations",
   "Nigeria",
   "Lagos, Nigeria",
+  "Abuja, Nigeria",
+  "Abeokuta, Ogun State",
   "London & Lagos",
   "Lagos & San Francisco",
   "Remote Africa",
+  "Remote",
 ];
 
 const LANGUAGES = [
@@ -70,6 +74,99 @@ const LANGUAGES = [
   "Mobile & Flutter",
   "Rust & Systems",
 ];
+
+function parseCompanyHeadcount(str: string): number {
+  if (!str) return 0;
+  const cleaned = str.replace(/,/g, "");
+  const matches = cleaned.match(/\d+/g);
+  if (!matches || matches.length === 0) return 0;
+  const nums = matches.map(Number);
+  return Math.max(...nums);
+}
+
+function matchesSize(compSizeStr: string, selectedSize: string): boolean {
+  if (!selectedSize || selectedSize === "All Sizes") return true;
+  const count = parseCompanyHeadcount(compSizeStr);
+  if (count === 0) return true;
+
+  if (selectedSize.includes("1-50") || selectedSize.includes("1-10") || selectedSize.includes("10-50")) {
+    return count <= 50;
+  }
+  if (selectedSize.includes("50-250") || selectedSize.includes("50 and 250") || selectedSize.includes("100 and 250")) {
+    return count >= 50 && count <= 250;
+  }
+  if (selectedSize.includes("250-500") || selectedSize.includes("250 and 500")) {
+    return count > 200 && count <= 500;
+  }
+  if (selectedSize.includes("1,000") || selectedSize.includes("1000")) {
+    return count >= 1000;
+  }
+  if (selectedSize.includes("500+")) {
+    return count >= 500;
+  }
+  return compSizeStr.toLowerCase().includes(selectedSize.toLowerCase());
+}
+
+function matchesTechStack(comp: SanityCompany, selectedLanguage: string): boolean {
+  if (!selectedLanguage || selectedLanguage === "All Stacks") return true;
+  const lang = selectedLanguage.toLowerCase();
+  const fullText = `${comp.name} ${comp.industry} ${comp.bio} ${comp.description}`.toLowerCase();
+
+  if (lang.includes("typescript") || lang.includes("react")) {
+    return (
+      fullText.includes("react") ||
+      fullText.includes("typescript") ||
+      fullText.includes("javascript") ||
+      fullText.includes("frontend") ||
+      fullText.includes("web") ||
+      fullText.includes("software") ||
+      fullText.includes("engineering")
+    );
+  }
+  if (lang.includes("python") || lang.includes("ai")) {
+    return (
+      fullText.includes("python") ||
+      fullText.includes("ai") ||
+      fullText.includes("ml") ||
+      fullText.includes("data") ||
+      fullText.includes("analytics") ||
+      fullText.includes("intelligence")
+    );
+  }
+  if (lang.includes("go") || lang.includes("kubernetes")) {
+    return (
+      fullText.includes("go") ||
+      fullText.includes("golang") ||
+      fullText.includes("kubernetes") ||
+      fullText.includes("infrastructure") ||
+      fullText.includes("backend") ||
+      fullText.includes("cloud") ||
+      fullText.includes("rails") ||
+      fullText.includes("devops")
+    );
+  }
+  if (lang.includes("mobile") || lang.includes("flutter")) {
+    return (
+      fullText.includes("mobile") ||
+      fullText.includes("flutter") ||
+      fullText.includes("app") ||
+      fullText.includes("pos") ||
+      fullText.includes("ios") ||
+      fullText.includes("android")
+    );
+  }
+  if (lang.includes("rust") || lang.includes("systems")) {
+    return (
+      fullText.includes("rust") ||
+      fullText.includes("systems") ||
+      fullText.includes("infrastructure") ||
+      fullText.includes("payments") ||
+      fullText.includes("security")
+    );
+  }
+
+  return fullText.includes(lang);
+}
 
 /* ─────────────────────────────────────────────────────────────
    Company Logo Mark: uses uploaded Sanity logo when available,
@@ -156,7 +253,7 @@ function CompanySquareMark({
 
 export function CompaniesPageClient({ companies }: { companies: SanityCompany[] }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState<string>("Nigeria");
+  const [selectedLocation, setSelectedLocation] = useState<string>("");
   const [selectedSector, setSelectedSector] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
@@ -183,40 +280,97 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
 
   const filteredCompanies = useMemo(() => {
     return companies.filter((comp) => {
+      // 1. Keyword match
       if (searchTerm) {
-        const q = searchTerm.toLowerCase();
+        const q = searchTerm.toLowerCase().trim();
         const matchName = comp.name.toLowerCase().includes(q);
         const matchIndustry = comp.industry.toLowerCase().includes(q);
         const matchBio = comp.bio.toLowerCase().includes(q);
-        if (!matchName && !matchIndustry && !matchBio) return false;
+        const matchDesc = comp.description.toLowerCase().includes(q);
+        const matchLoc = comp.location.toLowerCase().includes(q);
+        if (!matchName && !matchIndustry && !matchBio && !matchDesc && !matchLoc) return false;
       }
+
+      // 2. Location filter
       if (selectedLocation && selectedLocation !== "All Locations") {
-        const loc = selectedLocation.toLowerCase();
-        if (selectedLocation === "Nigeria") {
-          if (
-            comp.location &&
-            !comp.location.toLowerCase().includes("nigeria") &&
-            !comp.location.toLowerCase().includes("lagos")
-          ) {
-            return false;
-          }
-        } else if (comp.location && !comp.location.toLowerCase().includes(loc)) {
+        const loc = selectedLocation.toLowerCase().trim();
+        const compLoc = (comp.location || "").toLowerCase();
+
+        if (loc === "nigeria") {
+          const isNigeria =
+            compLoc.includes("nigeria") ||
+            compLoc.includes("lagos") ||
+            compLoc.includes("abuja") ||
+            compLoc.includes("abeokuta") ||
+            compLoc.includes("ogun");
+          if (!isNigeria) return false;
+        } else if (loc === "remote" || loc === "remote africa") {
+          if (!compLoc.includes("remote")) return false;
+        } else if (loc.includes("lagos")) {
+          if (!compLoc.includes("lagos")) return false;
+        } else if (loc.includes("abuja")) {
+          if (!compLoc.includes("abuja")) return false;
+        } else if (loc.includes("abeokuta") || loc.includes("ogun")) {
+          if (!compLoc.includes("abeokuta") && !compLoc.includes("ogun")) return false;
+        } else if (loc.includes("london")) {
+          if (!compLoc.includes("london")) return false;
+        } else if (loc.includes("san francisco")) {
+          if (!compLoc.includes("san francisco")) return false;
+        } else if (!compLoc.includes(loc)) {
           return false;
         }
       }
+
+      // 3. Sector filter
       if (selectedSector && selectedSector !== "All Sectors") {
-        if (!comp.industry.toLowerCase().includes(selectedSector.toLowerCase())) {
-          return false;
+        const sec = selectedSector.toLowerCase();
+        const ind = (comp.industry || "").toLowerCase();
+        const fullText = `${ind} ${(comp.bio || "").toLowerCase()} ${(comp.description || "").toLowerCase()}`;
+
+        if (ind.includes(sec)) {
+          // direct industry match
+        } else if (sec.includes("payments") || sec.includes("banking") || sec.includes("fintech")) {
+          const isFintech =
+            ind.includes("payment") ||
+            ind.includes("banking") ||
+            ind.includes("fintech") ||
+            ind.includes("wealth") ||
+            fullText.includes("payment") ||
+            fullText.includes("banking") ||
+            fullText.includes("fintech");
+          if (!isFintech) return false;
+        } else if (sec.includes("health")) {
+          if (!fullText.includes("health") && !fullText.includes("medical")) return false;
+        } else if (sec.includes("delivery") || sec.includes("logistics")) {
+          if (!fullText.includes("delivery") && !fullText.includes("logistics")) return false;
+        } else if (sec.includes("talent") || sec.includes("network")) {
+          if (!fullText.includes("talent") && !fullText.includes("network") && !fullText.includes("hiring")) return false;
+        } else if (sec.includes("data") || sec.includes("ai") || sec.includes("ml")) {
+          if (!fullText.includes("data") && !fullText.includes("ai") && !fullText.includes("ml")) return false;
+        } else if (sec.includes("engineering") || sec.includes("software")) {
+          if (!fullText.includes("software") && !fullText.includes("engineering") && !fullText.includes("tech")) return false;
+        } else {
+          if (!ind.includes(sec) && !fullText.includes(sec)) return false;
         }
       }
+
+      // 4. Company Size filter
       if (selectedSize && selectedSize !== "All Sizes") {
-        if (comp.employeesCount !== selectedSize) {
+        if (!matchesSize(comp.employeesCount, selectedSize)) {
           return false;
         }
       }
+
+      // 5. Tech Stack / Language filter
+      if (selectedLanguage && selectedLanguage !== "All Stacks") {
+        if (!matchesTechStack(comp, selectedLanguage)) {
+          return false;
+        }
+      }
+
       return true;
     });
-  }, [companies, searchTerm, selectedLocation, selectedSector, selectedSize]);
+  }, [companies, searchTerm, selectedLocation, selectedSector, selectedSize, selectedLanguage]);
 
   const resetFilters = () => {
     setSearchTerm("");
@@ -225,6 +379,14 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
     setSelectedSize("");
     setSelectedLanguage("");
     setOpenDropdown(null);
+  };
+
+  const handleSearchSubmit = () => {
+    setOpenDropdown(null);
+    const el = document.getElementById("companies-results");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   return (
@@ -256,9 +418,9 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
             <button
               type="button"
               onClick={() => setOpenDropdown(openDropdown === "location" ? null : "location")}
-              className="w-full h-full flex items-center gap-2 px-4 py-3 text-[13px] font-bold text-zinc-900 hover:bg-zinc-50 cursor-pointer select-none"
+              className={`w-full h-full flex items-center gap-2 px-4 py-3 text-[13px] font-bold transition-colors cursor-pointer select-none ${selectedLocation ? "text-[#E7040D] bg-red-50/50" : "text-zinc-900 hover:bg-zinc-50"}`}
             >
-              <MapPin size={16} weight="bold" className="text-zinc-400 shrink-0" />
+              <MapPin size={16} weight="bold" className={selectedLocation ? "text-[#E7040D] shrink-0" : "text-zinc-400 shrink-0"} />
               <span>{selectedLocation || "Add location"}</span>
               {selectedLocation ? (
                 <span
@@ -299,7 +461,16 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                 className={`px-4 py-3 flex items-center gap-2 text-[13px] font-semibold transition-colors cursor-pointer select-none whitespace-nowrap ${selectedSector ? "text-[#E7040D] font-bold bg-red-50/50" : "text-zinc-700 hover:text-zinc-950"}`}
               >
                 <span className="max-w-[120px] truncate">{selectedSector || "Sector"}</span>
-                <CaretDown size={13} weight="bold" className="text-zinc-400 shrink-0" />
+                {selectedSector ? (
+                  <span
+                    onClick={(e) => { e.stopPropagation(); setSelectedSector(""); }}
+                    className="text-zinc-400 hover:text-zinc-700 ml-0.5 p-0.5"
+                  >
+                    <X size={12} weight="bold" />
+                  </span>
+                ) : (
+                  <CaretDown size={13} weight="bold" className="text-zinc-400 shrink-0" />
+                )}
               </button>
               {openDropdown === "sector" && (
                 <div className="absolute top-full left-0 mt-1 w-72 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 shadow-2xl py-1 z-50 max-h-72 overflow-y-auto">
@@ -326,8 +497,17 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                 onClick={() => setOpenDropdown(openDropdown === "size" ? null : "size")}
                 className={`px-4 py-3 flex items-center gap-2 text-[13px] font-semibold transition-colors cursor-pointer select-none whitespace-nowrap ${selectedSize ? "text-[#E7040D] font-bold bg-red-50/50" : "text-zinc-700 hover:text-zinc-950"}`}
               >
-                <span className="max-w-[100px] truncate">{selectedSize ? "Selected" : "Size"}</span>
-                <CaretDown size={13} weight="bold" className="text-zinc-400 shrink-0" />
+                <span className="max-w-[120px] truncate">{selectedSize || "Size"}</span>
+                {selectedSize ? (
+                  <span
+                    onClick={(e) => { e.stopPropagation(); setSelectedSize(""); }}
+                    className="text-zinc-400 hover:text-zinc-700 ml-0.5 p-0.5"
+                  >
+                    <X size={12} weight="bold" />
+                  </span>
+                ) : (
+                  <CaretDown size={13} weight="bold" className="text-zinc-400 shrink-0" />
+                )}
               </button>
               {openDropdown === "size" && (
                 <div className="absolute top-full left-0 mt-1 w-64 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 shadow-2xl py-1 z-50">
@@ -354,8 +534,17 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                 onClick={() => setOpenDropdown(openDropdown === "language" ? null : "language")}
                 className={`px-4 py-3 flex items-center gap-2 text-[13px] font-semibold transition-colors cursor-pointer select-none whitespace-nowrap ${selectedLanguage ? "text-[#E7040D] font-bold bg-red-50/50" : "text-zinc-700 hover:text-zinc-950"}`}
               >
-                <span>{selectedLanguage || "Languages"}</span>
-                <CaretDown size={13} weight="bold" className="text-zinc-400 shrink-0" />
+                <span className="max-w-[120px] truncate">{selectedLanguage || "Languages"}</span>
+                {selectedLanguage ? (
+                  <span
+                    onClick={(e) => { e.stopPropagation(); setSelectedLanguage(""); }}
+                    className="text-zinc-400 hover:text-zinc-700 ml-0.5 p-0.5"
+                  >
+                    <X size={12} weight="bold" />
+                  </span>
+                ) : (
+                  <CaretDown size={13} weight="bold" className="text-zinc-400 shrink-0" />
+                )}
               </button>
               {openDropdown === "language" && (
                 <div className="absolute top-full right-0 sm:right-0 mt-1 w-56 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 shadow-2xl py-1 z-50">
@@ -378,7 +567,7 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
 
           {/* Search Button */}
           <button
-            onClick={() => setOpenDropdown(null)}
+            onClick={handleSearchSubmit}
             className="flex items-center justify-center gap-2 px-8 py-3.5 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer shrink-0"
           >
             <MagnifyingGlass size={16} weight="bold" />
@@ -388,7 +577,7 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
       </AppHeader>
 
       {/* Main Content */}
-      <main className="flex-1 w-full max-w-[1360px] mx-auto py-8 px-6 sm:px-8 lg:px-10 space-y-10">
+      <main id="companies-results" className="flex-1 w-full max-w-[1360px] mx-auto py-8 px-6 sm:px-8 lg:px-10 space-y-10">
         <div>
           <div className="flex items-center justify-between pb-3.5 border-b border-zinc-200/80 gap-3">
             <h1 className="text-[24px] sm:text-[30px] font-black text-[#1F1F1F] tracking-tight min-w-0">
