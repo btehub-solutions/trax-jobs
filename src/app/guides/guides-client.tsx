@@ -10,7 +10,6 @@ import {
 } from "@phosphor-icons/react";
 import { GuideArticle } from "@/data/guides";
 import { AppHeader } from "@/components/navigation/app-header";
-import { Footer } from "@/components/footer";
 
 interface GuidesClientProps {
   guides: GuideArticle[];
@@ -107,8 +106,6 @@ export function GuidesClient({ guides }: GuidesClientProps) {
           ))}
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

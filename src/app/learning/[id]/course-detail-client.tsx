@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { CourseDetail } from "@/data/courses";
 import {
   House,
@@ -378,12 +377,8 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
 
             </div>
           </div>
-
         </div>
       </main>
-
-      {/* 3. Global Footer */}
-      <Footer />
     </div>
   );
 }

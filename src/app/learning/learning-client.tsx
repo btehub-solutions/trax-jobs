@@ -10,7 +10,6 @@ import {
 } from "@phosphor-icons/react";
 import { CourseDetail } from "@/data/courses";
 import { AppHeader } from "@/components/navigation/app-header";
-import { Footer } from "@/components/footer";
 
 interface LearningClientProps {
   courses: CourseDetail[];
@@ -121,8 +120,6 @@ export function LearningClient({ courses }: LearningClientProps) {
         </div>
 
       </main>
-
-      <Footer />
     </div>
   );
 }
