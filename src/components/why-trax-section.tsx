@@ -113,10 +113,10 @@ export function WhyTraxSection() {
                   <div className="absolute -top-2 -left-2 w-[97%] h-[95%] bg-white/60 rounded-none -rotate-3 -z-20 border border-white/50 shadow-2xs" />
                   <div className="absolute top-1.5 -right-2 w-[98%] h-[96%] bg-white/80 rounded-none rotate-2 -z-10 border border-white/70 shadow-xs" />
 
-                  {/* Floating Trax Yellow Sticker */}
-                  <div className="absolute -top-3.5 right-1 z-30 bg-[#FBBF24] text-zinc-950 text-[10.5px] font-black px-2.5 py-0.5 rounded-none shadow-sm border border-amber-400 flex items-center gap-1.5 rotate-2">
+                  {/* Floating Trax Editorial Badge */}
+                  <div className="absolute -top-3.5 right-1 z-30 bg-[#1F1F1F] text-white text-[10.5px] font-black px-2.5 py-0.5 rounded-none shadow-sm border border-black flex items-center gap-1.5 rotate-2">
                     <span>New matches</span>
-                    <span className="w-4 h-4 rounded-none bg-zinc-950 text-white flex items-center justify-center text-[9px] font-black">
+                    <span className="w-4 h-4 rounded-none bg-[#E7040D] text-white flex items-center justify-center text-[9px] font-black">
                       6
                     </span>
                   </div>
@@ -138,14 +138,14 @@ export function WhyTraxSection() {
 
                     {/* Metadata Pills */}
                     <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-                      <span className="px-2 py-0.5 rounded-none bg-[#E2F2E6] text-[#14532D] text-[10px] font-bold flex items-center gap-1 border border-emerald-200">
+                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-900 border border-zinc-200/90 text-[10px] font-bold flex items-center gap-1">
                         <CurrencyCircleDollar size={11} weight="bold" />
                         <span>₦28M - ₦38M/yr</span>
                       </span>
-                      <span className="px-2 py-0.5 rounded-none bg-[#E2F2E6] text-[#14532D] text-[10px] font-bold border border-emerald-200">
+                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
                         Senior
                       </span>
-                      <span className="px-2 py-0.5 rounded-none bg-[#E2F2E6] text-[#14532D] text-[10px] font-bold flex items-center gap-0.5 border border-emerald-200">
+                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold flex items-center gap-0.5">
                         <MapPin size={11} weight="fill" />
                         <span>Lagos</span>
                       </span>
@@ -365,7 +365,7 @@ export function WhyTraxSection() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-1.5 text-white">
                         <div className="flex items-center gap-1">
-                          <span className="w-3.5 h-3.5 rounded-none bg-[#FBBF24] text-black flex items-center justify-center shrink-0">
+                          <span className="w-3.5 h-3.5 rounded-none bg-[#E7040D] text-white flex items-center justify-center shrink-0">
                             <Play size={6} weight="fill" />
                           </span>
                           <p className="text-[8.5px] font-bold text-white leading-tight truncate">
@@ -461,10 +461,10 @@ export function WhyTraxSection() {
                   {/* Ghost card 1 (mid back layer) */}
                   <div className="absolute top-1 -right-2.5 w-[97%] h-[95%] bg-white/80 rounded-[16px] rotate-2 -z-10 border border-white/60 shadow-xs" />
 
-                  {/* Floating Trax Yellow Sticker ("New matches 6") */}
-                  <div className="absolute -top-3.5 right-2 sm:right-3 z-30 bg-[#FBBF24] text-zinc-950 text-[11px] font-black px-3 py-1 rounded-xl shadow-md border border-amber-300 flex items-center gap-1.5 rotate-2">
+                  {/* Floating Trax Editorial Badge ("New matches 6") */}
+                  <div className="absolute -top-3.5 right-2 sm:right-3 z-30 bg-[#1F1F1F] text-white text-[11px] font-black px-3 py-1 rounded-none shadow-md border border-black flex items-center gap-1.5 rotate-2">
                     <span>New matches</span>
-                    <span className="w-4 h-4 rounded-full bg-zinc-950 text-white flex items-center justify-center text-[9.5px] font-black">
+                    <span className="w-4 h-4 rounded-none bg-[#E7040D] text-white flex items-center justify-center text-[9.5px] font-black">
                       6
                     </span>
                   </div>
@@ -488,26 +488,25 @@ export function WhyTraxSection() {
 
                     {/* Metadata Pills Row */}
                     <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-                      <span className="px-2 py-0.5 rounded-full bg-[#E2F2E6] text-[#14532D] text-[10px] font-bold flex items-center gap-1 border border-emerald-200">
+                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-900 border border-zinc-200/90 text-[10px] font-bold flex items-center gap-1">
                         <CurrencyCircleDollar size={11} weight="bold" />
                         <span>₦28M - ₦38M/yr</span>
                       </span>
-                      <span className="px-2 py-0.5 rounded-full bg-[#E2F2E6] text-[#14532D] text-[10px] font-bold flex items-center gap-1 border border-emerald-200">
-                        <LinkIcon size={11} weight="bold" />
-                        <span>Senior</span>
+                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
+                        Senior
                       </span>
-                      <span className="px-2 py-0.5 rounded-full bg-[#E2F2E6] text-[#14532D] text-[10px] font-bold flex items-center gap-1 border border-emerald-200">
+                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold flex items-center gap-1">
                         <MapPin size={11} weight="fill" />
                         <span>Lagos</span>
                       </span>
-                      <span className="px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold flex items-center gap-1">
+                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold flex items-center gap-1">
                         <HouseLine size={11} weight="bold" />
                         <span>Hybrid / Remote</span>
                       </span>
-                      <span className="px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
+                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
                         Fintech
                       </span>
-                      <span className="px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
+                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
                         React &bull; Next.js
                       </span>
                     </div>
@@ -636,11 +635,11 @@ export function WhyTraxSection() {
                 `,
               }}
             >
-              {/* Torn fold detail on top-left */}
-              <div className="absolute -top-[1px] -left-[1px] w-5 h-5 overflow-hidden pointer-events-none z-20">
+              {/* Torn fold detail on top-right */}
+              <div className="absolute -top-[1px] -right-[1px] w-5 h-5 overflow-hidden pointer-events-none z-20">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M0 0 L20 0 L0 20 Z" fill="#FAF8F5" />
-                  <path d="M0 20 L20 20 L20 0 Z" fill="#E8DFD3" stroke="#D3C7B5" strokeWidth="0.75" />
+                  <path d="M0 0 L20 0 L20 20 Z" fill="#FAF8F5" />
+                  <path d="M0 0 L0 20 L20 20 Z" fill="#E8DFD3" stroke="#D3C7B5" strokeWidth="0.75" />
                 </svg>
               </div>
 
@@ -833,7 +832,7 @@ export function WhyTraxSection() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-transparent flex flex-col justify-end p-2 text-white">
                         <div className="flex items-start gap-1.5">
-                          <span className="w-4 h-4 rounded bg-[#FBBF24] text-black flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                          <span className="w-4 h-4 rounded bg-[#E7040D] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
                             <Play size={7} weight="fill" />
                           </span>
                           <div className="min-w-0 flex-1">
