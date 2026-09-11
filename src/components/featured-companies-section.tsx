@@ -263,9 +263,6 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
         
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce8e0] text-[#E7040D] text-[11px] font-bold uppercase tracking-wider mb-4">
-            <span>Curated Tech Ecosystem</span>
-          </div>
           <h2 className="text-[32px] sm:text-[44px] lg:text-[50px] font-extrabold tracking-[-0.03em] text-zinc-950 leading-[1.15] mb-5">
             Choose the company that&apos;s meant for you
           </h2>
@@ -333,7 +330,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
           {filteredCompanies.map((company) => (
             <div
               key={company.name}
-              className="w-[245px] sm:w-[255px] shrink-0 bg-white rounded-none border border-zinc-200/80 shadow-[0_8px_24px_-4px_rgba(15,16,18,0.05)] hover:shadow-[0_16px_32px_-6px_rgba(231,4,13,0.1)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start"
+              className="w-[280px] xs:w-[320px] sm:w-[255px] shrink-0 bg-white rounded-none border border-zinc-200/80 shadow-[0_8px_24px_-4px_rgba(15,16,18,0.05)] hover:shadow-[0_16px_32px_-6px_rgba(231,4,13,0.1)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start"
             >
               {/* Cover Media */}
               <div>
@@ -342,7 +339,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                     src={company.coverImage || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800"}
                     alt={`${company.name} office`}
                     fill
-                    sizes="255px"
+                    sizes="(max-width: 640px) 320px, 255px"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />

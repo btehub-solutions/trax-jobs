@@ -24,10 +24,6 @@ export function SocialProofSection() {
           
           {/* Left Column: Big Bold Headline & Callout */}
           <div className="lg:col-span-5 max-w-xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce8e0] text-[#E7040D] text-[11px] font-bold uppercase tracking-wider mb-5">
-              <span>Community Impact</span>
-            </div>
-            
             <h2 className="text-[38px] sm:text-[50px] lg:text-[54px] font-extrabold tracking-[-0.035em] text-zinc-950 leading-[1.08] mb-6">
               50,000+ people found where they belong.
             </h2>

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpenText } from "@phosphor-icons/react";
+import { ArrowRight } from "@phosphor-icons/react";
 
 /* ─────────────────────────────────────────────────────────────
    Audience Categories
@@ -124,11 +124,6 @@ export function CareerGuidesSection({ guides }: CareerGuidesSectionProps = {}) {
         
         {/* Header Block */}
         <div className="max-w-2xl mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce8e0] text-[#E7040D] text-[11px] font-bold uppercase tracking-wider mb-4">
-            <BookOpenText size={14} weight="bold" />
-            <span>Trax Playbooks & Guides</span>
-          </div>
-          
           <h2 className="text-[34px] sm:text-[46px] lg:text-[52px] font-extrabold tracking-[-0.03em] text-zinc-950 leading-[1.12] mb-4">
             Guide to getting hired
           </h2>

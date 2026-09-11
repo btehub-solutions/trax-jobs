@@ -414,6 +414,12 @@ const features = [
     cta: "Browse live jobs",
     href: "/jobs",
     component: <VerifiedJobsCard />,
+    theme: {
+      outerGradient: "linear-gradient(145deg, #FFF7F3 0%, #FDF1EA 45%, #FAECE3 100%)",
+      ghostGradient: "linear-gradient(135deg, #F8DDD2 0%, #F3D0C3 100%)",
+      borderColor: "rgba(24, 24, 27, 0.08)",
+      baseShadow: "0 10px 30px -4px rgba(24, 24, 27, 0.04), 0 2px 8px -1px rgba(24, 24, 27, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+    },
   },
   {
     title: "Saved opportunities tracker",
@@ -421,6 +427,12 @@ const features = [
     cta: "Start tracking now",
     href: "/jobs",
     component: <ApplicationTrackerCard />,
+    theme: {
+      outerGradient: "linear-gradient(145deg, #FFFDF5 0%, #FEFAEB 45%, #FBF4DC 100%)",
+      ghostGradient: "linear-gradient(135deg, #F6ECC4 0%, #EFE1B0 100%)",
+      borderColor: "rgba(24, 24, 27, 0.08)",
+      baseShadow: "0 10px 30px -4px rgba(24, 24, 27, 0.04), 0 2px 8px -1px rgba(24, 24, 27, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+    },
   },
   {
     title: "Vetted talent profiles",
@@ -428,6 +440,12 @@ const features = [
     cta: "View talent profiles",
     href: "/talent",
     component: <TalentProfileCard />,
+    theme: {
+      outerGradient: "linear-gradient(145deg, #F9FBFC 0%, #F2F5F8 45%, #E6ECF2 100%)",
+      ghostGradient: "linear-gradient(135deg, #D4DEE7 0%, #C7D3DE 100%)",
+      borderColor: "rgba(24, 24, 27, 0.08)",
+      baseShadow: "0 10px 30px -4px rgba(24, 24, 27, 0.04), 0 2px 8px -1px rgba(24, 24, 27, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+    },
   },
   {
     title: "Employer vacancy submissions",
@@ -435,6 +453,12 @@ const features = [
     cta: "Submit an open job",
     href: "/about?tab=contact&topic=hiring",
     component: <JobSubmissionCard />,
+    theme: {
+      outerGradient: "linear-gradient(145deg, #FFFAF6 0%, #FFF4ED 45%, #FCE8DC 100%)",
+      ghostGradient: "linear-gradient(135deg, #F8DEC9 0%, #F1CFB5 100%)",
+      borderColor: "rgba(24, 24, 27, 0.08)",
+      baseShadow: "0 10px 30px -4px rgba(24, 24, 27, 0.04), 0 2px 8px -1px rgba(24, 24, 27, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+    },
   },
   {
     title: "Direct talent hiring",
@@ -442,6 +466,12 @@ const features = [
     cta: "Explore talent directory",
     href: "/talent",
     component: <DirectHireCard />,
+    theme: {
+      outerGradient: "linear-gradient(145deg, #F8FCF9 0%, #F0F8F2 45%, #E2F2E6 100%)",
+      ghostGradient: "linear-gradient(135deg, #D0E8D5 0%, #C1DEC7 100%)",
+      borderColor: "rgba(24, 24, 27, 0.08)",
+      baseShadow: "0 10px 30px -4px rgba(24, 24, 27, 0.04), 0 2px 8px -1px rgba(24, 24, 27, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+    },
   },
   {
     title: "Editorial trust and authority",
@@ -449,6 +479,12 @@ const features = [
     cta: "About Trax Media",
     href: "/about",
     component: <EditorialTrustCard />,
+    theme: {
+      outerGradient: "linear-gradient(145deg, #FFFAF9 0%, #FBF3F2 45%, #F7E7E5 100%)",
+      ghostGradient: "linear-gradient(135deg, #F3D3D0 0%, #ECC2BD 100%)",
+      borderColor: "rgba(24, 24, 27, 0.08)",
+      baseShadow: "0 10px 30px -4px rgba(24, 24, 27, 0.04), 0 2px 8px -1px rgba(24, 24, 27, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+    },
   },
 ];
 
@@ -478,9 +514,6 @@ export function WhyTraxSection() {
         {/* Section Header with Editorial Kicker */}
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 mb-16">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce8e0] text-[#E7040D] text-[11px] font-bold uppercase tracking-wider mb-3.5">
-              <span>The Trax Standard</span>
-            </div>
             <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] font-extrabold tracking-tight text-zinc-950 leading-[1.2] mb-4">
               We are here for every step of your search
             </h2>
@@ -518,21 +551,23 @@ export function WhyTraxSection() {
 }
 
 function FeatureColumn({ feature }: { feature: typeof features[0] }) {
+  const { theme } = feature;
   return (
     <div className="flex flex-col gap-7 group/card">
-      {/* Outer Warm Gradient Canvas with Stacked Card Illusion */}
+      {/* Outer Gradient Canvas with Stacked Card Illusion */}
       <div className="relative">
         {/* Ghost card peeking behind (stacked depth illusion) */}
         <div
-          className="absolute inset-x-2 -bottom-1.5 h-6 rounded-b-[22px] opacity-40 transition-all duration-300 group-hover/card:opacity-60"
-          style={{ background: "linear-gradient(135deg, #f5c4ae 0%, #edb8a4 100%)" }}
+          className="absolute inset-x-2 -bottom-1.5 h-6 rounded-b-[22px] opacity-40 transition-all duration-300 group-hover/card:opacity-70"
+          style={{ background: theme.ghostGradient }}
         />
         {/* Main outer card */}
         <div
-          className="relative w-full h-[280px] rounded-[24px] border border-[#f0c0a8]/50 p-5 flex items-center justify-center overflow-hidden transition-all duration-300 ease-out group-hover/card:-translate-y-1 group-hover/card:shadow-[0_20px_48px_-8px_rgba(231,4,13,0.10),0_8px_20px_-4px_rgba(231,4,13,0.05)]"
+          className="relative w-full h-[280px] rounded-[24px] border p-5 flex items-center justify-center overflow-hidden transition-all duration-300 ease-out group-hover/card:-translate-y-1 group-hover/card:shadow-[0_20px_48px_-8px_rgba(15,16,18,0.10),0_8px_20px_-4px_rgba(15,16,18,0.05)]"
           style={{
-            background: "linear-gradient(145deg, #fdf2ee 0%, #fce4d6 45%, #f8d4c4 100%)",
-            boxShadow: "0 12px 32px -6px rgba(231,4,13,0.06), 0 4px 12px -2px rgba(231,4,13,0.03)",
+            background: theme.outerGradient,
+            borderColor: theme.borderColor,
+            boxShadow: theme.baseShadow,
           }}
         >
           {feature.component}

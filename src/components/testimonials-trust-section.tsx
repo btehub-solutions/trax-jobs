@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { Star, SealCheck, CaretLeft, CaretRight, Quotes } from "@phosphor-icons/react";
+import { Star, SealCheck, CaretLeft, CaretRight } from "@phosphor-icons/react";
 
 /* ─────────────────────────────────────────────────────────────
    Verified Testimonials Data (Authentic Nigerian Tech Context)
@@ -102,11 +102,6 @@ export function TestimonialsTrustSection() {
         {/* Header Row */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce8e0] text-[#E7040D] text-[11px] font-bold uppercase tracking-wider mb-4">
-              <Quotes size={14} weight="bold" />
-              <span>Verified Candidate Stories</span>
-            </div>
-
             <h2 className="text-[32px] sm:text-[44px] lg:text-[48px] font-extrabold tracking-[-0.03em] text-zinc-950 leading-[1.15]">
               Why people trust us
             </h2>

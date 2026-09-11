@@ -7,7 +7,6 @@ import {
   Clock,
   CalendarBlank,
   ArrowUpRight,
-  BookOpen,
 } from "@phosphor-icons/react";
 import { GuideArticle } from "@/data/guides";
 import { AppHeader } from "@/components/navigation/app-header";
@@ -38,10 +37,6 @@ export function GuidesClient({ guides }: GuidesClientProps) {
       <main className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-8 lg:px-12 py-4 pb-20">
         {/* Editorial Masthead */}
         <div className="border-b border-zinc-200/80 pt-2 pb-8 sm:pb-10 mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#fce8e0] text-[#E7040D] text-[11px] font-black uppercase tracking-wider mb-3.5">
-            <BookOpen size={14} weight="fill" />
-            <span>Trax Career Intelligence</span>
-          </div>
           <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-[#1F1F1F] tracking-[-0.03em] leading-[1.12] mb-3">
             Career Guides & Ecosystem Insights
           </h1>

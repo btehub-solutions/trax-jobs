@@ -50,11 +50,6 @@ export function TrendingSkillsSection({ courses }: TrendingSkillsSectionProps = 
         {/* Section Header with Trax Context and Carousel Controls */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-2.5 max-w-2xl">
-            {/* Editorial Kicker */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce8e0] text-[#E7040D] text-[11px] font-bold uppercase tracking-wider">
-              <span>The Trax Skills Standard</span>
-            </div>
-
             <h2 className="text-[28px] sm:text-[36px] lg:text-[40px] font-extrabold text-zinc-950 tracking-tight leading-[1.2]">
               Build the skills leading African tech teams need today
             </h2>

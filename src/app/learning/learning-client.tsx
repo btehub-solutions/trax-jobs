@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   CaretLeft,
   Clock,
-  GraduationCap,
   Star,
   ArrowUpRight,
 } from "@phosphor-icons/react";
@@ -39,10 +38,6 @@ export function LearningClient({ courses }: LearningClientProps) {
         
         {/* Editorial Masthead */}
         <div className="border-b border-zinc-200/80 pt-2 pb-8 sm:pb-10 mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#fce8e0] text-[#E7040D] text-[11px] font-black uppercase tracking-wider mb-3.5">
-            <GraduationCap size={15} weight="fill" />
-            <span>Trax Learning Hub</span>
-          </div>
           <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-[#1F1F1F] tracking-[-0.03em] leading-[1.12] mb-3">
             Upskilling & Practical Engineering Courses
           </h1>
