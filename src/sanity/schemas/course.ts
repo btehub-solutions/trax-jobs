@@ -224,8 +224,8 @@ export const course = defineType({
       name: "whatsappNumber",
       title: "WhatsApp Enrollment Number",
       type: "string",
-      description: "Phone number with country code (e.g. 2348000008729 or +234 800 000 8729) for student WhatsApp inquiries.",
-      initialValue: "2348000008729",
+      description: "Phone number with country code (e.g. 2347045422815 or +234 704 542 2815) for student WhatsApp inquiries.",
+      initialValue: "2347045422815",
     }),
   ],
   preview: {

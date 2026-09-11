@@ -46,7 +46,7 @@ function mapSanityCourse(c: any): CourseDetail {
       ],
     },
     enrollmentLink: c.enrollmentLink || "",
-    whatsappNumber: c.whatsappNumber || "2348000008729",
+    whatsappNumber: c.whatsappNumber || "2347045422815",
   };
 }
 

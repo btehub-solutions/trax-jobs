@@ -132,7 +132,7 @@ export function Footer() {
                   <YoutubeLogo size={18} weight="fill" />
                 </a>
                 <a
-                  href="https://wa.me/2348000008729?text=Hello%20Trax%20Jobs%20Desk"
+                  href="https://wa.me/2347045422815?text=Hello%20Trax%20Jobs%20Desk"
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-white transition-colors"

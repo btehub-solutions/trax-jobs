@@ -76,7 +76,7 @@ export default async function Home() {
       ],
     },
     enrollmentLink: c.enrollmentLink || "",
-    whatsappNumber: c.whatsappNumber || "2348000008729",
+    whatsappNumber: c.whatsappNumber || "2347045422815",
   }));
 
   const sanityGuides = (rawGuides ?? []).map((g: any) => ({

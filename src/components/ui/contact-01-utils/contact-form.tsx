@@ -7,6 +7,8 @@ interface ContactFormProps {
   initialTopic?: string | null;
 }
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xbgjbpba";
+
 export default function ContactForm({ initialTopic }: ContactFormProps) {
   const getInitialInquiry = (topic?: string | null) => {
     if (topic === "job" || topic === "hiring") return "Hiring / Post a Job";
@@ -15,7 +17,26 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
     return "";
   };
 
+  const getSubject = (type: string, name: string) => {
+    switch (type) {
+      case "Hiring / Post a Job":
+        return `[Trax Jobs] New Job Submission: Hiring / Post a Job - from ${name}`;
+      case "Submit Talent Profile":
+        return `[Trax Jobs] New Talent Profile Submission - from ${name}`;
+      case "Submit Company Profile":
+        return `[Trax Jobs] New Company Profile Submission - from ${name}`;
+      case "Media & Partnerships":
+        return `[Trax Jobs] Media & Partnerships Inquiry - from ${name}`;
+      case "General Inquiry":
+        return `[Trax Jobs] General Contact Inquiry - from ${name}`;
+      default:
+        return `[Trax Jobs] New Inquiry: ${type || "General"} - from ${name}`;
+    }
+  };
+
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [inquiryType, setInquiryType] = useState(() => getInitialInquiry(initialTopic));
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -24,13 +45,62 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
   const [message, setMessage] = useState("");
   const [agreed, setAgreed] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage(null);
+
     if (!agreed) {
-      alert("Please acknowledge the Terms and Conditions before submitting.");
+      setErrorMessage("Please acknowledge the Terms and Conditions before submitting.");
       return;
     }
-    setSubmitted(true);
+
+    if (!inquiryType) {
+      setErrorMessage("Please select an inquiry type.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const fullName = `${firstName.trim()} ${lastName.trim()}`.trim();
+      const subject = getSubject(inquiryType, fullName);
+
+      const payload = {
+        _subject: subject,
+        name: fullName,
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        email: email.trim(),
+        _replyto: email.trim(),
+        inquiryType,
+        country,
+        message: message.trim(),
+        submittedAt: new Date().toISOString(),
+        source: "Trax Jobs Contact Page (/about?tab=contact)",
+      };
+
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await response.json().catch(() => ({}));
+        const err = data?.errors?.[0]?.message || data?.error || "We encountered an issue submitting your inquiry. Please try again or reach out on WhatsApp.";
+        setErrorMessage(err);
+      }
+    } catch (err) {
+      console.error("Formspree submission error:", err);
+      setErrorMessage("Network connection error. Please try again or reach out directly on WhatsApp.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -48,6 +118,8 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
             <button
               onClick={() => {
                 setSubmitted(false);
+                setErrorMessage(null);
+                setIsSubmitting(false);
                 setInquiryType("");
                 setFirstName("");
                 setLastName("");
@@ -61,7 +133,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               Send Another Inquiry
             </button>
             <a
-              href="https://wa.me/2348000008729"
+              href="https://wa.me/2347045422815"
               target="_blank"
               rel="noreferrer"
               className="w-full sm:w-auto px-6 py-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold transition-all rounded-none flex items-center justify-center gap-1.5"
@@ -196,19 +268,34 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
             </label>
           </div>
 
+          {/* Error Message Banner */}
+          {errorMessage && (
+            <div className="p-3 bg-[#fdf2ee] border-l-2 border-[#E7040D] text-[13px] text-[#E7040D] font-medium leading-relaxed">
+              {errorMessage}
+            </div>
+          )}
+
           {/* Row 7: Action Buttons (Submit Inquiry & WhatsApp Option) */}
           <div className="pt-2 space-y-3">
             {/* Primary Submit Button */}
             <button
               type="submit"
-              className="w-full py-3.5 px-6 rounded-none bg-[#E7040D] hover:bg-[#CB030B] active:bg-[#A80209] text-white text-[15px] font-bold transition-all shadow-xs cursor-pointer flex items-center justify-center"
+              disabled={isSubmitting}
+              className="w-full py-3.5 px-6 rounded-none bg-[#E7040D] hover:bg-[#CB030B] active:bg-[#A80209] disabled:opacity-70 disabled:cursor-not-allowed text-white text-[15px] font-bold transition-all shadow-xs cursor-pointer flex items-center justify-center gap-2 select-none"
             >
-              Submit Inquiry
+              {isSubmitting ? (
+                <>
+                  <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin inline-block" />
+                  <span>Sending Inquiry...</span>
+                </>
+              ) : (
+                <span>Submit Inquiry</span>
+              )}
             </button>
 
             {/* WhatsApp Option Button */}
             <a
-              href="https://wa.me/2348000008729?text=Hello%20Trax%20Jobs%20Desk%2C%20I%20would%20like%20to%20make%20an%20inquiry"
+              href="https://wa.me/2347045422815?text=Hello%20Trax%20Jobs%20Desk%2C%20I%20would%20like%20to%20make%20an%20inquiry"
               target="_blank"
               rel="noreferrer"
               className="w-full py-3.5 px-6 rounded-none bg-[#25D366] hover:bg-[#20bd5a] active:bg-[#1da850] text-white text-[15px] font-bold transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer"

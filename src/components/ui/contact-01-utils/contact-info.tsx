@@ -22,10 +22,10 @@ export default function ContactInfo() {
               Phone
             </span>
             <a
-              href="tel:+2348000008729"
+              href="tel:+2347045422815"
               className="text-[15.5px] font-black text-[#1F1F1F] hover:text-[#E7040D] transition-colors"
             >
-              +234 800 000 8729
+              +234 704 542 2815
             </a>
           </div>
 

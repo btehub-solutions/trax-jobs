@@ -112,6 +112,36 @@ export async function POST(request: Request) {
 
     const result = await sanityWriteClient.create(doc);
 
+    // Forward to Formspree for instant email delivery to traxnewsng@gmail.com
+    try {
+      await fetch("https://formspree.io/f/xbgjbpba", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          _subject: `[Trax Jobs] Direct Job Submission: ${jobTitle} at ${companyName}`,
+          companyName,
+          jobTitle,
+          contactEmail,
+          _replyto: contactEmail,
+          roleCategory,
+          workplaceType,
+          location,
+          salaryRange,
+          applicationLink,
+          description,
+          requirements,
+          sanityId: result._id,
+          submittedAt: new Date().toISOString(),
+          source: "Direct API Submission (/api/submit-job)",
+        }),
+      });
+    } catch (notifyErr) {
+      console.error("Formspree forward error (job):", notifyErr);
+    }
+
     return NextResponse.json(
       { success: true, id: result._id },
       { status: 201 }

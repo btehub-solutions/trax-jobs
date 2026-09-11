@@ -45,7 +45,7 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
     }
   };
 
-  const rawPhone = course.whatsappNumber || "2348000008729";
+  const rawPhone = course.whatsappNumber || "2347045422815";
   const cleanPhone = rawPhone.replace(/\D/g, "");
   const whatsappMessage = encodeURIComponent(
     `Hello Trax, I would like to enrol in the "${course.title}" course.`
