@@ -114,7 +114,7 @@ export default async function Home() {
         {/* 7. Everyone's learning these right now (Trax Skills & Playbooks) */}
         <TrendingSkillsSection courses={sanityCourses.length > 0 ? sanityCourses : undefined} />
 
-        {/* 8. 50,000+ people found where they belong (Social Proof & Impact Collage) */}
+        {/* 8. Find teams that respect your craft (Ecosystem Standards & Direct Hiring) */}
         <SocialProofSection />
 
         {/* 8. Guide to getting hired (Nigerian Career Playbooks) */}

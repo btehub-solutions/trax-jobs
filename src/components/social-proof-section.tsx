@@ -25,24 +25,24 @@ export function SocialProofSection() {
           {/* Left Column: Big Bold Headline & Callout */}
           <div className="lg:col-span-5 max-w-xl">
             <h2 className="text-[38px] sm:text-[50px] lg:text-[54px] font-extrabold tracking-[-0.035em] text-zinc-950 leading-[1.08] mb-6">
-              50,000+ people found where they belong.
+              Find teams that respect your craft.
             </h2>
             
             <p className="text-[16px] sm:text-[17px] text-zinc-600 leading-[1.7] mb-8">
-              <strong className="text-zinc-950 font-bold">Now it&apos;s your turn.</strong> Start your search on Trax Jobs today and discover teams that share your ambition.
+              <strong className="text-zinc-950 font-bold">A new standard for tech hiring.</strong> Trax manually reviews every opening and talent profile before it goes live. No ghost listings, no dead links, and no automated noise.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-row items-center gap-2.5 sm:gap-4 w-full sm:w-auto">
               <Link
                 href="/jobs"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E7040D] hover:bg-[#CB030B] text-white text-[15px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.98]"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 py-3 sm:px-7 sm:py-3.5 rounded-full bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] sm:text-[15px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.98] whitespace-nowrap text-center"
               >
                 <span>Find your next role</span>
-                <ArrowRight size={16} weight="bold" />
+                <ArrowRight size={15} weight="bold" className="shrink-0" />
               </Link>
               <Link
                 href="/talent"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white hover:bg-zinc-100 text-zinc-900 text-[15px] font-bold border border-zinc-200/90 shadow-2xs transition-all"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center px-4 py-3 sm:px-6 sm:py-3.5 rounded-full bg-white hover:bg-zinc-100 text-zinc-900 text-[13.5px] sm:text-[15px] font-bold border border-zinc-200/90 shadow-2xs transition-all whitespace-nowrap text-center"
               >
                 <span>Browse talent</span>
               </Link>
@@ -66,48 +66,48 @@ export function SocialProofSection() {
 
             {/* Floating Card 1: Top Right (Cream Yellow Post-it) */}
             <div className="absolute top-0 right-0 sm:right-4 md:right-8 w-[155px] xs:w-[175px] sm:w-[220px] bg-[#FEF6E4] rounded-2xl p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#F6E6BF] hover:-translate-y-1 transition-transform duration-300">
-              <p className="text-[15px] sm:text-[19px] font-black text-zinc-950 leading-tight mb-1">
-                Every <br />minute
+              <p className="text-[17px] sm:text-[22px] font-black text-zinc-950 leading-tight mb-1">
+                100%
               </p>
               <p className="text-[10.5px] sm:text-[12px] text-zinc-700 leading-snug">
-                a verified role or profile is published on Trax Jobs.
+                human-reviewed. Every opening is verified before publishing.
               </p>
             </div>
 
-            {/* Floating Card 2: Left Side (Testimonial Card) */}
-            <div className="absolute bottom-8 left-0 sm:bottom-12 sm:left-0 md:left-2 w-[170px] xs:w-[195px] sm:w-[240px] bg-[#FEFBEA] rounded-2xl p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#F4EDB8] hover:-translate-y-1 transition-transform duration-300">
+            {/* Floating Card 2: Left Side (Editorial Note Card) */}
+            <div className="absolute bottom-8 left-0 sm:bottom-12 sm:left-0 md:left-2 w-[175px] xs:w-[200px] sm:w-[245px] bg-[#FEFBEA] rounded-2xl p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#F4EDB8] hover:-translate-y-1 transition-transform duration-300">
               <div className="flex items-center gap-1.5 text-zinc-900 mb-1.5 sm:mb-2">
                 <Quotes size={15} weight="fill" className="text-[#E7040D]" />
-                <span className="text-[10.5px] sm:text-[11.5px] font-bold">Amara&apos;s story</span>
+                <span className="text-[10.5px] sm:text-[11.5px] font-bold">The Trax Standard</span>
               </div>
               <p className="text-[10px] sm:text-[11.5px] text-zinc-700 leading-relaxed mb-2.5 sm:mb-3 italic">
-                &ldquo;When you find a team that respects your craft, work stops being a grind and starts being real.&rdquo;
+                &ldquo;We built Trax Jobs to end ghost postings. If an opening is listed here, a real team is actively hiring.&rdquo;
               </p>
               <Link
                 href="/about"
                 className="inline-block px-2.5 sm:px-3 py-1 rounded-md bg-zinc-950 text-white text-[9.5px] sm:text-[10.5px] font-bold hover:bg-[#E7040D] transition-colors"
               >
-                Read story
+                About our review
               </Link>
             </div>
 
-            {/* Floating Card 3: Bottom Center-Right (Soft Lime/Mint Metric) */}
+            {/* Floating Card 3: Bottom Center-Right (Soft Mint Trust Card) */}
             <div className="absolute -bottom-2 right-1 sm:-bottom-4 sm:right-12 md:right-20 w-[155px] xs:w-[175px] sm:w-[220px] bg-[#EDFBEF] rounded-2xl p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#D1F2D6] hover:-translate-y-1 transition-transform duration-300 z-20">
-              <p className="text-[22px] sm:text-[30px] font-black text-zinc-950 leading-tight mb-0.5 sm:mb-1">
-                84%
+              <p className="text-[15px] sm:text-[19px] font-black text-zinc-950 leading-tight mb-0.5 sm:mb-1">
+                Zero ghost roles
               </p>
               <p className="text-[10px] sm:text-[11.5px] text-zinc-700 leading-snug">
-                of candidates say Trax helped them find the right team, not just a job.
+                No recycled vacancies or dead links. Active African tech openings only.
               </p>
             </div>
 
-            {/* Floating Card 4: Top Left (Soft Ice Blue Trust Metric) */}
-            <div className="hidden sm:block absolute top-4 left-4 md:left-10 w-[180px] bg-[#EEF6FC] rounded-2xl p-4 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#D5E8F7] hover:-translate-y-1 transition-transform duration-300">
-              <p className="text-[20px] font-black text-zinc-950 leading-tight mb-1">
-                120+
+            {/* Floating Card 4: Top Left (Soft Ice Blue Direct Contact Card) */}
+            <div className="hidden sm:block absolute top-4 left-4 md:left-10 w-[185px] bg-[#EEF6FC] rounded-2xl p-4 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#D5E8F7] hover:-translate-y-1 transition-transform duration-300">
+              <p className="text-[15px] sm:text-[18px] font-black text-zinc-950 leading-tight mb-1">
+                Direct contact
               </p>
               <p className="text-[11px] text-zinc-700 leading-snug">
-                vetted companies hiring across West Africa.
+                Connect directly with founders and hiring leads via WhatsApp or email.
               </p>
             </div>
 

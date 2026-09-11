@@ -415,10 +415,10 @@ const features = [
     href: "/jobs",
     component: <VerifiedJobsCard />,
     theme: {
-      outerGradient: "linear-gradient(145deg, #FFF7F3 0%, #FDF1EA 45%, #FAECE3 100%)",
-      ghostGradient: "linear-gradient(135deg, #F8DDD2 0%, #F3D0C3 100%)",
-      borderColor: "rgba(24, 24, 27, 0.08)",
-      baseShadow: "0 10px 30px -4px rgba(24, 24, 27, 0.04), 0 2px 8px -1px rgba(24, 24, 27, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+      outerGradient: "linear-gradient(145deg, #FDF2EE 0%, #FCE4D6 50%, #FBD5C4 100%)",
+      ghostGradient: "linear-gradient(135deg, #F5BCA5 0%, #EFA488 100%)",
+      borderColor: "#F0C0A8",
+      baseShadow: "0 12px 32px -6px rgba(231,4,13,0.08), 0 4px 12px -2px rgba(15,16,18,0.03)",
     },
   },
   {
@@ -428,10 +428,10 @@ const features = [
     href: "/jobs",
     component: <ApplicationTrackerCard />,
     theme: {
-      outerGradient: "linear-gradient(145deg, #FFFDF5 0%, #FEFAEB 45%, #FBF4DC 100%)",
-      ghostGradient: "linear-gradient(135deg, #F6ECC4 0%, #EFE1B0 100%)",
-      borderColor: "rgba(24, 24, 27, 0.08)",
-      baseShadow: "0 10px 30px -4px rgba(24, 24, 27, 0.04), 0 2px 8px -1px rgba(24, 24, 27, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+      outerGradient: "linear-gradient(145deg, #FEFCE8 0%, #FEF9C3 50%, #FEF08A 100%)",
+      ghostGradient: "linear-gradient(135deg, #FDE047 0%, #FACC15 100%)",
+      borderColor: "#FDE047",
+      baseShadow: "0 12px 32px -6px rgba(202,138,4,0.10), 0 4px 12px -2px rgba(15,16,18,0.03)",
     },
   },
   {
@@ -441,10 +441,10 @@ const features = [
     href: "/talent",
     component: <TalentProfileCard />,
     theme: {
-      outerGradient: "linear-gradient(145deg, #F9FBFC 0%, #F2F5F8 45%, #E6ECF2 100%)",
-      ghostGradient: "linear-gradient(135deg, #D4DEE7 0%, #C7D3DE 100%)",
-      borderColor: "rgba(24, 24, 27, 0.08)",
-      baseShadow: "0 10px 30px -4px rgba(24, 24, 27, 0.04), 0 2px 8px -1px rgba(24, 24, 27, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+      outerGradient: "linear-gradient(145deg, #F0F9FF 0%, #E0F2FE 50%, #BAE6FD 100%)",
+      ghostGradient: "linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)",
+      borderColor: "#7DD3FC",
+      baseShadow: "0 12px 32px -6px rgba(2,132,199,0.10), 0 4px 12px -2px rgba(15,16,18,0.03)",
     },
   },
   {
@@ -454,10 +454,10 @@ const features = [
     href: "/about?tab=contact&topic=hiring",
     component: <JobSubmissionCard />,
     theme: {
-      outerGradient: "linear-gradient(145deg, #FFFAF6 0%, #FFF4ED 45%, #FCE8DC 100%)",
-      ghostGradient: "linear-gradient(135deg, #F8DEC9 0%, #F1CFB5 100%)",
-      borderColor: "rgba(24, 24, 27, 0.08)",
-      baseShadow: "0 10px 30px -4px rgba(24, 24, 27, 0.04), 0 2px 8px -1px rgba(24, 24, 27, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+      outerGradient: "linear-gradient(145deg, #FFF7ED 0%, #FFEDD5 50%, #FED7AA 100%)",
+      ghostGradient: "linear-gradient(135deg, #FDBA74 0%, #FB923C 100%)",
+      borderColor: "#FDBA74",
+      baseShadow: "0 12px 32px -6px rgba(234,88,12,0.10), 0 4px 12px -2px rgba(15,16,18,0.03)",
     },
   },
   {
@@ -467,10 +467,10 @@ const features = [
     href: "/talent",
     component: <DirectHireCard />,
     theme: {
-      outerGradient: "linear-gradient(145deg, #F8FCF9 0%, #F0F8F2 45%, #E2F2E6 100%)",
-      ghostGradient: "linear-gradient(135deg, #D0E8D5 0%, #C1DEC7 100%)",
-      borderColor: "rgba(24, 24, 27, 0.08)",
-      baseShadow: "0 10px 30px -4px rgba(24, 24, 27, 0.04), 0 2px 8px -1px rgba(24, 24, 27, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+      outerGradient: "linear-gradient(145deg, #F0FDF4 0%, #DCFCE7 50%, #BBF7D0 100%)",
+      ghostGradient: "linear-gradient(135deg, #86EFAC 0%, #4ADE80 100%)",
+      borderColor: "#86EFAC",
+      baseShadow: "0 12px 32px -6px rgba(22,163,74,0.10), 0 4px 12px -2px rgba(15,16,18,0.03)",
     },
   },
   {
@@ -480,10 +480,10 @@ const features = [
     href: "/about",
     component: <EditorialTrustCard />,
     theme: {
-      outerGradient: "linear-gradient(145deg, #FFFAF9 0%, #FBF3F2 45%, #F7E7E5 100%)",
-      ghostGradient: "linear-gradient(135deg, #F3D3D0 0%, #ECC2BD 100%)",
-      borderColor: "rgba(24, 24, 27, 0.08)",
-      baseShadow: "0 10px 30px -4px rgba(24, 24, 27, 0.04), 0 2px 8px -1px rgba(24, 24, 27, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+      outerGradient: "linear-gradient(145deg, #FFF1F2 0%, #FFE4E6 50%, #FECDD3 100%)",
+      ghostGradient: "linear-gradient(135deg, #FDA4AF 0%, #FB7185 100%)",
+      borderColor: "#FDA4AF",
+      baseShadow: "0 12px 32px -6px rgba(225,29,72,0.10), 0 4px 12px -2px rgba(15,16,18,0.03)",
     },
   },
 ];
