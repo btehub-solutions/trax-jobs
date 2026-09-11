@@ -99,3 +99,70 @@ export function extractStringList(input: any): string[] {
   }
   return [];
 }
+
+/**
+ * Resolves job skill tags with intelligent extraction from requirements/title/category
+ * so that the Skills & Expertise section is never blank.
+ */
+export function resolveJobTags(
+  tags: any,
+  jobContext?: { title?: string; category?: string; requirements?: string[]; summary?: string }
+): string[] {
+  const extracted = extractStringList(tags);
+  if (extracted.length > 0) return extracted;
+
+  const textCorpus = [
+    jobContext?.title || "",
+    jobContext?.summary || "",
+    ...(jobContext?.requirements || []),
+  ].join(" ");
+
+  const commonKeywords: Array<[string, RegExp]> = [
+    ["Python", /\bpython\b/i],
+    ["PyTorch", /\bpytorch\b/i],
+    ["TensorFlow", /\btensorflow\b/i],
+    ["FastAPI", /\bfastapi\b/i],
+    ["React", /\breact\b/i],
+    ["TypeScript", /\btypescript\b/i],
+    ["JavaScript", /\bjavascript\b/i],
+    ["Node.js", /\bnode(?:\.js)?\b/i],
+    ["Next.js", /\bnext(?:\.js)?\b/i],
+    ["Docker", /\bdocker\b/i],
+    ["Kubernetes", /\bkubernetes\b/i],
+    ["AWS", /\baws\b/i],
+    ["GCP", /\bgcp|google cloud\b/i],
+    ["PostgreSQL", /\bpostgres(?:ql)?\b/i],
+    ["SQL", /\bsql\b/i],
+    ["RAG & LLMs", /\b(?:rag|llm|llms|generative ai)\b/i],
+    ["Vector Databases", /\b(?:vector database|vector store|pinecone|qdrant|weaviate|pgvector)\b/i],
+    ["Figma", /\bfigma\b/i],
+    ["Design Systems", /\bdesign system(?:s)?\b/i],
+    ["Product Strategy", /\bproduct (?:strategy|roadmap|management)\b/i],
+    ["CI/CD", /\bci\/cd\b/i],
+  ];
+
+  const matched: string[] = [];
+  for (const [label, regex] of commonKeywords) {
+    if (regex.test(textCorpus) && !matched.includes(label)) {
+      matched.push(label);
+      if (matched.length >= 6) break;
+    }
+  }
+
+  if (matched.length > 0) return matched;
+
+  const category = (jobContext?.category || "").toLowerCase();
+  if (category.includes("ai") || category.includes("data")) {
+    return ["Python", "Machine Learning", "Data Infrastructure", "Cloud"];
+  }
+  if (category.includes("design")) {
+    return ["Figma", "Design Systems", "UI/UX", "User Research"];
+  }
+  if (category.includes("product")) {
+    return ["Product Strategy", "Agile", "User Research", "Metrics"];
+  }
+  if (category.includes("devops") || category.includes("cloud")) {
+    return ["Cloud Infrastructure", "Docker", "CI/CD", "Security"];
+  }
+  return ["Software Engineering", "Full-Stack", "Cloud Architecture"];
+}

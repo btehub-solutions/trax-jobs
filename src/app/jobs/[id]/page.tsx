@@ -3,7 +3,7 @@ import { fetchJobBySlug, fetchPublishedJobs } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { SAMPLE_JOBS } from "@/data/jobs";
 import { notFound } from "next/navigation";
-import { extractText, extractParagraphs, extractStringList } from "@/lib/utils";
+import { extractText, extractParagraphs, extractStringList, resolveJobTags } from "@/lib/utils";
 import JobDetailClient from "./job-detail-client";
 
 export const revalidate = 60;
@@ -74,25 +74,31 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 function mapJob(j: any) {
   if (!j) return null;
+  const title = j.title ?? "";
+  const roleCategory = j.category ?? "";
+  const summary = extractText(j.summary);
+  const requirements = extractStringList(j.requirements);
+  const tags = resolveJobTags(j.tags, { title, category: roleCategory, requirements, summary });
+
   return {
     id: j._id,
     slug: j.slug ?? j._id,
-    title: j.title ?? "",
-    summary: extractText(j.summary),
+    title,
+    summary,
     description: extractParagraphs(j.description),
-    requirements: extractStringList(j.requirements),
+    requirements,
     benefits: extractStringList(j.benefits),
     location: j.location ?? "",
     workplaceType: j.workplaceType ?? "On-site",
     experienceLevel: j.experienceLevel ?? "Mid-level",
-    roleCategory: j.category ?? "",
+    roleCategory,
     contractType: j.employmentType ?? "Permanent",
     salary: {
       formatted: j.salary?.formatted ?? "",
       rawMin: j.salary?.min ?? 0,
       rawMax: j.salary?.max ?? 0,
     },
-    tags: extractStringList(j.tags),
+    tags,
     applicationLink: j.applicationLink ?? "#",
     isFeatured: j.isFeatured ?? false,
     isVerified: j.isVerified ?? false,
@@ -145,7 +151,12 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
           rawMin: staticJob!.salary?.rawMin ?? 0,
           rawMax: staticJob!.salary?.rawMax ?? 0,
         },
-        tags: staticJob!.tags ?? [],
+        tags: resolveJobTags(staticJob!.tags, {
+          title: staticJob!.title,
+          category: staticJob!.roleCategory,
+          requirements: staticJob!.requirements,
+          summary: staticJob!.summary,
+        }),
         applicationLink: staticJob!.applicationLink ?? "#",
         isFeatured: staticJob!.isFeatured ?? false,
         isVerified: staticJob!.isVerified ?? false,

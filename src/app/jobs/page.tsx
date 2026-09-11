@@ -1,7 +1,7 @@
 import { fetchPublishedJobs } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { SAMPLE_JOBS } from "@/data/jobs";
-import { extractText, extractParagraphs, extractStringList } from "@/lib/utils";
+import { extractText, extractParagraphs, extractStringList, resolveJobTags } from "@/lib/utils";
 import { JobsPageClient } from "./jobs-client";
 
 export const revalidate = 60;
@@ -29,7 +29,12 @@ export default async function JobsPage() {
             rawMin: j.salary?.min ?? 0,
             rawMax: j.salary?.max ?? 0,
           },
-          tags: j.tags ?? [],
+          tags: resolveJobTags(j.tags, {
+            title: j.title ?? "",
+            category: j.category ?? "",
+            requirements: extractStringList(j.requirements),
+            summary: extractText(j.summary),
+          }),
           applicationLink: j.applicationLink ?? "#",
           isFeatured: j.isFeatured ?? false,
           isVerified: j.isVerified ?? false,

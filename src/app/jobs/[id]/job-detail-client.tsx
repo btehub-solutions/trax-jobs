@@ -147,6 +147,19 @@ export default function JobDetailClient({
     `Monitor performance and drive ongoing optimization across production environments, establishing benchmark quality for Africa's tech ecosystem.`,
   ], [job]);
 
+  const displayTags = useMemo(() => {
+    const rawTags = (job.tags || [])
+      .map((skill: any) => (typeof skill === "string" ? skill : (skill?.name || skill?.title || "")))
+      .filter(Boolean);
+    if (rawTags.length > 0) return rawTags;
+    const cat = (job.roleCategory || "").toLowerCase();
+    if (cat.includes("ai") || cat.includes("data")) return ["Python", "PyTorch", "FastAPI", "RAG & LLMs", "Docker", "Vector Databases"];
+    if (cat.includes("design")) return ["Figma", "Design Systems", "UI/UX", "User Research"];
+    if (cat.includes("product")) return ["Product Strategy", "Agile", "User Research", "Metrics"];
+    if (cat.includes("devops") || cat.includes("cloud")) return ["Cloud Infrastructure", "Docker", "CI/CD", "Security"];
+    return ["Software Engineering", "Full-Stack", "Cloud Architecture"];
+  }, [job.tags, job.roleCategory]);
+
   const gallery = CULTURE_GALLERY_SETS[Math.abs(job.title.length) % CULTURE_GALLERY_SETS.length];
 
   const formattedRelativeDate = useMemo(() => {
@@ -268,13 +281,9 @@ export default function JobDetailClient({
                 <div className="md:col-span-7 space-y-3">
                   <h3 className="text-[11.5px] font-bold tracking-wider uppercase text-[#1F1F1F]">SKILLS &amp; EXPERTISE</h3>
                   <div className="flex flex-wrap items-center gap-2">
-                    {(job.tags || []).map((skill: any, idx: number) => {
-                      const tagText = typeof skill === "string" ? skill : (skill?.name || skill?.title || "");
-                      if (!tagText) return null;
-                      return (
-                        <span key={idx} className="inline-flex items-center px-3 py-1.5 bg-[#FAFAFA] hover:bg-zinc-100 text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 transition-colors">{tagText}</span>
-                      );
-                    })}
+                    {displayTags.map((skill: string, idx: number) => (
+                      <span key={idx} className="inline-flex items-center px-3 py-1.5 bg-[#FAFAFA] hover:bg-zinc-100 text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 transition-colors">{skill}</span>
+                    ))}
                   </div>
                 </div>
               </div>
