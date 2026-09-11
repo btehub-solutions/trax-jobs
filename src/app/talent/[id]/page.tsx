@@ -3,6 +3,7 @@ import { fetchTalentBySlug, fetchPublishedTalent } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { SAMPLE_TALENT } from "@/data/talent";
 import { notFound } from "next/navigation";
+import { extractText, extractStringList } from "@/lib/utils";
 import TalentDetailClient from "./talent-detail-client";
 
 export const revalidate = 60;
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const roleTitle = rawTalent?.title || staticTalent?.title || "Tech Professional";
   const title = `${name} • ${roleTitle}`;
   const description =
-    rawTalent?.bio ||
+    extractText(rawTalent?.bio) ||
     staticTalent?.bio ||
     `Hire ${name}, ${roleTitle} located in ${rawTalent?.location || staticTalent?.location || "Nigeria"}. Verified African tech talent.`;
   const rawAvatar = rawTalent ? urlForImage(rawTalent.avatar) : staticTalent?.avatar;
@@ -72,13 +73,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 function mapTalent(t: any, fallbackStatic?: any) {
   if (!t) return null;
-  const rawSkills = t.skills;
-  const parsedSkills = Array.isArray(rawSkills)
-    ? rawSkills.filter(Boolean)
-    : typeof rawSkills === "string"
-    ? rawSkills.split(",").map((s: string) => s.trim()).filter(Boolean)
-    : [];
-
+  const parsedSkills = extractStringList(t.skills);
   const finalSkills = parsedSkills.length > 0 ? parsedSkills : (fallbackStatic?.skills ?? []);
 
   return {
@@ -94,7 +89,7 @@ function mapTalent(t: any, fallbackStatic?: any) {
     location: t.location ?? fallbackStatic?.location ?? "",
     workPreference: t.workPreference ?? fallbackStatic?.workPreference ?? "Remote",
     skills: finalSkills,
-    bio: t.bio ?? fallbackStatic?.bio ?? "",
+    bio: extractText(t.bio) || fallbackStatic?.bio || "",
     highlightMetric: t.highlightMetric ?? fallbackStatic?.highlightMetric ?? "",
     rate: t.rate ?? fallbackStatic?.rate ?? "",
     availability: t.availability ?? fallbackStatic?.availability ?? "Available immediately",

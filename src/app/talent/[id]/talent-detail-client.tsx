@@ -105,11 +105,15 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
     return `mailto:${talent.email}?subject=${subject}&body=${body}`;
   }, [talent]);
 
+  const safeSkills = useMemo(() => {
+    return (talent.skills || []).map((s: any) => (typeof s === "string" ? s : (s?.title || s?.name || ""))).filter(Boolean);
+  }, [talent.skills]);
+
   const keyAchievements = useMemo(() => [
     `Key Accomplishment: ${talent.highlightMetric || "Multiple high-impact projects delivered on time"}. Delivered tangible business outcomes and scaled production infrastructure with measured quality.`,
-    `Core Expertise: Proven leadership across ${(talent.skills || []).slice(0, 3).join(", ")}. Strong track record in architecture, peer mentoring, and delivery.`,
+    `Core Expertise: Proven leadership across ${safeSkills.slice(0, 3).join(", ") || "core technical domains"}. Strong track record in architecture, peer mentoring, and delivery.`,
     `Work Approach: Fully equipped for ${talent.workPreference} collaboration with robust remote habits and proactive communication.`,
-  ], [talent]);
+  ], [talent, safeSkills]);
 
   const gallery = TALENT_GALLERY_SETS[Math.abs(talent.name.length) % TALENT_GALLERY_SETS.length];
 
@@ -256,8 +260,8 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
                 <div className="md:col-span-7 space-y-3">
                   <h3 className="text-[11.5px] font-bold tracking-wider uppercase text-[#1F1F1F]">SKILLS &amp; EXPERTISE</h3>
                   <div className="flex flex-wrap items-center gap-2">
-                    {(talent.skills || []).map((skill: string) => (
-                      <span key={skill} className="inline-flex items-center px-3 py-1.5 bg-[#FAFAFA] hover:bg-zinc-100 text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 transition-colors">{skill}</span>
+                    {safeSkills.map((skill: string, idx: number) => (
+                      <span key={idx} className="inline-flex items-center px-3 py-1.5 bg-[#FAFAFA] hover:bg-zinc-100 text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 transition-colors">{skill}</span>
                     ))}
                   </div>
                 </div>

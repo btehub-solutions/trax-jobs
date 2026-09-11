@@ -268,9 +268,13 @@ export default function JobDetailClient({
                 <div className="md:col-span-7 space-y-3">
                   <h3 className="text-[11.5px] font-bold tracking-wider uppercase text-[#1F1F1F]">SKILLS &amp; EXPERTISE</h3>
                   <div className="flex flex-wrap items-center gap-2">
-                    {job.tags.map((skill: string) => (
-                      <span key={skill} className="inline-flex items-center px-3 py-1.5 bg-[#FAFAFA] hover:bg-zinc-100 text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 transition-colors">{skill}</span>
-                    ))}
+                    {(job.tags || []).map((skill: any, idx: number) => {
+                      const tagText = typeof skill === "string" ? skill : (skill?.name || skill?.title || "");
+                      if (!tagText) return null;
+                      return (
+                        <span key={idx} className="inline-flex items-center px-3 py-1.5 bg-[#FAFAFA] hover:bg-zinc-100 text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 transition-colors">{tagText}</span>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -338,7 +342,10 @@ export default function JobDetailClient({
                   {showFullOverview && (
                     <div className="space-y-4 pt-2">
                       <p>You will work as part of a high-performing team to build scalable architectures, ensuring solutions are robust, efficient, and suitable for a high-volume live environment.</p>
-                      {(job.description || []).map((p: string, i: number) => <p key={i}>{p}</p>)}
+                      {(Array.isArray(job.description) ? job.description : [job.description]).map((p: any, i: number) => {
+                        const text = typeof p === "string" ? p : (Array.isArray(p?.children) ? p.children.map((c: any) => (typeof c === "string" ? c : c?.text || "")).join("") : p?.text || "");
+                        return text ? <p key={i}>{text}</p> : null;
+                      })}
                     </div>
                   )}
 
@@ -353,12 +360,16 @@ export default function JobDetailClient({
                 <div className="pt-6 border-t border-zinc-100">
                   <h4 className="text-[14px] font-bold text-[#1F1F1F] mb-3">Profile &amp; Requirements</h4>
                   <ul className="space-y-3">
-                    {job.requirements.map((req: string, idx: number) => (
-                      <li key={idx} className="flex items-start gap-3 text-[14px] text-zinc-700 leading-relaxed">
-                        <CheckCircle size={17} weight="fill" className="text-[#E7040D] shrink-0 mt-0.5" />
-                        <span>{req}</span>
-                      </li>
-                    ))}
+                    {job.requirements.map((req: any, idx: number) => {
+                      const reqText = typeof req === "string" ? req : (Array.isArray(req?.children) ? req.children.map((c: any) => (typeof c === "string" ? c : c?.text || "")).join("") : req?.text || "");
+                      if (!reqText) return null;
+                      return (
+                        <li key={idx} className="flex items-start gap-3 text-[14px] text-zinc-700 leading-relaxed">
+                          <CheckCircle size={17} weight="fill" className="text-[#E7040D] shrink-0 mt-0.5" />
+                          <span>{reqText}</span>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               )}
@@ -367,9 +378,13 @@ export default function JobDetailClient({
                 <div className="pt-6 border-t border-zinc-100">
                   <h4 className="text-[14px] font-bold text-[#1F1F1F] mb-3">What we offer</h4>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {job.benefits.map((b: string, idx: number) => (
-                      <li key={idx} className="p-3 bg-[#FAFAFA] border border-zinc-200/80 text-[13px] text-zinc-800 font-medium">{b}</li>
-                    ))}
+                    {job.benefits.map((b: any, idx: number) => {
+                      const bText = typeof b === "string" ? b : (Array.isArray(b?.children) ? b.children.map((c: any) => (typeof c === "string" ? c : c?.text || "")).join("") : b?.text || "");
+                      if (!bText) return null;
+                      return (
+                        <li key={idx} className="p-3 bg-[#FAFAFA] border border-zinc-200/80 text-[13px] text-zinc-800 font-medium">{bText}</li>
+                      );
+                    })}
                   </ul>
                 </div>
               )}
@@ -436,7 +451,7 @@ export default function JobDetailClient({
               <div className="pt-4 border-t border-zinc-100 space-y-3">
                 <h4 className="text-[14px] font-bold text-[#1F1F1F]">Who are they?</h4>
                 <div className="text-[13px] text-zinc-600 leading-relaxed space-y-2">
-                  <p>{job.company.bio || `${job.company.name} is an ecosystem-leading technology company operating across high-scale markets in Africa and globally.`}</p>
+                  <p>{(typeof job.company.bio === "string" ? job.company.bio : (Array.isArray(job.company.bio) ? job.company.bio.map((b: any) => (typeof b === "string" ? b : (Array.isArray(b?.children) ? b.children.map((c: any) => c?.text || "").join("") : b?.text || ""))).filter(Boolean).join(" ") : "")) || `${job.company.name} is an ecosystem-leading technology company operating across high-scale markets in Africa and globally.`}</p>
                   {showFullCompanyBio && (
                     <p>The company invests deeply in engineering talent, remote-first practices, and building robust platforms that serve thousands of businesses across Africa.</p>
                   )}

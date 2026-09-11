@@ -156,14 +156,20 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
               {activeTab === "overview" && (
                 <div className="py-6 text-zinc-800 space-y-4">
                   <p className="text-[14.5px] leading-relaxed text-zinc-600">
-                    {course.description || course.summary}
+                    {typeof course.description === "string"
+                      ? course.description
+                      : typeof course.summary === "string"
+                      ? course.summary
+                      : ""}
                   </p>
                   {course.learningOutcomes && course.learningOutcomes.length > 0 && (
                     <div className="pt-3">
                       <h3 className="text-[14px] font-bold text-zinc-900 mb-2">Key Learning Outcomes</h3>
                       <ul className="space-y-2 list-disc list-outside pl-5 text-[13.5px] text-zinc-600">
                         {course.learningOutcomes.map((item, idx) => (
-                          <li key={idx} className="leading-relaxed">{item}</li>
+                          <li key={idx} className="leading-relaxed">
+                            {typeof item === "string" ? item : (item as any)?.text || ""}
+                          </li>
                         ))}
                       </ul>
                     </div>

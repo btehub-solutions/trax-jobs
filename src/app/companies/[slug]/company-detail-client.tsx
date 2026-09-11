@@ -117,7 +117,7 @@ export default function CompanyDetailClient({
 
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[#1F1F1F] tracking-tight mb-3">{company.name}</h1>
           <p className="text-[15px] sm:text-[16px] text-zinc-600 max-w-xl mx-auto leading-relaxed mb-6 font-medium">
-            {company.tagline || company.bio.slice(0, 100) + "..."}
+            {company.tagline || (typeof company.bio === "string" ? (company.bio.length > 100 ? `${company.bio.slice(0, 100)}...` : company.bio) : "")}
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3 text-[13px] font-medium text-zinc-700 mb-6">
@@ -153,7 +153,9 @@ export default function CompanyDetailClient({
             <div className="space-y-8">
               <div className="bg-white rounded-none border border-zinc-200/90 p-8 sm:p-10 space-y-4 shadow-2xs">
                 <h2 className="text-[20px] font-black text-[#1F1F1F] tracking-tight">About {company.name}</h2>
-                <p className="text-[15px] text-zinc-600 leading-relaxed max-w-3xl">{company.bio}</p>
+                <p className="text-[15px] text-zinc-600 leading-relaxed max-w-3xl">
+                  {typeof company.bio === "string" ? company.bio : (company.bio ? String(company.bio) : "")}
+                </p>
                 <p className="text-[15px] text-zinc-600 leading-relaxed max-w-3xl">
                   Rooted in the African digital economy, {company.name} combines cutting-edge engineering standards with local market execution to scale solutions across West Africa and global markets.
                 </p>

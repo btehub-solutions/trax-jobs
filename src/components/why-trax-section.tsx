@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -18,8 +18,6 @@ import {
   MapPin,
   Link as LinkIcon,
   SealCheck,
-  CaretLeft,
-  CaretRight,
 } from "@phosphor-icons/react";
 
 /* ─────────────────────────────────────────────────────────────
@@ -72,33 +70,6 @@ function BrandLogo({ name }: { name: "Paystack" | "Flutterwave" | "Moniepoint" }
 
 export function WhyTraxSection() {
   const [savedRole, setSavedRole] = useState(false);
-  const [activeSlide, setActiveSlide] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const scrollToSlide = (index: number) => {
-    if (!scrollContainerRef.current) return;
-    const container = scrollContainerRef.current;
-    const card = container.children[index] as HTMLElement | undefined;
-    if (card) {
-      container.scrollTo({
-        left: card.offsetLeft - container.offsetLeft,
-        behavior: "smooth",
-      });
-    }
-    setActiveSlide(index);
-  };
-
-  const handleScroll = () => {
-    if (!scrollContainerRef.current) return;
-    const container = scrollContainerRef.current;
-    const card = container.children[0] as HTMLElement | undefined;
-    if (!card) return;
-    const step = card.offsetWidth + 14;
-    const newIndex = Math.round(container.scrollLeft / step);
-    if (newIndex >= 0 && newIndex <= 2 && newIndex !== activeSlide) {
-      setActiveSlide(newIndex);
-    }
-  };
 
   return (
     <section className="w-full bg-[#FAF8F5] py-16 sm:py-24 lg:py-28 relative overflow-hidden">
@@ -131,9 +102,7 @@ export function WhyTraxSection() {
         <div className="block lg:hidden">
           {/* Native Horizontal Scroll Container with Snapping */}
           <div
-            ref={scrollContainerRef}
-            onScroll={handleScroll}
-            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-3.5 pb-2 touch-pan-x [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden w-full max-w-[420px] mx-auto"
+            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-3.5 pb-2 overscroll-x-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden w-full max-w-[420px] mx-auto"
           >
             {/* CARD 0: Curated Roles */}
             <div className="w-full shrink-0 snap-center bg-white rounded-none overflow-hidden shadow-[0_16px_36px_-8px_rgba(15,16,18,0.12)] border border-black/10 select-none">
@@ -426,66 +395,6 @@ export function WhyTraxSection() {
                 </p>
               </div>
             </div>
-          </div>
-
-          {/* Carousel Navigation Arrow Controls */}
-          <div className="flex items-center gap-2 mt-4 max-w-[420px] mx-auto">
-            {/* Prev Button */}
-            <button
-              type="button"
-              onClick={() => scrollToSlide(Math.max(0, activeSlide - 1))}
-              disabled={activeSlide === 0}
-              aria-label="Previous slide"
-              className={`w-10 h-10 rounded-none border flex items-center justify-center transition-all ${
-                activeSlide === 0
-                  ? "border-zinc-200 bg-zinc-100 text-zinc-300 cursor-not-allowed"
-                  : "border-zinc-300 bg-white text-zinc-900 hover:bg-zinc-50 active:scale-95 shadow-2xs cursor-pointer"
-              }`}
-              style={
-                activeSlide === 0
-                  ? {
-                      backgroundImage:
-                        "repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(0, 0, 0, 0.05) 3px, rgba(0, 0, 0, 0.05) 6px)",
-                    }
-                  : undefined
-              }
-            >
-              <CaretLeft size={17} weight="bold" />
-            </button>
-
-            {/* Next Button */}
-            <button
-              type="button"
-              onClick={() => scrollToSlide(Math.min(2, activeSlide + 1))}
-              disabled={activeSlide === 2}
-              aria-label="Next slide"
-              className={`w-10 h-10 rounded-none border flex items-center justify-center transition-all ${
-                activeSlide === 2
-                  ? "border-zinc-200 bg-zinc-100 text-zinc-300 cursor-not-allowed"
-                  : "border-zinc-300 bg-white text-zinc-900 hover:bg-zinc-50 active:scale-95 shadow-2xs cursor-pointer"
-              }`}
-              style={
-                activeSlide === 2
-                  ? {
-                      backgroundImage:
-                        "repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(0, 0, 0, 0.05) 3px, rgba(0, 0, 0, 0.05) 6px)",
-                    }
-                  : undefined
-              }
-            >
-              <CaretRight size={17} weight="bold" />
-            </button>
-          </div>
-
-          {/* Full-width CTA Button */}
-          <div className="mt-3.5 max-w-[420px] mx-auto">
-            <Link
-              href="/jobs"
-              className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-none bg-[#E7040D] hover:bg-[#CB030B] text-white text-[14.5px] font-bold shadow-sm hover:shadow-md transition-all active:scale-[0.99]"
-            >
-              <span>Browse all jobs</span>
-              <ArrowRight size={15} weight="bold" />
-            </Link>
           </div>
         </div>
 

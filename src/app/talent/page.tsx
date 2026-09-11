@@ -1,6 +1,7 @@
 import { fetchPublishedTalent } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { SAMPLE_TALENT } from "@/data/talent";
+import { extractText, extractStringList } from "@/lib/utils";
 import { TalentPageClient } from "./talent-client";
 
 export const revalidate = 60;
@@ -22,8 +23,8 @@ export default async function TalentPage() {
           experienceYears: t.experienceYears ?? "",
           location: t.location ?? "",
           workPreference: t.workPreference ?? "Remote",
-          skills: t.skills ?? [],
-          bio: t.bio ?? "",
+          skills: extractStringList(t.skills),
+          bio: extractText(t.bio),
           highlightMetric: t.highlightMetric ?? "",
           rate: t.rate ?? "",
           availability: t.availability ?? "Available immediately",

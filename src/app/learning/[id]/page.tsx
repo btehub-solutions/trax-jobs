@@ -3,6 +3,7 @@ import { fetchCourseBySlug, fetchPublishedCourses } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { COURSES_DATA, CourseDetail } from "@/data/courses";
 import { notFound } from "next/navigation";
+import { extractText, extractStringList } from "@/lib/utils";
 import { CourseDetailClient } from "./course-detail-client";
 
 export const revalidate = 60;
@@ -81,16 +82,16 @@ function mapSanityCourse(c: any): CourseDetail {
     platform: c.platform || "Web & WhatsApp",
     instructor: c.instructor || "Trax Skills Council",
     instructorTitle: c.instructorTitle || "Engineering & Product Leaders",
-    summary: c.summary || "",
-    description: c.description || "",
-    skills: c.skills || [],
-    includes: c.includes || [
+    summary: extractText(c.summary) || "",
+    description: extractText(c.description) || "",
+    skills: extractStringList(c.skills),
+    includes: extractStringList(c.includes).length > 0 ? extractStringList(c.includes) : [
       "Shareable certificate of completion",
       "Access on web and mobile",
       "100% online practical lessons",
     ],
-    learningOutcomes: c.learningOutcomes || [],
-    targetAudience: c.targetAudience || [],
+    learningOutcomes: extractStringList(c.learningOutcomes),
+    targetAudience: extractStringList(c.targetAudience),
     syllabus: (c.syllabus || []).map((m: any) => ({
       moduleTitle: m.moduleTitle || "",
       duration: m.duration || "",

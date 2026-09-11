@@ -1,6 +1,7 @@
 import { fetchPublishedJobs } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { SAMPLE_JOBS } from "@/data/jobs";
+import { extractText, extractParagraphs, extractStringList } from "@/lib/utils";
 import { JobsPageClient } from "./jobs-client";
 
 export const revalidate = 60;
@@ -14,10 +15,10 @@ export default async function JobsPage() {
           id: j._id,
           slug: j.slug ?? j._id,
           title: j.title ?? "",
-          summary: j.summary ?? "",
-          description: j.description ?? [],
-          requirements: j.requirements ?? [],
-          benefits: j.benefits ?? [],
+          summary: extractText(j.summary),
+          description: extractParagraphs(j.description),
+          requirements: extractStringList(j.requirements),
+          benefits: extractStringList(j.benefits),
           location: j.location ?? "",
           workplaceType: j.workplaceType ?? "On-site",
           experienceLevel: j.experienceLevel ?? "Mid-level",

@@ -3,6 +3,7 @@ import { fetchJobBySlug, fetchPublishedJobs } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { SAMPLE_JOBS } from "@/data/jobs";
 import { notFound } from "next/navigation";
+import { extractText, extractParagraphs, extractStringList } from "@/lib/utils";
 import JobDetailClient from "./job-detail-client";
 
 export const revalidate = 60;
@@ -77,10 +78,10 @@ function mapJob(j: any) {
     id: j._id,
     slug: j.slug ?? j._id,
     title: j.title ?? "",
-    summary: j.summary ?? "",
-    description: j.description ?? [],
-    requirements: j.requirements ?? [],
-    benefits: j.benefits ?? [],
+    summary: extractText(j.summary),
+    description: extractParagraphs(j.description),
+    requirements: extractStringList(j.requirements),
+    benefits: extractStringList(j.benefits),
     location: j.location ?? "",
     workplaceType: j.workplaceType ?? "On-site",
     experienceLevel: j.experienceLevel ?? "Mid-level",
@@ -91,7 +92,7 @@ function mapJob(j: any) {
       rawMin: j.salary?.min ?? 0,
       rawMax: j.salary?.max ?? 0,
     },
-    tags: j.tags ?? [],
+    tags: extractStringList(j.tags),
     applicationLink: j.applicationLink ?? "#",
     isFeatured: j.isFeatured ?? false,
     isVerified: j.isVerified ?? false,
@@ -105,7 +106,7 @@ function mapJob(j: any) {
       location: j.company?.location ?? "",
       employeesCount: j.company?.employeesCount ?? "",
       hq: j.company?.location ?? "",
-      bio: j.company?.description ?? "",
+      bio: extractText(j.company?.description),
     },
   };
 }
