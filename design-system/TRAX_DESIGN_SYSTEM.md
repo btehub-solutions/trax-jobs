@@ -81,3 +81,25 @@ This document defines the **single source of truth** for all visual styles, geom
 - **Icon Library**: **Phosphor Icons exclusively** (`@phosphor-icons/react`). Zero Lucide icons under any circumstance.
 - **Tone of Voice**: Authoritative African tech journalism (trax.ng standard). No em dashes, no generic SaaS filler words ("moreover", "furthermore", "in today's fast-paced world").
 - **Authentic Assets**: Real African vector company logos (Paystack, Flutterwave, Moniepoint, Interswitch, Andela), real verified portrait photography. No dummy Latin text or empty skeleton bars.
+
+---
+
+## 7. Production Lock-In & Consistency Guarantee
+
+This design system is production-locked. Every page currently live on the platform is frozen and must not be modified or broken:
+
+- **Locked Core Routes**:
+  - `/` (Home: Hero, Trending Skills, Social Proof, Career Guides, Testimonials, Announcement Bar)
+  - `/jobs` (Listings, Filters, Preferences Wizard) & `/jobs/[id]` (Job Detail, External Apply, Save)
+  - `/talent` (Talent Directory, Category Filters) & `/talent/[id]` (Talent Profile, WhatsApp/Email Hire)
+  - `/companies` (Company Directory) & `/companies/[slug]` (Company Dossier, Open Roles)
+  - `/learning` (Curated Courses) & `/learning/[id]` (Course Detail, Modules, Syllabus, Enrol)
+  - `/guides` (Editorial Career Playbooks) & `/guides/[slug]` (Article, Author Widget, Related)
+  - `/about` (About Us Narrative, Panoramic Hero, Founder's Letter, Solutions, Contact Form)
+  - `/opengraph-image` (1200 × 630 px Edge-rendered brand preview)
+
+- **Immutable Rules for Future Expansion**:
+  - No existing page or component may be altered, refactored, or removed unless explicitly commanded by the project owner.
+  - No unsolicited pages, scaffolding, or demo files may ever be created.
+  - Any future page or feature must strictly inherit the tokens, geometry, typography, and Phosphor icon standard defined in this document with 100% fidelity.
+  - The canonical domain is strictly `https://jobs.trax.ng`.

@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
 export const alt = "Trax Jobs: Curated African Tech Opportunities & Verified Talent";
 export const size = {
   width: 1200,

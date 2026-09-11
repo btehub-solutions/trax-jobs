@@ -10,7 +10,32 @@ This file gives instructions to any AI coding agent (Claude Code, Cursor, Copilo
 2. Read every file inside `/design-system`. This defines visual language, components, spacing, typography, and tokens. Do not introduce colors, fonts, spacing values, or component patterns that are not defined there.
 3. If a task conflicts with the PRD or the design system, stop and ask before proceeding. Do not silently override either.
 
-*Adjust the paths above if your PRD or design system folder live somewhere else in this repo.*
+---
+
+## Production Codebase & Design System Lock-In (CRITICAL & NON-NEGOTIABLE)
+
+This repository is ready for production. All existing pages, layouts, components, interactions, and design tokens are **COMPLETELY LOCKED IN AND FROZEN**.
+
+1. **Strict Code & Page Freeze**:
+   - Every page, section, component, modal, and route built up to this point is locked in.
+   - Under no circumstances may any existing page or component be touched, refactored, re-architected, or modified unless the user explicitly instructs you to modify that specific file or feature.
+   - Do NOT break any existing page, route, or flow. What works must stay working permanently.
+
+2. **Zero Unsolicited File Additions**:
+   - Do NOT create new pages, mock routes, scratch files, demo components, or unrequested features.
+   - Only create a new page or component when the user explicitly requests it.
+
+3. **Design System Continuity**:
+   - The design system defined in `/design-system/TRAX_DESIGN_SYSTEM.md` is the immutable standard across the entire project.
+   - Whenever the user asks to build a new page or feature, it MUST inherit the locked design system with 100% consistency:
+     - Exact palette: Primary Red (`#E7040D` / hover `#CB030B`), Dark Navy (`#0C1222`), Charcoal (`#1F1F1F` / `#161616`), Warm Peach (`#fdf2ee` / `#fce8e0`), Warm Grid Canvas (`#FAF8F5`), Clean White (`#FFFFFF`).
+     - Exact geometry: 90-degree square edges (`rounded-none`) on all cards with `border border-zinc-200/90`.
+     - Exact icon set: Phosphor Icons exclusively (`@phosphor-icons/react`). Zero Lucide icons under any circumstance.
+     - Editorial typography: Tight letter-tracking on headings (`tracking-[-0.02em]`), generous line height (`leading-[1.7]`), editorial kicker badges.
+     - Content rules: No em dashes anywhere in any copy, code comments, or commit messages.
+
+4. **Authoritative Domain**:
+   - The canonical production domain for this application is strictly `https://jobs.trax.ng` (NOT `https://trax.ng`, which is the separate Trax news site). All metadataBase configurations, sitemaps, robots.txt, and Open Graph previews must resolve to `https://jobs.trax.ng`.
 
 ---
 

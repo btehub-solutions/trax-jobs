@@ -19,3 +19,9 @@ Every page, section, component, card, and interaction in Trax Jobs must be desig
 
 4. **Editorial Typography**:
    - Tight letter-tracking on titles (`tracking-[-0.02em]`), generous line height on descriptions (`leading-[1.7]`), and editorial kicker badges (`THE TRAX STANDARD`).
+
+5. **Production Codebase & Design System Freeze**:
+   - All existing pages, components, sections, and tokens in this repository are completely locked in for production.
+   - Do NOT modify, refactor, or touch existing files unless explicitly asked by the user.
+   - Do NOT create unprompted pages or features.
+   - Any new page or component requested by the user in the future must strictly inherit these locked tokens and geometry with 100% consistency.
