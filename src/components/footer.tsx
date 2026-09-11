@@ -54,16 +54,9 @@ const footerLinks: FooterSection[] = [
 
 export function Footer() {
   return (
-    <footer className="w-full bg-white relative overflow-hidden antialiased [font-synthesis:none] select-none">
-      {/* Large Stroke Text Section */}
-      <div className="relative w-full flex justify-center items-end pt-8 md:pt-12 pb-0 z-0 overflow-hidden">
-        <h2 className="text-[120px] sm:text-[160px] md:text-[210px] font-semibold text-transparent [-webkit-text-stroke:1px_rgba(0,0,0,0.35)] leading-[0.75] select-none -mb-4 md:-mb-6 opacity-60 whitespace-nowrap">
-          {companyName}
-        </h2>
-      </div>
-
-      {/* Trax Brand Charcoal Panel Section - Clean and smooth, zero line artifacts */}
-      <div className="relative w-full bg-[#0C1222] z-10 min-h-[380px]">
+    <footer className="w-full bg-[#0C1222] relative overflow-hidden antialiased [font-synthesis:none] select-none">
+      {/* Trax Brand Navy Panel Content */}
+      <div className="relative w-full z-10 min-h-[380px]">
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-24 flex flex-col lg:flex-row justify-between gap-16 lg:gap-8">
 
