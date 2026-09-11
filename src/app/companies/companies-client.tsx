@@ -452,7 +452,7 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
           </div>
 
           {/* Sector, Size, Language Dropdowns */}
-          <div className="flex items-center divide-x divide-zinc-200/80 overflow-x-auto no-scrollbar max-w-full border-b md:border-b-0 shrink-0">
+          <div className="grid grid-cols-3 md:flex md:items-center divide-x divide-zinc-200/80 border-b md:border-b-0 shrink-0">
             {/* Sector */}
             <div className="relative shrink-0">
               <button

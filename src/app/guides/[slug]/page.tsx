@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://trax.ng").replace(/\/$/, "");
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://jobs.trax.ng").replace(/\/$/, "");
   const pageUrl = `${siteUrl}/guides/${article.slug}`;
   const title = `${article.title} • Trax Playbook`;
   const description = article.lead || "Practical engineering guides and career playbooks for African tech professionals.";
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ogImageUrl = `${siteUrl}${ogImageUrl.startsWith("/") ? "" : "/"}${ogImageUrl}`;
   }
   if (!ogImageUrl) {
-    ogImageUrl = `${siteUrl}/images/trax-logo.png`;
+    ogImageUrl = `${siteUrl}/opengraph-image`;
   }
 
   return {

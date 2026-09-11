@@ -12,6 +12,7 @@ import {
   Tag,
   SealCheck,
 } from "@phosphor-icons/react";
+import { BrandWordmark, ALL_AFRICAN_BRANDS } from "@/components/brand-wordmark";
 
 /* ─────────────────────────────────────────────────────────────
    Company Logos (Authentic Vector SVGs)
@@ -415,7 +416,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
             Are you{" "}
             <Link
               href="/about?tab=contact&topic=hiring"
-              className="font-semibold underline decoration-[#E7040D] decoration-2 underline-offset-4 cursor-pointer hover:text-[#E7040D] transition-colors"
+              className="font-bold underline decoration-[#FBBF24] decoration-[2.5px] underline-offset-4 cursor-pointer hover:text-[#E7040D] transition-colors"
             >
               hiring?
             </Link>{" "}
@@ -424,37 +425,15 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
         </div>
       </div>
 
-      {/* Full-Bleed Infinite Horizontal Marquee Ticker (Cuts edge-to-edge across entire screen) */}
-      <div className="w-full overflow-hidden py-4 mt-8">
-        <div className="marquee-scroll flex items-center gap-12 sm:gap-20 select-none">
-          {[
-            { name: "paystack", style: "font-black tracking-[-0.04em]" },
-            { name: "flutterwave", style: "font-extrabold tracking-[-0.03em]" },
-            { name: "moniepoint", style: "font-extrabold tracking-[-0.03em]" },
-            { name: "interswitch", style: "font-bold tracking-[-0.02em]", dot: true },
-            { name: "kuda", style: "font-black tracking-[-0.04em]", dot: true },
-            { name: "piggyvest", style: "font-black tracking-[-0.03em]" },
-            { name: "andela", style: "font-black tracking-[-0.02em]" },
-            { name: "moove", style: "font-extrabold tracking-[-0.02em]" },
-            { name: "cowrywise", style: "font-black tracking-[-0.03em]" },
-            { name: "paystack", style: "font-black tracking-[-0.04em]" },
-            { name: "flutterwave", style: "font-extrabold tracking-[-0.03em]" },
-            { name: "moniepoint", style: "font-extrabold tracking-[-0.03em]" },
-            { name: "interswitch", style: "font-bold tracking-[-0.02em]", dot: true },
-            { name: "kuda", style: "font-black tracking-[-0.04em]", dot: true },
-            { name: "piggyvest", style: "font-black tracking-[-0.03em]" },
-            { name: "andela", style: "font-black tracking-[-0.02em]" },
-            { name: "moove", style: "font-extrabold tracking-[-0.02em]" },
-            { name: "cowrywise", style: "font-black tracking-[-0.03em]" },
-          ].map((brand, idx) => (
+      {/* Full-Bleed Infinite Horizontal Marquee Ticker with Bespoke Brand Wordmarks */}
+      <div className="w-full overflow-hidden py-6 mt-6">
+        <div className="marquee-scroll flex items-center gap-14 sm:gap-20 select-none">
+          {[...ALL_AFRICAN_BRANDS, ...ALL_AFRICAN_BRANDS, ...ALL_AFRICAN_BRANDS].map((brand, idx) => (
             <div
-              key={`${brand.name}-${idx}`}
-              className="flex items-center gap-1 shrink-0 opacity-80 hover:opacity-100 transition-opacity cursor-pointer text-zinc-950"
+              key={`${brand}-${idx}`}
+              className="flex items-center shrink-0 opacity-85 hover:opacity-100 transition-all duration-200 cursor-pointer hover:scale-105"
             >
-              <span className={`text-[22px] sm:text-[28px] ${brand.style}`}>
-                {brand.name}
-                {brand.dot && <span className="text-[#E7040D]">.</span>}
-              </span>
+              <BrandWordmark brand={brand} />
             </div>
           ))}
         </div>

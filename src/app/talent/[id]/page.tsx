@@ -41,7 +41,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     rawTalent?.bio ||
     staticTalent?.bio ||
     `Hire ${name}, ${roleTitle} located in ${rawTalent?.location || staticTalent?.location || "Nigeria"}. Verified African tech talent.`;
-  const avatarUrl = rawTalent ? urlForImage(rawTalent.avatar) : staticTalent?.avatar;
+  const rawAvatar = rawTalent ? urlForImage(rawTalent.avatar) : staticTalent?.avatar;
+  const ogImageUrl = rawAvatar || "/opengraph-image";
 
   return {
     title,
@@ -50,43 +51,60 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       title,
       description,
       type: "profile",
-      images: avatarUrl ? [{ url: avatarUrl, alt: name }] : undefined,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${name} • ${roleTitle}`,
+          type: "image/png",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: avatarUrl ? [avatarUrl] : undefined,
+      images: [ogImageUrl],
     },
   };
 }
 
-function mapTalent(t: any) {
+function mapTalent(t: any, fallbackStatic?: any) {
   if (!t) return null;
+  const rawSkills = t.skills;
+  const parsedSkills = Array.isArray(rawSkills)
+    ? rawSkills.filter(Boolean)
+    : typeof rawSkills === "string"
+    ? rawSkills.split(",").map((s: string) => s.trim()).filter(Boolean)
+    : [];
+
+  const finalSkills = parsedSkills.length > 0 ? parsedSkills : (fallbackStatic?.skills ?? []);
+
   return {
     id: t._id,
     slug: t.slug ?? t._id,
-    name: t.name ?? "",
-    title: t.title ?? "",
-    category: t.category ?? "Engineering",
-    avatar: urlForImage(t.avatar) || "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=300",
-    coverImage: urlForImage(t.coverImage) || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800",
-    experienceLevel: t.experienceLevel ?? "",
-    experienceYears: t.experienceYears ?? "",
-    location: t.location ?? "",
-    workPreference: t.workPreference ?? "Remote",
-    skills: t.skills ?? [],
-    bio: t.bio ?? "",
-    highlightMetric: t.highlightMetric ?? "",
-    rate: t.rate ?? "",
-    availability: t.availability ?? "Available immediately",
-    preferredContactMethod: t.preferredContactMethod ?? "email",
-    email: t.email ?? "",
-    whatsapp: t.whatsapp ?? "",
-    portfolioUrl: t.portfolioUrl ?? "",
-    githubUrl: t.githubUrl ?? "",
-    linkedinUrl: t.linkedinUrl ?? "",
-    publishedAt: t.publishedAt ?? new Date().toISOString(),
+    name: t.name ?? fallbackStatic?.name ?? "",
+    title: t.title ?? fallbackStatic?.title ?? "",
+    category: t.category ?? fallbackStatic?.category ?? "Engineering",
+    avatar: urlForImage(t.avatar) || fallbackStatic?.avatar || "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=300",
+    coverImage: urlForImage(t.coverImage) || fallbackStatic?.coverImage || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800",
+    experienceLevel: t.experienceLevel ?? fallbackStatic?.experienceLevel ?? "",
+    experienceYears: t.experienceYears ?? fallbackStatic?.experienceYears ?? "",
+    location: t.location ?? fallbackStatic?.location ?? "",
+    workPreference: t.workPreference ?? fallbackStatic?.workPreference ?? "Remote",
+    skills: finalSkills,
+    bio: t.bio ?? fallbackStatic?.bio ?? "",
+    highlightMetric: t.highlightMetric ?? fallbackStatic?.highlightMetric ?? "",
+    rate: t.rate ?? fallbackStatic?.rate ?? "",
+    availability: t.availability ?? fallbackStatic?.availability ?? "Available immediately",
+    preferredContactMethod: t.preferredContactMethod ?? fallbackStatic?.preferredContactMethod ?? "email",
+    email: t.email ?? fallbackStatic?.email ?? "",
+    whatsapp: t.whatsapp ?? fallbackStatic?.whatsapp ?? "",
+    portfolioUrl: t.portfolioUrl ?? fallbackStatic?.portfolioUrl ?? "",
+    githubUrl: t.githubUrl ?? fallbackStatic?.githubUrl ?? "",
+    linkedinUrl: t.linkedinUrl ?? fallbackStatic?.linkedinUrl ?? "",
+    publishedAt: t.publishedAt ?? fallbackStatic?.publishedAt ?? new Date().toISOString(),
   };
 }
 
@@ -99,37 +117,13 @@ export default async function TalentDetailPage({ params }: { params: Promise<{ i
     rawTalent = all?.find((t: any) => t._id === id || t.slug === id) ?? null;
   }
 
-  const staticTalent = !rawTalent ? findStaticTalent(id) : null;
+  const staticTalent = findStaticTalent(id);
 
   if (!rawTalent && !staticTalent) notFound();
 
   const talent = rawTalent
-    ? mapTalent(rawTalent)!
-    : {
-        id: staticTalent!.id,
-        slug: staticTalent!.slug,
-        name: staticTalent!.name,
-        title: staticTalent!.title,
-        category: staticTalent!.category,
-        avatar: staticTalent!.avatar,
-        coverImage: staticTalent!.coverImage || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800",
-        experienceLevel: staticTalent!.experienceLevel,
-        experienceYears: staticTalent!.experienceYears,
-        location: staticTalent!.location,
-        workPreference: staticTalent!.workPreference,
-        skills: staticTalent!.skills,
-        bio: staticTalent!.bio,
-        highlightMetric: staticTalent!.highlightMetric || "",
-        rate: staticTalent!.rate || "",
-        availability: staticTalent!.availability,
-        preferredContactMethod: staticTalent!.preferredContactMethod,
-        email: staticTalent!.email || "",
-        whatsapp: staticTalent!.whatsapp || "",
-        portfolioUrl: staticTalent!.portfolioUrl || "",
-        githubUrl: staticTalent!.githubUrl || "",
-        linkedinUrl: staticTalent!.linkedinUrl || "",
-        publishedAt: staticTalent!.publishedAt,
-      };
+    ? mapTalent(rawTalent, staticTalent)!
+    : staticTalent!;
 
   // Similar talent in same category
   let similar: any[] = [];

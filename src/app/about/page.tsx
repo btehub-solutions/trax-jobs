@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/navbar";
@@ -15,18 +16,23 @@ const TABS: { id: AboutTab; label: string }[] = [
   { id: "contact", label: "Contact" },
 ];
 
-export default function AboutPage() {
-  const [activeTab, setActiveTab] = useState<AboutTab>("about");
-  const [topicParam, setTopicParam] = useState<string | null>(null);
+function AboutPageContent() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const tabParam = searchParams.get("tab");
+  const topicParam = searchParams.get("topic");
+
+  const activeTab: AboutTab = tabParam === "contact" ? "contact" : "about";
   const [isExpanded, setIsExpanded] = useState(false);
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const tab = params.get("tab") as AboutTab | null;
-    const topic = params.get("topic");
-    if (tab === "contact") setActiveTab("contact");
-    if (topic) setTopicParam(topic);
-  }, []);
+  const handleTabClick = (tabId: AboutTab) => {
+    if (tabId === "contact") {
+      router.push("/about?tab=contact", { scroll: false });
+    } else {
+      router.push("/about", { scroll: false });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white flex flex-col justify-between">
@@ -43,7 +49,7 @@ export default function AboutPage() {
                 return (
                   <button
                     key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
+                    onClick={() => handleTabClick(tab.id)}
                     className={`py-4 text-[14.5px] font-medium transition-all relative whitespace-nowrap cursor-pointer ${
                       isActive
                         ? "text-[#E7040D] font-semibold"
@@ -211,15 +217,25 @@ export default function AboutPage() {
                       Looking to hire?
                     </span>
                     <h3 className="text-2xl sm:text-3xl lg:text-[32px] font-black tracking-[-0.02em] leading-[1.2] text-white group-hover:text-[#1F1F1F] transition-colors">
-                      We help you find and engage the right people faster.
+                      <span className="sm:hidden">We help you find the right talent faster.</span>
+                      <span className="hidden sm:inline">We help you find and engage the right people faster.</span>
                     </h3>
                   </div>
 
                   <p className="text-[14.5px] sm:text-[15.5px] text-white/95 group-hover:text-zinc-800 leading-[1.7] transition-colors font-normal">
-                    Our secret sauce: Shining a light on what already makes your company great with editorial vetting, authentic employer brand stories, and expert guidance, not to mention getting direct reach to vetted African tech talent across Trax Media. Win-win?
+                    <span className="sm:hidden">
+                      Spotlight what makes your company great with editorial vetting, authentic brand stories, and direct reach to vetted African tech talent across Trax Media. Fast, verified, and high-conviction.
+                    </span>
+                    <span className="hidden sm:inline">
+                      Our secret sauce: Shining a light on what already makes your company great with editorial vetting, authentic employer brand stories, and expert guidance, not to mention getting direct reach to vetted African tech talent across Trax Media. Win-win?
+                    </span>
                   </p>
 
-                  <p className="text-[11px] sm:text-[11.5px] text-white/80 group-hover:text-zinc-500 leading-relaxed transition-colors pt-4">
+                  <p className="text-[14px] sm:text-[15px] font-bold text-white group-hover:text-[#1F1F1F] transition-colors pt-2">
+                    High-signal hiring. Verified African tech talent.
+                  </p>
+
+                  <p className="hidden sm:block text-[11px] sm:text-[11.5px] text-white/80 group-hover:text-zinc-500 leading-relaxed transition-colors pt-4">
                     *Every single job and company listing is reviewed and published by Trax editors before publication to guarantee high signal quality.
                   </p>
                 </div>
@@ -271,7 +287,7 @@ export default function AboutPage() {
         </section>
 
         {/* 6. Our Core Values Section */}
-        <section className="w-full bg-white py-20 sm:py-28 border-b border-zinc-200">
+        <section id="editorial-standards" className="w-full bg-white py-20 sm:py-28 border-b border-zinc-200">
           <div className="max-w-[1240px] mx-auto px-6 sm:px-10 lg:px-16">
             
             {/* Section Header */}
@@ -538,5 +554,13 @@ export default function AboutPage() {
   {/* Footer */}
   <Footer />
 </div>
+  );
+}
+
+export default function AboutPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white" />}>
+      <AboutPageContent />
+    </Suspense>
   );
 }

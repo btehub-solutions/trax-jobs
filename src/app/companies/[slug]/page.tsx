@@ -37,7 +37,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     raw?.description ||
     staticCompany?.bio ||
     `Explore open roles, engineering culture, and team details at ${name} on Trax Jobs.`;
-  const logoUrl = raw ? urlForImage(raw.logo) : staticCompany?.logo;
+  const rawLogo = raw ? urlForImage(raw.logo) : staticCompany?.logo;
+  const ogImageUrl = rawLogo || "/opengraph-image";
 
   return {
     title,
@@ -46,13 +47,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title,
       description,
       type: "website",
-      images: logoUrl ? [{ url: logoUrl, alt: name }] : undefined,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${name} Careers & Tech Culture`,
+          type: "image/png",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: logoUrl ? [logoUrl] : undefined,
+      images: [ogImageUrl],
     },
   };
 }

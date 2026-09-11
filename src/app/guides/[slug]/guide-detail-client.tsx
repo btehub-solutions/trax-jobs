@@ -31,7 +31,7 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
     }
   }, []);
 
-  const currentUrl = shareUrl || `https://trax.ng/guides/${article.slug}`;
+  const currentUrl = shareUrl || `https://jobs.trax.ng/guides/${article.slug}`;
   const encodedUrl = encodeURIComponent(currentUrl);
   const encodedTitle = encodeURIComponent(article.title);
   const whatsappShareText = encodeURIComponent(`${article.title}\n\n${currentUrl}`);
@@ -208,16 +208,16 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
                 <p>
                   Follow Trax Jobs on{" "}
                   <a
-                    href="https://twitter.com"
+                    href="https://x.com/traxmedia"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-zinc-800 font-semibold underline"
                   >
-                    X (Twitter)
+                    X
                   </a>
                   ,{" "}
                   <a
-                    href="https://linkedin.com"
+                    href="https://linkedin.com/company/trax-media"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-zinc-800 font-semibold underline"

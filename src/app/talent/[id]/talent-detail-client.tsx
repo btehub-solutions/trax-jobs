@@ -27,7 +27,6 @@ import {
   House,
 } from "@phosphor-icons/react";
 import { AppHeader } from "@/components/navigation/app-header";
-import { Footer } from "@/components/footer";
 
 const TALENT_GALLERY_SETS = [
   [
@@ -197,7 +196,7 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
       </div>
 
       <main className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-8 lg:px-12 py-4 pb-24 sm:pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start lg:items-stretch">
 
           {/* Left Column */}
           <div className="lg:col-span-8 space-y-8">
@@ -371,7 +370,7 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
           </div>
 
           {/* Right Sidebar */}
-          <div className="lg:col-span-4 space-y-6">
+          <div className="lg:col-span-4 space-y-6 lg:self-stretch">
 
             <div className="grid grid-cols-2 gap-1.5 bg-white p-2 border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
               {gallery.map((photoUrl, idx) => (
@@ -381,23 +380,24 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
               ))}
             </div>
 
-            <div className="bg-[#161616] text-white p-6 sm:p-7 shadow-[0_2px_12px_rgba(0,0,0,0.02)] border border-zinc-800">
+            <div className="bg-[#0C1222] text-white p-6 sm:p-7 shadow-[0_2px_12px_rgba(0,0,0,0.02)] border border-[#0C1222]">
               <h3 className="text-xl font-black tracking-tight mb-2 text-white">Hire {talent.name}</h3>
-              <p className="text-[13.5px] font-medium text-zinc-300 leading-relaxed mb-6">Connect directly with this vetted professional for full-time or contract roles with zero platform fees.</p>
+              <p className="text-[13.5px] font-medium text-white/70 leading-relaxed mb-6">Connect directly with this vetted professional for full-time or contract roles with zero platform fees.</p>
               <div className="flex flex-col sm:flex-row items-center gap-3">
                 <a href={hireUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13px] font-bold transition-all text-center cursor-pointer">
                   {talent.preferredContactMethod === "whatsapp" ? <WhatsappLogo size={16} weight="bold" /> : <EnvelopeSimple size={16} weight="bold" />}
                   <span>Hire Talent</span>
                 </a>
                 {talent.portfolioUrl && (
-                  <a href={talent.portfolioUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-3 border border-zinc-600 hover:border-white hover:bg-white hover:text-[#161616] text-zinc-200 text-[13px] font-bold transition-all text-center cursor-pointer">
+                  <a href={talent.portfolioUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-3 border border-white/20 hover:border-white hover:bg-white hover:text-[#0C1222] text-white text-[13px] font-bold transition-all text-center cursor-pointer">
                     Portfolio
                   </a>
                 )}
               </div>
             </div>
 
-            <div className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 space-y-6">
+            {/* About the professional (Sticky on desktop once reached during scroll) */}
+            <div className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 space-y-6 lg:sticky lg:top-[76px]">
               <div className="flex items-center gap-2">
                 <span className="w-4 h-1 bg-[#E7040D] inline-block" />
                 <h3 className="text-xl font-black text-[#1F1F1F] tracking-tight">About the professional</h3>
@@ -491,8 +491,6 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

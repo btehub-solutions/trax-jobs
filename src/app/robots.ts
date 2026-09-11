@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://trax.ng";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://jobs.trax.ng";
 
   return {
     rules: [

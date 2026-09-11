@@ -188,8 +188,8 @@ export function JobsFilterSidebar({
 
         {/* Scrollable Middle Body Area */}
         <div className="flex-1 overflow-y-auto py-3 pr-1.5 space-y-5 custom-scrollbar">
-          {/* 1. "Your Preferences" Dark Container */}
-          <div className="bg-[#0C1222] rounded-none p-4 space-y-2.5 text-white">
+          {/* 1. "Your Preferences" Container: Matches Footer Navy Theme */}
+          <div className="bg-[#0C1222] border border-[#0C1222] rounded-none p-4 space-y-2.5 shadow-xs">
             <div className="flex items-center justify-between">
               <h3 className="text-[13.5px] font-bold text-white tracking-tight">
                 Active preferences
@@ -198,7 +198,7 @@ export function JobsFilterSidebar({
                 <button
                   type="button"
                   onClick={handleResetAll}
-                  className="text-[11px] font-bold text-zinc-400 hover:text-white transition-colors cursor-pointer"
+                  className="text-[11px] font-bold text-[#FF4D55] hover:text-white hover:underline transition-colors cursor-pointer"
                 >
                   Clear all
                 </button>
@@ -210,15 +210,15 @@ export function JobsFilterSidebar({
               <div className="flex flex-wrap items-center gap-1.5 pt-1">
                 {/* Search Term Chip */}
                 {filters.search && (
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
-                    <Briefcase size={12} weight="bold" className="text-zinc-600 shrink-0" />
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                    <Briefcase size={12} weight="bold" className="text-[#E7040D] shrink-0" />
                     <span className="truncate max-w-[120px]">{filters.search}</span>
                     <button
                       onClick={() => {
                         setJobTitleInput("");
                         onChange({ ...filters, search: "" });
                       }}
-                      className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer"
+                      className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
                       aria-label="Remove search filter"
                     >
                       <X size={11} weight="bold" />
@@ -230,12 +230,12 @@ export function JobsFilterSidebar({
                 {filters.roles.map((r) => (
                   <div
                     key={r}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs"
                   >
                     <span>{r}</span>
                     <button
                       onClick={() => toggleRoleCategory(r)}
-                      className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer"
+                      className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
                       aria-label={`Remove ${r} filter`}
                     >
                       <X size={11} weight="bold" />
@@ -247,12 +247,12 @@ export function JobsFilterSidebar({
                 {filters.experienceLevels.map((exp) => (
                   <div
                     key={exp}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs"
                   >
                     <span>{exp.split(".")[0]}</span>
                     <button
                       onClick={() => toggleExperience(exp)}
-                      className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer"
+                      className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
                       aria-label={`Remove ${exp} filter`}
                     >
                       <X size={11} weight="bold" />
@@ -264,13 +264,13 @@ export function JobsFilterSidebar({
                 {filters.workplaceTypes.map((wp) => (
                   <div
                     key={wp}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs"
                   >
-                    <House size={12} weight="bold" className="text-zinc-600 shrink-0" />
+                    <House size={12} weight="bold" className="text-[#E7040D] shrink-0" />
                     <span>{wp}</span>
                     <button
                       onClick={() => toggleWorkplace(wp)}
-                      className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer"
+                      className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
                       aria-label={`Remove ${wp} filter`}
                     >
                       <X size={11} weight="bold" />
@@ -282,9 +282,9 @@ export function JobsFilterSidebar({
                 {filters.locations.map((loc) => (
                   <div
                     key={loc}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs"
                   >
-                    <MapPin size={12} weight="bold" className="text-zinc-600 shrink-0" />
+                    <MapPin size={12} weight="bold" className="text-[#E7040D] shrink-0" />
                     <span className="truncate max-w-[120px]">{loc}</span>
                     <button
                       onClick={() => {
@@ -292,7 +292,7 @@ export function JobsFilterSidebar({
                         setLocationInput("");
                         onChange({ ...filters, locations });
                       }}
-                      className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer"
+                      className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
                       aria-label={`Remove ${loc} filter`}
                     >
                       <X size={11} weight="bold" />
@@ -304,13 +304,13 @@ export function JobsFilterSidebar({
                 {filters.contractTypes.map((ct) => (
                   <div
                     key={ct}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs"
                   >
-                    <Cardholder size={12} weight="bold" className="text-zinc-600 shrink-0" />
+                    <Cardholder size={12} weight="bold" className="text-[#E7040D] shrink-0" />
                     <span>{ct}</span>
                     <button
                       onClick={() => toggleContract(ct)}
-                      className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer"
+                      className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
                       aria-label={`Remove ${ct} filter`}
                     >
                       <X size={11} weight="bold" />
@@ -319,7 +319,7 @@ export function JobsFilterSidebar({
                 ))}
               </div>
             ) : (
-              <p className="text-[12px] text-zinc-400 leading-relaxed py-1">
+              <p className="text-[12px] text-white/70 leading-relaxed py-1">
                 No filters applied. Select from the criteria below to filter open roles.
               </p>
             )}
@@ -361,7 +361,7 @@ export function JobsFilterSidebar({
                     <button
                       type="button"
                       onClick={handleApplyInputs}
-                      className="h-9 px-3 bg-[#1F1F1F] hover:bg-[#E7040D] text-white text-[12px] font-bold transition-all cursor-pointer"
+                      className="h-9 px-3.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[12px] font-bold transition-all cursor-pointer shadow-2xs"
                     >
                       Apply
                     </button>
@@ -500,7 +500,7 @@ export function JobsFilterSidebar({
                     <button
                       type="button"
                       onClick={handleApplyInputs}
-                      className="h-9 px-3 bg-[#1F1F1F] hover:bg-[#E7040D] text-white text-[12px] font-bold transition-all cursor-pointer"
+                      className="h-9 px-3.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[12px] font-bold transition-all cursor-pointer shadow-2xs"
                     >
                       Apply
                     </button>

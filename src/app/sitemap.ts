@@ -10,7 +10,7 @@ import { GUIDES_DATA } from "@/data/guides";
 import { COURSES_DATA } from "@/data/courses";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://trax.ng";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://jobs.trax.ng";
   const now = new Date();
 
   // 1. Static Core Routes

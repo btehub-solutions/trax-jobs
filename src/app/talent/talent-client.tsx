@@ -284,23 +284,66 @@ export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
             )}
           </div>
 
-          <div className="flex items-center divide-x divide-zinc-200/80 overflow-x-auto no-scrollbar max-w-full border-b md:border-b-0 shrink-0">
+          <div className="grid grid-cols-3 md:flex md:items-center divide-x divide-zinc-200/80 border-b md:border-b-0 shrink-0">
             {[
               { key: "discipline", label: "Discipline", value: selectedDiscipline, set: setSelectedDiscipline, options: DISCIPLINES, allValue: "All Disciplines" },
               { key: "experience", label: "Experience", value: selectedExperience, set: setSelectedExperience, options: EXPERIENCES, allValue: "All Experience" },
               { key: "availability", label: "Availability", value: selectedAvailability, set: setSelectedAvailability, options: AVAILABILITIES, allValue: "All Availability" },
-            ].map(({ key, label, value, set, options, allValue }) => (
+            ].map(({ key, label, value, set, options, allValue }, idx) => (
               <div key={key} className="relative shrink-0">
-                <button type="button" onClick={() => setOpenDropdown(openDropdown === key as any ? null : key as any)} className={`px-4 py-3 flex items-center gap-2 text-[13px] font-semibold transition-colors cursor-pointer select-none whitespace-nowrap ${value ? "text-[#E7040D] font-bold bg-red-50/50" : "text-zinc-700 hover:text-zinc-950"}`}>
-                  <span className="max-w-[120px] truncate">{value || label}</span>
-                  <CaretDown size={13} weight="bold" className="text-zinc-400 shrink-0" />
+                <button
+                  type="button"
+                  onClick={() => setOpenDropdown(openDropdown === (key as any) ? null : (key as any))}
+                  className={`w-full h-full px-3 sm:px-4 py-3 flex items-center justify-between md:justify-start gap-2 text-[12.5px] sm:text-[13px] font-semibold transition-colors cursor-pointer select-none whitespace-nowrap ${
+                    value ? "text-[#E7040D] font-bold bg-red-50/50" : "text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50"
+                  }`}
+                >
+                  <span className="max-w-[85px] sm:max-w-[120px] truncate">{value || label}</span>
+                  {value ? (
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        set("");
+                      }}
+                      className="text-zinc-400 hover:text-[#E7040D] p-0.5 cursor-pointer transition-colors"
+                      aria-label={`Clear ${label}`}
+                    >
+                      <X size={12} weight="bold" />
+                    </span>
+                  ) : (
+                    <CaretDown
+                      size={13}
+                      weight="bold"
+                      className={`text-zinc-400 shrink-0 transition-transform ${
+                        openDropdown === key ? "rotate-180 text-zinc-900" : ""
+                      }`}
+                    />
+                  )}
                 </button>
                 {openDropdown === key && (
-                  <div className="absolute top-full left-0 sm:left-0 right-auto mt-1 w-60 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 shadow-xl py-1 z-50">
+                  <div
+                    className={`absolute top-full mt-1 w-56 sm:w-60 bg-white border border-zinc-200/90 shadow-2xl py-1 z-50 animate-in fade-in zoom-in-95 duration-100 ${
+                      idx === 2
+                        ? "right-0 left-auto"
+                        : idx === 1
+                        ? "left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0"
+                        : "left-0"
+                    }`}
+                  >
                     {options.map((opt) => (
-                      <button key={opt} onClick={() => { set(opt === allValue ? "" : opt); setOpenDropdown(null); }} className="w-full text-left px-4 py-2 text-[13px] font-medium text-zinc-700 hover:bg-zinc-50 hover:text-black flex items-center justify-between cursor-pointer">
+                      <button
+                        key={opt}
+                        type="button"
+                        onClick={() => {
+                          set(opt === allValue ? "" : opt);
+                          setOpenDropdown(null);
+                        }}
+                        className="w-full text-left px-4 py-2.5 text-[13px] font-medium text-zinc-700 hover:bg-zinc-50 hover:text-black flex items-center justify-between cursor-pointer"
+                      >
                         <span>{opt}</span>
-                        {(value === opt || (!value && opt === allValue)) && <Check size={14} weight="bold" className="text-[#E7040D]" />}
+                        {(value === opt || (!value && opt === allValue)) && (
+                          <Check size={14} weight="bold" className="text-[#E7040D]" />
+                        )}
                       </button>
                     ))}
                   </div>

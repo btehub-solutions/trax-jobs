@@ -5,8 +5,10 @@ import Link from "next/link";
 import {
   XLogo,
   LinkedinLogo,
+  FacebookLogo,
   InstagramLogo,
   YoutubeLogo,
+  WhatsappLogo,
 } from "@phosphor-icons/react";
 
 interface FooterLinkItem {
@@ -46,7 +48,7 @@ const footerLinks: FooterSection[] = [
     links: [
       { name: "About Trax Jobs", href: "/about" },
       { name: "Contact us", href: "/about?tab=contact" },
-      { name: "Editorial Standards", href: "/about" },
+      { name: "Editorial Standards", href: "/about#editorial-standards" },
       { name: "Trax News (trax.ng)", href: "https://trax.ng", isExternal: true },
     ],
   },
@@ -103,6 +105,15 @@ export function Footer() {
                   <LinkedinLogo size={18} weight="fill" />
                 </a>
                 <a
+                  href="https://www.facebook.com/share/16KthtYMDY/?mibextid=wwXIfr"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-white transition-colors"
+                  aria-label="Trax on Facebook"
+                >
+                  <FacebookLogo size={18} weight="fill" />
+                </a>
+                <a
                   href="https://instagram.com/traxmedia"
                   target="_blank"
                   rel="noreferrer"
@@ -119,6 +130,15 @@ export function Footer() {
                   aria-label="Trax on YouTube"
                 >
                   <YoutubeLogo size={18} weight="fill" />
+                </a>
+                <a
+                  href="https://wa.me/2348000008729?text=Hello%20Trax%20Jobs%20Desk"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-white transition-colors"
+                  aria-label="Chat with Trax on WhatsApp"
+                >
+                  <WhatsappLogo size={18} weight="fill" />
                 </a>
               </div>
 

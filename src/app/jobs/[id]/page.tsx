@@ -41,7 +41,9 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     rawJob?.summary ||
     staticJob?.summary ||
     `Apply for ${rawJob?.title || staticJob?.title} in ${rawJob?.location || staticJob?.location}. Verified tech opportunity on Trax Jobs.`;
-  const companyLogo = rawJob ? urlForImage(rawJob.company?.logo) : null;
+  const companyName = rawJob?.company?.name || staticJob?.company?.name || "Verified Company";
+  const rawLogo = rawJob ? urlForImage(rawJob.company?.logo) : (staticJob?.company as any)?.logo;
+  const ogImageUrl = rawLogo || "/opengraph-image";
 
   return {
     title,
@@ -50,13 +52,21 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       title,
       description,
       type: "article",
-      images: companyLogo ? [{ url: companyLogo, alt: rawJob?.company?.name }] : undefined,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${title} - ${companyName}`,
+          type: "image/png",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: companyLogo ? [companyLogo] : undefined,
+      images: [ogImageUrl],
     },
   };
 }

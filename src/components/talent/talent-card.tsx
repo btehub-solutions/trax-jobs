@@ -175,7 +175,8 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
                 <GithubLogo size={16} weight="bold" />
               </a>
             )}
-            {talent.linkedinUrl && (
+            {talent.linkedinUrl &&
+              !["https://linkedin.com", "https://www.linkedin.com", "https://linkedin.com/", "https://www.linkedin.com/"].includes(talent.linkedinUrl.trim()) && (
               <a
                 href={talent.linkedinUrl}
                 target="_blank"

@@ -36,6 +36,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const description = course.summary || course.description || "Master high-demand tech skills through practical courses curated by African engineering leaders.";
   const banner = course.bannerImage || course.image;
 
+  const ogImageUrl = banner || "/opengraph-image";
+
   return {
     title,
     description,
@@ -43,13 +45,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       type: "website",
-      images: banner ? [{ url: banner, alt: course.title }] : undefined,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: course.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: banner ? [banner] : undefined,
+      images: [ogImageUrl],
     },
   };
 }

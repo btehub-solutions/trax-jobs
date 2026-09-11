@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://trax.ng";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://jobs.trax.ng";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -46,10 +46,11 @@ export const metadata: Metadata = {
       "Curated tech opportunities and elite talent from Ogun State and across Africa. Verified listings, direct hiring, and transparent compensation.",
     images: [
       {
-        url: "/images/trax-logo.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Trax Jobs",
+        alt: "Trax Jobs: Curated African Tech Opportunities & Verified Talent Network",
+        type: "image/png",
       },
     ],
   },
@@ -59,7 +60,14 @@ export const metadata: Metadata = {
     description:
       "Curated tech opportunities and elite talent from Ogun State and across Africa.",
     creator: "@traxmedia",
-    images: ["/images/trax-logo.png"],
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Trax Jobs: Curated African Tech Opportunities & Verified Talent Network",
+      },
+    ],
   },
   robots: {
     index: true,
