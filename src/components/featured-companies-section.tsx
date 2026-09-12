@@ -20,14 +20,14 @@ import { BrandWordmark, ALL_AFRICAN_BRANDS } from "@/components/brand-wordmark";
 function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   if (logo) {
     return (
-      <div className="w-10 h-10 rounded-xl bg-white border border-zinc-200 flex items-center justify-center shrink-0 shadow-xs overflow-hidden p-1">
+      <div className="w-10 h-10 rounded-[6px] bg-white border border-zinc-200 flex items-center justify-center shrink-0 shadow-xs overflow-hidden p-1">
         <Image src={logo} alt={name} width={36} height={36} className="w-full h-full object-contain" />
       </div>
     );
   }
   if (name === "Paystack") {
     return (
-      <div className="w-10 h-10 rounded-xl bg-[#E8F8FF] border border-[#C7EFFF] flex items-center justify-center shrink-0 shadow-xs">
+      <div className="w-10 h-10 rounded-[6px] bg-[#E8F8FF] border border-[#C7EFFF] flex items-center justify-center shrink-0 shadow-xs">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
           <rect x="3" y="4" width="18" height="3.5" rx="1.75" fill="#0BA4DB" />
           <rect x="3" y="10.25" width="12" height="3.5" rx="1.75" fill="#0BA4DB" />
@@ -38,7 +38,7 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Flutterwave") {
     return (
-      <div className="w-10 h-10 rounded-xl bg-[#FFF3ED] border border-[#FFE0D1] flex items-center justify-center shrink-0 shadow-xs">
+      <div className="w-10 h-10 rounded-[6px] bg-[#FFF3ED] border border-[#FFE0D1] flex items-center justify-center shrink-0 shadow-xs">
         <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
           <path d="M6 16C6 10.477 10.477 6 16 6C19.5 6 22.5 7.8 24.2 10.5L20.8 13.9C19.6 12.4 17.9 11.5 16 11.5C13.515 11.5 11.5 13.515 11.5 16C11.5 18.485 13.515 20.5 16 20.5C17.9 20.5 19.6 19.6 20.8 18.1L24.2 21.5C22.5 24.2 19.5 26 16 26C10.477 26 6 21.523 6 16Z" fill="#F56522" />
           <path d="M16 6C21.523 6 26 10.477 26 16C26 21.523 21.523 26 16 26" stroke="#FFBA00" strokeWidth="3" strokeLinecap="round" />
@@ -48,7 +48,7 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Moniepoint") {
     return (
-      <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] border border-[#D7E2FF] flex items-center justify-center shrink-0 shadow-xs">
+      <div className="w-10 h-10 rounded-[6px] bg-[#EEF2FF] border border-[#D7E2FF] flex items-center justify-center shrink-0 shadow-xs">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
           <path d="M3 6C3 4.89543 3.89543 4 5 4H7.5L12 11.5L16.5 4H19C20.1046 4 21 4.89543 21 6V18C21 19.1046 20.1046 20 19 20H16.5V11.5L12 19L7.5 11.5V20H5C3.89543 20 3 19.1046 3 18V6Z" fill="#0336FF" />
         </svg>
@@ -57,7 +57,7 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Andela") {
     return (
-      <div className="w-10 h-10 rounded-xl bg-[#F0FDF4] border border-[#DCFCE7] flex items-center justify-center shrink-0 shadow-xs">
+      <div className="w-10 h-10 rounded-[6px] bg-[#F0FDF4] border border-[#DCFCE7] flex items-center justify-center shrink-0 shadow-xs">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
           <circle cx="12" cy="12" r="9" stroke="#16A34A" strokeWidth="2.5" />
           <path d="M12 6.5L17 16.5H7L12 6.5Z" fill="#16A34A" />
@@ -67,7 +67,7 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Kuda Bank") {
     return (
-      <div className="w-10 h-10 rounded-xl bg-[#F5F3FF] border border-[#E9E4FF] flex items-center justify-center shrink-0 shadow-xs">
+      <div className="w-10 h-10 rounded-[6px] bg-[#F5F3FF] border border-[#E9E4FF] flex items-center justify-center shrink-0 shadow-xs">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
           <rect width="24" height="24" rx="6" fill="#40196D" />
           <path d="M7 6V18M7 12L15 6M9.5 10L16.5 18" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -77,7 +77,7 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Interswitch") {
     return (
-      <div className="w-10 h-10 rounded-xl bg-[#FEF2F2] border border-[#FEE2E2] flex items-center justify-center shrink-0 shadow-xs">
+      <div className="w-10 h-10 rounded-[6px] bg-[#FEF2F2] border border-[#FEE2E2] flex items-center justify-center shrink-0 shadow-xs">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
           <circle cx="12" cy="12" r="9" fill="#DC2626" />
           <circle cx="12" cy="12" r="4.5" fill="white" />
@@ -88,14 +88,14 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Moove") {
     return (
-      <div className="w-10 h-10 rounded-xl bg-[#F0FDF4] border border-[#DCFCE7] flex items-center justify-center shrink-0 shadow-xs font-black text-[#16A34A] text-[16px]">
+      <div className="w-10 h-10 rounded-[6px] bg-[#F0FDF4] border border-[#DCFCE7] flex items-center justify-center shrink-0 shadow-xs font-black text-[#16A34A] text-[16px]">
         M
       </div>
     );
   }
   if (name === "Cowrywise") {
     return (
-      <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center shrink-0 shadow-xs font-black text-[#2563EB] text-[16px]">
+      <div className="w-10 h-10 rounded-[6px] bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center shrink-0 shadow-xs font-black text-[#2563EB] text-[16px]">
         C
       </div>
     );
@@ -331,30 +331,30 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
           {filteredCompanies.map((company) => (
             <div
               key={company.name}
-              className="w-[280px] xs:w-[320px] sm:w-[255px] shrink-0 bg-white rounded-none border border-zinc-200/80 shadow-[0_8px_24px_-4px_rgba(15,16,18,0.05)] hover:shadow-[0_16px_32px_-6px_rgba(231,4,13,0.1)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start"
+              className="w-[285px] sm:w-[305px] shrink-0 bg-white rounded-[8px] border border-black/10 shadow-[0_12px_32px_-8px_rgba(15,16,18,0.09)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start"
             >
               {/* Cover Media */}
               <div>
-                <div className="relative h-[145px] w-full bg-zinc-100 overflow-hidden rounded-none">
+                <div className="relative h-[150px] w-full bg-zinc-100 overflow-hidden">
                   <Image
                     src={company.coverImage || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800"}
                     alt={`${company.name} office`}
                     fill
-                    sizes="(max-width: 640px) 320px, 255px"
+                    sizes="(max-width: 640px) 320px, 305px"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
                   
                   {/* Floating Open Roles Pill */}
                   <div className="absolute top-2.5 right-2.5">
-                    <span className="px-2.5 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-zinc-950 font-bold text-[10px] shadow-xs border border-white/60">
+                    <span className="px-2.5 py-0.5 rounded-[4px] bg-white/95 backdrop-blur-xs text-zinc-950 font-bold text-[10px] shadow-xs border border-white/60">
                       {company.openRoles} roles
                     </span>
                   </div>
                 </div>
 
                 {/* Company Details Body */}
-                <div className="p-4">
+                <div className="p-4 sm:p-4.5">
                   {/* Logo + Name */}
                   <div className="flex items-center gap-2.5 mb-3.5">
                     <CompanyVector name={company.name} logo={company.logo} />
@@ -371,25 +371,25 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                   {/* Metadata Badges */}
                   <div className="flex flex-wrap items-center gap-1.5">
                     {company.size && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
                         <Users size={12} weight="bold" className="text-zinc-400" />
                         {company.size}
                       </span>
                     )}
                     {company.location && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
                         <MapPin size={12} weight="bold" className="text-zinc-400" />
                         <span dangerouslySetInnerHTML={{ __html: company.location.split("&bull;")[0] }} />
                       </span>
                     )}
                     {company.industry && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
                         <Tag size={12} weight="bold" className="text-zinc-400" />
                         {company.industry}
                       </span>
                     )}
                     {company.subIndustry && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
                         {company.subIndustry}
                       </span>
                     )}
@@ -398,10 +398,10 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
               </div>
 
               {/* Card Footer Button */}
-              <div className="p-4 pt-0">
+              <div className="p-4 sm:p-4.5 pt-0">
                 <Link
                   href={`/companies/${company.slug}`}
-                  className="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-white hover:bg-[#E7040D] active:scale-95 select-none text-zinc-800 hover:text-white text-[12px] font-semibold transition-all duration-150 border border-zinc-200/90 hover:border-[#E7040D] shadow-2xs"
+                  className="w-full inline-flex items-center justify-center px-4 py-2 rounded-[6px] bg-white hover:bg-[#E7040D] active:scale-95 select-none text-zinc-800 hover:text-white text-[12.5px] font-bold transition-all duration-150 border border-zinc-200/90 hover:border-[#E7040D] shadow-2xs text-center"
                 >
                   Explore
                 </Link>
@@ -416,7 +416,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
             Are you{" "}
             <Link
               href="/about?tab=contact&topic=hiring"
-              className="font-bold underline decoration-[#FBBF24] decoration-[2.5px] underline-offset-4 cursor-pointer hover:text-[#E7040D] transition-colors"
+              className="font-bold underline decoration-[#E7040D] decoration-[2.5px] underline-offset-4 cursor-pointer hover:text-[#E7040D] transition-colors"
             >
               hiring?
             </Link>{" "}

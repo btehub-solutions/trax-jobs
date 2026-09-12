@@ -199,7 +199,7 @@ function CompanySquareMark({
   const n = name.toLowerCase();
   if (n.includes("paystack")) {
     return (
-      <div className="w-16 h-16 rounded-none bg-white border border-zinc-200/90 shadow-xs flex items-center justify-center p-3">
+      <div className="w-16 h-16 rounded-[6px] bg-white border border-zinc-200/90 shadow-xs flex items-center justify-center p-3">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full text-[#00C3F8]">
           <path d="M15 22h70v16H15zM15 44h45v16H15zM15 66h70v15H15z" fill="currentColor" />
         </svg>
@@ -208,7 +208,7 @@ function CompanySquareMark({
   }
   if (n.includes("flutterwave")) {
     return (
-      <div className="w-16 h-16 rounded-none bg-white border border-zinc-200/90 shadow-xs flex items-center justify-center p-3">
+      <div className="w-16 h-16 rounded-[6px] bg-white border border-zinc-200/90 shadow-xs flex items-center justify-center p-3">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M20 50c0-16.569 13.431-30 30-30s30 13.431 30 30" stroke="#FB4E2D" strokeWidth="12" strokeLinecap="round" />
           <path d="M32 50c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="#FF9B00" strokeWidth="10" strokeLinecap="round" />
@@ -218,7 +218,7 @@ function CompanySquareMark({
   }
   if (n.includes("moniepoint")) {
     return (
-      <div className="w-16 h-16 rounded-none bg-[#0355D4] border border-zinc-200/90 shadow-xs flex items-center justify-center p-3 text-white">
+      <div className="w-16 h-16 rounded-[6px] bg-[#0355D4] border border-zinc-200/90 shadow-xs flex items-center justify-center p-3 text-white">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M22 22l28 28-28 28V22zM78 22L50 50l28 28V22z" fill="white" />
         </svg>
@@ -227,14 +227,14 @@ function CompanySquareMark({
   }
   if (n.includes("andela")) {
     return (
-      <div className="w-16 h-16 rounded-none bg-white border border-zinc-200/90 shadow-xs flex items-center justify-center p-2">
+      <div className="w-16 h-16 rounded-[6px] bg-white border border-zinc-200/90 shadow-xs flex items-center justify-center p-2">
         <span className="text-[#3359DF] font-black text-2xl tracking-tighter">A</span>
       </div>
     );
   }
   if (n.includes("kuda")) {
     return (
-      <div className="w-16 h-16 rounded-none bg-[#40196D] border border-zinc-200/90 shadow-xs flex items-center justify-center p-2">
+      <div className="w-16 h-16 rounded-[6px] bg-[#40196D] border border-zinc-200/90 shadow-xs flex items-center justify-center p-2">
         <span className="text-white font-black text-sm tracking-tight">kuda.</span>
       </div>
     );
@@ -243,7 +243,7 @@ function CompanySquareMark({
   // Generic fallback using accentColor from Sanity
   return (
     <div
-      className="w-16 h-16 rounded-none border border-zinc-200/90 shadow-xs flex items-center justify-center text-white font-bold text-base"
+      className="w-16 h-16 rounded-[6px] border border-zinc-200/90 shadow-xs flex items-center justify-center text-white font-bold text-base"
       style={{ backgroundColor: accentColor || "#1F1F1F" }}
     >
       {name.slice(0, 2).toUpperCase()}
@@ -598,7 +598,7 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
               return (
                 <div
                   key={comp.id}
-                  className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_14px_32px_-6px_rgba(15,16,18,0.08)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+                  className="bg-white rounded-[8px] border border-black/10 shadow-[0_12px_32px_-8px_rgba(15,16,18,0.09)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.12)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
                 >
                   {/* Cover Banner */}
                   <Link href={`/companies/${comp.slug}`} className="block relative h-32 w-full bg-[#E5E7EB] overflow-hidden">
@@ -651,7 +651,7 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                       <button
                         type="button"
                         onClick={() => toggleFollow(comp.id)}
-                        className={`w-full py-2 rounded-none text-[12.5px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${
+                        className={`w-full py-2.5 rounded-[6px] text-[12.5px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${
                           isFollowed
                             ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D] shadow-2xs"
                             : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F] shadow-2xs hover:border-zinc-300"

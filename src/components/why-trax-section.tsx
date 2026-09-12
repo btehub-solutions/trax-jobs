@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -18,6 +18,8 @@ import {
   MapPin,
   Link as LinkIcon,
   SealCheck,
+  CaretLeft,
+  CaretRight,
 } from "@phosphor-icons/react";
 
 /* ─────────────────────────────────────────────────────────────
@@ -26,8 +28,8 @@ import {
 function BrandLogo({ name }: { name: "Paystack" | "Flutterwave" | "Moniepoint" }) {
   if (name === "Paystack") {
     return (
-      <div className="w-7 h-7 rounded-lg bg-[#E8F8FF] border border-[#C7EFFF] flex items-center justify-center shrink-0 shadow-2xs">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+      <div className="w-6 h-6 rounded-md bg-[#E8F8FF] border border-[#C7EFFF] flex items-center justify-center shrink-0 shadow-2xs">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
           <rect x="3" y="4" width="18" height="3" rx="1.5" fill="#0BA4DB" />
           <rect x="3" y="10.5" width="12" height="3" rx="1.5" fill="#0BA4DB" />
           <rect x="3" y="17" width="18" height="3" rx="1.5" fill="#0BA4DB" />
@@ -37,8 +39,8 @@ function BrandLogo({ name }: { name: "Paystack" | "Flutterwave" | "Moniepoint" }
   }
   if (name === "Flutterwave") {
     return (
-      <div className="w-7 h-7 rounded-lg bg-[#FFF3ED] border border-[#FFE0D1] flex items-center justify-center shrink-0 shadow-2xs">
-        <svg width="16" height="16" viewBox="0 0 32 32" fill="none">
+      <div className="w-6 h-6 rounded-md bg-[#FFF3ED] border border-[#FFE0D1] flex items-center justify-center shrink-0 shadow-2xs">
+        <svg width="14" height="14" viewBox="0 0 32 32" fill="none">
           <path
             d="M6 16C6 10.477 10.477 6 16 6C19.5 6 22.5 7.8 24.2 10.5L20.8 13.9C19.6 12.4 17.9 11.5 16 11.5C13.515 11.5 11.5 13.515 11.5 16C11.5 18.485 13.515 20.5 16 20.5C17.9 20.5 19.6 19.6 20.8 18.1L24.2 21.5C22.5 24.2 19.5 26 16 26C10.477 26 6 21.523 6 16Z"
             fill="#F56522"
@@ -55,8 +57,8 @@ function BrandLogo({ name }: { name: "Paystack" | "Flutterwave" | "Moniepoint" }
   }
   if (name === "Moniepoint") {
     return (
-      <div className="w-7 h-7 rounded-lg bg-[#EEF2FF] border border-[#D7E2FF] flex items-center justify-center shrink-0 shadow-2xs">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+      <div className="w-6 h-6 rounded-md bg-[#EEF2FF] border border-[#D7E2FF] flex items-center justify-center shrink-0 shadow-2xs">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
           <path
             d="M3 6C3 4.89543 3.89543 4 5 4H7.5L12 11.5L16.5 4H19C20.1046 4 21 4.89543 21 6V18C21 19.1046 20.1046 20 19 20H16.5V11.5L12 19L7.5 11.5V20H5C3.89543 20 3 19.1046 3 18V6Z"
             fill="#0336FF"
@@ -70,6 +72,75 @@ function BrandLogo({ name }: { name: "Paystack" | "Flutterwave" | "Moniepoint" }
 
 export function WhyTraxSection() {
   const [savedRole, setSavedRole] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+
+  const totalSlides = 3;
+  const canPrev = currentSlide > 0;
+  const canNext = currentSlide < totalSlides - 1;
+
+  /* Automatic rotation on mobile view */
+  useEffect(() => {
+    if (isHovered) return;
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    }, 5500);
+    return () => clearInterval(timer);
+  }, [isHovered, totalSlides]);
+
+  const handlePrev = () => {
+    if (canPrev) {
+      setCurrentSlide((prev) => prev - 1);
+    } else {
+      setCurrentSlide(totalSlides - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (canNext) {
+      setCurrentSlide((prev) => prev + 1);
+    } else {
+      setCurrentSlide(0);
+    }
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsHovered(true);
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    setIsHovered(false);
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+
+    if (diff > 45) {
+      handleNext();
+    } else if (diff < -45) {
+      handlePrev();
+    }
+    setTouchStartX(null);
+  };
+
+  const mobileSlides = [
+    {
+      id: "curated-roles",
+      ctaText: "Find that job",
+      ctaHref: "/jobs",
+    },
+    {
+      id: "recruiters-to-you",
+      ctaText: "Submit your profile",
+      ctaHref: "/submit-profile",
+    },
+    {
+      id: "company-culture",
+      ctaText: "Explore verified companies",
+      ctaHref: "/companies",
+    },
+  ];
 
   return (
     <section className="w-full bg-[#FAF8F5] py-16 sm:py-24 lg:py-28 relative overflow-hidden">
@@ -97,309 +168,418 @@ export function WhyTraxSection() {
         </div>
 
         {/* ─────────────────────────────────────────────────────────────
-            MOBILE VIEW: Native Horizontal Scroll Carousel (< lg)
+            MOBILE VIEW: Interactive Carousel (< lg breakpoint)
         ───────────────────────────────────────────────────────────── */}
         <div className="block lg:hidden">
-          {/* Native Horizontal Scroll Container with Snapping */}
           <div
-            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-3.5 pb-2 overscroll-x-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden w-full max-w-[420px] mx-auto"
+            className="w-full max-w-[365px] sm:max-w-[380px] mx-auto"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
-            {/* CARD 0: Curated Roles */}
-            <div className="w-full shrink-0 snap-center bg-white rounded-none overflow-hidden shadow-[0_16px_36px_-8px_rgba(15,16,18,0.12)] border border-black/10 select-none">
-              {/* Visual Upper Block (Warm Peach #FCE8DC) */}
-              <div className="p-5 sm:p-6 bg-[#FCE8DC] flex items-center justify-center min-h-[340px] sm:min-h-[360px] relative overflow-hidden">
-                <div className="relative w-full max-w-[340px]">
-                  {/* Ghost card layers with square edges */}
-                  <div className="absolute -top-2 -left-2 w-[97%] h-[95%] bg-white/60 rounded-none -rotate-3 -z-20 border border-white/50 shadow-2xs" />
-                  <div className="absolute top-1.5 -right-2 w-[98%] h-[96%] bg-white/80 rounded-none rotate-2 -z-10 border border-white/70 shadow-xs" />
+            {/* Main Card with Crisp Subtle 8px Corners */}
+            <div className="bg-white rounded-[8px] overflow-hidden shadow-[0_14px_34px_-8px_rgba(15,16,18,0.11)] border border-black/10 select-none transition-all duration-300">
+              {/* Sliding Carousel Track */}
+              <div
+                className="flex transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {/* ══════════════════════════════════════════════════════
+                    SLIDE 0: Looking for the right role?
+                ══════════════════════════════════════════════════════ */}
+                <div className="w-full shrink-0">
+                  {/* Visual Upper Block (Trax Warm Peach Canvas #FCE8DC) */}
+                  <div className="p-4 sm:p-5 bg-[#FCE8DC] flex items-center justify-center min-h-[305px] relative overflow-hidden">
+                    <div className="relative w-full max-w-[305px]">
+                      {/* Ghost card 2 (back-most layer) */}
+                      <div className="absolute -top-2.5 -left-2 w-[98%] h-[96%] bg-white/70 rounded-[8px] -rotate-3 -z-20 border border-white/60 shadow-2xs" />
 
-                  {/* Floating Trax Editorial Badge */}
-                  <div className="absolute -top-3.5 right-1 z-30 bg-[#1F1F1F] text-white text-[10.5px] font-black px-2.5 py-0.5 rounded-none shadow-sm border border-black flex items-center gap-1.5 rotate-2">
-                    <span>New matches</span>
-                    <span className="w-4 h-4 rounded-none bg-[#E7040D] text-white flex items-center justify-center text-[9px] font-black">
-                      6
-                    </span>
-                  </div>
+                      {/* Ghost card 1 (middle layer) */}
+                      <div className="absolute top-1 -right-2 w-[98%] h-[97%] bg-white/85 rounded-[8px] rotate-2 -z-10 border border-white/80 shadow-xs" />
 
-                  {/* Front Main Job Card */}
-                  <div className="relative z-10 w-full bg-white rounded-none p-4 shadow-[0_14px_28px_-6px_rgba(15,16,18,0.14)] border border-black/10 space-y-3">
-                    <div>
-                      <h4 className="text-[16px] font-black text-black tracking-tight leading-tight">
-                        Senior Frontend Engineer
-                      </h4>
-                      <div className="flex items-center gap-2 mt-2">
-                        <BrandLogo name="Paystack" />
+                      {/* Floating Trax Editorial Badge */}
+                      <div className="absolute -top-3.5 right-1 z-30 bg-[#1F1F1F] text-white text-[10.5px] font-black px-2.5 py-0.5 rounded-[4px] shadow-sm border border-black flex items-center gap-1.5 rotate-2">
+                        <span>New matches</span>
+                        <span className="w-3.5 h-3.5 rounded-[3px] bg-[#E7040D] text-white flex items-center justify-center text-[8.5px] font-black">
+                          6
+                        </span>
+                      </div>
+
+                      {/* Front Main Job Card */}
+                      <div className="relative z-10 w-full bg-white rounded-[8px] p-3.5 shadow-[0_10px_24px_-6px_rgba(15,16,18,0.12)] border border-black/10 space-y-2.5">
                         <div>
-                          <p className="text-[12px] font-bold text-zinc-900 leading-tight">Paystack</p>
-                          <p className="text-[10px] text-zinc-500">Payments &bull; Lagos, Nigeria</p>
+                          <h4 className="text-[15px] font-black text-black tracking-tight leading-tight">
+                            Senior Frontend Engineer
+                          </h4>
+                          <div className="flex items-center gap-1.5 mt-1.5">
+                            <BrandLogo name="Paystack" />
+                            <div>
+                              <p className="text-[11.5px] font-bold text-zinc-900 leading-tight">Paystack</p>
+                              <p className="text-[9.5px] text-zinc-500">Payments &bull; Lagos, Nigeria</p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
 
-                    {/* Metadata Pills */}
-                    <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-900 border border-zinc-200/90 text-[10px] font-bold flex items-center gap-1">
-                        <CurrencyCircleDollar size={11} weight="bold" />
-                        <span>₦28M - ₦38M/yr</span>
-                      </span>
-                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
-                        Senior
-                      </span>
-                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold flex items-center gap-0.5">
-                        <MapPin size={11} weight="fill" />
-                        <span>Lagos</span>
-                      </span>
-                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
-                        Hybrid
-                      </span>
-                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
-                        React
-                      </span>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="pt-1 flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setSavedRole(!savedRole)}
-                        className={`flex-1 flex items-center justify-center gap-1 py-2 px-2.5 rounded-none text-[11.5px] font-black transition-all cursor-pointer ${
-                          savedRole
-                            ? "bg-emerald-600 text-white"
-                            : "bg-[#E7040D] hover:bg-[#CB030B] text-white"
-                        }`}
-                      >
-                        <Heart size={13} weight={savedRole ? "fill" : "bold"} />
-                        <span>{savedRole ? "Saved" : "Save role"}</span>
-                      </button>
-                      <Link
-                        href="/jobs"
-                        className="flex-1 flex items-center justify-center gap-1 py-2 px-2.5 rounded-none bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-[11.5px] font-bold border border-zinc-200 text-center"
-                      >
-                        <span>View details</span>
-                        <ArrowRight size={11} weight="bold" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Text Lower Block */}
-              <div className="py-8 px-6 sm:px-7 bg-white border-t border-zinc-100">
-                <h3 className="text-[23px] sm:text-[25px] font-black text-black tracking-tight leading-[1.18] mb-3">
-                  Looking for the{" "}
-                  <span className="inline-block bg-[#FCE8E0] text-[#E7040D] px-2 py-0.5 rounded-none font-black border border-[#F9D5C7]">
-                    right role?
-                  </span>
-                </h3>
-                <p className="text-[13.5px] sm:text-[14px] text-zinc-600 leading-[1.7]">
-                  <strong className="font-bold text-zinc-950">Start matching!</strong> Tell us who you are and what you build. Trax surfaces verified openings tailored to your craft, no ghost jobs or endless scrolling required.
-                </p>
-              </div>
-            </div>
-
-            {/* CARD 1: Direct Outreach */}
-            <div className="w-full shrink-0 snap-center bg-white rounded-none overflow-hidden shadow-[0_16px_36px_-8px_rgba(15,16,18,0.12)] border border-black/10 select-none">
-              {/* Visual Upper Block (Pale Honey #FBF4DC) */}
-              <div className="p-5 sm:p-6 bg-[#FBF4DC] flex items-center justify-center min-h-[340px] sm:min-h-[360px] relative overflow-hidden">
-                {/* Floating Notification 1 (Flutterwave) */}
-                <div className="absolute top-3 left-2 sm:left-3 z-20 w-[205px] bg-white rounded-none p-2.5 shadow-md border border-zinc-200/80 flex items-start gap-2 -rotate-3">
-                  <BrandLogo name="Flutterwave" />
-                  <div className="min-w-0">
-                    <p className="text-[10.5px] font-bold text-zinc-950 truncate leading-tight">
-                      Flutterwave Talent
-                    </p>
-                    <p className="text-[9px] text-zinc-600 line-clamp-1 leading-snug mt-0.5">
-                      &ldquo;Hi Amara, your UX portfolio caught our eye...&rdquo;
-                    </p>
-                  </div>
-                </div>
-
-                {/* Main Candidate Card */}
-                <div className="relative z-10 w-full max-w-[225px] bg-white rounded-none p-4 shadow-md border border-black/10 text-center flex flex-col items-center mt-3">
-                  <p className="text-[9.5px] font-bold uppercase tracking-wider text-zinc-400 mb-2">
-                    Curated Profile
-                  </p>
-                  <div className="relative w-16 h-16 rounded-none overflow-hidden shadow-2xs border-2 border-[#FBBF24] mb-2">
-                    <Image
-                      src="https://images.pexels.com/photos/3777943/pexels-photo-3777943.jpeg?auto=compress&cs=tinysrgb&w=400"
-                      alt="Amara Osei"
-                      fill
-                      sizes="80px"
-                      className="object-cover object-top"
-                    />
-                  </div>
-                  <div className="flex items-center gap-1 justify-center">
-                    <h5 className="text-[14px] font-black text-black tracking-tight leading-tight">
-                      Amara Osei
-                    </h5>
-                    <SealCheck size={14} weight="fill" className="text-[#E7040D]" />
-                  </div>
-                  <p className="text-[11px] font-medium text-zinc-600 mt-0.5">
-                    Senior Product Designer
-                  </p>
-                  <p className="text-[9.5px] text-zinc-400">Ex-Paystack &bull; Lagos, NG</p>
-                  <div className="mt-2.5 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-none bg-[#E2F2E6] text-[#14532D] text-[9.5px] font-bold border border-emerald-200">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
-                    <span>2 new recruiter requests</span>
-                  </div>
-                </div>
-
-                {/* Floating Notification 2 (Moniepoint) */}
-                <div className="absolute bottom-3 left-2 sm:left-3 z-20 w-[205px] bg-white rounded-none p-2.5 shadow-md border border-zinc-200/80 flex items-start gap-2 rotate-3">
-                  <BrandLogo name="Moniepoint" />
-                  <div className="min-w-0">
-                    <p className="text-[10.5px] font-bold text-zinc-950 truncate leading-tight">
-                      Moniepoint Design
-                    </p>
-                    <p className="text-[9px] text-zinc-600 line-clamp-1 leading-snug mt-0.5">
-                      &ldquo;We would love to invite you for a chat...&rdquo;
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Text Lower Block */}
-              <div className="py-8 px-6 sm:px-7 bg-white border-t border-zinc-100">
-                <h3 className="text-[23px] sm:text-[25px] font-black text-black tracking-tight leading-[1.18] mb-3">
-                  What if recruiters{" "}
-                  <span className="inline-block bg-[#FEF3C7] text-zinc-950 px-2 py-0.5 rounded-none font-black border border-amber-300">
-                    came to you?
-                  </span>
-                </h3>
-                <p className="text-[13.5px] sm:text-[14px] text-zinc-600 leading-[1.7]">
-                  <strong className="font-bold text-zinc-950">Now they can.</strong> Publish your verified profile so leading African engineering and design teams reach out directly via WhatsApp or email with zero platform locks.
-                </p>
-              </div>
-            </div>
-
-            {/* CARD 2: Company Culture */}
-            <div className="w-full shrink-0 snap-center bg-white rounded-none overflow-hidden shadow-[0_16px_36px_-8px_rgba(15,16,18,0.12)] border border-black/10 select-none">
-              {/* Visual Upper Block (Celadon Mint #E2F2E6) */}
-              <div className="p-4 sm:p-5 bg-[#E2F2E6] min-h-[340px] sm:min-h-[360px] flex flex-col justify-center">
-                <div className="flex items-center gap-2 mb-3 px-0.5">
-                  <div className="w-6 h-6 rounded-none bg-white shadow-2xs flex items-center justify-center text-zinc-900 shrink-0">
-                    <Buildings size={12} weight="bold" />
-                  </div>
-                  <h4 className="text-[14px] font-black text-black tracking-tight">
-                    You&apos;ll be part of
-                  </h4>
-                </div>
-
-                {/* 3-column micro grid */}
-                <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
-                  {/* Col 1: Office */}
-                  <div className="bg-white rounded-none overflow-hidden shadow-2xs border border-black/10 flex flex-col h-[200px]">
-                    <div className="h-6 border-b border-zinc-100 flex items-center justify-center text-[9.5px] font-bold text-zinc-800">
-                      Office
-                    </div>
-                    <div className="relative w-full h-[120px] bg-[#E8EEF5] overflow-hidden">
-                      <svg className="w-full h-full object-cover" viewBox="0 0 200 140" fill="none">
-                        <rect width="200" height="140" fill="#E8EEF5" />
-                        <path d="M-10 105 Q30 85 70 110 L50 150 L-10 150 Z" fill="#D3E4F4" />
-                        <path d="M-10 32 L210 20" stroke="#FFFFFF" strokeWidth="12" />
-                        <path d="M35 -10 L20 150" stroke="#FFFFFF" strokeWidth="9" />
-                        <path d="M125 -10 L145 150" stroke="#FFFFFF" strokeWidth="12" />
-                        <path d="M-10 90 L210 65" stroke="#FFFFFF" strokeWidth="14" />
-                        <path d="M98 -10 L108 150" stroke="#FFE9A8" strokeWidth="8" />
-                        <rect x="38" y="36" width="20" height="15" fill="#DDE4ED" />
-                        <rect x="112" y="20" width="22" height="36" fill="#D4DEE8" />
-                      </svg>
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                        <div className="w-5 h-5 rounded-none bg-zinc-950 text-white flex items-center justify-center shadow-xs">
-                          <Buildings size={10} weight="fill" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-1.5 bg-white flex flex-col justify-center flex-1">
-                      <p className="text-[10px] font-black text-black leading-tight truncate">Lagos, NG</p>
-                      <p className="text-[8px] text-zinc-400 truncate mt-0.5">Victoria Island</p>
-                    </div>
-                  </div>
-
-                  {/* Col 2: Benefits */}
-                  <div className="bg-white rounded-none p-1.5 shadow-2xs border border-black/10 flex flex-col justify-between h-[200px] overflow-hidden">
-                    <div className="h-6 border-b border-zinc-100 flex items-center justify-center text-[9.5px] font-bold text-zinc-800 -mx-1.5 -mt-1.5 mb-1.5">
-                      Benefits
-                    </div>
-                    <div className="space-y-1 flex-1 flex flex-col justify-start overflow-hidden">
-                      <div className="h-[18px] px-1 rounded-none bg-[#DCFCE7] text-[#14532D] text-[8px] font-semibold flex items-center gap-1 truncate">
-                        <Heart size={8} weight="fill" className="text-emerald-700 shrink-0" />
-                        <span className="truncate">Mental health</span>
-                      </div>
-                      <div className="h-[18px] px-1 rounded-none bg-[#DCFCE7] text-[#14532D] text-[8px] font-semibold flex items-center gap-1 truncate">
-                        <Briefcase size={8} weight="fill" className="text-emerald-700 shrink-0" />
-                        <span className="truncate">Bonus pay</span>
-                      </div>
-                      <div className="h-[18px] px-1 rounded-none bg-[#DCFCE7] text-[#14532D] text-[8px] font-semibold flex items-center gap-1 truncate">
-                        <TrendUp size={8} weight="bold" className="text-emerald-700 shrink-0" />
-                        <span className="truncate">Equity ESOP</span>
-                      </div>
-                      <div className="h-[18px] px-1 rounded-none bg-zinc-100 text-zinc-800 text-[8px] font-medium flex items-center gap-1 truncate">
-                        <Buildings size={8} weight="bold" className="text-zinc-600 shrink-0" />
-                        <span className="truncate">HMO care</span>
-                      </div>
-                      <div className="h-[18px] px-1 rounded-none bg-zinc-100 text-zinc-800 text-[8px] font-medium flex items-center gap-1 truncate">
-                        <HouseLine size={8} weight="bold" className="text-zinc-600 shrink-0" />
-                        <span className="truncate">Full remote</span>
-                      </div>
-                    </div>
-                    <div className="pt-0.5">
-                      <span className="inline-block px-1.5 py-0.2 rounded-none bg-zinc-100 text-zinc-600 text-[8px] font-bold border border-zinc-200">
-                        +12
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Col 3: Team */}
-                  <div className="bg-white rounded-none overflow-hidden shadow-2xs border border-black/10 flex flex-col h-[200px]">
-                    <div className="h-6 border-b border-zinc-100 flex items-center justify-center text-[9.5px] font-bold text-zinc-800">
-                      Meet team
-                    </div>
-                    <div className="relative w-full flex-1 overflow-hidden">
-                      <Image
-                        src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400"
-                        alt="Tolu, VP Engineering"
-                        fill
-                        sizes="110px"
-                        className="object-cover object-top"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-1.5 text-white">
-                        <div className="flex items-center gap-1">
-                          <span className="w-3.5 h-3.5 rounded-none bg-[#E7040D] text-white flex items-center justify-center shrink-0">
-                            <Play size={6} weight="fill" />
+                        {/* Metadata Pills */}
+                        <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+                          <span className="px-2 py-0.5 rounded-[4px] bg-zinc-100 text-zinc-900 border border-zinc-200/90 text-[10px] font-bold flex items-center gap-0.5">
+                            <CurrencyCircleDollar size={10.5} weight="bold" />
+                            <span>₦28M - ₦38M/yr</span>
                           </span>
-                          <p className="text-[8.5px] font-bold text-white leading-tight truncate">
-                            Tolu Adelaja
-                          </p>
+                          <span className="px-2 py-0.5 rounded-[4px] bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
+                            Senior
+                          </span>
+                          <span className="px-2 py-0.5 rounded-[4px] bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold flex items-center gap-0.5">
+                            <MapPin size={10} weight="fill" />
+                            <span>Lagos</span>
+                          </span>
+                          <span className="px-2 py-0.5 rounded-[4px] bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold flex items-center gap-0.5">
+                            <HouseLine size={10} weight="bold" />
+                            <span>Hybrid</span>
+                          </span>
+                          <span className="px-2 py-0.5 rounded-[4px] bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
+                            Fintech
+                          </span>
+                          <span className="px-2 py-0.5 rounded-[4px] bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
+                            React
+                          </span>
                         </div>
-                        <p className="text-[7px] text-zinc-300 line-clamp-1 mt-0.5">
-                          VP Engineering
+
+                        {/* Action Buttons inside Card */}
+                        <div className="pt-0.5 flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setSavedRole(!savedRole)}
+                            className={`flex-1 flex items-center justify-center gap-1 py-1.5 px-2.5 rounded-[6px] text-[11px] font-black transition-all cursor-pointer ${
+                              savedRole
+                                ? "bg-emerald-600 text-white"
+                                : "bg-[#E7040D] hover:bg-[#CB030B] text-white"
+                            }`}
+                          >
+                            <Heart size={12} weight={savedRole ? "fill" : "bold"} />
+                            <span>{savedRole ? "Saved" : "Save role"}</span>
+                          </button>
+                          <Link
+                            href="/jobs"
+                            className="flex-1 flex items-center justify-center gap-1 py-1.5 px-2.5 rounded-[6px] bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-[11px] font-bold border border-zinc-200 text-center transition-colors"
+                          >
+                            <span>View details</span>
+                            <ArrowRight size={11} weight="bold" />
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Editorial Content Block */}
+                  <div className="p-5 sm:p-6 bg-white">
+                    <h3 className="text-[21px] sm:text-[23px] font-black text-black tracking-tight leading-[1.18] mb-2.5">
+                      Looking for the{" "}
+                      <span className="inline-block bg-[#FCE8E0] text-[#E7040D] px-1.5 py-0.5 rounded-[4px] font-black border border-[#F9D5C7]">
+                        right role?
+                      </span>
+                    </h3>
+                    <p className="text-[13px] sm:text-[13.5px] text-zinc-600 leading-[1.68]">
+                      <strong className="font-bold text-zinc-950">Start matching!</strong> Tell us who you are and what you build. Trax surfaces verified openings tailored to your craft, no ghost jobs or endless scrolling required.
+                    </p>
+                  </div>
+                </div>
+
+                {/* ══════════════════════════════════════════════════════
+                    SLIDE 1: What if recruiters came to you?
+                ══════════════════════════════════════════════════════ */}
+                <div className="w-full shrink-0">
+                  {/* Visual Upper Block (Pale Honey Linen #FBF4DC) */}
+                  <div className="p-4 sm:p-5 bg-[#FBF4DC] flex items-center justify-center min-h-[305px] relative overflow-hidden">
+                    {/* Floating Notification 1 (Top Left: Flutterwave) */}
+                    <div className="absolute top-3 left-2 sm:left-3 z-20 w-[175px] sm:w-[185px] bg-white rounded-[6px] p-2 shadow-sm border border-zinc-200/80 flex items-start gap-1.5 -rotate-3">
+                      <BrandLogo name="Flutterwave" />
+                      <div className="min-w-0">
+                        <p className="text-[10px] font-bold text-zinc-950 truncate leading-tight">
+                          Flutterwave Talent
+                        </p>
+                        <p className="text-[8.5px] text-zinc-600 line-clamp-1 leading-snug mt-0.5">
+                          &ldquo;Hi Amara, your UX portfolio...&rdquo;
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Main Curated Profile Card */}
+                    <div className="relative z-10 w-full max-w-[210px] bg-white rounded-[8px] p-3.5 shadow-md border border-black/10 text-center flex flex-col items-center mt-2.5">
+                      <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5">
+                        Curated Profile
+                      </p>
+                      <div className="relative w-15 h-15 rounded-[6px] overflow-hidden shadow-2xs border-2 border-[#FBBF24] mb-1.5">
+                        <Image
+                          src="https://images.pexels.com/photos/3777943/pexels-photo-3777943.jpeg?auto=compress&cs=tinysrgb&w=400"
+                          alt="Amara Osei"
+                          fill
+                          sizes="75px"
+                          className="object-cover object-top"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1 justify-center">
+                        <h5 className="text-[13.5px] font-black text-black tracking-tight leading-tight">
+                          Amara Osei
+                        </h5>
+                        <SealCheck size={13} weight="fill" className="text-[#E7040D]" />
+                      </div>
+                      <p className="text-[10.5px] font-medium text-zinc-600 mt-0.5">
+                        Senior Product Designer
+                      </p>
+                      <p className="text-[9px] text-zinc-400">Ex-Paystack &bull; Lagos, NG</p>
+                      <div className="mt-2 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#E2F2E6] text-[#14532D] text-[9px] font-bold border border-emerald-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                        <span>2 recruiter requests</span>
+                      </div>
+                    </div>
+
+                    {/* Floating Notification 2 (Bottom Right: Moniepoint) */}
+                    <div className="absolute bottom-3 right-2 sm:right-3 z-20 w-[175px] sm:w-[185px] bg-white rounded-[6px] p-2 shadow-sm border border-zinc-200/80 flex items-start gap-1.5 rotate-3">
+                      <BrandLogo name="Moniepoint" />
+                      <div className="min-w-0">
+                        <p className="text-[10px] font-bold text-zinc-950 truncate leading-tight">
+                          Moniepoint Design
+                        </p>
+                        <p className="text-[8.5px] text-zinc-600 line-clamp-1 leading-snug mt-0.5">
+                          &ldquo;We would love to chat...&rdquo;
                         </p>
                       </div>
                     </div>
                   </div>
+
+                  {/* Editorial Content Block */}
+                  <div className="p-5 sm:p-6 bg-white">
+                    <h3 className="text-[21px] sm:text-[23px] font-black text-black tracking-tight leading-[1.18] mb-2.5">
+                      What if recruiters{" "}
+                      <span className="inline-block bg-[#FEF3C7] text-zinc-950 px-1.5 py-0.5 rounded-[4px] font-black border border-amber-300">
+                        came to you?
+                      </span>
+                    </h3>
+                    <p className="text-[13px] sm:text-[13.5px] text-zinc-600 leading-[1.68]">
+                      <strong className="font-bold text-zinc-950">Now they can.</strong> Publish your verified profile so leading African engineering and design teams reach out directly via WhatsApp or email with zero platform locks.
+                    </p>
+                  </div>
+                </div>
+
+                {/* ══════════════════════════════════════════════════════
+                    SLIDE 2: Get a feel of what it's really like
+                ══════════════════════════════════════════════════════ */}
+                <div className="w-full shrink-0">
+                  {/* Visual Upper Block (Celadon Mint #E2F2E6) */}
+                  <div className="p-4 sm:p-5 bg-[#E2F2E6] flex flex-col justify-center min-h-[305px] relative overflow-hidden">
+                    <div className="flex items-center gap-1.5 mb-2.5 px-0.5">
+                      <div className="w-4.5 h-4.5 rounded-sm bg-white shadow-2xs flex items-center justify-center text-zinc-900 shrink-0">
+                        <Buildings size={11} weight="bold" />
+                      </div>
+                      <h4 className="text-[13px] font-black text-black tracking-tight">
+                        You&apos;ll be part of
+                      </h4>
+                    </div>
+
+                    {/* 3-Column Micro Culture Grid */}
+                    <div className="grid grid-cols-3 gap-1.5">
+                      {/* Col 1: Office */}
+                      <div className="bg-white rounded-[6px] overflow-hidden shadow-2xs border border-black/10 flex flex-col h-[175px]">
+                        <div className="h-5.5 border-b border-zinc-100 flex items-center justify-center text-[9px] font-bold text-zinc-800">
+                          Office
+                        </div>
+                        <div className="relative w-full h-[100px] bg-[#E8EEF5] overflow-hidden">
+                          <svg className="w-full h-full object-cover" viewBox="0 0 200 140" fill="none">
+                            <rect width="200" height="140" fill="#E8EEF5" />
+                            <path d="M-10 105 Q30 85 70 110 L50 150 L-10 150 Z" fill="#D3E4F4" />
+                            <path d="M-10 32 L210 20" stroke="#FFFFFF" strokeWidth="12" />
+                            <path d="M35 -10 L20 150" stroke="#FFFFFF" strokeWidth="9" />
+                            <path d="M125 -10 L145 150" stroke="#FFFFFF" strokeWidth="12" />
+                            <path d="M-10 90 L210 65" stroke="#FFFFFF" strokeWidth="14" />
+                            <path d="M98 -10 L108 150" stroke="#FFE9A8" strokeWidth="8" />
+                            <rect x="38" y="36" width="20" height="15" fill="#DDE4ED" />
+                            <rect x="112" y="20" width="22" height="36" fill="#D4DEE8" />
+                          </svg>
+                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+                            <div className="w-4.5 h-4.5 rounded-full bg-zinc-950 text-white flex items-center justify-center shadow-xs">
+                              <Buildings size={9.5} weight="fill" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="p-1 bg-white flex flex-col justify-center flex-1">
+                          <p className="text-[9.5px] font-black text-black leading-tight truncate">Lagos, NG</p>
+                          <p className="text-[8px] text-zinc-400 truncate mt-0.5">VI Tech Hub</p>
+                        </div>
+                      </div>
+
+                      {/* Col 2: Benefits */}
+                      <div className="bg-white rounded-[6px] p-1.5 shadow-2xs border border-black/10 flex flex-col justify-between h-[175px] overflow-hidden">
+                        <div className="h-5.5 border-b border-zinc-100 flex items-center justify-center text-[9px] font-bold text-zinc-800 -mx-1.5 -mt-1.5 mb-1">
+                          Benefits
+                        </div>
+                        <div className="space-y-1 flex-1 flex flex-col justify-start overflow-hidden">
+                          <div className="h-[16px] px-1 rounded-[3px] bg-[#DCFCE7] text-[#14532D] text-[8px] font-semibold flex items-center gap-0.5 truncate">
+                            <Heart size={7.5} weight="fill" className="text-emerald-700 shrink-0" />
+                            <span className="truncate">Mental health</span>
+                          </div>
+                          <div className="h-[16px] px-1 rounded-[3px] bg-[#DCFCE7] text-[#14532D] text-[8px] font-semibold flex items-center gap-0.5 truncate">
+                            <Briefcase size={7.5} weight="fill" className="text-emerald-700 shrink-0" />
+                            <span className="truncate">Bonus pay</span>
+                          </div>
+                          <div className="h-[16px] px-1 rounded-[3px] bg-[#DCFCE7] text-[#14532D] text-[8px] font-semibold flex items-center gap-0.5 truncate">
+                            <TrendUp size={7.5} weight="bold" className="text-emerald-700 shrink-0" />
+                            <span className="truncate">Equity ESOP</span>
+                          </div>
+                          <div className="h-[16px] px-1 rounded-[3px] bg-zinc-100 text-zinc-800 text-[8px] font-medium flex items-center gap-0.5 truncate">
+                            <Buildings size={7.5} weight="bold" className="text-zinc-600 shrink-0" />
+                            <span className="truncate">HMO care</span>
+                          </div>
+                        </div>
+                        <div className="pt-0.5">
+                          <span className="inline-block px-1 py-0.2 rounded-[3px] bg-zinc-100 text-zinc-600 text-[8px] font-bold border border-zinc-200">
+                            +12
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Col 3: Team */}
+                      <div className="bg-white rounded-[6px] overflow-hidden shadow-2xs border border-black/10 flex flex-col h-[175px]">
+                        <div className="h-5.5 border-b border-zinc-100 flex items-center justify-center text-[9px] font-bold text-zinc-800">
+                          Meet team
+                        </div>
+                        <div className="relative w-full flex-1 overflow-hidden">
+                          <Image
+                            src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="Tolu, VP Engineering"
+                            fill
+                            sizes="95px"
+                            className="object-cover object-top"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-1 text-white">
+                            <div className="flex items-center gap-0.5">
+                              <span className="w-3.5 h-3.5 rounded bg-[#E7040D] text-white flex items-center justify-center shrink-0">
+                                <Play size={5.5} weight="fill" />
+                              </span>
+                              <p className="text-[8px] font-bold text-white leading-tight truncate">
+                                Tolu Adelaja
+                              </p>
+                            </div>
+                            <p className="text-[7px] text-zinc-300 line-clamp-1 mt-0.5">
+                              VP Engineering
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Editorial Content Block */}
+                  <div className="p-5 sm:p-6 bg-white">
+                    <h3 className="text-[21px] sm:text-[23px] font-black text-black tracking-tight leading-[1.18] mb-2.5">
+                      Get a feel of what it&apos;s{" "}
+                      <span className="inline-block bg-[#DCFCE7] text-emerald-900 px-1.5 py-0.5 rounded-[4px] font-black border border-emerald-300">
+                        really
+                      </span>{" "}
+                      like
+                    </h3>
+                    <p className="text-[13px] sm:text-[13.5px] text-zinc-600 leading-[1.68]">
+                      <strong className="font-bold text-zinc-950">Go behind the scenes.</strong> Detailed company profiles with verified office locations across Lagos and Nairobi, actual team perks, and real engineering stories: apply with confidence.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ─────────────────────────────────────────────────────────────
+                CAROUSEL CONTROLS & MAIN ACTION BUTTON (Mobile Only)
+            ───────────────────────────────────────────────────────────── */}
+            <div className="mt-4 space-y-2.5">
+              {/* Arrow Navigation Row */}
+              <div className="flex items-center gap-2">
+                {/* Prev Button with Diagonal Stripe Pattern When Disabled */}
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  disabled={!canPrev}
+                  aria-label="Previous step"
+                  className={`w-9 h-9 rounded-[6px] flex items-center justify-center border transition-all select-none ${
+                    canPrev
+                      ? "bg-white hover:bg-zinc-50 border-zinc-200 text-zinc-900 shadow-2xs active:scale-95 cursor-pointer"
+                      : "border-zinc-200/80 text-zinc-300 cursor-not-allowed"
+                  }`}
+                  style={
+                    !canPrev
+                      ? {
+                          backgroundImage: `repeating-linear-gradient(
+                            -45deg,
+                            #F4F4F5,
+                            #F4F4F5 3px,
+                            #FFFFFF 3px,
+                            #FFFFFF 6px
+                          )`,
+                        }
+                      : undefined
+                  }
+                >
+                  <CaretLeft size={15} weight="bold" />
+                </button>
+
+                {/* Next Button with Diagonal Stripe Pattern When Disabled */}
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  disabled={!canNext}
+                  aria-label="Next step"
+                  className={`w-9 h-9 rounded-[6px] flex items-center justify-center border transition-all select-none ${
+                    canNext
+                      ? "bg-white hover:bg-zinc-50 border-zinc-200 text-zinc-900 shadow-2xs active:scale-95 cursor-pointer"
+                      : "border-zinc-200/80 text-zinc-300 cursor-not-allowed"
+                  }`}
+                  style={
+                    !canNext
+                      ? {
+                          backgroundImage: `repeating-linear-gradient(
+                            -45deg,
+                            #F4F4F5,
+                            #F4F4F5 3px,
+                            #FFFFFF 3px,
+                            #FFFFFF 6px
+                          )`,
+                        }
+                      : undefined
+                  }
+                >
+                  <CaretRight size={15} weight="bold" />
+                </button>
+
+                {/* Step Indicator Dots */}
+                <div className="ml-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-200/60">
+                  {Array.from({ length: totalSlides }).map((_, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setCurrentSlide(i)}
+                      aria-label={`Go to slide ${i + 1}`}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        currentSlide === i ? "w-4 bg-[#E7040D]" : "w-1.5 bg-zinc-400 hover:bg-zinc-600"
+                      }`}
+                    />
+                  ))}
                 </div>
               </div>
 
-              {/* Text Lower Block */}
-              <div className="py-8 px-6 sm:px-7 bg-white border-t border-zinc-100">
-                <h3 className="text-[23px] sm:text-[25px] font-black text-black tracking-tight leading-[1.18] mb-3">
-                  Get a feel of what it&apos;s{" "}
-                  <span className="inline-block bg-[#DCFCE7] text-emerald-900 px-2 py-0.5 rounded-none font-black border border-emerald-300">
-                    really
-                  </span>{" "}
-                  like
-                </h3>
-                <p className="text-[13.5px] sm:text-[14px] text-zinc-600 leading-[1.7]">
-                  <strong className="font-bold text-zinc-950">Go behind the scenes.</strong> Detailed company profiles with verified office locations across Lagos and Nairobi, actual team perks, and real engineering stories: apply with confidence.
-                </p>
-              </div>
+              {/* Prominent Full-Width Trax Action Button */}
+              <Link
+                href={mobileSlides[currentSlide].ctaHref}
+                className="w-full py-3.5 px-5 rounded-[8px] bg-[#E7040D] hover:bg-[#CB030B] text-white font-bold text-[14.5px] sm:text-[15px] text-center tracking-tight shadow-sm hover:shadow-md active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2"
+              >
+                <span>{mobileSlides[currentSlide].ctaText}</span>
+                <ArrowRight size={15} weight="bold" />
+              </Link>
             </div>
           </div>
         </div>
 
         {/* ─────────────────────────────────────────────────────────────
             DESKTOP VIEW: 3 Showcase Blocks (>= lg breakpoint)
+            (100% Fully Reverted & Untouched Desktop Layout)
         ───────────────────────────────────────────────────────────── */}
         <div className="hidden lg:block space-y-20 lg:space-y-28">
 
@@ -462,15 +642,15 @@ export function WhyTraxSection() {
                   <div className="absolute top-1 -right-2.5 w-[97%] h-[95%] bg-white/80 rounded-[16px] rotate-2 -z-10 border border-white/60 shadow-xs" />
 
                   {/* Floating Trax Editorial Badge ("New matches 6") */}
-                  <div className="absolute -top-3.5 right-2 sm:right-3 z-30 bg-[#1F1F1F] text-white text-[11px] font-black px-3 py-1 rounded-none shadow-md border border-black flex items-center gap-1.5 rotate-2">
+                  <div className="absolute -top-3.5 right-2 sm:right-3 z-30 bg-[#1F1F1F] text-white text-[11px] font-black px-3 py-1 rounded-[6px] shadow-md border border-black flex items-center gap-1.5 rotate-2">
                     <span>New matches</span>
-                    <span className="w-4 h-4 rounded-none bg-[#E7040D] text-white flex items-center justify-center text-[9.5px] font-black">
+                    <span className="w-4 h-4 rounded-[4px] bg-[#E7040D] text-white flex items-center justify-center text-[9.5px] font-black">
                       6
                     </span>
                   </div>
 
                   {/* Front Main Job Card */}
-                  <div className="relative z-10 w-full bg-white rounded-[16px] p-4 sm:p-5 shadow-[0_14px_30px_-6px_rgba(15,16,18,0.14)] border border-black/5 space-y-3">
+                  <div className="relative z-10 w-full bg-white rounded-[12px] p-4 sm:p-5 shadow-[0_14px_30px_-6px_rgba(15,16,18,0.14)] border border-black/5 space-y-3">
                     
                     {/* Role Title & Company Header */}
                     <div>
@@ -486,27 +666,27 @@ export function WhyTraxSection() {
                       </div>
                     </div>
 
-                    {/* Metadata Pills Row */}
+                    {/* Metadata Pills Row (Trax Clean Brand Neutral Tokens) */}
                     <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-900 border border-zinc-200/90 text-[10px] font-bold flex items-center gap-1">
-                        <CurrencyCircleDollar size={11} weight="bold" />
+                      <span className="px-2.5 py-1 rounded-[6px] bg-zinc-100 text-zinc-900 border border-zinc-200/90 text-[10.5px] font-bold flex items-center gap-1">
+                        <CurrencyCircleDollar size={12} weight="bold" className="text-zinc-700" />
                         <span>₦28M - ₦38M/yr</span>
                       </span>
-                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
+                      <span className="px-2.5 py-1 rounded-[6px] bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10.5px] font-semibold">
                         Senior
                       </span>
-                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold flex items-center gap-1">
-                        <MapPin size={11} weight="fill" />
+                      <span className="px-2.5 py-1 rounded-[6px] bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10.5px] font-semibold flex items-center gap-1">
+                        <MapPin size={12} weight="fill" className="text-zinc-600" />
                         <span>Lagos</span>
                       </span>
-                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold flex items-center gap-1">
-                        <HouseLine size={11} weight="bold" />
-                        <span>Hybrid / Remote</span>
+                      <span className="px-2.5 py-1 rounded-[6px] bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10.5px] font-semibold flex items-center gap-1">
+                        <HouseLine size={12} weight="bold" className="text-zinc-600" />
+                        <span>Hybrid</span>
                       </span>
-                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
+                      <span className="px-2.5 py-1 rounded-[6px] bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10.5px] font-semibold">
                         Fintech
                       </span>
-                      <span className="px-2 py-0.5 rounded-none bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10px] font-semibold">
+                      <span className="px-2.5 py-1 rounded-[6px] bg-zinc-100 text-zinc-700 border border-zinc-200/90 text-[10.5px] font-semibold">
                         React &bull; Next.js
                       </span>
                     </div>
@@ -515,9 +695,9 @@ export function WhyTraxSection() {
                     <div className="pt-1.5 flex items-center gap-2.5">
                       <button
                         onClick={() => setSavedRole(!savedRole)}
-                        className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-[12px] font-black transition-all cursor-pointer select-none active:scale-95 ${
+                        className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-[6px] text-[12px] font-black transition-all cursor-pointer select-none active:scale-95 ${
                           savedRole
-                            ? "bg-emerald-600 text-white shadow-2xs"
+                            ? "bg-zinc-900 text-white shadow-2xs"
                             : "bg-[#E7040D] hover:bg-[#CB030B] text-white shadow-2xs"
                         }`}
                       >
@@ -527,7 +707,7 @@ export function WhyTraxSection() {
 
                       <Link
                         href="/jobs"
-                        className="flex-1 flex items-center justify-center gap-1 py-2 px-3 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-[12px] font-bold border border-zinc-200 shadow-2xs transition-colors"
+                        className="flex-1 flex items-center justify-center gap-1 py-2 px-3 rounded-[6px] bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-[12px] font-bold border border-zinc-200 shadow-2xs transition-colors"
                       >
                         <span>View details</span>
                         <ArrowRight size={12} weight="bold" />
