@@ -598,16 +598,16 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
               return (
                 <div
                   key={comp.id}
-                  className="bg-white rounded-[8px] border border-black/10 shadow-[0_12px_32px_-8px_rgba(15,16,18,0.09)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.12)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+                  className="bg-white rounded-2xl sm:rounded-[8px] border border-zinc-200/90 sm:border-black/10 shadow-[0_4px_20px_-4px_rgba(15,16,18,0.06)] sm:shadow-[0_12px_32px_-8px_rgba(15,16,18,0.09)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.12)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
                 >
                   {/* Cover Banner */}
-                  <Link href={`/companies/${comp.slug}`} className="block relative h-32 w-full bg-[#E5E7EB] overflow-hidden">
+                  <Link href={`/companies/${comp.slug}`} className="block relative h-[185px] sm:h-32 w-full bg-zinc-950 overflow-hidden">
                     {comp.coverImage && (
                       <Image
                         src={comp.coverImage}
                         alt={comp.name}
                         fill
-                        sizes="320px"
+                        sizes="(max-width: 640px) 100vw, 320px"
                         className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
                         unoptimized
                       />
@@ -615,22 +615,62 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                   </Link>
 
                   {/* Body */}
-                  <div className="p-5 pt-0 flex-1 flex flex-col justify-between">
+                  <div className="p-4.5 sm:p-5 sm:pt-0 flex-1 flex flex-col justify-between">
                     <div>
-                      {/* Floating Logo Badge */}
-                      <Link href={`/companies/${comp.slug}`} className="block -mt-8 mb-3.5 relative z-10">
+                      {/* Desktop: Floating Logo Badge */}
+                      <Link href={`/companies/${comp.slug}`} className="hidden sm:block -mt-8 mb-3.5 relative z-10">
                         <CompanySquareMark name={comp.name} logo={comp.logo} accentColor={comp.accentColor} />
                       </Link>
 
-                      {/* Company Name */}
-                      <Link href={`/companies/${comp.slug}`}>
+                      {/* Mobile: Logo + Name side by side */}
+                      <div className="flex sm:hidden items-center gap-3.5 mb-3.5 pt-1">
+                        <Link href={`/companies/${comp.slug}`} className="shrink-0">
+                          <div className="w-12 h-12 rounded-xl bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-1.5 overflow-hidden">
+                            {comp.logo ? (
+                              <Image src={comp.logo} alt={comp.name} width={42} height={42} className="object-contain w-full h-full" unoptimized />
+                            ) : (
+                              <span className="font-bold text-sm text-zinc-800">{comp.name.slice(0, 2).toUpperCase()}</span>
+                            )}
+                          </div>
+                        </Link>
+                        <Link href={`/companies/${comp.slug}`} className="min-w-0 flex-1">
+                          <h2 className="text-[16.5px] font-bold text-zinc-950 group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
+                            {comp.name}
+                          </h2>
+                        </Link>
+                      </div>
+
+                      {/* Desktop: Company Name */}
+                      <Link href={`/companies/${comp.slug}`} className="hidden sm:block">
                         <h2 className="text-[17px] font-black text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight mb-2">
                           {comp.name}
                         </h2>
                       </Link>
 
-                      {/* Metadata */}
-                      <div className="space-y-1.5 text-[12.5px] text-zinc-600">
+                      {/* Mobile: Wrapped Tag Pills */}
+                      <div className="flex sm:hidden flex-wrap items-center gap-2 mb-4">
+                        {comp.location && (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F4F4F5] text-zinc-800 text-[12px] font-medium leading-none">
+                            <MapPin size={13} weight="bold" className="text-zinc-500 shrink-0" />
+                            <span className="truncate max-w-[140px]">{comp.location}</span>
+                          </span>
+                        )}
+                        {comp.industry && (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F4F4F5] text-zinc-800 text-[12px] font-medium leading-none">
+                            <Tag size={13} weight="bold" className="text-zinc-500 shrink-0" />
+                            <span className="truncate max-w-[140px]">{comp.industry}</span>
+                          </span>
+                        )}
+                        {comp.employeesCount && (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F4F4F5] text-zinc-800 text-[12px] font-medium leading-none">
+                            <Users size={13} weight="bold" className="text-zinc-500 shrink-0" />
+                            <span>{comp.employeesCount}</span>
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Desktop: Metadata List */}
+                      <div className="hidden sm:block space-y-1.5 text-[12.5px] text-zinc-600">
                         <div className="flex items-center gap-2">
                           <Tag size={14} weight="bold" className="text-zinc-400 shrink-0" />
                           <span className="truncate">{comp.industry || "General Tech"}</span>
@@ -647,14 +687,14 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                     </div>
 
                     {/* Follow Button */}
-                    <div className="pt-6">
+                    <div className="pt-2 sm:pt-6">
                       <button
                         type="button"
                         onClick={() => toggleFollow(comp.id)}
-                        className={`w-full py-2.5 rounded-[6px] text-[12.5px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${
+                        className={`inline-flex sm:w-full items-center justify-center px-6 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-[6px] text-[13px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${
                           isFollowed
                             ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D] shadow-2xs"
-                            : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F] shadow-2xs hover:border-zinc-300"
+                            : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-950 shadow-2xs hover:border-zinc-300"
                         }`}
                       >
                         {isFollowed ? "Following" : "Follow"}

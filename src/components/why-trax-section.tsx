@@ -92,16 +92,12 @@ export function WhyTraxSection() {
   const handlePrev = () => {
     if (canPrev) {
       setCurrentSlide((prev) => prev - 1);
-    } else {
-      setCurrentSlide(totalSlides - 1);
     }
   };
 
   const handleNext = () => {
     if (canNext) {
       setCurrentSlide((prev) => prev + 1);
-    } else {
-      setCurrentSlide(0);
     }
   };
 
@@ -172,7 +168,7 @@ export function WhyTraxSection() {
         ───────────────────────────────────────────────────────────── */}
         <div className="block lg:hidden">
           <div
-            className="w-full max-w-[365px] sm:max-w-[380px] mx-auto"
+            className="w-full max-w-[352px] sm:max-w-[370px] mx-auto"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
             onMouseEnter={() => setIsHovered(true)}
@@ -488,10 +484,10 @@ export function WhyTraxSection() {
             </div>
 
             {/* ─────────────────────────────────────────────────────────────
-                CAROUSEL CONTROLS & MAIN ACTION BUTTON (Mobile Only)
+                NAVIGATION ARROWS & MAIN ACTION BUTTON (Mobile Only)
             ───────────────────────────────────────────────────────────── */}
-            <div className="mt-4 space-y-2.5">
-              {/* Arrow Navigation Row */}
+            <div className="mt-4 space-y-3">
+              {/* Two Navigation Buttons (Left-Aligned, No Dots) */}
               <div className="flex items-center gap-2">
                 {/* Prev Button with Diagonal Stripe Pattern When Disabled */}
                 <button
@@ -499,7 +495,7 @@ export function WhyTraxSection() {
                   onClick={handlePrev}
                   disabled={!canPrev}
                   aria-label="Previous step"
-                  className={`w-9 h-9 rounded-[6px] flex items-center justify-center border transition-all select-none ${
+                  className={`w-9 h-9 rounded-lg flex items-center justify-center border transition-all select-none ${
                     canPrev
                       ? "bg-white hover:bg-zinc-50 border-zinc-200 text-zinc-900 shadow-2xs active:scale-95 cursor-pointer"
                       : "border-zinc-200/80 text-zinc-300 cursor-not-allowed"
@@ -527,7 +523,7 @@ export function WhyTraxSection() {
                   onClick={handleNext}
                   disabled={!canNext}
                   aria-label="Next step"
-                  className={`w-9 h-9 rounded-[6px] flex items-center justify-center border transition-all select-none ${
+                  className={`w-9 h-9 rounded-lg flex items-center justify-center border transition-all select-none ${
                     canNext
                       ? "bg-white hover:bg-zinc-50 border-zinc-200 text-zinc-900 shadow-2xs active:scale-95 cursor-pointer"
                       : "border-zinc-200/80 text-zinc-300 cursor-not-allowed"
@@ -548,21 +544,6 @@ export function WhyTraxSection() {
                 >
                   <CaretRight size={15} weight="bold" />
                 </button>
-
-                {/* Step Indicator Dots */}
-                <div className="ml-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-200/60">
-                  {Array.from({ length: totalSlides }).map((_, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={() => setCurrentSlide(i)}
-                      aria-label={`Go to slide ${i + 1}`}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
-                        currentSlide === i ? "w-4 bg-[#E7040D]" : "w-1.5 bg-zinc-400 hover:bg-zinc-600"
-                      }`}
-                    />
-                  ))}
-                </div>
               </div>
 
               {/* Prominent Full-Width Trax Action Button */}

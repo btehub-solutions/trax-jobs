@@ -6,7 +6,6 @@ import Link from "next/link";
 import {
   CaretLeft,
   CaretRight,
-  ArrowRight,
   Users,
   MapPin,
   Tag,
@@ -20,15 +19,15 @@ import { BrandWordmark, ALL_AFRICAN_BRANDS } from "@/components/brand-wordmark";
 function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   if (logo) {
     return (
-      <div className="w-10 h-10 rounded-[6px] bg-white border border-zinc-200 flex items-center justify-center shrink-0 shadow-xs overflow-hidden p-1">
-        <Image src={logo} alt={name} width={36} height={36} className="w-full h-full object-contain" />
+      <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl sm:rounded-[6px] bg-white border border-zinc-200 flex items-center justify-center shrink-0 shadow-xs overflow-hidden p-1">
+        <Image src={logo} alt={name} width={40} height={40} className="w-full h-full object-contain" />
       </div>
     );
   }
   if (name === "Paystack") {
     return (
-      <div className="w-10 h-10 rounded-[6px] bg-[#E8F8FF] border border-[#C7EFFF] flex items-center justify-center shrink-0 shadow-xs">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl sm:rounded-[6px] bg-[#E8F8FF] border border-[#C7EFFF] flex items-center justify-center shrink-0 shadow-xs">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <rect x="3" y="4" width="18" height="3.5" rx="1.75" fill="#0BA4DB" />
           <rect x="3" y="10.25" width="12" height="3.5" rx="1.75" fill="#0BA4DB" />
           <rect x="3" y="16.5" width="18" height="3.5" rx="1.75" fill="#0BA4DB" />
@@ -38,8 +37,8 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Flutterwave") {
     return (
-      <div className="w-10 h-10 rounded-[6px] bg-[#FFF3ED] border border-[#FFE0D1] flex items-center justify-center shrink-0 shadow-xs">
-        <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
+      <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl sm:rounded-[6px] bg-[#FFF3ED] border border-[#FFE0D1] flex items-center justify-center shrink-0 shadow-xs">
+        <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
           <path d="M6 16C6 10.477 10.477 6 16 6C19.5 6 22.5 7.8 24.2 10.5L20.8 13.9C19.6 12.4 17.9 11.5 16 11.5C13.515 11.5 11.5 13.515 11.5 16C11.5 18.485 13.515 20.5 16 20.5C17.9 20.5 19.6 19.6 20.8 18.1L24.2 21.5C22.5 24.2 19.5 26 16 26C10.477 26 6 21.523 6 16Z" fill="#F56522" />
           <path d="M16 6C21.523 6 26 10.477 26 16C26 21.523 21.523 26 16 26" stroke="#FFBA00" strokeWidth="3" strokeLinecap="round" />
         </svg>
@@ -48,8 +47,8 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Moniepoint") {
     return (
-      <div className="w-10 h-10 rounded-[6px] bg-[#EEF2FF] border border-[#D7E2FF] flex items-center justify-center shrink-0 shadow-xs">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl sm:rounded-[6px] bg-[#EEF2FF] border border-[#D7E2FF] flex items-center justify-center shrink-0 shadow-xs">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path d="M3 6C3 4.89543 3.89543 4 5 4H7.5L12 11.5L16.5 4H19C20.1046 4 21 4.89543 21 6V18C21 19.1046 20.1046 20 19 20H16.5V11.5L12 19L7.5 11.5V20H5C3.89543 20 3 19.1046 3 18V6Z" fill="#0336FF" />
         </svg>
       </div>
@@ -57,8 +56,8 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Andela") {
     return (
-      <div className="w-10 h-10 rounded-[6px] bg-[#F0FDF4] border border-[#DCFCE7] flex items-center justify-center shrink-0 shadow-xs">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl sm:rounded-[6px] bg-[#F0FDF4] border border-[#DCFCE7] flex items-center justify-center shrink-0 shadow-xs">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <circle cx="12" cy="12" r="9" stroke="#16A34A" strokeWidth="2.5" />
           <path d="M12 6.5L17 16.5H7L12 6.5Z" fill="#16A34A" />
         </svg>
@@ -67,8 +66,8 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Kuda Bank") {
     return (
-      <div className="w-10 h-10 rounded-[6px] bg-[#F5F3FF] border border-[#E9E4FF] flex items-center justify-center shrink-0 shadow-xs">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl sm:rounded-[6px] bg-[#F5F3FF] border border-[#E9E4FF] flex items-center justify-center shrink-0 shadow-xs">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <rect width="24" height="24" rx="6" fill="#40196D" />
           <path d="M7 6V18M7 12L15 6M9.5 10L16.5 18" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -77,8 +76,8 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Interswitch") {
     return (
-      <div className="w-10 h-10 rounded-[6px] bg-[#FEF2F2] border border-[#FEE2E2] flex items-center justify-center shrink-0 shadow-xs">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl sm:rounded-[6px] bg-[#FEF2F2] border border-[#FEE2E2] flex items-center justify-center shrink-0 shadow-xs">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <circle cx="12" cy="12" r="9" fill="#DC2626" />
           <circle cx="12" cy="12" r="4.5" fill="white" />
           <circle cx="12" cy="12" r="2" fill="#DC2626" />
@@ -88,20 +87,20 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Moove") {
     return (
-      <div className="w-10 h-10 rounded-[6px] bg-[#F0FDF4] border border-[#DCFCE7] flex items-center justify-center shrink-0 shadow-xs font-black text-[#16A34A] text-[16px]">
+      <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl sm:rounded-[6px] bg-[#F0FDF4] border border-[#DCFCE7] flex items-center justify-center shrink-0 shadow-xs font-black text-[#16A34A] text-[17px]">
         M
       </div>
     );
   }
   if (name === "Cowrywise") {
     return (
-      <div className="w-10 h-10 rounded-[6px] bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center shrink-0 shadow-xs font-black text-[#2563EB] text-[16px]">
+      <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl sm:rounded-[6px] bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center shrink-0 shadow-xs font-black text-[#2563EB] text-[17px]">
         C
       </div>
     );
   }
   return (
-    <div className="w-10 h-10 rounded-xl bg-zinc-100 border border-zinc-200 flex items-center justify-center shrink-0 font-bold text-[14px] text-zinc-700">
+    <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl bg-zinc-100 border border-zinc-200 flex items-center justify-center shrink-0 font-bold text-[14px] text-zinc-700">
       {name[0]}
     </div>
   );
@@ -253,7 +252,8 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
 
   const handleScroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const offset = direction === "left" ? -380 : 380;
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+      const offset = direction === "left" ? (isMobile ? -320 : -380) : (isMobile ? 320 : 380);
       scrollRef.current.scrollBy({ left: offset, behavior: "smooth" });
     }
   };
@@ -267,18 +267,9 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
           <h2 className="text-[32px] sm:text-[44px] lg:text-[50px] font-extrabold tracking-[-0.03em] text-zinc-950 leading-[1.15] mb-5">
             Choose the company that&apos;s meant for you
           </h2>
-          <p className="text-[15px] sm:text-[17px] text-zinc-600 leading-[1.7] max-w-2xl mb-8">
+          <p className="text-[15px] sm:text-[17px] text-zinc-600 leading-[1.7] max-w-2xl">
             Get to know leading companies across Nigeria and Africa. Explore their engineering story, team culture, and active openings. When you find the right one, you will just know.
           </p>
-          <div>
-            <Link
-              href="/companies"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E7040D] hover:bg-[#CB030B] text-white text-[15px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.98]"
-            >
-              <span>Explore companies</span>
-              <ArrowRight size={16} weight="bold" />
-            </Link>
-          </div>
         </div>
 
         {/* Filter Pills & Carousel Controls Row */}
@@ -325,72 +316,81 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
         {/* Company Cards Carousel / Grid */}
         <div
           ref={scrollRef}
-          className="flex items-stretch gap-5 overflow-x-auto no-scrollbar pb-2 pt-2 snap-x snap-mandatory"
+          className="flex items-stretch gap-4 sm:gap-5 overflow-x-auto no-scrollbar pb-3 pt-2 snap-x snap-mandatory -mx-6 px-6 sm:mx-0 sm:px-0"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {filteredCompanies.map((company) => (
             <div
               key={company.name}
-              className="w-[285px] sm:w-[305px] shrink-0 bg-white rounded-[8px] border border-black/10 shadow-[0_12px_32px_-8px_rgba(15,16,18,0.09)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start"
+              className="w-[280px] sm:w-[305px] shrink-0 bg-white rounded-2xl sm:rounded-[8px] border border-zinc-200/90 sm:border-black/10 shadow-[0_4px_20px_-4px_rgba(15,16,18,0.06)] sm:shadow-[0_12px_32px_-8px_rgba(15,16,18,0.09)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start"
             >
-              {/* Cover Media */}
+              {/* Cover Media - Balanced 185px vertical height matching reference image */}
               <div>
-                <div className="relative h-[150px] w-full bg-zinc-100 overflow-hidden">
+                <div className="relative h-[185px] sm:h-[150px] w-full bg-zinc-950 overflow-hidden">
                   <Image
                     src={company.coverImage || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800"}
                     alt={`${company.name} office`}
                     fill
-                    sizes="(max-width: 640px) 320px, 305px"
+                    sizes="(max-width: 640px) 280px, 305px"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                   
                   {/* Floating Open Roles Pill */}
-                  <div className="absolute top-2.5 right-2.5">
-                    <span className="px-2.5 py-0.5 rounded-[4px] bg-white/95 backdrop-blur-xs text-zinc-950 font-bold text-[10px] shadow-xs border border-white/60">
-                      {company.openRoles} roles
-                    </span>
-                  </div>
+                  {company.openRoles ? (
+                    <div className="absolute top-3 right-3">
+                      <span className="px-2.5 py-1 rounded-[6px] bg-white/95 backdrop-blur-xs text-zinc-950 font-bold text-[11px] sm:text-[10px] shadow-xs border border-white/60">
+                        {company.openRoles} roles
+                      </span>
+                    </div>
+                  ) : null}
                 </div>
 
                 {/* Company Details Body */}
-                <div className="p-4 sm:p-4.5">
+                <div className="p-4.5 sm:p-4.5">
                   {/* Logo + Name */}
-                  <div className="flex items-center gap-2.5 mb-3.5">
-                    <CompanyVector name={company.name} logo={company.logo} />
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1">
-                        <h3 className="text-[14.5px] font-bold text-zinc-950 truncate tracking-tight">
+                  <div className="flex items-center gap-3.5 mb-3.5 sm:mb-3.5">
+                    <div className="w-12 h-12 sm:w-10 sm:h-10 rounded-xl sm:rounded-[6px] bg-[#FAF8F5] border border-zinc-200/90 flex items-center justify-center shrink-0 shadow-2xs overflow-hidden p-1.5">
+                      {company.logo ? (
+                        <Image src={company.logo} alt={company.name} width={42} height={42} className="w-full h-full object-contain" />
+                      ) : (
+                        <CompanyVector name={company.name} />
+                      )}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5">
+                        <h3 className="text-[16.5px] sm:text-[14.5px] font-bold text-zinc-950 truncate tracking-tight">
                           {company.name}
                         </h3>
-                        <SealCheck size={14} weight="fill" className="text-[#E7040D] shrink-0" />
+                        <SealCheck size={16} weight="fill" className="text-[#E7040D] shrink-0" />
                       </div>
                     </div>
                   </div>
 
-                  {/* Metadata Badges */}
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    {company.size && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
-                        <Users size={12} weight="bold" className="text-zinc-400" />
-                        {company.size}
-                      </span>
-                    )}
+                  {/* Metadata Badges / Pills */}
+                  <div className="flex flex-wrap items-center gap-2 content-start min-h-[58px]">
                     {company.location && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
-                        <MapPin size={12} weight="bold" className="text-zinc-400" />
-                        <span dangerouslySetInnerHTML={{ __html: company.location.split("&bull;")[0] }} />
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg sm:rounded-[4px] bg-[#F4F4F5] text-zinc-800 text-[12px] sm:text-[11px] font-medium leading-none">
+                        <MapPin size={13} weight="bold" className="text-zinc-500 shrink-0" />
+                        <span dangerouslySetInnerHTML={{ __html: company.location.split("&bull;")[0].trim() }} />
                       </span>
                     )}
                     {company.industry && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
-                        <Tag size={12} weight="bold" className="text-zinc-400" />
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg sm:rounded-[4px] bg-[#F4F4F5] text-zinc-800 text-[12px] sm:text-[11px] font-medium leading-none">
+                        <Tag size={13} weight="bold" className="text-zinc-500 shrink-0" />
                         {company.industry}
                       </span>
                     )}
                     {company.subIndustry && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-zinc-100/80 text-zinc-700 text-[11px] font-medium">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg sm:rounded-[4px] bg-[#F4F4F5] text-zinc-800 text-[12px] sm:text-[11px] font-medium leading-none">
+                        <Tag size={13} weight="bold" className="text-zinc-500 shrink-0" />
                         {company.subIndustry}
+                      </span>
+                    )}
+                    {company.size && (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg sm:rounded-[4px] bg-[#F4F4F5] text-zinc-800 text-[12px] sm:text-[11px] font-medium leading-none">
+                        <Users size={13} weight="bold" className="text-zinc-500 shrink-0" />
+                        {company.size}
                       </span>
                     )}
                   </div>
@@ -398,16 +398,34 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
               </div>
 
               {/* Card Footer Button */}
-              <div className="p-4 sm:p-4.5 pt-0">
+              <div className="p-4.5 sm:p-4.5 pt-0 pb-4.5 sm:pb-4.5">
                 <Link
                   href={`/companies/${company.slug}`}
-                  className="w-full inline-flex items-center justify-center px-4 py-2 rounded-[6px] bg-white hover:bg-[#E7040D] active:scale-95 select-none text-zinc-800 hover:text-white text-[12.5px] font-bold transition-all duration-150 border border-zinc-200/90 hover:border-[#E7040D] shadow-2xs text-center"
+                  className="inline-flex sm:w-full items-center justify-center px-6 sm:px-4 py-2 sm:py-2 rounded-xl sm:rounded-[6px] bg-white hover:bg-zinc-50 text-zinc-950 sm:text-zinc-900 sm:hover:bg-[#E7040D] sm:hover:text-white active:scale-95 select-none text-[13px] font-bold transition-all duration-150 border border-zinc-200/90 hover:border-zinc-300 sm:hover:border-[#E7040D] shadow-2xs text-center"
                 >
                   Explore
                 </Link>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Mobile Carousel Navigation Controls */}
+        <div className="flex sm:hidden items-center gap-2 mt-4 pt-1">
+          <button
+            onClick={() => handleScroll("left")}
+            className="w-9 h-9 rounded-lg bg-white border border-zinc-200/90 hover:bg-zinc-50 flex items-center justify-center text-zinc-800 hover:text-[#E7040D] transition-colors shadow-2xs cursor-pointer active:scale-95"
+            aria-label="Previous company"
+          >
+            <CaretLeft size={16} weight="bold" />
+          </button>
+          <button
+            onClick={() => handleScroll("right")}
+            className="w-9 h-9 rounded-lg bg-white border border-zinc-200/90 hover:bg-zinc-50 flex items-center justify-center text-zinc-800 hover:text-[#E7040D] transition-colors shadow-2xs cursor-pointer active:scale-95"
+            aria-label="Next company"
+          >
+            <CaretRight size={16} weight="bold" />
+          </button>
         </div>
 
         {/* Seamless Hiring Callout */}

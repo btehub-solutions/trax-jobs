@@ -23,7 +23,8 @@ export function TrendingSkillsSection({ courses }: TrendingSkillsSectionProps = 
 
   const handleScroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
-      const scrollAmount = 380;
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+      const scrollAmount = isMobile ? 316 : 380;
       scrollContainerRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
@@ -81,22 +82,22 @@ export function TrendingSkillsSection({ courses }: TrendingSkillsSectionProps = 
         {/* Horizontal Carousel Cards (Zero Scrollbar Track, Pure Scroll) */}
         <div
           ref={scrollContainerRef}
-          className="flex items-stretch gap-6 overflow-x-auto pb-4 pt-1 snap-x scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          className="flex items-stretch gap-4 sm:gap-6 overflow-x-auto pb-4 pt-1 snap-x scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] -mx-6 px-6 sm:mx-0 sm:px-0"
         >
           {displayCourses.map((course) => (
             <Link
               key={course.id || course.slug}
               href={`/learning/${course.slug || course.id}`}
-              className="w-[280px] xs:w-[320px] sm:w-[360px] md:w-[380px] shrink-0 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start cursor-pointer block"
+              className="w-[300px] sm:w-[360px] md:w-[380px] shrink-0 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start cursor-pointer block"
             >
               <div>
                 {/* 1. Top Image Thumbnail Container */}
-                <div className="relative h-52 w-full bg-zinc-100 overflow-hidden">
+                <div className="relative h-[215px] sm:h-52 w-full bg-zinc-100 overflow-hidden">
                   <Image
                     src={course.image}
                     alt={course.title}
                     fill
-                    sizes="380px"
+                    sizes="(max-width: 640px) 300px, 380px"
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
 
