@@ -12,6 +12,7 @@ import {
   Users,
   X,
   Check,
+  SealCheck,
 } from "@phosphor-icons/react";
 import { AppHeader } from "@/components/navigation/app-header";
 
@@ -598,14 +599,14 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
               return (
                 <div
                   key={comp.id}
-                  className="bg-white rounded-2xl border border-zinc-200/90 shadow-[0_4px_20px_-4px_rgba(15,16,18,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.12)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group min-h-[390px] sm:min-h-[405px]"
+                  className="bg-white rounded-2xl border border-zinc-200/90 shadow-[0_4px_20px_-4px_rgba(15,16,18,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.12)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group h-full"
                 >
                   {/* Upper Section: Cover Banner + Info Body */}
                   <div className="flex flex-col">
                     {/* Cover Banner - Proportional Height */}
                     <Link
                       href={`/companies/${comp.slug}`}
-                      className="block relative h-[150px] sm:h-[155px] w-full bg-zinc-950 overflow-hidden shrink-0"
+                      className="block relative h-[145px] sm:h-[150px] w-full bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-950 overflow-hidden shrink-0"
                     >
                       {comp.coverImage && (
                         <Image
@@ -617,21 +618,21 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                           unoptimized
                         />
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
                       
-                      {comp.openJobsCount > 0 && (
+                      {comp.openJobsCount > 0 ? (
                         <div className="absolute top-3 right-3">
-                          <span className="px-2 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-zinc-950 font-bold text-[10px] shadow-xs border border-white/60">
-                            {comp.openJobsCount} {comp.openJobsCount === 1 ? "role" : "roles"}
+                          <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-zinc-950 font-bold text-[10px] shadow-xs border border-white/60">
+                            {comp.openJobsCount} {comp.openJobsCount === 1 ? "open role" : "open roles"}
                           </span>
                         </div>
-                      )}
+                      ) : null}
                     </Link>
 
                     {/* Card Body */}
-                    <div className="p-4 sm:p-4.5 pb-2">
-                      {/* Logo + Company Name side-by-side */}
-                      <div className="flex items-center gap-3 mb-3.5">
+                    <div className="p-4 sm:p-4.5 pb-2 flex-1 flex flex-col">
+                      {/* Logo + Company Name */}
+                      <div className="flex items-center gap-3 mb-2">
                         <Link href={`/companies/${comp.slug}`} className="shrink-0">
                           <div className="w-11 h-11 rounded-xl bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-1.5 overflow-hidden">
                             {comp.logo ? (
@@ -646,40 +647,48 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                             <h2 className="text-[15.5px] sm:text-[16px] font-extrabold text-zinc-950 leading-tight tracking-tight line-clamp-1">
                               {comp.name}
                             </h2>
+                            <SealCheck size={14} weight="fill" className="text-[#E7040D] shrink-0" />
                           </Link>
                         </div>
                       </div>
 
-                      {/* Multi-Row Rounded Badge Pills matching reference layout */}
-                      <div className="flex flex-wrap items-center gap-2 content-start min-h-[76px] sm:min-h-[80px]">
-                        {comp.employeesCount && (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
-                            <Users size={12} weight="bold" className="text-zinc-500 shrink-0" />
-                            <span className="truncate max-w-[140px]">{comp.employeesCount}</span>
-                          </span>
-                        )}
+                      {/* 2-line Bio / Summary (Clean, Editorial, Not Crowded) */}
+                      {(comp.bio || comp.description) ? (
+                        <p className="text-[12.5px] sm:text-[13px] text-zinc-600 leading-[1.5] line-clamp-2 mb-3.5 font-normal">
+                          {comp.bio || comp.description}
+                        </p>
+                      ) : null}
+
+                      {/* Rounded Badge Pills (Phosphor Icons, Clean Spacing, No Awkward Truncation) */}
+                      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 content-start mt-auto pt-1">
                         {comp.location && (
                           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
                             <MapPin size={12} weight="bold" className="text-zinc-500 shrink-0" />
-                            <span className="truncate max-w-[140px]">{comp.location.split("•")[0].trim()}</span>
+                            <span>{comp.location.split("•")[0].split(",").slice(0, 2).join(",").trim()}</span>
+                          </span>
+                        )}
+                        {comp.employeesCount && (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
+                            <Users size={12} weight="bold" className="text-zinc-500 shrink-0" />
+                            <span>{comp.employeesCount.toLowerCase().includes("team") || comp.employeesCount.toLowerCase().includes("employee") ? comp.employeesCount : `${comp.employeesCount} team`}</span>
                           </span>
                         )}
                         {comp.industry && (
                           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
                             <Tag size={12} weight="bold" className="text-zinc-500 shrink-0" />
-                            <span className="truncate max-w-[140px]">{comp.industry}</span>
+                            <span>{comp.industry}</span>
                           </span>
                         )}
                       </div>
                     </div>
                   </div>
 
-                  {/* Left-Aligned Follow Action Button */}
-                  <div className="p-4 sm:p-4.5 pt-0 pb-4 sm:pb-4.5 flex items-center justify-between gap-2">
+                  {/* Left-Aligned Follow Action Button + Open Roles / View Link */}
+                  <div className="p-4 sm:p-4.5 pt-3 pb-4 sm:pb-4.5 flex items-center justify-between gap-2 border-t border-zinc-100/80 mt-3">
                     <button
                       type="button"
                       onClick={() => toggleFollow(comp.id)}
-                      className={`inline-flex items-center justify-center px-5 py-2 rounded-xl text-[12.5px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${
+                      className={`inline-flex items-center justify-center px-4.5 py-1.5 rounded-xl text-[12px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${
                         isFollowed
                           ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D] shadow-2xs"
                           : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-950 shadow-2xs hover:border-zinc-300"
@@ -689,9 +698,14 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                     </button>
                     <Link
                       href={`/companies/${comp.slug}`}
-                      className="text-[11.5px] font-semibold text-zinc-500 hover:text-[#E7040D] transition-colors"
+                      className={`text-[12px] font-bold transition-colors inline-flex items-center gap-1 ${
+                        comp.openJobsCount > 0
+                          ? "text-[#E7040D] hover:underline"
+                          : "text-zinc-500 hover:text-[#E7040D]"
+                      }`}
                     >
-                      View &rarr;
+                      <span>{comp.openJobsCount > 0 ? `View ${comp.openJobsCount === 1 ? "role" : "roles"}` : "View"}</span>
+                      <span aria-hidden="true">&rarr;</span>
                     </Link>
                   </div>
                 </div>

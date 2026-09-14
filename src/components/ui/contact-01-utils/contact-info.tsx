@@ -68,7 +68,7 @@ export default function ContactInfo() {
             {[...ALL_AFRICAN_BRANDS, ...ALL_AFRICAN_BRANDS, ...ALL_AFRICAN_BRANDS].map((brand, index) => (
               <div
                 key={`${brand}-${index}`}
-                className="flex items-center shrink-0 opacity-85 hover:opacity-100 transition-all duration-200 cursor-pointer hover:scale-105"
+                className="flex items-center shrink-0 opacity-95 hover:opacity-100 transition-all duration-200 cursor-pointer hover:scale-105"
               >
                 <BrandWordmark brand={brand} />
               </div>

@@ -416,8 +416,15 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                       </div>
                     </div>
 
+                    {/* 2-line Bio / Pitch (Clean, Editorial, Not Crowded) */}
+                    {company.description ? (
+                      <p className="text-[12.5px] sm:text-[13px] text-zinc-600 leading-[1.5] line-clamp-2 mb-3 font-normal">
+                        {company.description}
+                      </p>
+                    ) : null}
+
                     {/* 3. Multi-Row Stacked Metadata Badges */}
-                    <div className="flex flex-wrap items-center gap-2 content-start min-h-[82px] sm:min-h-[84px]">
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 content-start min-h-[64px] sm:min-h-[68px]">
                       {company.location && (
                         <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
                           <MapPin size={12} weight="bold" className="text-zinc-500 shrink-0" />
@@ -446,12 +453,12 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                   </div>
                 </div>
 
-                {/* 4. Left-Aligned Follow Action Button */}
-                <div className="p-4 sm:p-4.5 pt-0 pb-4 sm:pb-4.5 flex items-center justify-between gap-2">
+                {/* 4. Left-Aligned Follow Action Button + Open Roles Link */}
+                <div className="p-4 sm:p-4.5 pt-3 pb-4 sm:pb-4.5 flex items-center justify-between gap-2 border-t border-zinc-100/80 mt-2">
                   <button
                     type="button"
                     onClick={() => toggleFollow(company.slug)}
-                    className={`inline-flex items-center justify-center px-5 py-2 rounded-xl text-[12.5px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${isFollowed
+                    className={`inline-flex items-center justify-center px-4.5 py-1.5 rounded-xl text-[12px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${isFollowed
                         ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D] shadow-2xs"
                         : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-950 shadow-2xs hover:border-zinc-300"
                       }`}
@@ -460,9 +467,14 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                   </button>
                   <Link
                     href={`/companies/${company.slug}`}
-                    className="text-[11.5px] font-semibold text-zinc-500 hover:text-[#E7040D] transition-colors"
+                    className={`text-[12px] font-bold transition-colors inline-flex items-center gap-1 ${
+                      company.openRoles && company.openRoles > 0
+                        ? "text-[#E7040D] hover:underline"
+                        : "text-zinc-500 hover:text-[#E7040D]"
+                    }`}
                   >
-                    View &rarr;
+                    <span>{company.openRoles && company.openRoles > 0 ? `View ${company.openRoles} roles` : "View"}</span>
+                    <span aria-hidden="true">&rarr;</span>
                   </Link>
                 </div>
               </div>
@@ -519,7 +531,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
           {[...ALL_AFRICAN_BRANDS, ...ALL_AFRICAN_BRANDS, ...ALL_AFRICAN_BRANDS].map((brand, idx) => (
             <div
               key={`${brand}-${idx}`}
-              className="flex items-center shrink-0 opacity-85 hover:opacity-100 transition-all duration-200 cursor-pointer hover:scale-105"
+              className="flex items-center shrink-0 opacity-95 hover:opacity-100 transition-all duration-200 cursor-pointer hover:scale-105"
             >
               <BrandWordmark brand={brand} />
             </div>
