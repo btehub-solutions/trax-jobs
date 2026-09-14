@@ -592,114 +592,107 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
             </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 pt-6">
             {filteredCompanies.map((comp) => {
               const isFollowed = !!followedCompanies[comp.id];
               return (
                 <div
                   key={comp.id}
-                  className="bg-white rounded-2xl sm:rounded-[8px] border border-zinc-200/90 sm:border-black/10 shadow-[0_4px_20px_-4px_rgba(15,16,18,0.06)] sm:shadow-[0_12px_32px_-8px_rgba(15,16,18,0.09)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.12)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+                  className="bg-white rounded-2xl border border-zinc-200/90 shadow-[0_4px_20px_-4px_rgba(15,16,18,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.12)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group min-h-[390px] sm:min-h-[405px]"
                 >
-                  {/* Cover Banner */}
-                  <Link href={`/companies/${comp.slug}`} className="block relative h-[185px] sm:h-32 w-full bg-zinc-950 overflow-hidden">
-                    {comp.coverImage && (
-                      <Image
-                        src={comp.coverImage}
-                        alt={comp.name}
-                        fill
-                        sizes="(max-width: 640px) 100vw, 320px"
-                        className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
-                        unoptimized
-                      />
-                    )}
-                  </Link>
+                  {/* Upper Section: Cover Banner + Info Body */}
+                  <div className="flex flex-col">
+                    {/* Cover Banner - Compact Proportional Height */}
+                    <Link
+                      href={`/companies/${comp.slug}`}
+                      className="block relative h-[135px] sm:h-[145px] w-full bg-zinc-950 overflow-hidden shrink-0"
+                    >
+                      {comp.coverImage && (
+                        <Image
+                          src={comp.coverImage}
+                          alt={comp.name}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
+                          unoptimized
+                        />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                      
+                      {comp.openJobsCount > 0 && (
+                        <div className="absolute top-2 right-2">
+                          <span className="px-1.5 py-0.5 rounded-[4px] bg-white/95 backdrop-blur-xs text-zinc-950 font-bold text-[9.5px] shadow-xs border border-white/60">
+                            {comp.openJobsCount} {comp.openJobsCount === 1 ? "role" : "roles"}
+                          </span>
+                        </div>
+                      )}
+                    </Link>
 
-                  {/* Body */}
-                  <div className="p-4.5 sm:p-5 sm:pt-0 flex-1 flex flex-col justify-between">
-                    <div>
-                      {/* Desktop: Floating Logo Badge */}
-                      <Link href={`/companies/${comp.slug}`} className="hidden sm:block -mt-8 mb-3.5 relative z-10">
-                        <CompanySquareMark name={comp.name} logo={comp.logo} accentColor={comp.accentColor} />
-                      </Link>
-
-                      {/* Mobile: Logo + Name side by side */}
-                      <div className="flex sm:hidden items-center gap-3.5 mb-3.5 pt-1">
+                    {/* Card Body */}
+                    <div className="p-3 sm:p-3.5 pb-1.5">
+                      {/* Logo + Company Name side-by-side on all screens */}
+                      <div className="flex items-center gap-2 mb-2">
                         <Link href={`/companies/${comp.slug}`} className="shrink-0">
-                          <div className="w-12 h-12 rounded-xl bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-1.5 overflow-hidden">
+                          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-1 overflow-hidden">
                             {comp.logo ? (
-                              <Image src={comp.logo} alt={comp.name} width={42} height={42} className="object-contain w-full h-full" unoptimized />
+                              <Image src={comp.logo} alt={comp.name} width={32} height={32} className="object-contain w-full h-full" unoptimized />
                             ) : (
-                              <span className="font-bold text-sm text-zinc-800">{comp.name.slice(0, 2).toUpperCase()}</span>
+                              <CompanySquareMark name={comp.name} logo={comp.logo} accentColor={comp.accentColor} />
                             )}
                           </div>
                         </Link>
-                        <Link href={`/companies/${comp.slug}`} className="min-w-0 flex-1">
-                          <h2 className="text-[16.5px] font-bold text-zinc-950 group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
-                            {comp.name}
-                          </h2>
-                        </Link>
+                        <div className="min-w-0 flex-1">
+                          <Link href={`/companies/${comp.slug}`} className="inline-flex items-center gap-1 hover:text-[#E7040D] transition-colors">
+                            <h2 className="text-[14px] sm:text-[14.5px] font-extrabold text-zinc-950 leading-tight tracking-tight line-clamp-2">
+                              {comp.name}
+                            </h2>
+                          </Link>
+                        </div>
                       </div>
 
-                      {/* Desktop: Company Name */}
-                      <Link href={`/companies/${comp.slug}`} className="hidden sm:block">
-                        <h2 className="text-[17px] font-black text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight mb-2">
-                          {comp.name}
-                        </h2>
-                      </Link>
-
-                      {/* Mobile: Wrapped Tag Pills */}
-                      <div className="flex sm:hidden flex-wrap items-center gap-2 mb-4">
+                      {/* Multi-Row Wrapped Metadata Badges matching reference layout */}
+                      <div className="flex flex-wrap items-center gap-1.5 content-start min-h-[68px] sm:min-h-[72px]">
+                        {comp.employeesCount && (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-[5px] bg-[#F4F4F5] text-zinc-800 text-[10.5px] sm:text-[11px] font-medium leading-none">
+                            <Users size={11} weight="bold" className="text-zinc-500 shrink-0" />
+                            <span className="truncate max-w-[140px]">{comp.employeesCount}</span>
+                          </span>
+                        )}
                         {comp.location && (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F4F4F5] text-zinc-800 text-[12px] font-medium leading-none">
-                            <MapPin size={13} weight="bold" className="text-zinc-500 shrink-0" />
-                            <span className="truncate max-w-[140px]">{comp.location}</span>
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-[5px] bg-[#F4F4F5] text-zinc-800 text-[10.5px] sm:text-[11px] font-medium leading-none">
+                            <MapPin size={11} weight="bold" className="text-zinc-500 shrink-0" />
+                            <span className="truncate max-w-[140px]">{comp.location.split("•")[0].trim()}</span>
                           </span>
                         )}
                         {comp.industry && (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F4F4F5] text-zinc-800 text-[12px] font-medium leading-none">
-                            <Tag size={13} weight="bold" className="text-zinc-500 shrink-0" />
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-[5px] bg-[#F4F4F5] text-zinc-800 text-[10.5px] sm:text-[11px] font-medium leading-none">
+                            <Tag size={11} weight="bold" className="text-zinc-500 shrink-0" />
                             <span className="truncate max-w-[140px]">{comp.industry}</span>
                           </span>
                         )}
-                        {comp.employeesCount && (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F4F4F5] text-zinc-800 text-[12px] font-medium leading-none">
-                            <Users size={13} weight="bold" className="text-zinc-500 shrink-0" />
-                            <span>{comp.employeesCount}</span>
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Desktop: Metadata List */}
-                      <div className="hidden sm:block space-y-1.5 text-[12.5px] text-zinc-600">
-                        <div className="flex items-center gap-2">
-                          <Tag size={14} weight="bold" className="text-zinc-400 shrink-0" />
-                          <span className="truncate">{comp.industry || "General Tech"}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <MapPin size={14} weight="bold" className="text-zinc-400 shrink-0" />
-                          <span className="truncate">{comp.location || "Nigeria"}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Users size={14} weight="bold" className="text-zinc-400 shrink-0" />
-                          <span className="truncate">{comp.employeesCount || "10+ team"}</span>
-                        </div>
                       </div>
                     </div>
+                  </div>
 
-                    {/* Follow Button */}
-                    <div className="pt-2 sm:pt-6">
-                      <button
-                        type="button"
-                        onClick={() => toggleFollow(comp.id)}
-                        className={`inline-flex sm:w-full items-center justify-center px-6 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-[6px] text-[13px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${
-                          isFollowed
-                            ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D] shadow-2xs"
-                            : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-950 shadow-2xs hover:border-zinc-300"
-                        }`}
-                      >
-                        {isFollowed ? "Following" : "Follow"}
-                      </button>
-                    </div>
+                  {/* Left-Aligned Follow Action Button */}
+                  <div className="p-3 sm:p-3.5 pt-0 pb-3 sm:pb-3.5 flex items-center justify-between gap-2">
+                    <button
+                      type="button"
+                      onClick={() => toggleFollow(comp.id)}
+                      className={`inline-flex items-center justify-center px-4 py-1.5 rounded-lg text-[11.5px] sm:text-[12px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${
+                        isFollowed
+                          ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D] shadow-2xs"
+                          : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-950 shadow-2xs hover:border-zinc-300"
+                      }`}
+                    >
+                      {isFollowed ? "Following" : "Follow"}
+                    </button>
+                    <Link
+                      href={`/companies/${comp.slug}`}
+                      className="text-[11px] font-semibold text-zinc-500 hover:text-[#E7040D] transition-colors"
+                    >
+                      View &rarr;
+                    </Link>
                   </div>
                 </div>
               );

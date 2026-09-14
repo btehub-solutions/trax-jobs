@@ -97,7 +97,7 @@ function ExperienceLevelContent() {
           {/* Right Action */}
           <div>
             <Link
-              href="/about?tab=contact&topic=hiring"
+              href="/about?tab=post-and-submit&type=job"
               className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all shadow-2xs"
             >
               <span>Submit a job</span>

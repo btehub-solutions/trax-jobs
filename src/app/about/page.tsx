@@ -8,11 +8,13 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { CaretDown, CaretUp } from "@phosphor-icons/react";
 import Contact from "@/components/ui/contact";
+import { PostAndSubmitHub } from "@/components/submissions/post-and-submit-hub";
 
-type AboutTab = "about" | "contact";
+type AboutTab = "about" | "post-and-submit" | "contact";
 
 const TABS: { id: AboutTab; label: string }[] = [
   { id: "about", label: "About Us" },
+  { id: "post-and-submit", label: "Post & Submit" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -22,13 +24,21 @@ function AboutPageContent() {
 
   const tabParam = searchParams.get("tab");
   const topicParam = searchParams.get("topic");
+  const typeParam = searchParams.get("type");
 
-  const activeTab: AboutTab = tabParam === "contact" ? "contact" : "about";
+  const activeTab: AboutTab =
+    tabParam === "contact"
+      ? "contact"
+      : tabParam === "post-and-submit" || tabParam === "submit" || tabParam === "submissions"
+      ? "post-and-submit"
+      : "about";
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleTabClick = (tabId: AboutTab) => {
     if (tabId === "contact") {
       router.push("/about?tab=contact", { scroll: false });
+    } else if (tabId === "post-and-submit") {
+      router.push("/about?tab=post-and-submit", { scroll: false });
     } else {
       router.push("/about", { scroll: false });
     }
@@ -242,7 +252,7 @@ function AboutPageContent() {
 
                 <div className="pt-8 sm:pt-10">
                   <Link
-                    href="/about?tab=contact&topic=hiring"
+                    href="/about?tab=post-and-submit&type=job"
                     className="inline-flex items-center justify-center px-8 py-3.5 rounded-none bg-[#0C1222] hover:bg-[#070b14] text-white text-[14px] font-bold transition-all shadow-xs cursor-pointer"
                   >
                     Hire with Trax Jobs
@@ -541,6 +551,13 @@ function AboutPageContent() {
           </div>
         </section>
       </>
+    )}
+
+    {/* Active Tab: Post & Submit */}
+    {activeTab === "post-and-submit" && (
+      <div className="min-h-[70vh] bg-[#FAF8F5]">
+        <PostAndSubmitHub initialType={typeParam || topicParam} />
+      </div>
     )}
 
     {/* Active Tab: Contact */}

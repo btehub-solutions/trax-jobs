@@ -55,17 +55,17 @@ export function Navbar({
   const isJobsPage = activeTab === "jobs" || pathname.startsWith("/jobs");
 
   let defaultCtaText = "Submit a Job";
-  let defaultCtaHref = "/about?tab=contact&topic=hiring";
+  let defaultCtaHref = "/about?tab=post-and-submit&type=job";
 
   if (isTalentPage) {
     defaultCtaText = "Submit Profile";
-    defaultCtaHref = "/about?tab=contact&topic=talent";
+    defaultCtaHref = "/about?tab=post-and-submit&type=talent";
   } else if (isCompaniesPage) {
-    defaultCtaText = "Submit Profile";
-    defaultCtaHref = "/about?tab=contact&topic=company";
+    defaultCtaText = "Register Company";
+    defaultCtaHref = "/about?tab=post-and-submit&type=company";
   } else if (isJobsPage) {
     defaultCtaText = "Submit a Job";
-    defaultCtaHref = "/about?tab=contact&topic=hiring";
+    defaultCtaHref = "/about?tab=post-and-submit&type=job";
   }
 
   const finalCtaText = ctaText || defaultCtaText;
