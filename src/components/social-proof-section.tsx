@@ -6,7 +6,7 @@ import { ArrowRight, Quotes } from "@phosphor-icons/react";
 
 export function SocialProofSection() {
   return (
-    <section className="w-full bg-[#FAF8F5] py-24 sm:py-32 relative overflow-hidden">
+    <section className="w-full bg-[#FAF8F5] pt-16 sm:pt-28 lg:pt-32 pb-8 sm:pb-20 lg:pb-28 relative overflow-hidden">
       {/* Subtle Graph-Paper Grid Background */}
       <div
         className="absolute inset-0 pointer-events-none opacity-60"
@@ -94,7 +94,7 @@ export function SocialProofSection() {
             </div>
 
             {/* Card 4: Photo Card with Overlapping Physical Post-it Sticky Note */}
-            <div className="relative pt-2 pb-20">
+            <div className="relative pt-2 pb-4">
               {/* Photo Card with White Index Tab */}
               <div className="bg-white rounded-2xl border border-zinc-200/90 shadow-[0_8px_24px_-4px_rgba(15,16,18,0.08)] overflow-hidden">
                 <div className="h-5 bg-white border-b border-black/[0.03]" />

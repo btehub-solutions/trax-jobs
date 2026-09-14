@@ -107,7 +107,7 @@ export function CareerGuidesSection({ guides }: CareerGuidesSectionProps = {}) {
   const visibleGuides = (filtered.length > 0 ? filtered : allGuides).slice(0, 3);
 
   return (
-    <section className="w-full bg-[#FAF8F5] py-24 sm:py-32 relative overflow-hidden">
+    <section className="w-full bg-[#FAF8F5] pt-8 sm:pt-20 lg:pt-28 pb-24 sm:pb-32 relative overflow-hidden">
       {/* Graph Paper Grid Canvas */}
       <div
         className="absolute inset-0 pointer-events-none opacity-60"
