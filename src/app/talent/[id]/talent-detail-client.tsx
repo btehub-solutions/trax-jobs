@@ -30,16 +30,16 @@ import { AppHeader } from "@/components/navigation/app-header";
 
 const TALENT_GALLERY_SETS = [
   [
-    "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "/images/trax-culture-1.jpg",
+    "/images/trax-culture-2.jpg",
+    "/images/trax-culture-4.jpg",
+    "/images/trax-culture-3.jpg",
   ],
   [
-    "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/3184305/pexels-photo-3184305.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "/images/trax-culture-2.jpg",
+    "/images/trax-culture-1.jpg",
+    "/images/trax-culture-3.jpg",
+    "/images/trax-culture-4.jpg",
   ],
 ];
 

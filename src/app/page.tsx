@@ -9,18 +9,24 @@ import { SocialProofSection } from "@/components/social-proof-section";
 import { CareerGuidesSection } from "@/components/career-guides-section";
 import { TestimonialsTrustSection } from "@/components/testimonials-trust-section";
 import { Footer } from "@/components/footer";
-import { fetchCompanies, fetchPublishedCourses, fetchPublishedGuides } from "@/sanity/fetchers";
+import { fetchCompanies, fetchPublishedCourses, fetchPublishedGuides, fetchPublishedJobs } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { CourseDetail } from "@/data/courses";
+import { SAMPLE_JOBS } from "@/data/jobs";
+import { calculateExperienceCounts } from "@/lib/experience";
 
 export const revalidate = 60;
 
 export default async function Home() {
-  const [rawCompanies, rawCourses, rawGuides] = await Promise.all([
+  const [rawCompanies, rawCourses, rawGuides, rawJobs] = await Promise.all([
     fetchCompanies(),
     fetchPublishedCourses(),
     fetchPublishedGuides(),
+    fetchPublishedJobs(),
   ]);
+
+  const activeJobs = rawJobs && rawJobs.length > 0 ? rawJobs : SAMPLE_JOBS;
+  const experienceCounts = calculateExperienceCounts(activeJobs);
 
   const sanityCompanies = (rawCompanies ?? []).map((c: any) => ({
     name: c.name ?? "",
@@ -103,7 +109,7 @@ export default async function Home() {
         <HeroSection />
 
         {/* 4. Explore opportunities by experience level */}
-        <ExperienceSection />
+        <ExperienceSection counts={experienceCounts} />
 
         {/* 5. Choose the company that's meant for you (Featured Companies) */}
         <FeaturedCompaniesSection companies={sanityCompanies.length > 0 ? sanityCompanies : undefined} />

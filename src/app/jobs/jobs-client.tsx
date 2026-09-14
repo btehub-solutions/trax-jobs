@@ -5,7 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { JobCard } from "@/components/jobs/job-card";
 import { JobsFilterSidebar } from "@/components/jobs/jobs-filter-sidebar";
 import { AppHeader } from "@/components/navigation/app-header";
-import { JobFilterState, ExperienceTier } from "@/types";
+import { JobFilterState, ExperienceTier, ContractType } from "@/types";
+import { isJobMatchingLevel } from "@/lib/experience";
 import {
   CaretDown,
   CaretLeft,
@@ -50,10 +51,15 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
   const expParam = searchParams.get("exp")?.split(",").filter(Boolean) || [];
   const levelParam = searchParams.get("level") || "";
   const initialExp: string[] = [...expParam];
+  const initialContract: ContractType[] = [];
   if (levelParam) {
     const l = levelParam.toLowerCase();
-    if (l.includes("no-experience") || l.includes("entry") || l.includes("internship") || l.includes("graduate")) {
+    if (l.includes("no-experience")) {
       initialExp.push("Entry-level. 0-1 years");
+    } else if (l.includes("internship")) {
+      initialContract.push("Internship");
+    } else if (l.includes("entry")) {
+      initialExp.push("Entry-level. 0-1 years", "Junior. 1-3 years");
     } else if (l.includes("mid")) {
       initialExp.push("Mid-level. 3-5 years");
     } else if (l.includes("senior")) {
@@ -91,7 +97,7 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
     roles: [],
     experienceLevels: initialExp as ExperienceTier[],
     locations: locParam ? [locParam] : [],
-    contractTypes: [],
+    contractTypes: initialContract,
     workplaceTypes: [],
   });
 
@@ -118,6 +124,19 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
 
   const filteredJobs = useMemo(() => {
     return jobs.filter((job) => {
+      // 0. Level parameter matching (Direct match for incoming ?level= links from homepage)
+      if (
+        levelParam &&
+        !filters.search &&
+        filters.roles.length === 0 &&
+        filters.locations.length === 0 &&
+        filters.workplaceTypes.length === 0 &&
+        filters.experienceLevels.length === initialExp.length &&
+        filters.contractTypes.length === initialContract.length
+      ) {
+        if (!isJobMatchingLevel(job, levelParam)) return false;
+      }
+
       // 1. Search term (Title, Company, Tags, Summary, Category)
       if (filters.search) {
         const q = filters.search.toLowerCase();
@@ -146,13 +165,14 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
       // 3. Experience level (Fuzzy tier matching)
       if (filters.experienceLevels.length > 0) {
         const jExp = (job.experienceLevel || "").toLowerCase();
+        const jTitle = (job.title || "").toLowerCase();
         const matchExp = filters.experienceLevels.some((sel) => {
           const s = sel.toLowerCase();
-          if (s.includes("entry") && jExp.includes("entry")) return true;
-          if (s.includes("junior") && jExp.includes("junior")) return true;
-          if (s.includes("mid") && jExp.includes("mid")) return true;
-          if (s.includes("senior") && jExp.includes("senior")) return true;
-          if ((s.includes("expert") || s.includes("lead")) && (jExp.includes("expert") || jExp.includes("lead"))) return true;
+          if (s.includes("entry") && (jExp.includes("entry") || jExp.includes("0-1"))) return true;
+          if (s.includes("junior") && (jExp.includes("junior") || jExp.includes("1-3"))) return true;
+          if (s.includes("mid") && (jExp.includes("mid") || jExp.includes("3-5"))) return true;
+          if (s.includes("senior") && (jExp.includes("senior") || jExp.includes("5-10") || jExp.includes("lead") || jExp.includes("staff"))) return true;
+          if ((s.includes("expert") || s.includes("lead") || s.includes("10+")) && (jExp.includes("expert") || jExp.includes("10+") || jTitle.includes("principal") || jTitle.includes("architect") || jTitle.includes("director") || jTitle.includes("head"))) return true;
           return s === jExp || jExp.includes(s) || s.includes(jExp);
         });
         if (!matchExp) return false;
@@ -186,7 +206,11 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
       // 6. Contract types (Permanent, Contract, Internship, Part-time)
       if (filters.contractTypes.length > 0) {
         const jCt = (job.contractType || "").toLowerCase();
-        const matchCt = filters.contractTypes.some((ct) => jCt.includes(ct.toLowerCase()));
+        const jTitle = (job.title || "").toLowerCase();
+        const matchCt = filters.contractTypes.some((ct) => {
+          const c = ct.toLowerCase();
+          return jCt.includes(c) || (c.includes("intern") && (jTitle.includes("intern") || jCt.includes("intern")));
+        });
         if (!matchCt) return false;
       }
 
