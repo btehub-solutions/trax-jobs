@@ -9,6 +9,7 @@ import {
   Users,
   MapPin,
   Tag,
+
   SealCheck,
 } from "@phosphor-icons/react";
 import { BrandWordmark, ALL_AFRICAN_BRANDS } from "@/components/brand-wordmark";
@@ -252,11 +253,11 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
     activeCategory === "Highlight"
       ? activeList
       : activeList.filter(
-          (c) =>
-            (c.category && c.category.toLowerCase().includes(activeCategory.toLowerCase())) ||
-            (c.subIndustry && c.subIndustry.toLowerCase().includes(activeCategory.toLowerCase())) ||
-            (c.industry && c.industry.toLowerCase().includes(activeCategory.toLowerCase()))
-        );
+        (c) =>
+          (c.category && c.category.toLowerCase().includes(activeCategory.toLowerCase())) ||
+          (c.subIndustry && c.subIndustry.toLowerCase().includes(activeCategory.toLowerCase())) ||
+          (c.industry && c.industry.toLowerCase().includes(activeCategory.toLowerCase()))
+      );
 
   const handleScroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -269,7 +270,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
   return (
     <section className="w-full bg-[#fbf9f6] py-20 sm:py-28 border-t border-zinc-200/60 relative overflow-x-hidden">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
-        
+
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
           <h2 className="text-[32px] sm:text-[44px] lg:text-[50px] font-extrabold tracking-[-0.03em] text-zinc-950 leading-[1.15] mb-5">
@@ -290,11 +291,10 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-5 py-2.5 rounded-xl text-[13.5px] font-bold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 select-none ${
-                    isActive
+                  className={`px-5 py-2.5 rounded-xl text-[13.5px] font-bold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 select-none ${isActive
                       ? "bg-[#E7040D] text-white shadow-xs"
                       : "bg-white text-zinc-700 hover:text-zinc-950 border border-zinc-200/80 hover:border-zinc-300 hover:bg-zinc-50"
-                  }`}
+                    }`}
                 >
                   {cat}
                 </button>
@@ -349,7 +349,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                       className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                    
+
                     {/* Floating Open Roles Pill */}
                     {company.openRoles ? (
                       <div className="absolute top-2 right-2">
@@ -418,11 +418,10 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                   <button
                     type="button"
                     onClick={() => toggleFollow(company.slug)}
-                    className={`inline-flex items-center justify-center px-4 py-1.5 rounded-lg text-[11.5px] sm:text-[12px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${
-                      isFollowed
+                    className={`inline-flex items-center justify-center px-4 py-1.5 rounded-lg text-[11.5px] sm:text-[12px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${isFollowed
                         ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D] shadow-2xs"
                         : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-950 shadow-2xs hover:border-zinc-300"
-                    }`}
+                      }`}
                   >
                     {isFollowed ? "Following" : "Follow"}
                   </button>

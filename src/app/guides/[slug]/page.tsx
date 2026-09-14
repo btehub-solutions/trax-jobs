@@ -17,16 +17,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ? decodeURIComponent(resolvedParams.slug).toLowerCase().trim().replace(/\s+/g, "-")
     : "";
 
-  let article =
-    GUIDES_DATA.find((g) => g.slug === rawSlug) ||
-    GUIDES_DATA.find((g) => g.slug.includes(rawSlug)) ||
-    null;
+  // 1. Prioritize live Sanity CMS data so uploaded cover images are used for OG
+  let rawGuide = await fetchGuideBySlug(rawSlug);
+  if (!rawGuide) {
+    const allGuides = await fetchPublishedGuides();
+    rawGuide = (allGuides ?? []).find((g: any) => (g.slug || g._id) === rawSlug) ?? null;
+  }
 
-  if (!article) {
-    const rawGuide = await fetchGuideBySlug(rawSlug);
-    if (rawGuide) {
-      article = mapSanityGuide(rawGuide, []);
-    }
+  let article: GuideArticle | null = null;
+  if (rawGuide) {
+    article = mapSanityGuide(rawGuide, []);
+  } else {
+    // 2. Only fall back to local seed data if not found in Sanity
+    article =
+      GUIDES_DATA.find((g) => g.slug === rawSlug) ||
+      GUIDES_DATA.find((g) => g.slug.includes(rawSlug)) ||
+      null;
   }
 
   if (!article) {

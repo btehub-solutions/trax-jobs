@@ -326,7 +326,15 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
                     type="button"
                     onClick={() => {
                       const url = window.location.href;
-                      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, "_blank");
+                      const width = 640;
+                      const height = 560;
+                      const left = Math.max(0, (window.innerWidth - width) / 2 + window.screenX);
+                      const top = Math.max(0, (window.innerHeight - height) / 2 + window.screenY);
+                      window.open(
+                        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+                        "FacebookShare",
+                        `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`
+                      );
                     }}
                     className="w-9 h-9 bg-zinc-50 hover:bg-zinc-100 active:scale-90 border border-zinc-200 rounded-none flex items-center justify-center text-zinc-600 transition-all cursor-pointer select-none"
                     aria-label="Share on Facebook"
@@ -339,7 +347,15 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
                     type="button"
                     onClick={() => {
                       const url = window.location.href;
-                      window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(course.title)}`, "_blank");
+                      const width = 640;
+                      const height = 560;
+                      const left = Math.max(0, (window.innerWidth - width) / 2 + window.screenX);
+                      const top = Math.max(0, (window.innerHeight - height) / 2 + window.screenY);
+                      window.open(
+                        `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(course.title)}`,
+                        "TwitterShare",
+                        `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`
+                      );
                     }}
                     className="w-9 h-9 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 rounded-none flex items-center justify-center text-zinc-600 transition-colors cursor-pointer"
                     aria-label="Share on X"

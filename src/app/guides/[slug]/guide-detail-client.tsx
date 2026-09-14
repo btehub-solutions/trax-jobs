@@ -42,6 +42,19 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
   };
 
+  const openSharePopup = (url: string, title = "Share") => {
+    if (typeof window === "undefined") return;
+    const width = 640;
+    const height = 560;
+    const left = Math.max(0, (window.innerWidth - width) / 2 + window.screenX);
+    const top = Math.max(0, (window.innerHeight - height) / 2 + window.screenY);
+    window.open(
+      url,
+      title,
+      `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`
+    );
+  };
+
   const handleCopyLink = () => {
     if (typeof window !== "undefined") {
       navigator.clipboard.writeText(currentUrl);
@@ -119,52 +132,48 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
             </button>
 
             {/* WhatsApp Share Intent */}
-            <a
-              href={shareLinks.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-emerald-50 hover:border-[#25D366]/40 hover:text-[#25D366] flex items-center justify-center text-zinc-600 transition-colors"
+            <button
+              type="button"
+              onClick={() => openSharePopup(shareLinks.whatsapp, "WhatsAppShare")}
+              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-emerald-50 hover:border-[#25D366]/40 hover:text-[#25D366] flex items-center justify-center text-zinc-600 transition-colors cursor-pointer select-none active:scale-95"
               aria-label="Share on WhatsApp"
               title="Share on WhatsApp"
             >
               <WhatsappLogo size={16} weight="fill" />
-            </a>
+            </button>
 
             {/* X / Twitter Share Intent */}
-            <a
-              href={shareLinks.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-zinc-100 hover:text-black flex items-center justify-center text-zinc-600 transition-colors"
+            <button
+              type="button"
+              onClick={() => openSharePopup(shareLinks.twitter, "TwitterShare")}
+              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-zinc-100 hover:text-black flex items-center justify-center text-zinc-600 transition-colors cursor-pointer select-none active:scale-95"
               aria-label="Share on X (Twitter)"
               title="Share on X"
             >
               <XLogo size={15} weight="bold" />
-            </a>
+            </button>
 
             {/* LinkedIn Share Intent */}
-            <a
-              href={shareLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-blue-50 hover:border-[#0077B5]/40 hover:text-[#0077B5] flex items-center justify-center text-zinc-600 transition-colors"
+            <button
+              type="button"
+              onClick={() => openSharePopup(shareLinks.linkedin, "LinkedInShare")}
+              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-blue-50 hover:border-[#0077B5]/40 hover:text-[#0077B5] flex items-center justify-center text-zinc-600 transition-colors cursor-pointer select-none active:scale-95"
               aria-label="Share on LinkedIn"
               title="Share on LinkedIn"
             >
               <LinkedinLogo size={16} weight="fill" />
-            </a>
+            </button>
 
-            {/* Facebook Share Intent */}
-            <a
-              href={shareLinks.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-blue-50 hover:border-[#1877F2]/40 hover:text-[#1877F2] flex items-center justify-center text-zinc-600 transition-colors"
+            {/* Facebook Share Composer Popup */}
+            <button
+              type="button"
+              onClick={() => openSharePopup(shareLinks.facebook, "FacebookShare")}
+              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-blue-50 hover:border-[#1877F2]/40 hover:text-[#1877F2] flex items-center justify-center text-zinc-600 transition-colors cursor-pointer select-none active:scale-95"
               aria-label="Share on Facebook"
               title="Share on Facebook"
             >
               <FacebookLogo size={16} weight="fill" />
-            </a>
+            </button>
           </div>
         </div>
 

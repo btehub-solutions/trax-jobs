@@ -321,8 +321,8 @@ function AboutPageContent() {
                   {/* Image Container */}
                   <div className="relative aspect-[4/3] w-full bg-zinc-100 border border-zinc-200 overflow-hidden z-10 shadow-xs">
                     <Image
-                      src="/images/value-1.jpg"
-                      alt="African tech team collaborating with sticky notes and strategy board"
+                      src="/images/trax-core-value-1.jpg"
+                      alt="Trax team leadership standing together representing editorial integrity"
                       fill
                       priority
                       sizes="(max-width: 1024px) 100vw, 500px"
@@ -364,8 +364,8 @@ function AboutPageContent() {
                   {/* Image Container */}
                   <div className="relative aspect-[4/3] w-full bg-zinc-100 border border-zinc-200 overflow-hidden z-10 shadow-xs">
                     <Image
-                      src="/images/value-2.jpg"
-                      alt="African tech builders smiling and celebrating milestone"
+                      src="/images/trax-core-value-2.jpg"
+                      alt="African tech community attendees participating in a tech summit"
                       fill
                       priority
                       sizes="(max-width: 1024px) 100vw, 500px"
@@ -387,8 +387,8 @@ function AboutPageContent() {
                   {/* Image Container */}
                   <div className="relative aspect-[4/3] w-full bg-zinc-100 border border-zinc-200 overflow-hidden z-10 shadow-xs">
                     <Image
-                      src="/images/value-3.jpg"
-                      alt="African tech engineers having focused technical discussion"
+                      src="/images/trax-core-value-3.jpg"
+                      alt="Colleagues shaking hands across meeting table representing human relationships over resumes"
                       fill
                       priority
                       sizes="(max-width: 1024px) 100vw, 500px"
