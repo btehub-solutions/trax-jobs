@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AppHeader } from "@/components/navigation/app-header";
-import { Footer } from "@/components/footer";
 import { JobCard } from "@/components/jobs/job-card";
 import {
   House,
@@ -639,8 +638,6 @@ export default function CompanyDetailClient({
 
       </main>
 
-      {/* 3. Global Footer */}
-      <Footer />
     </div>
   );
 }
