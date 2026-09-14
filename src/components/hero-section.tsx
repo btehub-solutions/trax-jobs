@@ -37,7 +37,7 @@ export function HeroSection() {
       {/* Hero Content Container */}
       <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center">
         {/* Main Headline */}
-        <h1 className="text-3xl sm:text-5xl lg:text-[56px] font-extrabold tracking-tight text-white leading-[1.15] drop-shadow-md max-w-4xl mx-auto mb-8 sm:mb-10">
+        <h1 className="text-3xl sm:text-5xl lg:text-[56px] font-black tracking-[-0.03em] text-white leading-[1.12] drop-shadow-md max-w-4xl mx-auto mb-8 sm:mb-10">
           Find your next job opportunity, faster.
         </h1>
 

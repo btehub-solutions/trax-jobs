@@ -124,11 +124,11 @@ export function CareerGuidesSection({ guides }: CareerGuidesSectionProps = {}) {
         
         {/* Header Block */}
         <div className="max-w-2xl mb-10">
-          <h2 className="text-[34px] sm:text-[46px] lg:text-[52px] font-extrabold tracking-[-0.03em] text-zinc-950 leading-[1.12] mb-4">
+          <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] font-black tracking-[-0.025em] text-[#1F1F1F] leading-[1.18] mb-3">
             Guide to getting hired
           </h2>
           
-          <p className="text-[16px] sm:text-[17px] text-zinc-600 leading-[1.7]">
+          <p className="text-[15px] sm:text-[16.5px] text-zinc-600 leading-[1.7]">
             From your first application in Lagos to landing high-impact remote roles across Africa. We have got you covered.
           </p>
         </div>

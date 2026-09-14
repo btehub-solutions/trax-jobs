@@ -24,11 +24,11 @@ export function SocialProofSection() {
           
           {/* Left Column: Big Bold Headline & Callout */}
           <div className="lg:col-span-5 max-w-xl">
-            <h2 className="text-[38px] sm:text-[50px] lg:text-[54px] font-extrabold tracking-[-0.035em] text-zinc-950 leading-[1.08] mb-6">
+            <h2 className="text-[34px] sm:text-[46px] lg:text-[50px] font-black tracking-[-0.03em] text-[#1F1F1F] leading-[1.12] mb-5">
               Find teams that respect your craft.
             </h2>
             
-            <p className="text-[16px] sm:text-[17px] text-zinc-600 leading-[1.7] mb-8">
+            <p className="text-[15px] sm:text-[16.5px] text-zinc-600 leading-[1.7] mb-8">
               <strong className="text-zinc-950 font-bold">A new standard for tech hiring.</strong> Trax manually reviews every opening and talent profile before it goes live. No ghost listings, no dead links, and no automated noise.
             </p>
 

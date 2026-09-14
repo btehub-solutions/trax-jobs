@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -259,10 +259,33 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
           (c.industry && c.industry.toLowerCase().includes(activeCategory.toLowerCase()))
       );
 
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScrollability = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 10);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    checkScrollability();
+    el.addEventListener("scroll", checkScrollability, { passive: true });
+    window.addEventListener("resize", checkScrollability);
+    return () => {
+      el.removeEventListener("scroll", checkScrollability);
+      window.removeEventListener("resize", checkScrollability);
+    };
+  }, [filteredCompanies]);
+
   const handleScroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
-      const offset = direction === "left" ? (isMobile ? -220 : -250) : (isMobile ? 220 : 250);
+      const offset = direction === "left" ? (isMobile ? -314 : -260) : (isMobile ? 314 : 260);
       scrollRef.current.scrollBy({ left: offset, behavior: "smooth" });
     }
   };
@@ -273,10 +296,10 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
 
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <h2 className="text-[32px] sm:text-[44px] lg:text-[50px] font-extrabold tracking-[-0.03em] text-zinc-950 leading-[1.15] mb-5">
+          <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] font-black tracking-[-0.025em] text-[#1F1F1F] leading-[1.18] mb-4">
             Choose the company that&apos;s meant for you
           </h2>
-          <p className="text-[15px] sm:text-[17px] text-zinc-600 leading-[1.7] max-w-2xl">
+          <p className="text-[15px] sm:text-[16.5px] text-zinc-600 leading-[1.7] max-w-2xl">
             Get to know leading companies across Nigeria and Africa. Explore their engineering story, team culture, and active openings. When you find the right one, you will just know.
           </p>
         </div>
@@ -306,14 +329,24 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
           <div className="hidden sm:flex items-center gap-2 shrink-0">
             <button
               onClick={() => handleScroll("left")}
-              className="w-10 h-10 rounded-full bg-white border border-zinc-200/80 hover:bg-zinc-50 flex items-center justify-center text-zinc-800 hover:text-[#E7040D] transition-colors shadow-2xs cursor-pointer active:scale-95"
+              disabled={!canScrollLeft}
+              className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all shadow-2xs ${
+                canScrollLeft
+                  ? "bg-white border-zinc-200/90 text-zinc-800 hover:text-[#E7040D] hover:bg-zinc-50 cursor-pointer active:scale-95"
+                  : "bg-zinc-100/60 border-zinc-200/70 text-zinc-300 cursor-not-allowed"
+              }`}
               aria-label="Previous companies"
             >
               <CaretLeft size={18} weight="bold" />
             </button>
             <button
               onClick={() => handleScroll("right")}
-              className="w-10 h-10 rounded-full bg-white border border-zinc-200/80 hover:bg-zinc-50 flex items-center justify-center text-zinc-800 hover:text-[#E7040D] transition-colors shadow-2xs cursor-pointer active:scale-95"
+              disabled={!canScrollRight}
+              className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all shadow-2xs ${
+                canScrollRight
+                  ? "bg-white border-zinc-200/90 text-zinc-800 hover:text-[#E7040D] hover:bg-zinc-50 cursor-pointer active:scale-95"
+                  : "bg-zinc-100/60 border-zinc-200/70 text-zinc-300 cursor-not-allowed"
+              }`}
               aria-label="Next companies"
             >
               <CaretRight size={18} weight="bold" />
@@ -332,28 +365,28 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
             return (
               <div
                 key={company.name}
-                className="w-[200px] sm:w-[225px] h-[390px] sm:h-[405px] shrink-0 bg-white rounded-2xl border border-zinc-200/90 shadow-[0_4px_20px_-4px_rgba(15,16,18,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start select-none"
+                className="w-[280px] xs:w-[300px] sm:w-[240px] shrink-0 bg-white rounded-2xl border border-zinc-200/90 shadow-[0_4px_20px_-4px_rgba(15,16,18,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start select-none"
               >
                 {/* Upper Section: Cover Media + Info Body */}
                 <div className="flex flex-col">
-                  {/* 1. Cover Media - Compact Proportional Height */}
+                  {/* 1. Cover Media */}
                   <Link
                     href={`/companies/${company.slug}`}
-                    className="relative h-[135px] sm:h-[145px] w-full bg-zinc-950 overflow-hidden shrink-0 block"
+                    className="relative h-[160px] sm:h-[150px] w-full bg-zinc-950 overflow-hidden shrink-0 block"
                   >
                     <Image
                       src={company.coverImage || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800"}
                       alt={`${company.name} office`}
                       fill
-                      sizes="(max-width: 640px) 200px, 225px"
+                      sizes="(max-width: 640px) 300px, 240px"
                       className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
                     {/* Floating Open Roles Pill */}
                     {company.openRoles ? (
-                      <div className="absolute top-2 right-2">
-                        <span className="px-1.5 py-0.5 rounded-[4px] bg-white/95 backdrop-blur-xs text-zinc-950 font-bold text-[9.5px] shadow-xs border border-white/60">
+                      <div className="absolute top-3 right-3">
+                        <span className="px-2 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-zinc-950 font-bold text-[10px] shadow-xs border border-white/60">
                           {company.openRoles} roles
                         </span>
                       </div>
@@ -361,51 +394,51 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                   </Link>
 
                   {/* 2. Company Details Body */}
-                  <div className="p-3 sm:p-3.5 pb-1.5">
+                  <div className="p-4 sm:p-4.5 pb-2">
                     {/* Logo + Company Name */}
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-3 mb-3.5">
                       <Link href={`/companies/${company.slug}`} className="shrink-0">
-                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#FAF8F5] border border-zinc-200/90 flex items-center justify-center shrink-0 shadow-2xs overflow-hidden p-1">
+                        <div className="w-11 h-11 sm:w-11 sm:h-11 rounded-xl bg-[#FAF8F5] border border-zinc-200/90 flex items-center justify-center shrink-0 shadow-2xs overflow-hidden p-1.5">
                           {company.logo ? (
-                            <Image src={company.logo} alt={company.name} width={32} height={32} className="w-full h-full object-contain" />
+                            <Image src={company.logo} alt={company.name} width={36} height={36} className="w-full h-full object-contain" />
                           ) : (
                             <CompanyVector name={company.name} />
                           )}
                         </div>
                       </Link>
                       <div className="min-w-0 flex-1">
-                        <Link href={`/companies/${company.slug}`} className="inline-flex items-center gap-1 hover:text-[#E7040D] transition-colors">
-                          <h3 className="text-[14px] sm:text-[14.5px] font-extrabold text-zinc-950 leading-tight tracking-tight line-clamp-2">
+                        <Link href={`/companies/${company.slug}`} className="inline-flex items-center gap-1.5 hover:text-[#E7040D] transition-colors">
+                          <h3 className="text-[16px] sm:text-[16.5px] font-extrabold text-zinc-950 leading-tight tracking-tight line-clamp-1">
                             {company.name}
                           </h3>
-                          <SealCheck size={13} weight="fill" className="text-[#E7040D] shrink-0" />
+                          <SealCheck size={14} weight="fill" className="text-[#E7040D] shrink-0" />
                         </Link>
                       </div>
                     </div>
 
                     {/* 3. Multi-Row Stacked Metadata Badges */}
-                    <div className="flex flex-wrap items-center gap-1.5 content-start min-h-[68px] sm:min-h-[72px]">
-                      {company.size && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-[5px] bg-[#F4F4F5] text-zinc-800 text-[10.5px] sm:text-[11px] font-medium leading-none">
-                          <Users size={11} weight="bold" className="text-zinc-500 shrink-0" />
-                          <span>{company.size}</span>
-                        </span>
-                      )}
+                    <div className="flex flex-wrap items-center gap-2 content-start min-h-[82px] sm:min-h-[84px]">
                       {company.location && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-[5px] bg-[#F4F4F5] text-zinc-800 text-[10.5px] sm:text-[11px] font-medium leading-none">
-                          <MapPin size={11} weight="bold" className="text-zinc-500 shrink-0" />
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
+                          <MapPin size={12} weight="bold" className="text-zinc-500 shrink-0" />
                           <span dangerouslySetInnerHTML={{ __html: company.location.split("&bull;")[0].trim() }} />
                         </span>
                       )}
+                      {company.size && (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
+                          <Users size={12} weight="bold" className="text-zinc-500 shrink-0" />
+                          <span>{company.size}</span>
+                        </span>
+                      )}
                       {company.industry && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-[5px] bg-[#F4F4F5] text-zinc-800 text-[10.5px] sm:text-[11px] font-medium leading-none">
-                          <Tag size={11} weight="bold" className="text-zinc-500 shrink-0" />
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
+                          <Tag size={12} weight="bold" className="text-zinc-500 shrink-0" />
                           <span>{company.industry}</span>
                         </span>
                       )}
                       {company.subIndustry && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-[5px] bg-[#F4F4F5] text-zinc-800 text-[10.5px] sm:text-[11px] font-medium leading-none">
-                          <Tag size={11} weight="bold" className="text-zinc-500 shrink-0" />
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
+                          <Tag size={12} weight="bold" className="text-zinc-500 shrink-0" />
                           <span>{company.subIndustry}</span>
                         </span>
                       )}
@@ -414,11 +447,11 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                 </div>
 
                 {/* 4. Left-Aligned Follow Action Button */}
-                <div className="p-3 sm:p-3.5 pt-0 pb-3 sm:pb-3.5 flex items-center justify-between gap-2">
+                <div className="p-4 sm:p-4.5 pt-0 pb-4 sm:pb-4.5 flex items-center justify-between gap-2">
                   <button
                     type="button"
                     onClick={() => toggleFollow(company.slug)}
-                    className={`inline-flex items-center justify-center px-4 py-1.5 rounded-lg text-[11.5px] sm:text-[12px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${isFollowed
+                    className={`inline-flex items-center justify-center px-5 py-2 rounded-xl text-[12.5px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${isFollowed
                         ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D] shadow-2xs"
                         : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-950 shadow-2xs hover:border-zinc-300"
                       }`}
@@ -427,7 +460,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                   </button>
                   <Link
                     href={`/companies/${company.slug}`}
-                    className="text-[11px] font-semibold text-zinc-500 hover:text-[#E7040D] transition-colors"
+                    className="text-[11.5px] font-semibold text-zinc-500 hover:text-[#E7040D] transition-colors"
                   >
                     View &rarr;
                   </Link>
@@ -437,18 +470,28 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
           })}
         </div>
 
-        {/* Mobile Carousel Navigation Controls */}
+        {/* Mobile Carousel Navigation Controls matching reference layout */}
         <div className="flex sm:hidden items-center gap-2 mt-4 pt-1">
           <button
             onClick={() => handleScroll("left")}
-            className="w-9 h-9 rounded-lg bg-white border border-zinc-200/90 hover:bg-zinc-50 flex items-center justify-center text-zinc-800 hover:text-[#E7040D] transition-colors shadow-2xs cursor-pointer active:scale-95"
+            disabled={!canScrollLeft}
+            className={`w-9 h-9 rounded-lg border flex items-center justify-center transition-all shadow-2xs ${
+              canScrollLeft
+                ? "bg-white border-zinc-200/90 text-zinc-800 hover:text-[#E7040D] hover:bg-zinc-50 cursor-pointer active:scale-95"
+                : "bg-zinc-100/60 border-zinc-200/70 text-zinc-300 cursor-not-allowed"
+            }`}
             aria-label="Previous company"
           >
             <CaretLeft size={16} weight="bold" />
           </button>
           <button
             onClick={() => handleScroll("right")}
-            className="w-9 h-9 rounded-lg bg-white border border-zinc-200/90 hover:bg-zinc-50 flex items-center justify-center text-zinc-800 hover:text-[#E7040D] transition-colors shadow-2xs cursor-pointer active:scale-95"
+            disabled={!canScrollRight}
+            className={`w-9 h-9 rounded-lg border flex items-center justify-center transition-all shadow-2xs ${
+              canScrollRight
+                ? "bg-white border-zinc-200/90 text-zinc-800 hover:text-[#E7040D] hover:bg-zinc-50 cursor-pointer active:scale-95"
+                : "bg-zinc-100/60 border-zinc-200/70 text-zinc-300 cursor-not-allowed"
+            }`}
             aria-label="Next company"
           >
             <CaretRight size={16} weight="bold" />

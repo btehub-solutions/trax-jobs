@@ -75,13 +75,12 @@ export function ExperienceSection() {
     <section className="w-full bg-white py-16 sm:py-20 px-6 sm:px-10 lg:px-16 border-b border-zinc-100 overflow-hidden">
       <div className="max-w-[1440px] mx-auto">
         {/* Section Header */}
-        <div className="mb-10 sm:mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111827] tracking-tight leading-tight mb-3">
+        <div className="mb-10 sm:mb-12 max-w-3xl">
+          <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] font-black text-[#1F1F1F] tracking-[-0.025em] leading-[1.18] mb-3">
             Explore opportunities that match your experience
           </h2>
-          <p className="text-base sm:text-lg text-zinc-600 font-normal">
-            Choose your level and discover jobs tailored to your experience and
-            career goals.
+          <p className="text-[15px] sm:text-[16.5px] text-zinc-600 font-normal leading-[1.7]">
+            Choose your level and discover jobs tailored to your experience and career goals.
           </p>
         </div>
 

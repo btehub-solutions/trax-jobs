@@ -51,11 +51,11 @@ export function TrendingSkillsSection({ courses }: TrendingSkillsSectionProps = 
         {/* Section Header with Trax Context and Carousel Controls */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-2.5 max-w-2xl">
-            <h2 className="text-[28px] sm:text-[36px] lg:text-[40px] font-extrabold text-zinc-950 tracking-tight leading-[1.2]">
+            <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] font-black text-[#1F1F1F] tracking-[-0.025em] leading-[1.18]">
               Build the skills leading African tech teams need today
             </h2>
 
-            <p className="text-[15px] sm:text-[16px] text-zinc-500 leading-relaxed max-w-xl">
+            <p className="text-[15px] sm:text-[16.5px] text-zinc-600 font-normal leading-[1.7] max-w-xl">
               Industry-vetted courses and practical masterclasses to accelerate your career and stand out to hiring managers.
             </p>
           </div>

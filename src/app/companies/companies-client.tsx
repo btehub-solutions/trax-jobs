@@ -602,10 +602,10 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                 >
                   {/* Upper Section: Cover Banner + Info Body */}
                   <div className="flex flex-col">
-                    {/* Cover Banner - Compact Proportional Height */}
+                    {/* Cover Banner - Proportional Height */}
                     <Link
                       href={`/companies/${comp.slug}`}
-                      className="block relative h-[135px] sm:h-[145px] w-full bg-zinc-950 overflow-hidden shrink-0"
+                      className="block relative h-[150px] sm:h-[155px] w-full bg-zinc-950 overflow-hidden shrink-0"
                     >
                       {comp.coverImage && (
                         <Image
@@ -620,8 +620,8 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                       
                       {comp.openJobsCount > 0 && (
-                        <div className="absolute top-2 right-2">
-                          <span className="px-1.5 py-0.5 rounded-[4px] bg-white/95 backdrop-blur-xs text-zinc-950 font-bold text-[9.5px] shadow-xs border border-white/60">
+                        <div className="absolute top-3 right-3">
+                          <span className="px-2 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-zinc-950 font-bold text-[10px] shadow-xs border border-white/60">
                             {comp.openJobsCount} {comp.openJobsCount === 1 ? "role" : "roles"}
                           </span>
                         </div>
@@ -629,44 +629,44 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                     </Link>
 
                     {/* Card Body */}
-                    <div className="p-3 sm:p-3.5 pb-1.5">
-                      {/* Logo + Company Name side-by-side on all screens */}
-                      <div className="flex items-center gap-2 mb-2">
+                    <div className="p-4 sm:p-4.5 pb-2">
+                      {/* Logo + Company Name side-by-side */}
+                      <div className="flex items-center gap-3 mb-3.5">
                         <Link href={`/companies/${comp.slug}`} className="shrink-0">
-                          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-1 overflow-hidden">
+                          <div className="w-11 h-11 rounded-xl bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-1.5 overflow-hidden">
                             {comp.logo ? (
-                              <Image src={comp.logo} alt={comp.name} width={32} height={32} className="object-contain w-full h-full" unoptimized />
+                              <Image src={comp.logo} alt={comp.name} width={36} height={36} className="object-contain w-full h-full" unoptimized />
                             ) : (
                               <CompanySquareMark name={comp.name} logo={comp.logo} accentColor={comp.accentColor} />
                             )}
                           </div>
                         </Link>
                         <div className="min-w-0 flex-1">
-                          <Link href={`/companies/${comp.slug}`} className="inline-flex items-center gap-1 hover:text-[#E7040D] transition-colors">
-                            <h2 className="text-[14px] sm:text-[14.5px] font-extrabold text-zinc-950 leading-tight tracking-tight line-clamp-2">
+                          <Link href={`/companies/${comp.slug}`} className="inline-flex items-center gap-1.5 hover:text-[#E7040D] transition-colors">
+                            <h2 className="text-[15.5px] sm:text-[16px] font-extrabold text-zinc-950 leading-tight tracking-tight line-clamp-1">
                               {comp.name}
                             </h2>
                           </Link>
                         </div>
                       </div>
 
-                      {/* Multi-Row Wrapped Metadata Badges matching reference layout */}
-                      <div className="flex flex-wrap items-center gap-1.5 content-start min-h-[68px] sm:min-h-[72px]">
+                      {/* Multi-Row Rounded Badge Pills matching reference layout */}
+                      <div className="flex flex-wrap items-center gap-2 content-start min-h-[76px] sm:min-h-[80px]">
                         {comp.employeesCount && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-[5px] bg-[#F4F4F5] text-zinc-800 text-[10.5px] sm:text-[11px] font-medium leading-none">
-                            <Users size={11} weight="bold" className="text-zinc-500 shrink-0" />
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
+                            <Users size={12} weight="bold" className="text-zinc-500 shrink-0" />
                             <span className="truncate max-w-[140px]">{comp.employeesCount}</span>
                           </span>
                         )}
                         {comp.location && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-[5px] bg-[#F4F4F5] text-zinc-800 text-[10.5px] sm:text-[11px] font-medium leading-none">
-                            <MapPin size={11} weight="bold" className="text-zinc-500 shrink-0" />
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
+                            <MapPin size={12} weight="bold" className="text-zinc-500 shrink-0" />
                             <span className="truncate max-w-[140px]">{comp.location.split("•")[0].trim()}</span>
                           </span>
                         )}
                         {comp.industry && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-[5px] bg-[#F4F4F5] text-zinc-800 text-[10.5px] sm:text-[11px] font-medium leading-none">
-                            <Tag size={11} weight="bold" className="text-zinc-500 shrink-0" />
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
+                            <Tag size={12} weight="bold" className="text-zinc-500 shrink-0" />
                             <span className="truncate max-w-[140px]">{comp.industry}</span>
                           </span>
                         )}
@@ -675,11 +675,11 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                   </div>
 
                   {/* Left-Aligned Follow Action Button */}
-                  <div className="p-3 sm:p-3.5 pt-0 pb-3 sm:pb-3.5 flex items-center justify-between gap-2">
+                  <div className="p-4 sm:p-4.5 pt-0 pb-4 sm:pb-4.5 flex items-center justify-between gap-2">
                     <button
                       type="button"
                       onClick={() => toggleFollow(comp.id)}
-                      className={`inline-flex items-center justify-center px-4 py-1.5 rounded-lg text-[11.5px] sm:text-[12px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${
+                      className={`inline-flex items-center justify-center px-5 py-2 rounded-xl text-[12.5px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${
                         isFollowed
                           ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D] shadow-2xs"
                           : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-950 shadow-2xs hover:border-zinc-300"
@@ -689,7 +689,7 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                     </button>
                     <Link
                       href={`/companies/${comp.slug}`}
-                      className="text-[11px] font-semibold text-zinc-500 hover:text-[#E7040D] transition-colors"
+                      className="text-[11.5px] font-semibold text-zinc-500 hover:text-[#E7040D] transition-colors"
                     >
                       View &rarr;
                     </Link>
