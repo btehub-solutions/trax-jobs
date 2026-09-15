@@ -7,6 +7,7 @@ import { TrendingSkillsSection } from "@/components/trending-skills-section";
 import { FeaturedCompaniesSection } from "@/components/featured-companies-section";
 import { SocialProofSection } from "@/components/social-proof-section";
 import { CareerGuidesSection } from "@/components/career-guides-section";
+import { TraxMediaSection } from "@/components/trax-media-section";
 import { TestimonialsTrustSection } from "@/components/testimonials-trust-section";
 import { Footer } from "@/components/footer";
 import { fetchCompanies, fetchPublishedCourses, fetchPublishedGuides, fetchPublishedJobs } from "@/sanity/fetchers";
@@ -126,7 +127,10 @@ export default async function Home() {
         {/* 8. Guide to getting hired (Nigerian Career Playbooks) */}
         <CareerGuidesSection guides={sanityGuides.length > 0 ? sanityGuides : undefined} />
 
-        {/* 9. Why people trust us (Verified Candidate Testimonials) */}
+        {/* 9. Stories from the ecosystem (Trax Media Cross-bridge) */}
+        <TraxMediaSection />
+
+        {/* 10. Why people trust us (Verified Candidate Testimonials) */}
         <TestimonialsTrustSection />
       </main>
 
