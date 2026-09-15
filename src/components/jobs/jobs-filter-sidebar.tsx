@@ -356,7 +356,7 @@ export function JobsFilterSidebar({
                         if (e.key === "Enter") handleApplyInputs();
                       }}
                       placeholder="e.g. AI Engineer, Product..."
-                      className="flex-1 h-9 px-3 rounded-none bg-white border border-zinc-200 text-[16px] sm:text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
+                      className="flex-1 h-9 px-3 rounded-none bg-white border border-zinc-200 text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
                     />
                     <button
                       type="button"
@@ -495,7 +495,7 @@ export function JobsFilterSidebar({
                         if (e.key === "Enter") handleApplyInputs();
                       }}
                       placeholder="e.g. Lagos, Ogun, Remote..."
-                      className="flex-1 h-9 px-3 rounded-none bg-white border border-zinc-200 text-[16px] sm:text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
+                      className="flex-1 h-9 px-3 rounded-none bg-white border border-zinc-200 text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
                     />
                     <button
                       type="button"

@@ -285,7 +285,7 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="appearance-none pl-3.5 pr-8 py-2 rounded-xl bg-white border border-zinc-200/90 text-[16px] sm:text-[13.5px] font-bold text-zinc-800 shadow-2xs focus:outline-hidden cursor-pointer hover:border-zinc-300"
+                  className="appearance-none pl-3.5 pr-8 py-2 rounded-xl bg-white border border-zinc-200/90 text-[13px] sm:text-[13.5px] font-bold text-zinc-800 shadow-2xs focus:outline-hidden cursor-pointer hover:border-zinc-300"
                 >
                   <option value="any-time">Any time</option>
                   <option value="past-24h">Past 24 hours</option>

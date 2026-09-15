@@ -248,13 +248,13 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
       </div>
 
       {/* Footer Row: Save Button & Date */}
-      <div className="flex items-center justify-between gap-2 pt-1">
-        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+      <div className="flex items-center justify-between pt-1">
+        <div className="flex items-center gap-3">
           {/* Save Button with 90-degree edges */}
           <button
             type="button"
             onClick={toggleSave}
-            className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-none text-[12px] sm:text-[12.5px] font-semibold border transition-all duration-150 cursor-pointer select-none active:scale-90 shrink-0 ${
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none text-[12.5px] font-semibold border transition-all duration-150 cursor-pointer select-none active:scale-90 ${
               isSaved
                 ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]"
                 : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F] shadow-2xs"
@@ -264,20 +264,20 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
             <span>{isSaved ? "Saved" : "Save"}</span>
           </button>
 
-          {/* Date with Calendar icon - Stays strictly on one line across all mobile screens */}
-          <div className="inline-flex items-center gap-1.5 text-[11.5px] sm:text-[12.5px] text-zinc-400 font-medium whitespace-nowrap shrink-0">
-            <CalendarBlank size={13} weight="regular" className="shrink-0" />
-            <span className="whitespace-nowrap">{formattedDate}</span>
+          {/* Date with Calendar icon */}
+          <div className="inline-flex items-center gap-1.5 text-[12.5px] text-zinc-400 font-medium ml-2">
+            <CalendarBlank size={14} weight="regular" />
+            <span>{formattedDate}</span>
           </div>
         </div>
 
         {/* Details Button (Navigates to Job Detail Page) */}
         <Link
           href={`/jobs/${job.slug || job.id}`}
-          className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-none bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] text-white text-[12px] sm:text-[12.5px] font-bold shadow-2xs transition-all duration-150 cursor-pointer select-none whitespace-nowrap shrink-0"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-none bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] text-white text-[12.5px] font-bold shadow-2xs transition-all duration-150 cursor-pointer select-none whitespace-nowrap"
         >
           <span>Details</span>
-          <ArrowUpRight size={13} weight="bold" className="shrink-0" />
+          <ArrowUpRight size={13} weight="bold" />
         </Link>
       </div>
 
