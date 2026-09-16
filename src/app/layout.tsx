@@ -81,8 +81,89 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
   },
+  manifest: "/manifest.webmanifest",
+  other: {
+    "geo.region": "NG-OG",
+    "geo.placename": "Abeokuta, Ogun State, Nigeria",
+    "geo.position": "7.1475;3.3619",
+    "ICBM": "7.1475, 3.3619",
+    "DC.title": "Trax Jobs: Curated African Tech Opportunities & Verified Talent Network",
+    "DC.creator": "Trax Media",
+    "DC.description": "Curated tech opportunities and elite talent from Ogun State and across Africa. Verified listings, direct hiring, and transparent compensation.",
+    "DC.publisher": "Trax Media",
+    "DC.coverage": "Africa, Nigeria, Ogun State, Lagos",
+    "ai-content-declaration": "curated-human-verified",
+  },
+};
+
+const jsonLdGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "Trax Jobs",
+      description: "Curated tech opportunities and elite talent from Ogun State and across Africa.",
+      publisher: {
+        "@id": `${siteUrl}/#organization`,
+      },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${siteUrl}/jobs?search={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
+      },
+      inLanguage: "en",
+    },
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: "Trax Jobs",
+      alternateName: ["Trax Media Jobs", "Trax Jobs Africa"],
+      url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/apple-icon.png`,
+        width: "180",
+        height: "180",
+      },
+      parentOrganization: {
+        "@type": "Organization",
+        name: "Trax Media",
+        url: "https://trax.ng",
+      },
+      sameAs: [
+        "https://trax.ng",
+        "https://x.com/traxmedia",
+        "https://linkedin.com/company/traxmedia",
+      ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "Customer Support & Partnerships",
+        email: "contact@trax.ng",
+        areaServed: "Africa",
+        availableLanguage: ["en"],
+      },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Abeokuta",
+        addressRegion: "Ogun State",
+        addressCountry: "NG",
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -92,6 +173,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
+        />
+      </head>
       <body>
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>

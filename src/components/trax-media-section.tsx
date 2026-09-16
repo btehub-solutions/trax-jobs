@@ -102,7 +102,7 @@ export function TraxMediaSection({ articles = TRAX_MEDIA_ARTICLES }: TraxMediaSe
               href="https://trax.ng"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white hover:bg-zinc-100 text-zinc-900 text-[13px] sm:text-[13.5px] font-bold border border-zinc-200/90 shadow-2xs transition-all duration-200 group"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-none bg-white hover:bg-zinc-100 text-zinc-900 text-[13px] sm:text-[13.5px] font-bold border border-zinc-200/90 shadow-2xs transition-all duration-200 group"
             >
               <span>View more on Trax Media</span>
               <ArrowUpRight size={14} weight="bold" className="text-zinc-500 group-hover:text-[#E7040D] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -113,14 +113,14 @@ export function TraxMediaSection({ articles = TRAX_MEDIA_ARTICLES }: TraxMediaSe
               <button
                 onClick={handlePrev}
                 aria-label="Previous story"
-                className="w-8.5 h-8.5 sm:w-9 sm:h-9 rounded-full flex items-center justify-center bg-white hover:bg-zinc-100 text-zinc-700 hover:text-[#E7040D] border border-zinc-200/90 shadow-2xs transition-colors cursor-pointer active:scale-95"
+                className="w-8.5 h-8.5 sm:w-9 sm:h-9 rounded-none flex items-center justify-center bg-white hover:bg-zinc-100 text-zinc-700 hover:text-[#E7040D] border border-zinc-200/90 shadow-2xs transition-colors cursor-pointer active:scale-95"
               >
                 <CaretLeft size={16} weight="bold" />
               </button>
               <button
                 onClick={handleNext}
                 aria-label="Next story"
-                className="w-8.5 h-8.5 sm:w-9 sm:h-9 rounded-full flex items-center justify-center bg-white hover:bg-zinc-100 text-zinc-700 hover:text-[#E7040D] border border-zinc-200/90 shadow-2xs transition-colors cursor-pointer active:scale-95"
+                className="w-8.5 h-8.5 sm:w-9 sm:h-9 rounded-none flex items-center justify-center bg-white hover:bg-zinc-100 text-zinc-700 hover:text-[#E7040D] border border-zinc-200/90 shadow-2xs transition-colors cursor-pointer active:scale-95"
               >
                 <CaretRight size={16} weight="bold" />
               </button>
@@ -144,8 +144,8 @@ export function TraxMediaSection({ articles = TRAX_MEDIA_ARTICLES }: TraxMediaSe
                 rel="noopener noreferrer"
                 className="group flex flex-col cursor-pointer select-none shrink-0 snap-center sm:snap-start w-[82vw] max-w-[350px] sm:max-w-none sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]"
               >
-                {/* Horizontal Landscape Media Image Container (Wider width, shorter height) */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[16px] sm:rounded-[20px] bg-zinc-100 shadow-[0_4px_20px_-4px_rgba(15,16,18,0.06)] border border-zinc-200/80">
+                {/* Horizontal Landscape Media Image Container - 90 Degree Square Geometry */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-none bg-zinc-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-zinc-200/90 group-hover:border-zinc-300 transition-colors">
                   <Image
                     src={card.image}
                     alt={card.title}

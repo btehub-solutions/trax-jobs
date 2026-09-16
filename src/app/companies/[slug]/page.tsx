@@ -178,5 +178,27 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
         },
       }));
 
-  return <CompanyDetailClient company={company} companyJobs={companyJobs} />;
+  const companySchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: company.name,
+    description: company.bio,
+    logo: company.logo,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: company.location || "Nigeria",
+      addressCountry: "NG",
+    },
+    sameAs: `https://jobs.trax.ng/companies/${company.slug}`,
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(companySchema) }}
+      />
+      <CompanyDetailClient company={company} companyJobs={companyJobs} />
+    </>
+  );
 }

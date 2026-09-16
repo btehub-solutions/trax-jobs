@@ -1,10 +1,30 @@
+import type { Metadata } from "next";
 import { fetchPublishedTalent } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { SAMPLE_TALENT } from "@/data/talent";
-import { extractText, extractStringList } from "@/lib/utils";
+import { extractText, extractStringList, extractSkillsList } from "@/lib/utils";
 import { TalentPageClient } from "./talent-client";
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: "Hire Vetted African Tech Talent",
+  description:
+    "Discover exceptional software engineers, designers, product managers, and data specialists across Nigeria and Africa. Contact directly via email or WhatsApp.",
+  openGraph: {
+    title: "Hire Vetted African Tech Talent | Trax Jobs",
+    description:
+      "Discover exceptional software engineers, designers, product managers, and data specialists across Nigeria and Africa. Contact directly via email or WhatsApp.",
+    url: "https://jobs.trax.ng/talent",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hire Vetted African Tech Talent | Trax Jobs",
+    description:
+      "Discover exceptional software engineers, designers, product managers, and data specialists across Nigeria and Africa.",
+  },
+};
 
 export default async function TalentPage() {
   const raw = await fetchPublishedTalent();
@@ -23,7 +43,7 @@ export default async function TalentPage() {
           experienceYears: t.experienceYears ?? "",
           location: t.location ?? "",
           workPreference: t.workPreference ?? "Remote",
-          skills: extractStringList(t.skills),
+          skills: extractSkillsList(t.skills),
           bio: extractText(t.bio),
           highlightMetric: t.highlightMetric ?? "",
           rate: t.rate ?? "",

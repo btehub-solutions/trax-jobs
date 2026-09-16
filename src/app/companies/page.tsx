@@ -1,9 +1,29 @@
+import type { Metadata } from "next";
 import { fetchCompanies } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { SAMPLE_COMPANIES } from "@/data/companies";
 import { CompaniesPageClient } from "./companies-client";
 
 export const revalidate = 60; // revalidate every 60 seconds
+
+export const metadata: Metadata = {
+  title: "Top Tech Companies Hiring in Nigeria & Africa",
+  description:
+    "Discover the innovative startups and technology companies building across Nigeria and Africa. Explore team cultures, active roles, and company benefits.",
+  openGraph: {
+    title: "Top Tech Companies Hiring in Nigeria & Africa | Trax Jobs",
+    description:
+      "Discover the innovative startups and technology companies building across Nigeria and Africa. Explore team cultures, active roles, and company benefits.",
+    url: "https://jobs.trax.ng/companies",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Top Tech Companies Hiring in Nigeria & Africa | Trax Jobs",
+    description:
+      "Discover the innovative startups and technology companies building across Nigeria and Africa.",
+  },
+};
 
 export default async function CompaniesPage() {
   const raw = await fetchCompanies();

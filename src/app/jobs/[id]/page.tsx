@@ -192,5 +192,60 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
     companyJobsCount = staticCompanyJobs.length || 1;
   }
 
-  return <JobDetailClient job={job} allCompanyJobsCount={companyJobsCount} />;
+  const isRemote = job.workplaceType?.toLowerCase().includes("remote");
+  const jobPostingSchema = {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: job.title,
+    description: job.description || job.summary,
+    datePosted: job.postedDate || new Date().toISOString(),
+    employmentType: job.contractType?.toUpperCase().includes("FULL") ? "FULL_TIME" : "CONTRACTOR",
+    hiringOrganization: {
+      "@type": "Organization",
+      name: job.company?.name || "Verified African Tech Company",
+      sameAs: `https://jobs.trax.ng/companies/${job.company?.slug || ""}`,
+      logo: job.company?.logo,
+    },
+    jobLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: job.location || "Lagos",
+        addressCountry: "NG",
+      },
+    },
+    ...(isRemote
+      ? {
+          jobLocationType: "TELECOMMUTE",
+          applicantLocationRequirements: {
+            "@type": "Country",
+            name: "Nigeria",
+          },
+        }
+      : {}),
+    ...(job.salary?.rawMin
+      ? {
+          baseSalary: {
+            "@type": "MonetaryAmount",
+            currency: "NGN",
+            value: {
+              "@type": "QuantitativeValue",
+              minValue: job.salary.rawMin,
+              maxValue: job.salary.rawMax || job.salary.rawMin,
+              unitText: "MONTH",
+            },
+          },
+        }
+      : {}),
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingSchema) }}
+      />
+      <JobDetailClient job={job} allCompanyJobsCount={companyJobsCount} />
+    </>
+  );
 }

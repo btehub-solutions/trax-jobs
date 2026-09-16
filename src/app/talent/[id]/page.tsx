@@ -3,7 +3,7 @@ import { fetchTalentBySlug, fetchPublishedTalent } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { SAMPLE_TALENT } from "@/data/talent";
 import { notFound } from "next/navigation";
-import { extractText, extractStringList } from "@/lib/utils";
+import { extractText, extractStringList, extractSkillsList } from "@/lib/utils";
 import TalentDetailClient from "./talent-detail-client";
 
 export const revalidate = 60;
@@ -73,8 +73,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 function mapTalent(t: any, fallbackStatic?: any) {
   if (!t) return null;
-  const parsedSkills = extractStringList(t.skills);
-  const finalSkills = parsedSkills.length > 0 ? parsedSkills : (fallbackStatic?.skills ?? []);
+  const parsedSkills = extractSkillsList(t.skills);
+  const finalSkills = parsedSkills.length > 0 ? parsedSkills : extractSkillsList(fallbackStatic?.skills ?? []);
 
   return {
     id: t._id,
@@ -135,5 +135,32 @@ export default async function TalentDetailPage({ params }: { params: Promise<{ i
     ).slice(0, 3);
   }
 
-  return <TalentDetailClient talent={talent} similarTalent={similar} />;
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    mainEntity: {
+      "@type": "Person",
+      name: talent.name,
+      jobTitle: talent.title,
+      description: talent.bio,
+      image: talent.avatar,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: talent.location || "Nigeria",
+        addressCountry: "NG",
+      },
+      sameAs: [talent.portfolioUrl, talent.githubUrl, talent.linkedinUrl].filter(Boolean),
+      knowsAbout: talent.skills || [],
+    },
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <TalentDetailClient talent={talent} similarTalent={similar} />
+    </>
+  );
 }

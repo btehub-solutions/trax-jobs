@@ -9,8 +9,8 @@ import {
   Users,
   MapPin,
   Tag,
-
   SealCheck,
+  Briefcase,
 } from "@phosphor-icons/react";
 import { BrandWordmark, ALL_AFRICAN_BRANDS } from "@/components/brand-wordmark";
 
@@ -20,15 +20,15 @@ import { BrandWordmark, ALL_AFRICAN_BRANDS } from "@/components/brand-wordmark";
 function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   if (logo) {
     return (
-      <div className="w-12 h-12 rounded-xl bg-white border border-zinc-200 flex items-center justify-center shrink-0 shadow-xs overflow-hidden p-1">
+      <div className="w-full h-full rounded-none bg-white flex items-center justify-center shrink-0 overflow-hidden p-1">
         <Image src={logo} alt={name} width={40} height={40} className="w-full h-full object-contain" />
       </div>
     );
   }
   if (name === "Paystack") {
     return (
-      <div className="w-12 h-12 rounded-xl bg-[#E8F8FF] border border-[#C7EFFF] flex items-center justify-center shrink-0 shadow-xs">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <div className="w-full h-full rounded-none bg-[#E8F8FF] flex items-center justify-center shrink-0 p-1.5">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="w-full h-full">
           <rect x="3" y="4" width="18" height="3.5" rx="1.75" fill="#0BA4DB" />
           <rect x="3" y="10.25" width="12" height="3.5" rx="1.75" fill="#0BA4DB" />
           <rect x="3" y="16.5" width="18" height="3.5" rx="1.75" fill="#0BA4DB" />
@@ -38,8 +38,8 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Flutterwave") {
     return (
-      <div className="w-12 h-12 rounded-xl bg-[#FFF3ED] border border-[#FFE0D1] flex items-center justify-center shrink-0 shadow-xs">
-        <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+      <div className="w-full h-full rounded-none bg-[#FFF3ED] flex items-center justify-center shrink-0 p-1.5">
+        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" className="w-full h-full">
           <path d="M6 16C6 10.477 10.477 6 16 6C19.5 6 22.5 7.8 24.2 10.5L20.8 13.9C19.6 12.4 17.9 11.5 16 11.5C13.515 11.5 11.5 13.515 11.5 16C11.5 18.485 13.515 20.5 16 20.5C17.9 20.5 19.6 19.6 20.8 18.1L24.2 21.5C22.5 24.2 19.5 26 16 26C10.477 26 6 21.523 6 16Z" fill="#F56522" />
           <path d="M16 6C21.523 6 26 10.477 26 16C26 21.523 21.523 26 16 26" stroke="#FFBA00" strokeWidth="3" strokeLinecap="round" />
         </svg>
@@ -48,8 +48,8 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Moniepoint") {
     return (
-      <div className="w-12 h-12 rounded-xl bg-[#EEF2FF] border border-[#D7E2FF] flex items-center justify-center shrink-0 shadow-xs">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <div className="w-full h-full rounded-none bg-[#EEF2FF] flex items-center justify-center shrink-0 p-1.5">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="w-full h-full">
           <path d="M3 6C3 4.89543 3.89543 4 5 4H7.5L12 11.5L16.5 4H19C20.1046 4 21 4.89543 21 6V18C21 19.1046 20.1046 20 19 20H16.5V11.5L12 19L7.5 11.5V20H5C3.89543 20 3 19.1046 3 18V6Z" fill="#0336FF" />
         </svg>
       </div>
@@ -57,8 +57,8 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Andela") {
     return (
-      <div className="w-12 h-12 rounded-xl bg-[#F0FDF4] border border-[#DCFCE7] flex items-center justify-center shrink-0 shadow-xs">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <div className="w-full h-full rounded-none bg-[#F0FDF4] flex items-center justify-center shrink-0 p-1.5">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="w-full h-full">
           <circle cx="12" cy="12" r="9" stroke="#16A34A" strokeWidth="2.5" />
           <path d="M12 6.5L17 16.5H7L12 6.5Z" fill="#16A34A" />
         </svg>
@@ -67,8 +67,8 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Kuda Bank") {
     return (
-      <div className="w-12 h-12 rounded-xl bg-[#F5F3FF] border border-[#E9E4FF] flex items-center justify-center shrink-0 shadow-xs">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <div className="w-full h-full rounded-none bg-[#F5F3FF] flex items-center justify-center shrink-0 p-1.5">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="w-full h-full">
           <rect width="24" height="24" rx="6" fill="#40196D" />
           <path d="M7 6V18M7 12L15 6M9.5 10L16.5 18" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -77,8 +77,8 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Interswitch") {
     return (
-      <div className="w-12 h-12 rounded-xl bg-[#FEF2F2] border border-[#FEE2E2] flex items-center justify-center shrink-0 shadow-xs">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <div className="w-full h-full rounded-none bg-[#FEF2F2] flex items-center justify-center shrink-0 p-1.5">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="w-full h-full">
           <circle cx="12" cy="12" r="9" fill="#DC2626" />
           <circle cx="12" cy="12" r="4.5" fill="white" />
           <circle cx="12" cy="12" r="2" fill="#DC2626" />
@@ -88,20 +88,20 @@ function CompanyVector({ name, logo }: { name: string; logo?: string }) {
   }
   if (name === "Moove") {
     return (
-      <div className="w-12 h-12 rounded-xl bg-[#F0FDF4] border border-[#DCFCE7] flex items-center justify-center shrink-0 shadow-xs font-black text-[#16A34A] text-[17px]">
+      <div className="w-full h-full rounded-none bg-[#F0FDF4] flex items-center justify-center shrink-0 font-black text-[#16A34A] text-[17px]">
         M
       </div>
     );
   }
   if (name === "Cowrywise") {
     return (
-      <div className="w-12 h-12 rounded-xl bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center shrink-0 shadow-xs font-black text-[#2563EB] text-[17px]">
+      <div className="w-full h-full rounded-none bg-[#EFF6FF] flex items-center justify-center shrink-0 font-black text-[#2563EB] text-[17px]">
         C
       </div>
     );
   }
   return (
-    <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl bg-zinc-100 border border-zinc-200 flex items-center justify-center shrink-0 font-bold text-[14px] text-zinc-700">
+    <div className="w-full h-full rounded-none bg-zinc-100 flex items-center justify-center shrink-0 font-bold text-[13px] text-zinc-700">
       {name[0]}
     </div>
   );
@@ -365,117 +365,114 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
             return (
               <div
                 key={company.name}
-                className="w-[280px] xs:w-[300px] sm:w-[240px] shrink-0 bg-white rounded-2xl border border-zinc-200/90 shadow-[0_4px_20px_-4px_rgba(15,16,18,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start select-none"
+                className="w-[300px] sm:w-[360px] md:w-[380px] shrink-0 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start select-none"
               >
-                {/* Upper Section: Cover Media + Info Body */}
-                <div className="flex flex-col">
-                  {/* 1. Cover Media */}
+                <div>
+                  {/* 1. Top Image Thumbnail Container */}
                   <Link
                     href={`/companies/${company.slug}`}
-                    className="relative h-[160px] sm:h-[150px] w-full bg-zinc-950 overflow-hidden shrink-0 block"
+                    className="relative h-[215px] sm:h-52 w-full bg-zinc-100 overflow-hidden block"
                   >
                     <Image
                       src={company.coverImage || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800"}
                       alt={`${company.name} office`}
                       fill
-                      sizes="(max-width: 640px) 300px, 240px"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                      sizes="(max-width: 640px) 300px, 380px"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
-                    {/* Floating Open Roles Pill */}
-                    {company.openRoles ? (
-                      <div className="absolute top-3 right-3">
-                        <span className="px-2 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-zinc-950 font-bold text-[10px] shadow-xs border border-white/60">
-                          {company.openRoles} roles
-                        </span>
-                      </div>
-                    ) : null}
+                    {/* Top-Right Floating Roles Badge (Trax Brand Red) */}
+                    <div className="absolute top-3 right-3 bg-[#E7040D] text-white text-[11.5px] font-bold px-2.5 py-1 rounded-none flex items-center gap-1 shadow-xs">
+                      <Briefcase size={13} weight="bold" className="text-white" />
+                      <span>
+                        {company.openRoles && company.openRoles > 0
+                          ? `${company.openRoles} ${company.openRoles === 1 ? "Role" : "Roles"}`
+                          : "1 Role"}
+                      </span>
+                    </div>
                   </Link>
 
-                  {/* 2. Company Details Body */}
-                  <div className="p-4 sm:p-4.5 pb-2">
-                    {/* Logo + Company Name */}
-                    <div className="flex items-center gap-3 mb-3.5">
-                      <Link href={`/companies/${company.slug}`} className="shrink-0">
-                        <div className="w-11 h-11 sm:w-11 sm:h-11 rounded-xl bg-[#FAF8F5] border border-zinc-200/90 flex items-center justify-center shrink-0 shadow-2xs overflow-hidden p-1.5">
-                          {company.logo ? (
-                            <Image src={company.logo} alt={company.name} width={36} height={36} className="w-full h-full object-contain" />
-                          ) : (
-                            <CompanyVector name={company.name} />
-                          )}
-                        </div>
-                      </Link>
-                      <div className="min-w-0 flex-1">
-                        <Link href={`/companies/${company.slug}`} className="inline-flex items-center gap-1.5 hover:text-[#E7040D] transition-colors">
-                          <h3 className="text-[16px] sm:text-[16.5px] font-extrabold text-zinc-950 leading-tight tracking-tight line-clamp-1">
-                            {company.name}
-                          </h3>
-                          <SealCheck size={14} weight="fill" className="text-[#E7040D] shrink-0" />
-                        </Link>
+                  {/* 2. Card Body Content */}
+                  <div className="p-5 space-y-3.5">
+                    {/* Sector / Category Pill Tag + Follow Button */}
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="inline-block px-3 py-1 bg-[#E0F2FE] text-[#0284C7] text-[12px] font-bold rounded-none">
+                        {company.category || company.industry || "Technology"}
+                      </span>
+
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          toggleFollow(company.slug);
+                        }}
+                        className={`px-2.5 py-0.5 rounded-none text-[11px] font-bold border transition-all cursor-pointer select-none active:scale-95 ${
+                          isFollowed
+                            ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]"
+                            : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-800 hover:border-zinc-400 shadow-2xs"
+                        }`}
+                      >
+                        {isFollowed ? "Following" : "Follow"}
+                      </button>
+                    </div>
+
+                    {/* Company Identity: Logo + Name + Verified Badge */}
+                    <Link
+                      href={`/companies/${company.slug}`}
+                      className="flex items-center gap-3 group/title"
+                    >
+                      <div className="w-11 h-11 rounded-none bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-1.5 overflow-hidden shrink-0">
+                        {company.logo ? (
+                          <Image
+                            src={company.logo}
+                            alt={company.name}
+                            width={36}
+                            height={36}
+                            className="w-full h-full object-contain"
+                          />
+                        ) : (
+                          <CompanyVector name={company.name} />
+                        )}
                       </div>
-                    </div>
+                      <div className="min-w-0 flex-1 flex items-center gap-1.5">
+                        <h3 className="text-[17px] font-bold text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
+                          {company.name}
+                        </h3>
+                        <SealCheck size={16} weight="fill" className="text-[#E7040D] shrink-0" />
+                      </div>
+                    </Link>
 
-                    {/* 2-line Bio / Pitch (Clean, Editorial, Not Crowded) */}
-                    {company.description ? (
-                      <p className="text-[12.5px] sm:text-[13px] text-zinc-600 leading-[1.5] line-clamp-2 mb-3 font-normal">
-                        {company.description}
-                      </p>
-                    ) : null}
-
-                    {/* 3. Multi-Row Stacked Metadata Badges */}
-                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 content-start min-h-[64px] sm:min-h-[68px]">
-                      {company.location && (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
-                          <MapPin size={12} weight="bold" className="text-zinc-500 shrink-0" />
-                          <span dangerouslySetInnerHTML={{ __html: company.location.split("&bull;")[0].trim() }} />
-                        </span>
-                      )}
-                      {company.size && (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
-                          <Users size={12} weight="bold" className="text-zinc-500 shrink-0" />
-                          <span>{company.size}</span>
-                        </span>
-                      )}
-                      {company.industry && (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
-                          <Tag size={12} weight="bold" className="text-zinc-500 shrink-0" />
-                          <span>{company.industry}</span>
-                        </span>
-                      )}
-                      {company.subIndustry && (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F5] text-zinc-800 text-[11.5px] font-medium leading-none">
-                          <Tag size={12} weight="bold" className="text-zinc-500 shrink-0" />
-                          <span>{company.subIndustry}</span>
-                        </span>
-                      )}
-                    </div>
+                    {/* 2-line Bio / Editorial Pitch */}
+                    <p className="text-[13px] text-zinc-600 leading-[1.6] line-clamp-2 min-h-[42px] font-normal">
+                      {company.description || "Leading technology team building transformative products across Africa."}
+                    </p>
                   </div>
                 </div>
 
-                {/* 4. Left-Aligned Follow Action Button + Open Roles Link */}
-                <div className="p-4 sm:p-4.5 pt-3 pb-4 sm:pb-4.5 flex items-center justify-between gap-2 border-t border-zinc-100/80 mt-2">
-                  <button
-                    type="button"
-                    onClick={() => toggleFollow(company.slug)}
-                    className={`inline-flex items-center justify-center px-4.5 py-1.5 rounded-xl text-[12px] font-bold border transition-all duration-150 cursor-pointer whitespace-nowrap select-none active:scale-95 ${isFollowed
-                        ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D] shadow-2xs"
-                        : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-950 shadow-2xs hover:border-zinc-300"
-                      }`}
-                  >
-                    {isFollowed ? "Following" : "Follow"}
-                  </button>
-                  <Link
-                    href={`/companies/${company.slug}`}
-                    className={`text-[12px] font-bold transition-colors inline-flex items-center gap-1 ${
-                      company.openRoles && company.openRoles > 0
-                        ? "text-[#E7040D] hover:underline"
-                        : "text-zinc-500 hover:text-[#E7040D]"
-                    }`}
-                  >
-                    <span>{company.openRoles && company.openRoles > 0 ? `View ${company.openRoles} roles` : "View"}</span>
-                    <span aria-hidden="true">&rarr;</span>
-                  </Link>
+                {/* 3. Bottom Metadata Divider Row (Exact Course Card Pattern) */}
+                <div className="px-5 pb-4">
+                  <div className="border-t border-zinc-100 pt-3.5 flex items-center justify-between text-[12.5px] text-zinc-500 font-medium">
+                    {/* Location */}
+                    <div className="flex items-center gap-1.5 truncate max-w-[55%]">
+                      <MapPin size={14} weight="regular" className="text-zinc-400 shrink-0" />
+                      <span className="truncate">
+                        {company.location?.split("&bull;")[0]?.split("•")[0]?.split(",")?.slice(0, 2)?.join(",")?.trim() || "Nigeria"}
+                      </span>
+                    </div>
+
+                    {/* Team Size */}
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <Users size={14} weight="regular" className="text-zinc-400 shrink-0" />
+                      <span>
+                        {company.size
+                          ? company.size.toLowerCase().includes("team") || company.size.toLowerCase().includes("employee")
+                            ? company.size
+                            : `${company.size} team`
+                          : "10 team"}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             );

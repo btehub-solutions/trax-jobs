@@ -85,61 +85,61 @@ export function Footer() {
             </div>
 
             <div className="flex flex-col gap-3 mt-12 lg:mt-auto pt-8">
-              {/* Clean Minimalist Social Icons Row */}
-              <div className="flex items-center gap-4 text-white/80">
+              {/* Clean Minimalist Social Icons Row (Expanded & Scaled for Mobile Viewports) */}
+              <div className="flex items-center justify-between sm:justify-start sm:gap-5 w-full max-w-[320px] sm:max-w-none text-white/80">
                 <a
                   href="https://x.com/traxmedia"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white transition-colors"
+                  className="p-1 sm:p-0 hover:text-white transition-colors flex items-center justify-center"
                   aria-label="Trax on X"
                 >
-                  <XLogo size={18} weight="bold" />
+                  <XLogo size={24} className="w-6 h-6 sm:w-[18px] sm:h-[18px]" weight="bold" />
                 </a>
                 <a
                   href="https://linkedin.com/company/trax-media"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white transition-colors"
+                  className="p-1 sm:p-0 hover:text-white transition-colors flex items-center justify-center"
                   aria-label="Trax on LinkedIn"
                 >
-                  <LinkedinLogo size={18} weight="fill" />
+                  <LinkedinLogo size={24} className="w-6 h-6 sm:w-[18px] sm:h-[18px]" weight="fill" />
                 </a>
                 <a
                   href="https://www.facebook.com/share/16KthtYMDY/?mibextid=wwXIfr"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white transition-colors"
+                  className="p-1 sm:p-0 hover:text-white transition-colors flex items-center justify-center"
                   aria-label="Trax on Facebook"
                 >
-                  <FacebookLogo size={18} weight="fill" />
+                  <FacebookLogo size={24} className="w-6 h-6 sm:w-[18px] sm:h-[18px]" weight="fill" />
                 </a>
                 <a
                   href="https://instagram.com/traxmedia"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white transition-colors"
+                  className="p-1 sm:p-0 hover:text-white transition-colors flex items-center justify-center"
                   aria-label="Trax on Instagram"
                 >
-                  <InstagramLogo size={18} weight="bold" />
+                  <InstagramLogo size={24} className="w-6 h-6 sm:w-[18px] sm:h-[18px]" weight="bold" />
                 </a>
                 <a
                   href="https://youtube.com/@traxmedia"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white transition-colors"
+                  className="p-1 sm:p-0 hover:text-white transition-colors flex items-center justify-center"
                   aria-label="Trax on YouTube"
                 >
-                  <YoutubeLogo size={18} weight="fill" />
+                  <YoutubeLogo size={24} className="w-6 h-6 sm:w-[18px] sm:h-[18px]" weight="fill" />
                 </a>
                 <a
                   href="https://wa.me/2347045422815?text=Hello%20Trax%20Jobs%20Desk"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white transition-colors"
+                  className="p-1 sm:p-0 hover:text-white transition-colors flex items-center justify-center"
                   aria-label="Chat with Trax on WhatsApp"
                 >
-                  <WhatsappLogo size={18} weight="fill" />
+                  <WhatsappLogo size={24} className="w-6 h-6 sm:w-[18px] sm:h-[18px]" weight="fill" />
                 </a>
               </div>
 

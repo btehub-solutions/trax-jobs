@@ -101,15 +101,15 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
           {/* Name & Role Title */}
           <div className="mb-3">
             <div className="flex items-center gap-1.5 mb-1">
-              <Link href={`/talent/${talent.slug || talent.id}`}>
-                <h2 className="text-[18px] sm:text-[19px] font-black text-[#1F1F1F] tracking-tight group-hover:text-[#E7040D] transition-colors">
+              <Link href={`/talent/${talent.slug || talent.id}`} className="min-w-0">
+                <h2 className="text-[18px] sm:text-[19px] font-black text-[#1F1F1F] tracking-tight group-hover:text-[#E7040D] transition-colors break-words">
                   {talent.name}
                 </h2>
               </Link>
               <SealCheck size={16} weight="fill" className="text-[#E7040D] shrink-0" />
             </div>
             
-            <p className="text-[13.5px] font-bold text-zinc-800 leading-snug">
+            <p className="text-[13.5px] font-bold text-zinc-800 leading-snug break-words">
               {talent.title}
             </p>
           </div>
@@ -128,36 +128,47 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
           </div>
 
           {/* Editorial Highlight Metric Badge (No AI Sparkle Icon) */}
-          <div className="mb-3.5 p-2.5 bg-[#FAF8F5] border-l-2 border-[#E7040D] flex items-center justify-between gap-2">
-            <div className="flex items-center gap-1.5 text-[12px] text-zinc-700">
-              <span className="font-bold text-zinc-900">{talent.highlightMetric}</span>
+          <div className="mb-3.5 p-2.5 bg-[#FAF8F5] border-l-2 border-[#E7040D] flex items-center justify-between gap-2 min-w-0">
+            <div className="flex items-center gap-1.5 text-[12px] text-zinc-700 min-w-0">
+              <span className="font-bold text-zinc-900 break-words">{talent.highlightMetric}</span>
             </div>
-            <span className="text-[10px] uppercase font-bold tracking-wider text-zinc-400">
+            <span className="text-[10px] uppercase font-bold tracking-wider text-zinc-400 shrink-0">
               Verified
             </span>
           </div>
 
           {/* Bio Summary */}
-          <p className="text-[13px] text-zinc-600 leading-relaxed line-clamp-2 mb-4">
+          <p className="text-[13px] text-zinc-600 leading-relaxed line-clamp-2 mb-4 break-words">
             {talent.bio}
           </p>
 
           {/* Skill Badges */}
-          <div className="flex flex-wrap gap-1.5 mb-5">
-            {talent.skills.slice(0, 5).map((skill) => (
-              <span
-                key={skill}
-                className="px-2 py-0.5 rounded-none bg-[#F5F5F7] text-[#1F1F1F] text-[11.5px] font-medium border border-zinc-200/60"
-              >
-                {skill}
-              </span>
-            ))}
-            {talent.skills.length > 5 && (
-              <span className="px-2 py-0.5 text-zinc-400 text-[11px] font-semibold">
-                +{talent.skills.length - 5} more
-              </span>
-            )}
-          </div>
+          {(() => {
+            const safeSkills = (talent.skills || [])
+              .flatMap((s: any) => {
+                const str = typeof s === "string" ? s : (s?.title || s?.name || s?.text || "");
+                return str.split(/[,;\n]+/).map((x: string) => x.trim());
+              })
+              .filter(Boolean);
+
+            return (
+              <div className="flex flex-wrap gap-1.5 mb-5">
+                {safeSkills.slice(0, 5).map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-2 py-0.5 rounded-none bg-[#F5F5F7] text-[#1F1F1F] text-[11.5px] font-medium border border-zinc-200/60 break-words max-w-full"
+                  >
+                    {skill}
+                  </span>
+                ))}
+                {safeSkills.length > 5 && (
+                  <span className="px-2 py-0.5 text-zinc-400 text-[11px] font-semibold shrink-0">
+                    +{safeSkills.length - 5} more
+                  </span>
+                )}
+              </div>
+            );
+          })()}
         </div>
 
         {/* Footer Actions: Contact & Hire */}

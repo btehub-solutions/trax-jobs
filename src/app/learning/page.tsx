@@ -1,9 +1,29 @@
+import type { Metadata } from "next";
 import { fetchPublishedCourses } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { COURSES_DATA, CourseDetail } from "@/data/courses";
 import { LearningClient } from "./learning-client";
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: "Tech Courses & Practical Learning Hub",
+  description:
+    "Master high-demand tech skills with curated practical courses led by African engineering and product leaders. Frontend, backend, AI, and design.",
+  openGraph: {
+    title: "Tech Courses & Practical Learning Hub | Trax Jobs",
+    description:
+      "Master high-demand tech skills with curated practical courses led by African engineering and product leaders. Frontend, backend, AI, and design.",
+    url: "https://jobs.trax.ng/learning",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tech Courses & Practical Learning Hub | Trax Jobs",
+    description:
+      "Master high-demand tech skills with curated practical courses led by African engineering and product leaders.",
+  },
+};
 
 function mapSanityCourse(c: any): CourseDetail {
   return {

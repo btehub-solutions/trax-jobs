@@ -101,6 +101,40 @@ export function extractStringList(input: any): string[] {
 }
 
 /**
+ * Safely extracts clean individual skill tags from strings, arrays, or objects.
+ * Intelligently splits comma-separated or newline-separated skill strings,
+ * trims excess whitespace, and deduplicates tags.
+ */
+export function extractSkillsList(input: any): string[] {
+  if (!input) return [];
+  const rawList = Array.isArray(input) ? input : typeof input === "string" ? [input] : [];
+  const skills: string[] = [];
+
+  for (const item of rawList) {
+    if (!item) continue;
+    const str =
+      typeof item === "string"
+        ? item
+        : typeof item === "object"
+        ? (item.title || item.name || item.text || (Array.isArray(item.children) ? item.children.map((c: any) => c.text).join("") : ""))
+        : String(item);
+
+    if (str) {
+      const parts = str.split(/[,;\n]+/).map((s: string) => s.trim()).filter(Boolean);
+      skills.push(...parts);
+    }
+  }
+
+  const seen = new Set<string>();
+  return skills.filter((s) => {
+    const lower = s.toLowerCase();
+    if (seen.has(lower)) return false;
+    seen.add(lower);
+    return true;
+  });
+}
+
+/**
  * Resolves job skill tags with intelligent extraction from requirements/title/category
  * so that the Skills & Expertise section is never blank.
  */

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { fetchPublishedJobs } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { SAMPLE_JOBS } from "@/data/jobs";
@@ -5,6 +6,25 @@ import { extractText, extractParagraphs, extractStringList, resolveJobTags } fro
 import { JobsPageClient } from "./jobs-client";
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: "Tech Jobs in Nigeria & Across Africa",
+  description:
+    "Explore verified engineering, design, product, and data roles across Nigeria and Africa. Transparent compensation, direct employer reach, and vetted companies.",
+  openGraph: {
+    title: "Tech Jobs in Nigeria & Across Africa | Trax Jobs",
+    description:
+      "Explore verified engineering, design, product, and data roles across Nigeria and Africa. Transparent compensation, direct employer reach, and vetted companies.",
+    url: "https://jobs.trax.ng/jobs",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tech Jobs in Nigeria & Across Africa | Trax Jobs",
+    description:
+      "Explore verified engineering, design, product, and data roles across Nigeria and Africa.",
+  },
+};
 
 export default async function JobsPage() {
   const raw = await fetchPublishedJobs();

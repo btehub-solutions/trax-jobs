@@ -6,6 +6,9 @@ import {
   fetchPublishedGuides,
   fetchPublishedCourses,
 } from "@/sanity/fetchers";
+import { SAMPLE_JOBS } from "@/data/jobs";
+import { SAMPLE_COMPANIES } from "@/data/companies";
+import { SAMPLE_TALENT } from "@/data/talent";
 import { GUIDES_DATA } from "@/data/guides";
 import { COURSES_DATA } from "@/data/courses";
 
@@ -61,8 +64,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 2. Dynamic Jobs
   const rawJobs = await fetchPublishedJobs();
-  const jobRoutes: MetadataRoute.Sitemap = (rawJobs ?? []).map((j: any) => ({
-    url: `${siteUrl}/jobs/${j.slug || j._id}`,
+  const jobsList = rawJobs && rawJobs.length > 0 ? rawJobs : SAMPLE_JOBS;
+  const jobRoutes: MetadataRoute.Sitemap = jobsList.map((j: any) => ({
+    url: `${siteUrl}/jobs/${j.slug || j._id || j.id}`,
     lastModified: j.publishedAt ? new Date(j.publishedAt) : now,
     changeFrequency: "weekly",
     priority: 0.8,
@@ -70,8 +74,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 3. Dynamic Companies
   const rawCompanies = await fetchCompanies();
-  const companyRoutes: MetadataRoute.Sitemap = (rawCompanies ?? []).map((c: any) => ({
-    url: `${siteUrl}/companies/${c.slug || c._id}`,
+  const companiesList = rawCompanies && rawCompanies.length > 0 ? rawCompanies : SAMPLE_COMPANIES;
+  const companyRoutes: MetadataRoute.Sitemap = companiesList.map((c: any) => ({
+    url: `${siteUrl}/companies/${c.slug || c._id || c.id}`,
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.8,
@@ -79,8 +84,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 4. Dynamic Talent
   const rawTalent = await fetchPublishedTalent();
-  const talentRoutes: MetadataRoute.Sitemap = (rawTalent ?? []).map((t: any) => ({
-    url: `${siteUrl}/talent/${t.slug || t._id}`,
+  const talentList = rawTalent && rawTalent.length > 0 ? rawTalent : SAMPLE_TALENT;
+  const talentRoutes: MetadataRoute.Sitemap = talentList.map((t: any) => ({
+    url: `${siteUrl}/talent/${t.slug || t._id || t.id}`,
     lastModified: t.publishedAt ? new Date(t.publishedAt) : now,
     changeFrequency: "weekly",
     priority: 0.8,

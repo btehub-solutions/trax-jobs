@@ -106,12 +106,17 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
   }, [talent]);
 
   const safeSkills = useMemo(() => {
-    return (talent.skills || []).map((s: any) => (typeof s === "string" ? s : (s?.title || s?.name || ""))).filter(Boolean);
+    return (talent.skills || [])
+      .flatMap((s: any) => {
+        const str = typeof s === "string" ? s : (s?.title || s?.name || s?.text || "");
+        return str.split(/[,;\n]+/).map((x: string) => x.trim());
+      })
+      .filter(Boolean);
   }, [talent.skills]);
 
   const keyAchievements = useMemo(() => [
     `Key Accomplishment: ${talent.highlightMetric || "Multiple high-impact projects delivered on time"}. Delivered tangible business outcomes and scaled production infrastructure with measured quality.`,
-    `Core Expertise: Proven leadership across ${safeSkills.slice(0, 3).join(", ") || "core technical domains"}. Strong track record in architecture, peer mentoring, and delivery.`,
+    `Core Expertise: Proven leadership across ${safeSkills.slice(0, 4).join(", ") || "core technical domains"}. Strong track record in architecture, peer mentoring, and delivery.`,
     `Work Approach: Fully equipped for ${talent.workPreference} collaboration with robust remote habits and proactive communication.`,
   ], [talent, safeSkills]);
 
@@ -257,11 +262,11 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
                     </span>
                   </div>
                 </div>
-                <div className="md:col-span-7 space-y-3">
+                <div className="md:col-span-7 space-y-3 min-w-0">
                   <h3 className="text-[11.5px] font-bold tracking-wider uppercase text-[#1F1F1F]">SKILLS &amp; EXPERTISE</h3>
                   <div className="flex flex-wrap items-center gap-2">
                     {safeSkills.map((skill: string, idx: number) => (
-                      <span key={idx} className="inline-flex items-center px-3 py-1.5 bg-[#FAFAFA] hover:bg-zinc-100 text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 transition-colors">{skill}</span>
+                      <span key={idx} className="inline-flex items-center px-3 py-1.5 bg-[#FAFAFA] hover:bg-zinc-100 text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 transition-colors break-words max-w-full">{skill}</span>
                     ))}
                   </div>
                 </div>
@@ -271,7 +276,7 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
                 <h3 className="text-[11.5px] font-bold tracking-wider uppercase text-[#1F1F1F] mb-4">KEY ACHIEVEMENTS &amp; FOCUS</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {keyAchievements.map((achievement, idx) => (
-                    <div key={idx} className="text-[13.5px] text-zinc-600 leading-relaxed font-normal">{achievement}</div>
+                    <div key={idx} className="text-[13.5px] text-zinc-600 leading-relaxed font-normal min-w-0 break-words [overflow-wrap:anywhere]">{achievement}</div>
                   ))}
                 </div>
               </div>
@@ -400,97 +405,100 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
               </div>
             </div>
 
-            {/* About the professional (Sticky on desktop once reached during scroll) */}
-            <div className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 space-y-6 lg:sticky lg:top-[76px]">
-              <div className="flex items-center gap-2">
-                <span className="w-4 h-1 bg-[#E7040D] inline-block" />
-                <h3 className="text-xl font-black text-[#1F1F1F] tracking-tight">About the professional</h3>
-              </div>
+            {/* Sticky Group: About the professional + Similar Talent */}
+            <div className="lg:sticky lg:top-[76px] space-y-6">
+              {/* About the professional */}
+              <div className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 space-y-6">
+                <div className="flex items-center gap-2">
+                  <span className="w-4 h-1 bg-[#E7040D] inline-block" />
+                  <h3 className="text-xl font-black text-[#1F1F1F] tracking-tight">About the professional</h3>
+                </div>
 
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 bg-zinc-100 border border-zinc-200/90 overflow-hidden relative shrink-0">
-                  {talent.avatar && (
-                    <Image src={talent.avatar} alt={talent.name} fill sizes="60px" className="object-cover object-top" unoptimized />
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 bg-zinc-100 border border-zinc-200/90 overflow-hidden relative shrink-0">
+                    {talent.avatar && (
+                      <Image src={talent.avatar} alt={talent.name} fill sizes="60px" className="object-cover object-top" unoptimized />
+                    )}
+                  </div>
+                  <div>
+                    <h4 className="text-[14px] font-black uppercase text-[#1F1F1F]">{talent.name}</h4>
+                    <p className="text-[12px] text-zinc-500 font-medium">{talent.category} • {talent.experienceLevel}</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 text-[12px] text-zinc-700 font-medium">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] border border-zinc-200/80">
+                    <Tag size={13} weight="bold" className="text-zinc-500" />
+                    <span>{talent.category}</span>
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] border border-zinc-200/80">
+                    <MapPin size={13} weight="bold" className="text-zinc-500" />
+                    <span>{talent.location}</span>
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[#E7040D] bg-[#fce8e0] px-3 py-1.5 font-bold border border-[#E7040D]/30">
+                    <ShieldCheck size={14} weight="fill" />
+                    <span>Vetted by Trax</span>
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-3 pt-1 text-[13px] font-bold flex-wrap">
+                  {talent.githubUrl && (
+                    <a href={talent.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-zinc-900 hover:text-[#E7040D] transition-colors">
+                      <GithubLogo size={15} weight="bold" />
+                      <span>GitHub</span>
+                    </a>
+                  )}
+                  {talent.linkedinUrl && (
+                    <>
+                      <span className="text-zinc-300">•</span>
+                      <a href={talent.linkedinUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-zinc-900 hover:text-[#E7040D] transition-colors">
+                        <LinkedinLogo size={15} weight="bold" />
+                        <span>LinkedIn</span>
+                      </a>
+                    </>
+                  )}
+                  {talent.portfolioUrl && (
+                    <>
+                      <span className="text-zinc-300">•</span>
+                      <a href={talent.portfolioUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-zinc-900 hover:text-[#E7040D] transition-colors">
+                        <Globe size={15} weight="bold" />
+                        <span>Portfolio</span>
+                      </a>
+                    </>
                   )}
                 </div>
-                <div>
-                  <h4 className="text-[14px] font-black uppercase text-[#1F1F1F]">{talent.name}</h4>
-                  <p className="text-[12px] text-zinc-500 font-medium">{talent.category} • {talent.experienceLevel}</p>
+
+                <div className="pt-4 border-t border-zinc-100 space-y-2">
+                  <h4 className="text-[14px] font-bold text-[#1F1F1F]">Trax Curation Note</h4>
+                  <p className="text-[13px] text-zinc-600 leading-relaxed">
+                    Profile, identity, and past contributions manually vetted by Trax Media editors to ensure authentic engineering credibility across Ogun State and wider African ecosystems.
+                  </p>
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2 text-[12px] text-zinc-700 font-medium">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] border border-zinc-200/80">
-                  <Tag size={13} weight="bold" className="text-zinc-500" />
-                  <span>{talent.category}</span>
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] border border-zinc-200/80">
-                  <MapPin size={13} weight="bold" className="text-zinc-500" />
-                  <span>{talent.location}</span>
-                </span>
-                <span className="inline-flex items-center gap-1 text-[#E7040D] bg-[#fce8e0] px-3 py-1.5 font-bold border border-[#E7040D]/30">
-                  <ShieldCheck size={14} weight="fill" />
-                  <span>Vetted by Trax</span>
-                </span>
-              </div>
-
-              <div className="flex items-center gap-3 pt-1 text-[13px] font-bold flex-wrap">
-                {talent.githubUrl && (
-                  <a href={talent.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-zinc-900 hover:text-[#E7040D] transition-colors">
-                    <GithubLogo size={15} weight="bold" />
-                    <span>GitHub</span>
-                  </a>
-                )}
-                {talent.linkedinUrl && (
-                  <>
-                    <span className="text-zinc-300">•</span>
-                    <a href={talent.linkedinUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-zinc-900 hover:text-[#E7040D] transition-colors">
-                      <LinkedinLogo size={15} weight="bold" />
-                      <span>LinkedIn</span>
-                    </a>
-                  </>
-                )}
-                {talent.portfolioUrl && (
-                  <>
-                    <span className="text-zinc-300">•</span>
-                    <a href={talent.portfolioUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-zinc-900 hover:text-[#E7040D] transition-colors">
-                      <Globe size={15} weight="bold" />
-                      <span>Portfolio</span>
-                    </a>
-                  </>
-                )}
-              </div>
-
-              <div className="pt-4 border-t border-zinc-100 space-y-2">
-                <h4 className="text-[14px] font-bold text-[#1F1F1F]">Trax Curation Note</h4>
-                <p className="text-[13px] text-zinc-600 leading-relaxed">
-                  Profile, identity, and past contributions manually vetted by Trax Media editors to ensure authentic engineering credibility across Ogun State and wider African ecosystems.
-                </p>
-              </div>
+              {similarTalent.length > 0 && (
+                <div className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 space-y-4">
+                  <h3 className="text-base font-black text-[#1F1F1F] tracking-tight">Similar {talent.category} Talent</h3>
+                  <div className="space-y-3">
+                    {similarTalent.map((simTalent) => (
+                      <Link key={simTalent.id} href={`/talent/${simTalent.slug}`} className="block p-3 border border-zinc-200/70 hover:border-[#E7040D]/40 transition-colors group">
+                        <div className="flex items-start gap-2.5">
+                          <div className="w-8 h-8 bg-zinc-100 border border-zinc-200 overflow-hidden relative shrink-0">
+                            {simTalent.avatar && (
+                              <Image src={simTalent.avatar} alt={simTalent.name} fill sizes="32px" className="object-cover object-top" unoptimized />
+                            )}
+                          </div>
+                          <div className="min-w-0">
+                            <h4 className="text-[13.5px] font-bold text-zinc-900 group-hover:text-[#E7040D] transition-colors truncate">{simTalent.name}</h4>
+                            <p className="text-[12px] text-zinc-500 truncate">{simTalent.title} • {simTalent.location}</p>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-
-            {similarTalent.length > 0 && (
-              <div className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 space-y-4">
-                <h3 className="text-base font-black text-[#1F1F1F] tracking-tight">Similar {talent.category} Talent</h3>
-                <div className="space-y-3">
-                  {similarTalent.map((simTalent) => (
-                    <Link key={simTalent.id} href={`/talent/${simTalent.slug}`} className="block p-3 border border-zinc-200/70 hover:border-[#E7040D]/40 transition-colors group">
-                      <div className="flex items-start gap-2.5">
-                        <div className="w-8 h-8 bg-zinc-100 border border-zinc-200 overflow-hidden relative shrink-0">
-                          {simTalent.avatar && (
-                            <Image src={simTalent.avatar} alt={simTalent.name} fill sizes="32px" className="object-cover object-top" unoptimized />
-                          )}
-                        </div>
-                        <div className="min-w-0">
-                          <h4 className="text-[13.5px] font-bold text-zinc-900 group-hover:text-[#E7040D] transition-colors truncate">{simTalent.name}</h4>
-                          <p className="text-[12px] text-zinc-500 truncate">{simTalent.title} • {simTalent.location}</p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
 
           </div>
         </div>
