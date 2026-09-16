@@ -245,7 +245,7 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
     <div className="min-h-screen bg-[#FAF8F5] flex flex-col justify-between">
       <AppHeader activeTab="jobs" />
 
-      <main className="flex-1 w-full max-w-[1280px] mx-auto py-8 px-6 sm:px-8 lg:px-10">
+      <main className="flex-1 w-full max-w-[1280px] mx-auto py-6 sm:py-8 px-4 sm:px-8 lg:px-10">
         <div className="flex flex-col lg:flex-row items-start gap-8">
 
           <JobsFilterSidebar

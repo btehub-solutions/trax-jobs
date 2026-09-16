@@ -87,7 +87,7 @@ function JobsPreviewInner({ jobs }: { jobs: any[] }) {
         </div>
       </header>
 
-      <main className="flex-1 w-full max-w-[1280px] mx-auto py-8 px-6 sm:px-8 lg:px-10">
+      <main className="flex-1 w-full max-w-[1280px] mx-auto py-6 sm:py-8 px-4 sm:px-8 lg:px-10">
         <div className="flex flex-col lg:flex-row items-start gap-8">
 
           <JobsFilterSidebar filters={filters} onChange={setFilters} onReset={handleResetFilters} onOpenWizard={() => {}} />

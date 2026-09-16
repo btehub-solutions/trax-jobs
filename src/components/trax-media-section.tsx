@@ -97,7 +97,7 @@ export function TraxMediaSection({ articles = TRAX_MEDIA_ARTICLES }: TraxMediaSe
             </p>
           </div>
 
-          <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
+          <div className="flex items-center justify-start sm:justify-end gap-3 w-full sm:w-auto">
             <a
               href="https://trax.ng"
               target="_blank"
@@ -108,8 +108,8 @@ export function TraxMediaSection({ articles = TRAX_MEDIA_ARTICLES }: TraxMediaSe
               <ArrowUpRight size={14} weight="bold" className="text-zinc-500 group-hover:text-[#E7040D] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
 
-            {/* Pagination Controls */}
-            <div className="flex items-center gap-1.5 ml-1">
+            {/* Carousel Arrow Switcher (Hidden on Mobile, Visible on Tablet/Desktop) */}
+            <div className="hidden sm:flex items-center gap-1.5 ml-1">
               <button
                 onClick={handlePrev}
                 aria-label="Previous story"
@@ -175,22 +175,6 @@ export function TraxMediaSection({ articles = TRAX_MEDIA_ARTICLES }: TraxMediaSe
               </a>
             );
           })}
-        </div>
-
-        {/* Carousel Pagination Dots (Mobile Only) */}
-        <div className="flex sm:hidden items-center justify-center gap-2 mt-6 px-6">
-          {articles.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => scrollToIndex(idx)}
-              aria-label={`Go to story ${idx + 1}`}
-              className={`transition-all duration-300 rounded-full cursor-pointer ${
-                activeIndex === idx
-                  ? "w-2.5 h-2.5 bg-[#E7040D]"
-                  : "w-2 h-2 bg-zinc-300 hover:bg-[#E7040D]/40"
-              }`}
-            />
-          ))}
         </div>
 
       </div>
