@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
+import { NetworkStatusBanner } from "@/components/network-status";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://jobs.trax.ng";
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
     title: "Trax Jobs: Curated Tech Opportunities in Africa",
     description:
       "Curated tech opportunities and elite talent from Ogun State and across Africa.",
-    creator: "@traxmedia",
+    creator: "@trax_newsng",
     images: [
       {
         url: "/opengraph-image",
@@ -146,8 +147,11 @@ const jsonLdGraph = {
       },
       sameAs: [
         "https://trax.ng",
-        "https://x.com/traxmedia",
-        "https://linkedin.com/company/traxmedia",
+        "https://x.com/trax_newsng",
+        "https://www.linkedin.com/in/traxnewsng",
+        "https://www.instagram.com/trax_newsng",
+        "https://www.facebook.com/profile.php?id=61593926825413",
+        "https://youtube.com/@trax_newsng",
       ],
       contactPoint: {
         "@type": "ContactPoint",
@@ -180,6 +184,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <NetworkStatusBanner />
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>

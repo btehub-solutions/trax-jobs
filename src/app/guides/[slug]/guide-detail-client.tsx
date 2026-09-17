@@ -216,7 +216,7 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
                 <p>
                   Follow Trax Jobs on{" "}
                   <a
-                    href="https://x.com/traxmedia"
+                    href="https://x.com/trax_newsng"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-zinc-800 font-semibold underline"
@@ -225,12 +225,21 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
                   </a>
                   ,{" "}
                   <a
-                    href="https://linkedin.com/company/trax-media"
+                    href="https://www.linkedin.com/in/traxnewsng?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-zinc-800 font-semibold underline"
                   >
                     LinkedIn
+                  </a>
+                  ,{" "}
+                  <a
+                    href="https://www.instagram.com/trax_newsng?stkn=am9pMm92MXJpbnVh"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-zinc-800 font-semibold underline"
+                  >
+                    Instagram
                   </a>
                   , and subscribe to our newsletter for weekly ecosystem job drops and career playbooks.
                 </p>

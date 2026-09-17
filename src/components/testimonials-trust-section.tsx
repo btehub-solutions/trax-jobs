@@ -13,7 +13,7 @@ const TESTIMONIALS = [
     role: "Senior Product Designer",
     company: "Moniepoint",
     location: "Lagos, NG",
-    avatar: "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=150",
+    avatar: "https://images.pexels.com/photos/935988/pexels-photo-935988.jpeg?auto=compress&cs=tinysrgb&w=300",
     initials: "NA",
     rating: 5,
     quote:
@@ -25,7 +25,7 @@ const TESTIMONIALS = [
     role: "Lead Backend Engineer",
     company: "Paystack",
     location: "Lagos / Remote",
-    avatar: "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=150",
+    avatar: "https://images.pexels.com/photos/935969/pexels-photo-935969.jpeg?auto=compress&cs=tinysrgb&w=300",
     initials: "PM",
     rating: 5,
     quote:
@@ -37,7 +37,7 @@ const TESTIMONIALS = [
     role: "Infrastructure & DevOps",
     company: "Flutterwave",
     location: "Abuja, NG",
-    avatar: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=150",
+    avatar: "https://images.pexels.com/photos/935987/pexels-photo-935987.jpeg?auto=compress&cs=tinysrgb&w=300",
     initials: "EE",
     rating: 5,
     quote:
@@ -49,7 +49,7 @@ const TESTIMONIALS = [
     role: "Mobile App Lead (iOS)",
     company: "Kuda Bank",
     location: "Lagos, NG",
-    avatar: "https://images.pexels.com/photos/3777943/pexels-photo-3777943.jpeg?auto=compress&cs=tinysrgb&w=150",
+    avatar: "https://images.pexels.com/photos/3848184/pexels-photo-3848184.jpeg?auto=compress&cs=tinysrgb&w=300",
     initials: "AY",
     rating: 5,
     quote:
@@ -61,7 +61,7 @@ const TESTIMONIALS = [
     role: "Data Systems Architect",
     company: "Interswitch",
     location: "Lagos, NG",
-    avatar: "https://images.pexels.com/photos/3778680/pexels-photo-3778680.jpeg?auto=compress&cs=tinysrgb&w=150",
+    avatar: "https://images.pexels.com/photos/935966/pexels-photo-935966.jpeg?auto=compress&cs=tinysrgb&w=300",
     initials: "CO",
     rating: 5,
     quote:

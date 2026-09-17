@@ -2,6 +2,7 @@ import { Navbar } from "@/components/navbar";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { HeroSection } from "@/components/hero-section";
 import { ExperienceSection } from "@/components/experience-section";
+import { HowItWorksSection } from "@/components/how-it-works-section";
 import { WhyTraxSection } from "@/components/why-trax-section";
 import { TrendingSkillsSection } from "@/components/trending-skills-section";
 import { FeaturedCompaniesSection } from "@/components/featured-companies-section";
@@ -111,6 +112,9 @@ export default async function Home() {
 
         {/* 4. Explore opportunities by experience level */}
         <ExperienceSection counts={experienceCounts} />
+
+        {/* 4b. How it works (Direct Curation & Workflow) */}
+        <HowItWorksSection />
 
         {/* 5. Choose the company that's meant for you (Featured Companies) */}
         <FeaturedCompaniesSection companies={sanityCompanies.length > 0 ? sanityCompanies : undefined} />

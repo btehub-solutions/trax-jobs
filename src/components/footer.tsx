@@ -88,7 +88,7 @@ export function Footer() {
               {/* Clean Minimalist Social Icons Row (Expanded & Scaled for Mobile Viewports) */}
               <div className="flex items-center justify-between sm:justify-start sm:gap-5 w-full max-w-[320px] sm:max-w-none text-white/80">
                 <a
-                  href="https://x.com/traxmedia"
+                  href="https://x.com/trax_newsng"
                   target="_blank"
                   rel="noreferrer"
                   className="p-1 sm:p-0 hover:text-white transition-colors flex items-center justify-center"
@@ -97,7 +97,7 @@ export function Footer() {
                   <XLogo size={24} className="w-6 h-6 sm:w-[18px] sm:h-[18px]" weight="bold" />
                 </a>
                 <a
-                  href="https://linkedin.com/company/trax-media"
+                  href="https://www.linkedin.com/in/traxnewsng?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                   target="_blank"
                   rel="noreferrer"
                   className="p-1 sm:p-0 hover:text-white transition-colors flex items-center justify-center"
@@ -106,7 +106,7 @@ export function Footer() {
                   <LinkedinLogo size={24} className="w-6 h-6 sm:w-[18px] sm:h-[18px]" weight="fill" />
                 </a>
                 <a
-                  href="https://www.facebook.com/share/16KthtYMDY/?mibextid=wwXIfr"
+                  href="https://www.facebook.com/profile.php?id=61593926825413"
                   target="_blank"
                   rel="noreferrer"
                   className="p-1 sm:p-0 hover:text-white transition-colors flex items-center justify-center"
@@ -115,7 +115,7 @@ export function Footer() {
                   <FacebookLogo size={24} className="w-6 h-6 sm:w-[18px] sm:h-[18px]" weight="fill" />
                 </a>
                 <a
-                  href="https://instagram.com/traxmedia"
+                  href="https://www.instagram.com/trax_newsng?stkn=am9pMm92MXJpbnVh"
                   target="_blank"
                   rel="noreferrer"
                   className="p-1 sm:p-0 hover:text-white transition-colors flex items-center justify-center"
@@ -124,7 +124,7 @@ export function Footer() {
                   <InstagramLogo size={24} className="w-6 h-6 sm:w-[18px] sm:h-[18px]" weight="bold" />
                 </a>
                 <a
-                  href="https://youtube.com/@traxmedia"
+                  href="https://youtube.com/@trax_newsng?si=tQabHiza3kXgrhgV"
                   target="_blank"
                   rel="noreferrer"
                   className="p-1 sm:p-0 hover:text-white transition-colors flex items-center justify-center"
