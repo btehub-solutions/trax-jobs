@@ -41,7 +41,7 @@ const HIRING_STEPS: StepCard[] = [
   },
   {
     id: "hiring-step-3",
-    title: "Connect directly with zero commission",
+    title: "Connect with zero commission",
     description: "Engage candidates directly through WhatsApp or email with zero intermediary fees.",
     type: "photo",
     image: "https://images.pexels.com/photos/37118089/pexels-photo-37118089.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -269,7 +269,7 @@ export function HowItWorksSection() {
               {/* Text Information Below Card */}
               <div className="mt-4 flex flex-col">
                 <Link href={step.href} className="group-hover:text-[#E7040D] transition-colors duration-200">
-                  <h3 className="text-[18px] sm:text-[20px] font-bold text-[#1F1F1F] tracking-[-0.015em] leading-[1.3] group-hover:text-[#E7040D] transition-colors duration-200">
+                  <h3 className="text-[18px] sm:text-[20px] font-bold text-[#1F1F1F] tracking-[-0.015em] leading-[1.3] group-hover:text-[#E7040D] transition-colors duration-200 line-clamp-2">
                     {step.title}
                   </h3>
                 </Link>
