@@ -308,7 +308,7 @@ export function WhyTraxSection() {
                       </p>
                       <div className="relative w-15 h-15 rounded-[6px] overflow-hidden shadow-2xs border-2 border-[#FBBF24] mb-1.5">
                         <Image
-                          src="https://images.pexels.com/photos/3777943/pexels-photo-3777943.jpeg?auto=compress&cs=tinysrgb&w=400"
+                          src="https://images.pexels.com/photos/1181695/pexels-photo-1181695.jpeg?auto=compress&cs=tinysrgb&w=400"
                           alt="Amara Osei"
                           fill
                           sizes="75px"
@@ -442,7 +442,7 @@ export function WhyTraxSection() {
                         </div>
                         <div className="relative w-full flex-1 overflow-hidden">
                           <Image
-                            src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            src="https://images.pexels.com/photos/28426642/pexels-photo-28426642.jpeg?auto=compress&cs=tinysrgb&w=400"
                             alt="Tolu, VP Engineering"
                             fill
                             sizes="95px"
@@ -741,7 +741,7 @@ export function WhyTraxSection() {
                   {/* Avatar Portrait: Amara Osei */}
                   <div className="relative w-16 h-16 rounded-xl overflow-hidden shadow-2xs border-2 border-[#FBBF24] mb-2">
                     <Image
-                      src="https://images.pexels.com/photos/3777943/pexels-photo-3777943.jpeg?auto=compress&cs=tinysrgb&w=400"
+                      src="https://images.pexels.com/photos/1181695/pexels-photo-1181695.jpeg?auto=compress&cs=tinysrgb&w=400"
                       alt="Amara Osei"
                       fill
                       sizes="80px"
@@ -985,7 +985,7 @@ export function WhyTraxSection() {
                     </div>
                     <div className="relative w-full flex-1 overflow-hidden">
                       <Image
-                        src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400"
+                        src="https://images.pexels.com/photos/28426642/pexels-photo-28426642.jpeg?auto=compress&cs=tinysrgb&w=400"
                         alt="Meet Tolu, VP Engineering"
                         fill
                         sizes="(max-width: 640px) 100vw, 180px"
