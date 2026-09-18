@@ -439,105 +439,54 @@ function AboutPageContent() {
                 </svg>
               </div>
 
-              {/* 6 Arched Team Portait Cards in a Staggered Wave */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-5 items-end relative z-10">
+              {/* 3 Arched Team Portrait Cards in a Balanced Triptych Wave */}
+              <div className="max-w-4xl mx-auto grid grid-cols-3 gap-3 sm:gap-6 lg:gap-8 items-end relative z-10">
                 
-                {/* 1. Team Member 1 (Research & Tech Reporter) */}
+                {/* 1. Team Member 1 (Left Arch) */}
                 <div className="flex flex-col items-center">
                   {/* Floating Geometric Accent */}
                   <div className="w-3.5 h-3.5 bg-[#06B6D4] rotate-45 mb-2.5 shadow-2xs" />
-                  <div className="h-[270px] sm:h-[310px] lg:h-[340px] w-full bg-[#1F1F1F] rounded-t-[100px] relative overflow-hidden flex items-end group shadow-sm">
+                  <div className="h-[230px] xs:h-[280px] sm:h-[340px] lg:h-[390px] w-full bg-[#1F1F1F] rounded-t-[70px] sm:rounded-t-[110px] relative overflow-hidden flex items-end group shadow-sm">
                     <Image
-                      src="/images/team-1.jpg"
-                      alt="Trax Tech Reporter and Research Analyst"
+                      src="/images/team-member-1.jpg"
+                      alt="Trax Team Member"
                       fill
                       priority
-                      sizes="(max-width: 768px) 50vw, 220px"
+                      sizes="(max-width: 768px) 33vw, 260px"
                       className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                   </div>
                 </div>
 
-                {/* 2. Team Member 2 (Partnerships & Growth) */}
-                <div className="flex flex-col items-center">
-                  {/* Floating Geometric Accent */}
-                  <div className="w-3.5 h-3.5 bg-[#F59E0B] rounded-full mb-2.5 shadow-2xs" />
-                  <div className="h-[300px] sm:h-[350px] lg:h-[390px] w-full bg-[#1F1F1F] rounded-t-[110px] relative overflow-hidden flex items-end group shadow-sm">
-                    <Image
-                      src="/images/team-2.jpg"
-                      alt="Trax Head of Ecosystem Partnerships"
-                      fill
-                      priority
-                      sizes="(max-width: 768px) 50vw, 220px"
-                      className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                  </div>
-                </div>
-
-                {/* 3. Ben Sam Oladoyin (Founder & Publisher - Prominent Center Arch) */}
+                {/* 2. Ben Sam Oladoyin (Founder & Publisher - Prominent Center Arch) */}
                 <div className="flex flex-col items-center">
                   {/* Floating Geometric Accent (Trax Brand Red) */}
                   <div className="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[12px] border-b-[#E7040D] mb-2.5 shadow-2xs" />
-                  <div className="h-[340px] sm:h-[390px] lg:h-[450px] w-full bg-[#1F1F1F] rounded-t-[130px] relative overflow-hidden flex items-end group border border-[#E7040D]/30 shadow-md">
+                  <div className="h-[270px] xs:h-[330px] sm:h-[400px] lg:h-[460px] w-full bg-[#1F1F1F] rounded-t-[85px] sm:rounded-t-[130px] relative overflow-hidden flex items-end group border border-[#E7040D]/30 shadow-md">
                     <Image
                       src="/images/founder.jpg"
                       alt="Ben Sam Oladoyin, Founder & Publisher of Trax Media"
                       fill
                       priority
-                      sizes="(max-width: 768px) 50vw, 240px"
+                      sizes="(max-width: 768px) 34vw, 300px"
                       className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                   </div>
                 </div>
 
-                {/* 4. Team Member 4 (Platform & Technical Architecture) */}
-                <div className="flex flex-col items-center">
-                  {/* Floating Geometric Accent */}
-                  <div className="w-3.5 h-3.5 bg-[#8B5CF6] rounded-full mb-2.5 shadow-2xs" />
-                  <div className="h-[320px] sm:h-[370px] lg:h-[410px] w-full bg-[#1F1F1F] rounded-t-[120px] relative overflow-hidden flex items-end group shadow-sm">
-                    <Image
-                      src="/images/team-4.jpg"
-                      alt="Trax Platform Architect and Lead Engineer"
-                      fill
-                      priority
-                      sizes="(max-width: 768px) 50vw, 220px"
-                      className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                  </div>
-                </div>
-
-                {/* 5. Team Member 5 (Head of Talent Curation) */}
+                {/* 3. Team Member 2 (Right Arch) */}
                 <div className="flex flex-col items-center">
                   {/* Floating Geometric Accent */}
                   <div className="w-3.5 h-3.5 bg-[#10B981] rotate-45 mb-2.5 shadow-2xs" />
-                  <div className="h-[280px] sm:h-[320px] lg:h-[360px] w-full bg-[#1F1F1F] rounded-t-[100px] relative overflow-hidden flex items-end group shadow-sm">
+                  <div className="h-[230px] xs:h-[280px] sm:h-[340px] lg:h-[390px] w-full bg-[#1F1F1F] rounded-t-[70px] sm:rounded-t-[110px] relative overflow-hidden flex items-end group shadow-sm">
                     <Image
-                      src="/images/team-5.jpg"
-                      alt="Trax Head of Talent Curation and Vetting"
+                      src="/images/team-member-2.jpg"
+                      alt="Trax Team Member"
                       fill
                       priority
-                      sizes="(max-width: 768px) 50vw, 220px"
-                      className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                  </div>
-                </div>
-
-                {/* 6. Team Member 6 (Community & Ecosystem Growth) */}
-                <div className="flex flex-col items-center">
-                  {/* Floating Geometric Accent */}
-                  <div className="w-3.5 h-3.5 bg-[#0C1222] rotate-12 mb-2.5 shadow-2xs" />
-                  <div className="h-[300px] sm:h-[340px] lg:h-[380px] w-full bg-[#1F1F1F] rounded-t-[110px] relative overflow-hidden flex items-end group shadow-sm">
-                    <Image
-                      src="/images/team-6.jpg"
-                      alt="Trax Community and Growth Director"
-                      fill
-                      priority
-                      sizes="(max-width: 768px) 50vw, 220px"
+                      sizes="(max-width: 768px) 33vw, 260px"
                       className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
