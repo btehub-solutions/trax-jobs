@@ -175,13 +175,13 @@ export function SocialProofSection() {
             </div>
 
             {/* Floating Card 2: Left Side (Editorial Note Card) */}
-            <div className="absolute bottom-8 left-0 sm:bottom-12 sm:left-0 md:left-2 w-[175px] xs:w-[200px] sm:w-[245px] bg-[#FEFBEA] rounded-2xl p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#F4EDB8] hover:-translate-y-1 transition-transform duration-300">
+            <div className="absolute bottom-8 left-0 sm:bottom-12 sm:left-0 md:left-2 w-[175px] xs:w-[200px] sm:w-[245px] bg-[#FEFBEA] rounded-2xl p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#F4EDB8] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200">
               <div className="flex items-center gap-1.5 text-zinc-900 mb-1.5 sm:mb-2">
                 <Quotes size={15} weight="fill" className="text-[#E7040D]" />
                 <span className="text-[10.5px] sm:text-[11.5px] font-bold">The Trax Standard</span>
               </div>
               <p className="text-[10px] sm:text-[11.5px] text-zinc-700 leading-relaxed mb-2.5 sm:mb-3 italic">
-                &ldquo;We built Trax Jobs to end ghost postings. If an opening is listed here, a real team is actively hiring.&rdquo;
+                &ldquo;Our newsroom verifies every opening directly with founders and hiring leads across Africa before a single role goes live.&rdquo;
               </p>
               <Link
                 href="/about"
@@ -192,7 +192,7 @@ export function SocialProofSection() {
             </div>
 
             {/* Floating Card 3: Bottom Center-Right (Soft Mint Trust Card) */}
-            <div className="absolute -bottom-2 right-1 sm:-bottom-4 sm:right-12 md:right-20 w-[155px] xs:w-[175px] sm:w-[220px] bg-[#EDFBEF] rounded-2xl p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#D1F2D6] hover:-translate-y-1 transition-transform duration-300 z-20">
+            <div className="absolute -bottom-2 right-1 sm:-bottom-4 sm:right-12 md:right-20 w-[155px] xs:w-[175px] sm:w-[220px] bg-[#EDFBEF] rounded-2xl p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#D1F2D6] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200 z-20">
               <p className="text-[15px] sm:text-[19px] font-black text-zinc-950 leading-tight mb-0.5 sm:mb-1">
                 Zero ghost roles
               </p>
@@ -202,7 +202,7 @@ export function SocialProofSection() {
             </div>
 
             {/* Floating Card 4: Top Left (Soft Ice Blue Direct Contact Card) */}
-            <div className="hidden sm:block absolute top-4 left-4 md:left-10 w-[185px] bg-[#EEF6FC] rounded-2xl p-4 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#D5E8F7] hover:-translate-y-1 transition-transform duration-300">
+            <div className="hidden sm:block absolute top-4 left-4 md:left-10 w-[185px] bg-[#EEF6FC] rounded-2xl p-4 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#D5E8F7] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200">
               <p className="text-[15px] sm:text-[18px] font-black text-zinc-950 leading-tight mb-1">
                 Direct contact
               </p>

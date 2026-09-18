@@ -40,8 +40,8 @@ export default async function Home() {
     subIndustry: c.industry ?? "Software & Services",
     description: c.description ?? "",
     openRoles: c.openJobsCount ?? 0,
-    coverImage: urlForImage(c.coverImage) || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800",
-    logo: urlForImage(c.logo),
+    coverImage: urlForImage(c.coverImage, { width: 600 }) || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=600",
+    logo: urlForImage(c.logo, { width: 120 }),
   }));
 
   const sanityCourses: CourseDetail[] = (rawCourses ?? []).map((c: any) => ({
@@ -51,8 +51,8 @@ export default async function Home() {
     level: c.level || "All Levels",
     duration: c.duration || "4h 00m",
     durationWeeks: c.durationWeeks || "6 Weeks",
-    image: urlForImage(c.image) || "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=800",
-    bannerImage: urlForImage(c.bannerImage) || urlForImage(c.image) || "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: urlForImage(c.image, { width: 600 }) || "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=600",
+    bannerImage: urlForImage(c.bannerImage, { width: 800 }) || urlForImage(c.image, { width: 800 }) || "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=800",
     rating: c.rating || 4.9,
     ratingsCount: c.ratingsCount || 48,
     lessonsCount: c.lessonsCount || 10,
@@ -93,7 +93,7 @@ export default async function Home() {
     title: g.title,
     tagline: g.tagline || "",
     description: g.lead || "",
-    image: urlForImage(g.image) || "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: urlForImage(g.image, { width: 600 }) || "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=600",
     readTime: g.readTime || "5 min read",
     href: `/guides/${g.slug || g._id}`,
   }));

@@ -21,6 +21,7 @@ import {
   Check,
 } from "@phosphor-icons/react";
 import { AppHeader } from "@/components/navigation/app-header";
+import { isValidImageUrl } from "@/lib/utils";
 
 /* ─────────────────────────────────────────────────────────────
    Company Logo Mark
@@ -34,10 +35,10 @@ function CompanyLogoMark({
   logo?: string;
   className?: string;
 }) {
-  if (logo) {
+  if (isValidImageUrl(logo)) {
     return (
       <div className={`${className} bg-white border border-zinc-200/90 flex items-center justify-center p-1.5 overflow-hidden shrink-0`}>
-        <Image src={logo} alt={name} width={48} height={48} className="object-contain w-full h-full" unoptimized />
+        <Image src={logo!} alt={name} width={48} height={48} className="object-contain w-full h-full" unoptimized />
       </div>
     );
   }
@@ -209,7 +210,7 @@ export default function JobDetailClient({
 
       {/* Mobile Sticky Bottom Action Bar (Thumb-accessible, zero top collision) */}
       {showStickyNav && (
-        <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-zinc-200/90 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] px-4 py-3 flex items-center justify-between gap-3">
+        <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-zinc-200/90 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] flex items-center justify-between gap-3">
           <button onClick={() => router.back()} className="inline-flex items-center gap-1 px-2.5 py-2 text-[13px] font-bold text-zinc-700 hover:text-[#E7040D] active:scale-95 transition-all cursor-pointer shrink-0">
             <CaretLeft size={16} weight="bold" />
             <span>Back</span>

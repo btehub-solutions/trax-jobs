@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AppHeader } from "@/components/navigation/app-header";
 import { JobCard } from "@/components/jobs/job-card";
+import { isValidImageUrl } from "@/lib/utils";
 import {
   House,
   CaretRight,
@@ -40,7 +41,7 @@ function CompanyHeroMark({
   logo: string;
   accentColor: string;
 }) {
-  if (logo) {
+  if (isValidImageUrl(logo)) {
     return (
       <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-none bg-white border border-zinc-200/90 shadow-2xs flex items-center justify-center p-2 overflow-hidden shrink-0">
         <Image

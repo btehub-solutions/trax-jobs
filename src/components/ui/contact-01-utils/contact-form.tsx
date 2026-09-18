@@ -172,20 +172,22 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               <input
                 type="text"
                 required
+                autoComplete="given-name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="First name"
-                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors"
+                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[16px] sm:text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors"
               />
             </div>
             <div>
               <input
                 type="text"
                 required
+                autoComplete="family-name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="Last name"
-                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors"
+                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[16px] sm:text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors"
               />
             </div>
           </div>
@@ -195,10 +197,12 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
             <input
               type="email"
               required
+              autoComplete="email"
+              inputMode="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="youremail@website.com"
-              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors"
+              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[16px] sm:text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors"
             />
           </div>
 
@@ -208,7 +212,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               required
               value={inquiryType}
               onChange={(e) => setInquiryType(e.target.value)}
-              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[14px] text-zinc-800 focus:outline-hidden focus:border-zinc-400 transition-colors appearance-none cursor-pointer"
+              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[16px] sm:text-[14px] text-zinc-800 focus:outline-hidden focus:border-zinc-400 transition-colors appearance-none cursor-pointer"
             >
               <option value="" disabled>Inquiry Type (Hiring, Talent Profile, Company Profile)</option>
               <option value="Hiring / Post a Job">Hiring / Post a Job</option>
@@ -226,7 +230,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               required
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[14px] text-zinc-800 focus:outline-hidden focus:border-zinc-400 transition-colors appearance-none cursor-pointer"
+              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[16px] sm:text-[14px] text-zinc-800 focus:outline-hidden focus:border-zinc-400 transition-colors appearance-none cursor-pointer"
             >
               <option value="" disabled>Country</option>
               <option value="Nigeria">Nigeria</option>
@@ -250,7 +254,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Let us know about your project, role, or inquiry"
-              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors resize-none"
+              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[16px] sm:text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors resize-none"
             />
           </div>
 

@@ -15,8 +15,8 @@ export function mapSanityGuide(g: any, allGuides?: any[]): GuideArticle {
         slug: other.slug || other._id,
         title: other.title,
         image:
-          urlForImage(other.image) ||
-          "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=800",
+          urlForImage(other.image, { width: 400 }) ||
+          "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=400",
       }));
     if (others.length > 0) {
       relatedArticles = others;
@@ -33,9 +33,9 @@ export function mapSanityGuide(g: any, allGuides?: any[]): GuideArticle {
     readTime: g.readTime || fallbackGuide?.readTime || "5 min read",
     lead: g.lead || fallbackGuide?.lead || "",
     image:
-      urlForImage(g.image) ||
+      urlForImage(g.image, { width: 800 }) ||
       fallbackGuide?.image ||
-      "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=800",
     author: {
       name: g.author?.name || fallbackGuide?.author.name || "Ben Sam Oladoyin",
       role: g.author?.role || fallbackGuide?.author.role || "AI/ML Engineer, Founder Trax Media Ltd",

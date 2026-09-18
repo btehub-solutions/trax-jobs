@@ -576,7 +576,18 @@ function AboutPageContent() {
 
 export default function AboutPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-white" />}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-white flex flex-col">
+          <div className="w-full h-16 border-b border-zinc-200" />
+          <div className="max-w-5xl mx-auto px-6 py-12 w-full space-y-6">
+            <div className="h-10 w-64 bg-zinc-200 animate-pulse" />
+            <div className="h-5 w-96 bg-zinc-100 animate-pulse" />
+            <div className="h-64 bg-zinc-50 border border-zinc-200/80 animate-pulse" />
+          </div>
+        </div>
+      }
+    >
       <AboutPageContent />
     </Suspense>
   );

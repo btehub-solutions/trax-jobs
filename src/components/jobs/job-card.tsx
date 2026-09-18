@@ -14,15 +14,16 @@ import {
   ArrowUpRight,
 } from "@phosphor-icons/react";
 import { Job } from "@/types";
+import { isValidImageUrl } from "@/lib/utils";
 
 /* ─────────────────────────────────────────────────────────────
    Company Logos (Authentic Vector Marks & Brand Geometry)
 ───────────────────────────────────────────────────────────── */
 function CompanyMark({ name, logo }: { name: string; logo?: string }) {
-  if (logo) {
+  if (isValidImageUrl(logo)) {
     return (
       <div className="w-12 h-12 rounded-none bg-white border border-zinc-200/90 flex items-center justify-center p-1 shrink-0 overflow-hidden shadow-2xs">
-        <Image src={logo} alt={name} width={44} height={44} className="w-full h-full object-contain" />
+        <Image src={logo!} alt={name} width={44} height={44} className="w-full h-full object-contain" />
       </div>
     );
   }
@@ -140,22 +141,25 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
   const photoSet = CULTURE_SETS[Math.abs(job.title.length) % CULTURE_SETS.length];
 
   return (
-    <div className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_14px_32px_-6px_rgba(231,4,13,0.08)] hover:border-[#E7040D]/40 hover:-translate-y-0.5 transition-all duration-200 p-4 sm:p-6 md:p-7 flex flex-col justify-between group relative overflow-hidden">
+    <div className="feed-card-reveal bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_14px_32px_-6px_rgba(231,4,13,0.08)] hover:border-[#E7040D]/40 hover:-translate-y-0.5 active:scale-[0.99] active:bg-zinc-50/50 transition-all duration-150 p-4 sm:p-6 md:p-7 flex flex-col justify-between group relative overflow-hidden">
       
       {/* Top Section: Logo, Title, Company & Right-side 3-Photo Collage Widget */}
       <div>
         <div className="flex items-start justify-between gap-6 mb-3">
           <div className="flex items-start gap-4">
-            <CompanyMark name={job.company.name} logo={job.company.logo} />
+            <Link href={`/jobs/${job.slug || job.id}`} className="shrink-0 relative z-10">
+              <CompanyMark name={job.company.name} logo={job.company.logo} />
+            </Link>
             <div>
-              <Link href={`/jobs/${job.slug || job.id}`}>
-                <h3 className="text-[18px] sm:text-[20px] font-black text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight">
+              <Link href={`/jobs/${job.slug || job.id}`} className="block">
+                <span className="absolute inset-0 z-0" aria-hidden="true" />
+                <h3 className="text-[18px] sm:text-[20px] font-black text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight relative z-10">
                   {job.title}
                 </h3>
               </Link>
               <Link
                 href={`/companies/${job.company.slug || job.company.name.toLowerCase()}`}
-                className="text-[14px] font-medium text-zinc-700 hover:text-[#E7040D] transition-colors mt-0.5 inline-block"
+                className="text-[14px] font-medium text-zinc-700 hover:text-[#E7040D] transition-colors mt-0.5 inline-block relative z-10"
               >
                 {job.company.name}
               </Link>
@@ -248,7 +252,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
       </div>
 
       {/* Footer Row: Save Button & Date */}
-      <div className="flex items-center justify-between gap-2 pt-2 sm:pt-1">
+      <div className="flex items-center justify-between gap-2 pt-2 sm:pt-1 relative z-10">
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           {/* Save Button with 90-degree edges */}
           <button

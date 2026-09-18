@@ -253,11 +253,15 @@ export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search by candidate, role or skill ..."
-              className="w-full bg-transparent text-[13.5px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden"
+              className="w-full bg-transparent text-[16px] sm:text-[13.5px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden"
             />
             {searchTerm && (
-              <button onClick={() => setSearchTerm("")} className="text-zinc-400 hover:text-zinc-700 cursor-pointer">
-                <X size={14} weight="bold" />
+              <button
+                onClick={() => setSearchTerm("")}
+                className="p-2 -mr-2 text-zinc-400 hover:text-zinc-700 cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center active:scale-95 transition-transform"
+                aria-label="Clear search query"
+              >
+                <X size={15} weight="bold" />
               </button>
             )}
           </div>

@@ -149,7 +149,7 @@ export function Navbar({
           <div className="flex md:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="p-2 -mr-1.5 rounded-lg text-zinc-800 hover:bg-zinc-100 transition-colors cursor-pointer"
+              className="w-11 h-11 -mr-2 rounded-lg text-zinc-800 hover:bg-zinc-100 active:scale-95 transition-all cursor-pointer flex items-center justify-center"
               aria-label="Open navigation menu"
               aria-expanded={mobileMenuOpen}
             >
@@ -189,7 +189,7 @@ export function Navbar({
           <div className="flex items-center justify-end pb-3">
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="p-1.5 rounded-full text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 transition-colors cursor-pointer"
+              className="w-11 h-11 -mr-2 rounded-full text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 active:scale-95 transition-all cursor-pointer flex items-center justify-center"
               aria-label="Close menu"
             >
               <X size={22} weight="bold" />

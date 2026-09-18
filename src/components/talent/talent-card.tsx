@@ -27,7 +27,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <div className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_rgba(231,4,13,0.08)] hover:border-[#E7040D]/40 transition-all duration-200 flex flex-col justify-between overflow-hidden group">
+    <div className="feed-card-reveal bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_rgba(231,4,13,0.08)] hover:border-[#E7040D]/40 active:scale-[0.99] transition-all duration-150 flex flex-col justify-between overflow-hidden group relative">
       
       {/* Top Banner Cover Strip */}
       <div className="relative h-20 w-full bg-gradient-to-r from-[#0C1222] via-[#162038] to-[#1F1F1F] overflow-hidden">
@@ -101,8 +101,9 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
           {/* Name & Role Title */}
           <div className="mb-3">
             <div className="flex items-center gap-1.5 mb-1">
-              <Link href={`/talent/${talent.slug || talent.id}`} className="min-w-0">
-                <h2 className="text-[18px] sm:text-[19px] font-black text-[#1F1F1F] tracking-tight group-hover:text-[#E7040D] transition-colors break-words">
+              <Link href={`/talent/${talent.slug || talent.id}`} className="min-w-0 block">
+                <span className="absolute inset-0 z-0" aria-hidden="true" />
+                <h2 className="text-[18px] sm:text-[19px] font-black text-[#1F1F1F] tracking-tight group-hover:text-[#E7040D] transition-colors break-words relative z-10">
                   {talent.name}
                 </h2>
               </Link>
@@ -172,7 +173,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
         </div>
 
         {/* Footer Actions: Contact & Hire */}
-        <div className="pt-4 border-t border-zinc-100 flex items-center justify-between gap-3">
+        <div className="pt-4 border-t border-zinc-100 flex items-center justify-between gap-3 relative z-10">
           {/* Quick Social / Portfolio Links */}
           <div className="flex items-center gap-1.5 text-zinc-400">
             {talent.githubUrl && (

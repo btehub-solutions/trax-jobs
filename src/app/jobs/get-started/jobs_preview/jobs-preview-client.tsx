@@ -149,7 +149,19 @@ function JobsPreviewInner({ jobs }: { jobs: any[] }) {
 
 export function JobsPreviewClient({ jobs }: { jobs: any[] }) {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#FAF8F5]" />}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#FAF8F5] flex flex-col p-6 max-w-5xl mx-auto space-y-4">
+          <div className="h-10 w-48 bg-zinc-200 animate-pulse" />
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="bg-white border border-zinc-200/90 p-6 space-y-3 animate-pulse">
+              <div className="h-5 bg-zinc-200 w-1/3" />
+              <div className="h-4 bg-zinc-100 w-1/4" />
+            </div>
+          ))}
+        </div>
+      }
+    >
       <JobsPreviewInner jobs={jobs} />
     </Suspense>
   );

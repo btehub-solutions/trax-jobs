@@ -5,6 +5,15 @@ import Lenis from "lenis";
 
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
+    // Retain native 60/120fps hardware momentum scrolling on touch/mobile devices
+    const isTouchDevice =
+      typeof window !== "undefined" &&
+      (window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window || navigator.maxTouchPoints > 0);
+
+    if (isTouchDevice) {
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -12,7 +21,7 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 2,
+      touchMultiplier: 1,
       infinite: false,
     });
 

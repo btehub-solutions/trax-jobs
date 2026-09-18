@@ -407,10 +407,11 @@ function JobStudio() {
                   <input
                     type="text"
                     required
+                    autoComplete="organization"
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
                     placeholder="e.g. Paystack, Moniepoint"
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
                   />
                 </div>
               </div>
@@ -426,10 +427,12 @@ function JobStudio() {
                   <input
                     type="email"
                     required
+                    autoComplete="email"
+                    inputMode="email"
                     value={contactEmail}
                     onChange={(e) => setContactEmail(e.target.value)}
                     placeholder="recruiter@company.com"
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
                   />
                 </div>
               </div>
@@ -450,7 +453,7 @@ function JobStudio() {
                   value={jobTitle}
                   onChange={(e) => setJobTitle(e.target.value)}
                   placeholder="e.g. Senior Frontend Infrastructure Engineer"
-                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
                 />
               </div>
             </div>
@@ -614,10 +617,11 @@ function JobStudio() {
                 <input
                   type="url"
                   required
+                  inputMode="url"
                   value={applicationLink}
                   onChange={(e) => setApplicationLink(e.target.value)}
                   placeholder="https://jobs.lever.co/company/job-id or https://company.com/careers"
-                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] font-mono placeholder:font-sans placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-mono placeholder:font-sans placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
                 />
               </div>
             </div>
@@ -709,7 +713,7 @@ function JobStudio() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="What will this person build, and how does the role impact your platform scale?"
-                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed"
+                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed"
               />
             </div>
 
@@ -723,7 +727,7 @@ function JobStudio() {
                 value={requirements}
                 onChange={(e) => setRequirements(e.target.value)}
                 placeholder="Key tech stack, libraries, and years of experience expected."
-                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed"
+                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed"
               />
             </div>
 
@@ -1042,10 +1046,11 @@ function TalentStudio() {
                   <input
                     type="text"
                     required
+                    autoComplete="name"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="e.g. Babatunde Adeleke"
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
                   />
                 </div>
               </div>
@@ -1061,10 +1066,12 @@ function TalentStudio() {
                   <input
                     type="email"
                     required
+                    autoComplete="email"
+                    inputMode="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="engineer@gmail.com"
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
                   />
                 </div>
               </div>
@@ -1085,7 +1092,7 @@ function TalentStudio() {
                   value={roleTitle}
                   onChange={(e) => setRoleTitle(e.target.value)}
                   placeholder="e.g. Staff Distributed Systems Engineer"
-                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
                 />
               </div>
             </div>
@@ -1102,10 +1109,12 @@ function TalentStudio() {
                   </span>
                   <input
                     type="tel"
+                    autoComplete="tel"
+                    inputMode="tel"
                     value={whatsapp}
                     onChange={(e) => setWhatsapp(e.target.value)}
                     placeholder="+234 801 234 5678"
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
                   />
                 </div>
               </div>
@@ -1415,7 +1424,7 @@ function TalentStudio() {
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="2-3 sentences summarizing your specialty, scale of projects shipped, and current availability."
-                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed"
+                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed"
               />
             </div>
 
@@ -1711,10 +1720,11 @@ function CompanyStudio() {
                   <input
                     type="text"
                     required
+                    autoComplete="organization"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Flutterwave, Kuda"
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
                   />
                 </div>
               </div>
@@ -1730,10 +1740,12 @@ function CompanyStudio() {
                   <input
                     type="email"
                     required
+                    autoComplete="email"
+                    inputMode="email"
                     value={contactEmail}
                     onChange={(e) => setContactEmail(e.target.value)}
                     placeholder="talent@company.com"
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
                   />
                 </div>
               </div>
@@ -1750,10 +1762,11 @@ function CompanyStudio() {
                 </span>
                 <input
                   type="url"
+                  inputMode="url"
                   value={website}
                   onChange={(e) => setWebsite(e.target.value)}
                   placeholder="https://company.com"
-                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
                 />
               </div>
             </div>
@@ -1925,7 +1938,7 @@ function CompanyStudio() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Briefly describe what your organization builds and the engineering standards of your team."
-                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed"
+                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed"
               />
             </div>
 

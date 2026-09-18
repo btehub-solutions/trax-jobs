@@ -16,6 +16,7 @@ import {
   Briefcase,
 } from "@phosphor-icons/react";
 import { AppHeader } from "@/components/navigation/app-header";
+import { isValidImageUrl } from "@/lib/utils";
 
 export interface SanityCompany {
   id: string;
@@ -183,7 +184,7 @@ function CompanySquareMark({
   logo: string;
   accentColor: string;
 }) {
-  if (logo) {
+  if (isValidImageUrl(logo)) {
     return (
       <div className="w-full h-full rounded-none bg-white flex items-center justify-center p-1 overflow-hidden">
         <Image
@@ -406,11 +407,15 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search by company, keyword or tech ..."
-              className="w-full bg-transparent text-[13.5px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden"
+              className="w-full bg-transparent text-[16px] sm:text-[13.5px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden"
             />
             {searchTerm && (
-              <button onClick={() => setSearchTerm("")} className="text-zinc-400 hover:text-zinc-700 cursor-pointer">
-                <X size={14} weight="bold" />
+              <button
+                onClick={() => setSearchTerm("")}
+                className="p-2 -mr-2 text-zinc-400 hover:text-zinc-700 cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center active:scale-95 transition-transform"
+                aria-label="Clear search query"
+              >
+                <X size={15} weight="bold" />
               </button>
             )}
           </div>
@@ -665,7 +670,7 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                         className="flex items-center gap-3 group/title"
                       >
                         <div className="w-11 h-11 rounded-none bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-1.5 overflow-hidden shrink-0">
-                          {comp.logo ? (
+                          {isValidImageUrl(comp.logo) ? (
                             <Image
                               src={comp.logo}
                               alt={comp.name}

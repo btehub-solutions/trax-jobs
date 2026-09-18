@@ -172,6 +172,7 @@ export function HowItWorksSection() {
                             src="/images/trax-logo.png"
                             alt="Trax Jobs"
                             fill
+                            sizes="144px"
                             className="object-contain"
                             priority
                           />

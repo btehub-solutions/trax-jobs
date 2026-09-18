@@ -174,7 +174,17 @@ function ExperienceLevelContent() {
 
 export default function ExperienceLevelPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#FAFAFA]" />}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#FAFAFA] flex items-center justify-center p-6">
+          <div className="w-full max-w-xl bg-white border border-zinc-200/90 p-8 space-y-4 animate-pulse">
+            <div className="h-6 bg-zinc-200 w-1/2" />
+            <div className="h-4 bg-zinc-100 w-3/4" />
+            <div className="h-12 bg-zinc-100 w-full" />
+          </div>
+        </div>
+      }
+    >
       <ExperienceLevelContent />
     </Suspense>
   );

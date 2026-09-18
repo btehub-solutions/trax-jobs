@@ -200,3 +200,18 @@ export function resolveJobTags(
   }
   return ["Software Engineering", "Full-Stack", "Cloud Architecture"];
 }
+
+/**
+ * Validates that an image source is a parseable URL or path for next/image.
+ * Prevents fatal ERR_INVALID_URL crashes when company names or arbitrary strings are passed.
+ */
+export function isValidImageUrl(url?: string | null): boolean {
+  if (!url || typeof url !== "string") return false;
+  const trimmed = url.trim();
+  return (
+    trimmed.startsWith("http://") ||
+    trimmed.startsWith("https://") ||
+    trimmed.startsWith("/") ||
+    trimmed.startsWith("data:image/")
+  );
+}

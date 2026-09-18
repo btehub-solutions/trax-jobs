@@ -45,7 +45,7 @@ export function NetworkStatusBanner() {
     <div
       role="status"
       aria-live="polite"
-      className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] pointer-events-none px-4 py-2 rounded-full shadow-lg border backdrop-blur-md transition-all duration-300 flex items-center gap-2.5 max-w-[90vw]"
+      className="fixed top-[calc(1rem+env(safe-area-inset-top,0px))] left-1/2 -translate-x-1/2 z-[100] pointer-events-none px-4 py-2 rounded-full shadow-lg border backdrop-blur-md transition-all duration-300 flex items-center gap-2.5 max-w-[90vw]"
       style={{
         backgroundColor: isOnline ? "#064E3B" : "#1F1F1F",
         borderColor: isOnline ? "rgba(52, 211, 153, 0.4)" : "rgba(255, 255, 255, 0.15)",

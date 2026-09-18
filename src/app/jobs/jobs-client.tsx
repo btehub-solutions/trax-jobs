@@ -399,9 +399,53 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
   );
 }
 
+function JobsPageSkeleton() {
+  return (
+    <div className="min-h-screen bg-[#FAF8F5] flex flex-col justify-between">
+      <div className="w-full bg-white border-b border-zinc-200/80 h-16" />
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 py-8 w-full flex-1">
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
+          {/* Desktop Filter Sidebar Placeholder */}
+          <div className="hidden lg:block w-[395px] shrink-0 bg-white border border-zinc-200/90 h-[520px] p-6 space-y-6 animate-pulse">
+            <div className="h-5 bg-zinc-200 w-1/2" />
+            <div className="space-y-3 pt-4">
+              <div className="h-4 bg-zinc-100 w-3/4" />
+              <div className="h-4 bg-zinc-100 w-2/3" />
+              <div className="h-4 bg-zinc-100 w-4/5" />
+            </div>
+          </div>
+          {/* Jobs Listing Feed Placeholder */}
+          <div className="flex-1 w-full space-y-4">
+            <div className="h-11 bg-white border border-zinc-200/90 w-full animate-pulse flex items-center px-4">
+              <div className="h-4 bg-zinc-200 w-32" />
+            </div>
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="bg-white border border-zinc-200/90 p-5 sm:p-7 space-y-4 animate-pulse">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-zinc-200 shrink-0" />
+                  <div className="flex-1 space-y-2">
+                    <div className="h-5 bg-zinc-200 w-2/5" />
+                    <div className="h-4 bg-zinc-100 w-1/4" />
+                  </div>
+                </div>
+                <div className="h-4 bg-zinc-100 w-4/5" />
+                <div className="flex items-center gap-2 pt-1">
+                  <div className="h-6 w-20 bg-zinc-100" />
+                  <div className="h-6 w-24 bg-zinc-100" />
+                  <div className="h-6 w-16 bg-zinc-100" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function JobsPageClient({ jobs }: { jobs: SanityJob[] }) {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#FAF8F5]" />}>
+    <Suspense fallback={<JobsPageSkeleton />}>
       <JobsPageInner jobs={jobs} />
     </Suspense>
   );

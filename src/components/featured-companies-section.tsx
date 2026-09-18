@@ -13,15 +13,16 @@ import {
   Briefcase,
 } from "@phosphor-icons/react";
 import { BrandWordmark, ALL_AFRICAN_BRANDS } from "@/components/brand-wordmark";
+import { isValidImageUrl } from "@/lib/utils";
 
 /* ─────────────────────────────────────────────────────────────
    Company Logos (Authentic Vector SVGs)
 ───────────────────────────────────────────────────────────── */
 function CompanyVector({ name, logo }: { name: string; logo?: string }) {
-  if (logo) {
+  if (isValidImageUrl(logo)) {
     return (
       <div className="w-full h-full rounded-none bg-white flex items-center justify-center shrink-0 overflow-hidden p-1">
-        <Image src={logo} alt={name} width={40} height={40} className="w-full h-full object-contain" />
+        <Image src={logo!} alt={name} width={40} height={40} className="w-full h-full object-contain" />
       </div>
     );
   }
