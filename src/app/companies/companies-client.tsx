@@ -262,6 +262,7 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
   const [followedCompanies, setFollowedCompanies] = useState<Record<string, boolean>>({});
   const [openDropdown, setOpenDropdown] = useState<"location" | "sector" | "size" | "language" | null>(null);
+  const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
   const searchBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -382,6 +383,30 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
     setSelectedSize("");
     setSelectedLanguage("");
     setOpenDropdown(null);
+  };
+
+  const hasActiveFilters = Boolean(
+    searchTerm ||
+    selectedLocation ||
+    selectedSector ||
+    selectedSize ||
+    selectedLanguage
+  );
+
+  const handleDiscoverAll = () => {
+    resetFilters();
+    const el = document.getElementById("companies-results");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    setFeedbackMessage(
+      hasActiveFilters
+        ? `Filters cleared. Showing all ${companies.length} companies.`
+        : `Showing all ${companies.length} companies.`
+    );
+    setTimeout(() => {
+      setFeedbackMessage(null);
+    }, 3000);
   };
 
   const handleSearchSubmit = () => {
@@ -587,17 +612,37 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
       <main id="companies-results" className="flex-1 w-full max-w-[1360px] mx-auto py-8 px-6 sm:px-8 lg:px-10 space-y-10">
         <div>
           <div className="flex items-center justify-between pb-3.5 border-b border-zinc-200/80 gap-3">
-            <h1 className="text-[24px] sm:text-[30px] font-black text-[#1F1F1F] tracking-tight min-w-0">
-              New companies to explore
-            </h1>
+            <div className="flex items-center gap-3 min-w-0">
+              <h1 className="text-[24px] sm:text-[30px] font-black text-[#1F1F1F] tracking-tight min-w-0">
+                New companies to explore
+              </h1>
+              <span className="hidden sm:inline-flex items-center px-2 py-0.5 bg-zinc-100 text-zinc-600 text-[11px] font-bold border border-zinc-200/70">
+                {filteredCompanies.length}
+              </span>
+            </div>
             <button
-              onClick={resetFilters}
-              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-none bg-white border border-zinc-200/90 text-[12.5px] font-bold text-[#1F1F1F] hover:bg-zinc-50 transition-all shadow-2xs cursor-pointer shrink-0 whitespace-nowrap"
+              type="button"
+              onClick={handleDiscoverAll}
+              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-none bg-white border border-zinc-200/90 text-[12.5px] font-bold text-[#1F1F1F] hover:bg-zinc-50 hover:border-[#E7040D] hover:text-[#E7040D] active:scale-95 transition-all duration-150 shadow-2xs cursor-pointer shrink-0 whitespace-nowrap"
+              title="View all companies"
             >
-              <span>Discover all</span>
+              <span>Discover all ({companies.length})</span>
               <CaretRight size={13} weight="bold" />
             </button>
           </div>
+
+          {feedbackMessage && (
+            <div className="mt-3.5 px-4 py-2.5 bg-[#FDF2EE] border border-[#fce8e0] text-[#E7040D] text-[12.5px] font-semibold flex items-center justify-between transition-all">
+              <span>{feedbackMessage}</span>
+              <button
+                type="button"
+                onClick={() => setFeedbackMessage(null)}
+                className="text-[#E7040D] hover:text-[#CB030B] font-bold text-xs cursor-pointer ml-3 underline"
+              >
+                Dismiss
+              </button>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
             {filteredCompanies.map((comp) => {
