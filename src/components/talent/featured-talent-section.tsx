@@ -88,20 +88,8 @@ export function FeaturedTalentSection({
   };
 
   return (
-    <section className="w-full bg-[#FAF8F5] py-20 sm:py-28 relative overflow-x-hidden">
-      {/* Subtle Graph-Paper Grid Background */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-60"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, #e8e4dc 1px, transparent 1px),
-            linear-gradient(to bottom, #e8e4dc 1px, transparent 1px)
-          `,
-          backgroundSize: "28px 28px",
-        }}
-      />
-
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
+    <section className="w-full bg-[#fbf9f6] py-20 sm:py-28 relative overflow-x-hidden">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
           <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] font-black tracking-[-0.025em] text-[#1F1F1F] leading-[1.18] mb-4">

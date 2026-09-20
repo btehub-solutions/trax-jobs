@@ -447,55 +447,106 @@ function AboutPageContent() {
                 </svg>
               </div>
 
-              {/* 3 Arched Team Portrait Cards in a Balanced Triptych Wave */}
-              <div className="max-w-4xl mx-auto grid grid-cols-3 gap-3 sm:gap-6 lg:gap-8 items-end relative z-10">
+              {/* 6 Arched Team Portrait Cards: 3x2 on mobile (3 at top, 3 below), 6 in 1 row on desktop */}
+              <div className="max-w-4xl lg:max-w-[1240px] mx-auto grid grid-cols-3 lg:grid-cols-6 gap-2.5 xs:gap-3 sm:gap-6 lg:gap-4 xl:gap-6 gap-y-7 xs:gap-y-8 sm:gap-y-12 lg:gap-y-0 items-end relative z-10">
                 
-                {/* 1. Team Member 1 (Left Arch) */}
-                <div className="flex flex-col items-center">
+                {/* 1. Team Member 1 (Left of top row on mobile, Col 1 on desktop) */}
+                <div className="flex flex-col items-center w-full lg:order-1">
                   {/* Floating Geometric Accent */}
-                  <div className="w-3.5 h-3.5 bg-[#06B6D4] rotate-45 mb-2.5 shadow-2xs" />
-                  <div className="h-[230px] xs:h-[280px] sm:h-[340px] lg:h-[390px] w-full bg-[#1F1F1F] rounded-t-[70px] sm:rounded-t-[110px] relative overflow-hidden flex items-end group shadow-sm">
+                  <div className="w-3 sm:w-3.5 h-3 sm:h-3.5 bg-[#06B6D4] rotate-45 mb-2 sm:mb-2.5 shadow-2xs" />
+                  <div className="h-[210px] xs:h-[260px] sm:h-[320px] lg:h-[350px] xl:h-[380px] w-full bg-[#1F1F1F] rounded-t-[50px] xs:rounded-t-[65px] sm:rounded-t-[100px] lg:rounded-t-[60px] xl:rounded-t-[75px] rounded-b-xl lg:rounded-b-none relative overflow-hidden flex items-end group shadow-sm">
                     <Image
                       src="/images/team-member-1.jpg"
                       alt="Trax Team Member"
                       fill
                       priority
-                      sizes="(max-width: 768px) 33vw, 260px"
+                      sizes="(max-width: 768px) 33vw, 200px"
                       className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                   </div>
                 </div>
 
-                {/* 2. Ben Sam Oladoyin (Founder & Publisher - Prominent Center Arch) */}
-                <div className="flex flex-col items-center">
+                {/* 2. Ben Sam Oladoyin (Founder & Publisher - Center of top row on mobile, Col 3 on desktop) */}
+                <div className="flex flex-col items-center w-full lg:order-3">
                   {/* Floating Geometric Accent (Trax Brand Red) */}
-                  <div className="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[12px] border-b-[#E7040D] mb-2.5 shadow-2xs" />
-                  <div className="h-[270px] xs:h-[330px] sm:h-[400px] lg:h-[460px] w-full bg-[#1F1F1F] rounded-t-[85px] sm:rounded-t-[130px] relative overflow-hidden flex items-end group border border-[#E7040D]/30 shadow-md">
+                  <div className="w-0 h-0 border-l-[6px] sm:border-l-[7px] border-l-transparent border-r-[6px] sm:border-r-[7px] border-r-transparent border-b-[10px] sm:border-b-[12px] border-b-[#E7040D] mb-2 sm:mb-2.5 shadow-2xs" />
+                  <div className="h-[250px] xs:h-[310px] sm:h-[380px] lg:h-[390px] xl:h-[420px] w-full bg-[#1F1F1F] rounded-t-[60px] xs:rounded-t-[80px] sm:rounded-t-[120px] lg:rounded-t-[70px] xl:rounded-t-[85px] rounded-b-xl lg:rounded-b-none relative overflow-hidden flex items-end group border border-[#E7040D]/30 shadow-md">
                     <Image
                       src="/images/founder.jpg"
                       alt="Ben Sam Oladoyin, Founder & Publisher of Trax Media"
                       fill
                       priority
-                      sizes="(max-width: 768px) 34vw, 300px"
+                      sizes="(max-width: 768px) 34vw, 240px"
                       className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                   </div>
                 </div>
 
-                {/* 3. Team Member 2 (Right Arch) */}
-                <div className="flex flex-col items-center">
+                {/* 3. Team Member 2 (Right of top row on mobile, Col 5 on desktop) */}
+                <div className="flex flex-col items-center w-full lg:order-5">
                   {/* Floating Geometric Accent */}
-                  <div className="w-3.5 h-3.5 bg-[#10B981] rotate-45 mb-2.5 shadow-2xs" />
-                  <div className="h-[230px] xs:h-[280px] sm:h-[340px] lg:h-[390px] w-full bg-[#1F1F1F] rounded-t-[70px] sm:rounded-t-[110px] relative overflow-hidden flex items-end group shadow-sm">
+                  <div className="w-3 sm:w-3.5 h-3 sm:h-3.5 bg-[#10B981] rotate-45 mb-2 sm:mb-2.5 shadow-2xs" />
+                  <div className="h-[210px] xs:h-[260px] sm:h-[320px] lg:h-[350px] xl:h-[380px] w-full bg-[#1F1F1F] rounded-t-[50px] xs:rounded-t-[65px] sm:rounded-t-[100px] lg:rounded-t-[60px] xl:rounded-t-[75px] rounded-b-xl lg:rounded-b-none relative overflow-hidden flex items-end group shadow-sm">
                     <Image
                       src="/images/team-member-2.jpg"
                       alt="Trax Team Member"
                       fill
                       priority
-                      sizes="(max-width: 768px) 33vw, 260px"
+                      sizes="(max-width: 768px) 33vw, 200px"
                       className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                  </div>
+                </div>
+
+                {/* 4. Team Member 3 (Left of bottom row on mobile, Col 2 on desktop) */}
+                <div className="flex flex-col items-center w-full lg:order-2">
+                  {/* Floating Geometric Accent */}
+                  <div className="w-3 sm:w-3.5 h-3 sm:h-3.5 bg-[#F59E0B] rotate-45 mb-2 sm:mb-2.5 shadow-2xs" />
+                  <div className="h-[210px] xs:h-[260px] sm:h-[320px] lg:h-[350px] xl:h-[380px] w-full bg-[#1F1F1F] rounded-t-[50px] xs:rounded-t-[65px] sm:rounded-t-[100px] lg:rounded-t-[60px] xl:rounded-t-[75px] rounded-b-none relative overflow-hidden flex items-end group shadow-sm">
+                    <Image
+                      src="/images/team-member-3.png"
+                      alt="Trax Team Member"
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 33vw, 200px"
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                  </div>
+                </div>
+
+                {/* 5. Team Member 4 (Center of bottom row on mobile, Col 4 on desktop) */}
+                <div className="flex flex-col items-center w-full lg:order-4">
+                  {/* Floating Geometric Accent */}
+                  <div className="w-3 sm:w-3.5 h-3 sm:h-3.5 bg-[#F97316] rotate-45 mb-2 sm:mb-2.5 shadow-2xs" />
+                  <div className="h-[235px] xs:h-[290px] sm:h-[355px] lg:h-[370px] xl:h-[400px] w-full bg-[#1F1F1F] rounded-t-[55px] xs:rounded-t-[75px] sm:rounded-t-[115px] lg:rounded-t-[65px] xl:rounded-t-[80px] rounded-b-none relative overflow-hidden flex items-end group shadow-sm">
+                    <Image
+                      src="/images/team-member-4.png"
+                      alt="Trax Team Member"
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 34vw, 220px"
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                  </div>
+                </div>
+
+                {/* 6. Team Member 5 (Right of bottom row on mobile, Col 6 on desktop) */}
+                <div className="flex flex-col items-center w-full lg:order-6">
+                  {/* Floating Geometric Accent */}
+                  <div className="w-3 sm:w-3.5 h-3 sm:h-3.5 bg-[#8B5CF6] rotate-45 mb-2 sm:mb-2.5 shadow-2xs" />
+                  <div className="h-[210px] xs:h-[260px] sm:h-[320px] lg:h-[350px] xl:h-[380px] w-full bg-[#1F1F1F] rounded-t-[50px] xs:rounded-t-[65px] sm:rounded-t-[100px] lg:rounded-t-[60px] xl:rounded-t-[75px] rounded-b-none relative overflow-hidden flex items-end group shadow-sm">
+                    <Image
+                      src="/images/team-member-5.png"
+                      alt="Trax Team Member"
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 33vw, 200px"
+                      className="object-cover object-[center_15%] group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                   </div>
