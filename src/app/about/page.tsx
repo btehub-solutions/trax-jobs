@@ -9,6 +9,8 @@ import { Footer } from "@/components/footer";
 import { CaretDown, CaretUp } from "@phosphor-icons/react";
 import Contact from "@/components/ui/contact";
 import { PostAndSubmitHub } from "@/components/submissions/post-and-submit-hub";
+import { WhyTraxSection } from "@/components/why-trax-section";
+import { TestimonialsTrustSection } from "@/components/testimonials-trust-section";
 
 type AboutTab = "about" | "post-and-submit" | "contact";
 
@@ -206,7 +208,7 @@ function AboutPageContent() {
         </section>
 
         {/* 5. Our Solutions Section */}
-        <section className="w-full bg-[#F7F5F0] py-20 sm:py-28 border-b border-zinc-200">
+        <section className="w-full bg-white py-20 sm:py-28 border-b border-zinc-200">
           <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16">
             
             {/* Section Header */}
@@ -414,7 +416,13 @@ function AboutPageContent() {
           </div>
         </section>
 
-        {/* 7. Our People Section (100% Matching Arched Collage Reference) */}
+        {/* 7. Why Trax Verification & Curation Bento */}
+        <WhyTraxSection />
+
+        {/* 8. Verified Candidate Testimonials */}
+        <TestimonialsTrustSection />
+
+        {/* 9. Our People Section (100% Matching Arched Collage Reference) */}
         <section className="w-full bg-white py-20 sm:py-28 border-b border-zinc-200">
           <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16">
             
@@ -504,7 +512,7 @@ function AboutPageContent() {
 
     {/* Active Tab: Post & Submit */}
     {activeTab === "post-and-submit" && (
-      <div className="min-h-[70vh] bg-[#FAF8F5]">
+      <div className="min-h-[70vh] bg-white">
         <PostAndSubmitHub initialType={typeParam || topicParam} />
       </div>
     )}
@@ -517,9 +525,9 @@ function AboutPageContent() {
     )}
   </div>
 
-  {/* Footer */}
-  <Footer />
-</div>
+    {/* Footer: Only shown on the About Us tab */}
+    {activeTab === "about" && <Footer />}
+  </div>
   );
 }
 

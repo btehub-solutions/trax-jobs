@@ -10,6 +10,8 @@ import {
 } from "@phosphor-icons/react";
 import { GuideArticle } from "@/data/guides";
 import { AppHeader } from "@/components/navigation/app-header";
+import { TraxMediaSection } from "@/components/trax-media-section";
+import { Footer } from "@/components/footer";
 
 interface GuidesClientProps {
   guides: GuideArticle[];
@@ -18,7 +20,7 @@ interface GuidesClientProps {
 export function GuidesClient({ guides }: GuidesClientProps) {
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-[#1F1F1F] flex flex-col font-sans">
-      <AppHeader activeTab="about" />
+      <AppHeader activeTab="guides" />
 
       {/* Top Back Bar */}
       <div className="bg-[#FAFAFA]">
@@ -106,6 +108,12 @@ export function GuidesClient({ guides }: GuidesClientProps) {
           ))}
         </div>
       </main>
+
+      {/* Stories from the ecosystem (Trax Media Cross-bridge) */}
+      <TraxMediaSection />
+
+      {/* Global Footer */}
+      <Footer />
     </div>
   );
 }

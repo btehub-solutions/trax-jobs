@@ -3,28 +3,23 @@ import { AnnouncementBar } from "@/components/announcement-bar";
 import { HeroSection } from "@/components/hero-section";
 import { ExperienceSection } from "@/components/experience-section";
 import { HowItWorksSection } from "@/components/how-it-works-section";
-import { WhyTraxSection } from "@/components/why-trax-section";
-import { TrendingSkillsSection } from "@/components/trending-skills-section";
 import { FeaturedCompaniesSection } from "@/components/featured-companies-section";
+import { FeaturedTalentSection } from "@/components/talent/featured-talent-section";
 import { SocialProofSection } from "@/components/social-proof-section";
-import { CareerGuidesSection } from "@/components/career-guides-section";
-import { TraxMediaSection } from "@/components/trax-media-section";
-import { TestimonialsTrustSection } from "@/components/testimonials-trust-section";
 import { Footer } from "@/components/footer";
-import { fetchCompanies, fetchPublishedCourses, fetchPublishedGuides, fetchPublishedJobs } from "@/sanity/fetchers";
+import { fetchCompanies, fetchPublishedJobs, fetchPublishedTalent } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
-import { CourseDetail } from "@/data/courses";
 import { SAMPLE_JOBS } from "@/data/jobs";
 import { calculateExperienceCounts } from "@/lib/experience";
+import { extractSkillsList, extractText } from "@/lib/utils";
 
 export const revalidate = 60;
 
 export default async function Home() {
-  const [rawCompanies, rawCourses, rawGuides, rawJobs] = await Promise.all([
+  const [rawCompanies, rawJobs, rawTalent] = await Promise.all([
     fetchCompanies(),
-    fetchPublishedCourses(),
-    fetchPublishedGuides(),
     fetchPublishedJobs(),
+    fetchPublishedTalent(),
   ]);
 
   const activeJobs = rawJobs && rawJobs.length > 0 ? rawJobs : SAMPLE_JOBS;
@@ -44,58 +39,32 @@ export default async function Home() {
     logo: urlForImage(c.logo, { width: 120 }),
   }));
 
-  const sanityCourses: CourseDetail[] = (rawCourses ?? []).map((c: any) => ({
-    id: c._id,
-    slug: c.slug || c._id,
-    title: c.title,
-    level: c.level || "All Levels",
-    duration: c.duration || "4h 00m",
-    durationWeeks: c.durationWeeks || "6 Weeks",
-    image: urlForImage(c.image, { width: 600 }) || "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=600",
-    bannerImage: urlForImage(c.bannerImage, { width: 800 }) || urlForImage(c.image, { width: 800 }) || "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=800",
-    rating: c.rating || 4.9,
-    ratingsCount: c.ratingsCount || 48,
-    lessonsCount: c.lessonsCount || 10,
-    studentsCount: c.studentsCount || "10,000+",
-    language: c.language || "English",
-    platform: c.platform || "Web & WhatsApp",
-    instructor: c.instructor || "Trax Skills Council",
-    instructorTitle: c.instructorTitle || "Engineering & Product Leaders",
-    summary: c.summary || "",
-    description: c.description || "",
-    skills: c.skills || [],
-    includes: c.includes || [
-      "Shareable certificate of completion",
-      "Access on web and mobile",
-      "100% online practical lessons",
-    ],
-    learningOutcomes: c.learningOutcomes || [],
-    targetAudience: c.targetAudience || [],
-    syllabus: (c.syllabus || []).map((m: any) => ({
-      moduleTitle: m.moduleTitle || "",
-      duration: m.duration || "",
-      lessons: m.lessons || [],
-    })),
-    certificateDetails: c.certificateDetails || {
-      requirement: "Complete all modules and submit final practical milestone project",
-      bulletPoints: [
-        "Official verified credential issued under Trax Media",
-        "Directly displayable on your Trax talent profile",
-      ],
-    },
-    enrollmentLink: c.enrollmentLink || "",
-    whatsappNumber: c.whatsappNumber || "2347045422815",
-  }));
-
-  const sanityGuides = (rawGuides ?? []).map((g: any) => ({
-    slug: g.slug || g._id,
-    category: g.category || "job-hunters",
-    title: g.title,
-    tagline: g.tagline || "",
-    description: g.lead || "",
-    image: urlForImage(g.image, { width: 600 }) || "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=600",
-    readTime: g.readTime || "5 min read",
-    href: `/guides/${g.slug || g._id}`,
+  const sanityTalent = (rawTalent ?? []).map((t: any) => ({
+    id: t._id,
+    slug: t.slug ?? t._id,
+    name: t.name ?? "",
+    title: t.title ?? "",
+    category: t.category ?? "Engineering",
+    avatar: urlForImage(t.avatar, { width: 160 }) || "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=200",
+    coverImage: urlForImage(t.coverImage, { width: 600 }) || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=600",
+    experienceLevel: t.experienceLevel ?? "",
+    experienceYears: t.experienceYears ?? "",
+    location: t.location ?? "",
+    workPreference: t.workPreference ?? "Remote",
+    skills: extractSkillsList(t.skills),
+    bio: extractText(t.bio),
+    highlightMetric: t.highlightMetric ?? "",
+    rate: t.rate ?? "",
+    availability: t.availability ?? "Available immediately",
+    preferredContactMethod: t.preferredContactMethod ?? "email",
+    contactValue: t.email ?? t.whatsapp ?? "",
+    email: t.email ?? "",
+    whatsapp: t.whatsapp ?? "",
+    portfolioUrl: t.portfolioUrl ?? "",
+    githubUrl: t.githubUrl ?? "",
+    linkedinUrl: t.linkedinUrl ?? "",
+    verified: t.verified ?? true,
+    publishedAt: t.publishedAt ?? new Date().toISOString(),
   }));
 
   return (
@@ -113,32 +82,20 @@ export default async function Home() {
         {/* 4. Explore opportunities by experience level */}
         <ExperienceSection counts={experienceCounts} />
 
-        {/* 4b. How it works (Direct Curation & Workflow) */}
+        {/* 5. How it works (Direct Curation & Workflow) */}
         <HowItWorksSection />
 
-        {/* 5. Choose the company that's meant for you (Featured Companies) */}
+        {/* 6. Choose the company that's meant for you (Featured Companies) */}
         <FeaturedCompaniesSection companies={sanityCompanies.length > 0 ? sanityCompanies : undefined} />
 
-        {/* 6. Level up / We are here for every step (Why Trax) */}
-        <WhyTraxSection />
+        {/* 7. Hire Africa's finest tech talent (Featured Talent) */}
+        <FeaturedTalentSection talent={sanityTalent.length > 0 ? sanityTalent : undefined} />
 
-        {/* 7. Everyone's learning these right now (Trax Skills & Playbooks) */}
-        <TrendingSkillsSection courses={sanityCourses.length > 0 ? sanityCourses : undefined} />
-
-        {/* 8. Find teams that respect your craft (Ecosystem Standards & Direct Hiring) */}
+        {/* 8. Find teams that respect your craft (Ecosystem Standards & Direct Action CTAs) */}
         <SocialProofSection />
-
-        {/* 8. Guide to getting hired (Nigerian Career Playbooks) */}
-        <CareerGuidesSection guides={sanityGuides.length > 0 ? sanityGuides : undefined} />
-
-        {/* 9. Stories from the ecosystem (Trax Media Cross-bridge) */}
-        <TraxMediaSection />
-
-        {/* 10. Why people trust us (Verified Candidate Testimonials) */}
-        <TestimonialsTrustSection />
       </main>
 
-      {/* 10. Footer */}
+      {/* 9. Footer */}
       <Footer />
     </div>
   );

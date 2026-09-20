@@ -10,6 +10,7 @@ import {
 } from "@phosphor-icons/react";
 import { CourseDetail } from "@/data/courses";
 import { AppHeader } from "@/components/navigation/app-header";
+import { Footer } from "@/components/footer";
 
 interface LearningClientProps {
   courses: CourseDetail[];
@@ -18,7 +19,7 @@ interface LearningClientProps {
 export function LearningClient({ courses }: LearningClientProps) {
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-[#1F1F1F] flex flex-col font-sans">
-      <AppHeader activeTab="about" />
+      <AppHeader activeTab="learning" />
 
       {/* Top Back Bar */}
       <div className="bg-[#FAFAFA]">
@@ -120,6 +121,9 @@ export function LearningClient({ courses }: LearningClientProps) {
         </div>
 
       </main>
+
+      {/* Global Footer */}
+      <Footer />
     </div>
   );
 }

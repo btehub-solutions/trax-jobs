@@ -4,11 +4,21 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Megaphone, ArrowRight, CaretLeft, CaretRight } from "@phosphor-icons/react";
 
-const announcements = [
+interface Announcement {
+  id: string;
+  prefix: string;
+  body: string;
+  desktopBody?: string;
+  linkText: string;
+  href: string;
+}
+
+const announcements: Announcement[] = [
   {
     id: "safety",
     prefix: "Safety notice:",
     body: "Trax never asks for payment. All listings are verified.",
+    desktopBody: "Trax never asks candidates for placement fees or payment. Every company dossier and role is manually vetted by our desk.",
     linkText: "Learn more",
     href: "/about?tab=safety",
   },
@@ -16,6 +26,7 @@ const announcements = [
     id: "jobs",
     prefix: "Career goals?",
     body: "Explore vetted tech roles across top African startups.",
+    desktopBody: "Discover high-signal engineering, design, and product roles with salary transparency across Africa's leading tech hubs.",
     linkText: "Browse jobs",
     href: "/jobs",
   },
@@ -23,6 +34,7 @@ const announcements = [
     id: "talent",
     prefix: "Hiring talent?",
     body: "Connect with verified software engineers and designers.",
+    desktopBody: "Hire pre-vetted African software engineers, product designers, and tech leads ready for direct founder outreach.",
     linkText: "Hire talent",
     href: "/talent",
   },
@@ -30,6 +42,7 @@ const announcements = [
     id: "learning",
     prefix: "Level up:",
     body: "Cohort masterclasses in Product, Data, and Tech.",
+    desktopBody: "Practical cohort masterclasses in Product, Data, and AI Engineering led by vetted African tech leaders.",
     linkText: "Explore courses",
     href: "/learning",
   },
@@ -103,7 +116,8 @@ export function AnnouncementBar() {
           />
           <p className="text-[12.5px] sm:text-[13.5px] lg:text-[14px] text-zinc-800 leading-snug sm:leading-normal text-left sm:text-center whitespace-normal lg:whitespace-nowrap">
             <span className="font-semibold text-zinc-950">{current.prefix} </span>
-            <span className="text-zinc-700">{current.body} </span>
+            <span className="text-zinc-700 md:hidden">{current.body} </span>
+            <span className="text-zinc-700 hidden md:inline">{current.desktopBody || current.body} </span>
             <Link
               href={current.href}
               className="inline-flex items-center gap-1 text-[#E7040D] hover:text-[#CB030B] font-semibold hover:underline shrink-0 ml-1 group"

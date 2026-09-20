@@ -292,8 +292,20 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
   };
 
   return (
-    <section className="w-full bg-[#fbf9f6] py-20 sm:py-28 border-t border-zinc-200/60 relative overflow-x-hidden">
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
+    <section className="w-full bg-[#FAF8F5] py-20 sm:py-28 border-t border-zinc-200/60 relative overflow-x-hidden">
+      {/* Subtle Graph-Paper Grid Background */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-60"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #e8e4dc 1px, transparent 1px),
+            linear-gradient(to bottom, #e8e4dc 1px, transparent 1px)
+          `,
+          backgroundSize: "28px 28px",
+        }}
+      />
+
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
 
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
@@ -383,14 +395,14 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                     />
 
                     {/* Top-Right Floating Roles Badge (Trax Brand Red) */}
-                    <div className="absolute top-3 right-3 bg-[#E7040D] text-white text-[11.5px] font-bold px-2.5 py-1 rounded-none flex items-center gap-1 shadow-xs">
-                      <Briefcase size={13} weight="bold" className="text-white" />
-                      <span>
-                        {company.openRoles && company.openRoles > 0
-                          ? `${company.openRoles} ${company.openRoles === 1 ? "Role" : "Roles"}`
-                          : "1 Role"}
-                      </span>
-                    </div>
+                    {typeof company.openRoles === "number" && company.openRoles > 0 ? (
+                      <div className="absolute top-3 right-3 bg-[#E7040D] text-white text-[11.5px] font-bold px-2.5 py-1 rounded-none flex items-center gap-1 shadow-xs">
+                        <Briefcase size={13} weight="bold" className="text-white" />
+                        <span>
+                          {company.openRoles} {company.openRoles === 1 ? "Role" : "Roles"}
+                        </span>
+                      </div>
+                    ) : null}
                   </Link>
 
                   {/* 2. Card Body Content */}

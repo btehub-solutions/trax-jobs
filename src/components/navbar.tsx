@@ -19,6 +19,8 @@ const desktopNavLinks = [
   { name: "Find Jobs", href: "/jobs" },
   { name: "Hire a Talent", href: "/talent" },
   { name: "Companies", href: "/companies" },
+  { name: "Courses", href: "/learning" },
+  { name: "Guides", href: "/guides" },
   { name: "About Us", href: "/about" },
 ];
 
@@ -110,12 +112,14 @@ export function Navbar({
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden md:flex items-center gap-8 lg:gap-10">
+            <nav className="hidden md:flex items-center gap-5 lg:gap-7 xl:gap-8">
               {desktopNavLinks.map((link) => {
                 const isActive = activeTab
                   ? (activeTab === "jobs" && link.href === "/jobs") ||
                     (activeTab === "talent" && link.href === "/talent") ||
                     (activeTab === "companies" && link.href === "/companies") ||
+                    (activeTab === "learning" && link.href === "/learning") ||
+                    (activeTab === "guides" && link.href === "/guides") ||
                     (activeTab === "about" && link.href === "/about")
                   : pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
                 return (

@@ -2,7 +2,7 @@
 
 import { Navbar, NavbarProps } from "@/components/navbar";
 
-export type NavTab = "jobs" | "talent" | "companies" | "about" | "recruiter";
+export type NavTab = "jobs" | "talent" | "companies" | "learning" | "guides" | "about" | "recruiter";
 
 export interface AppHeaderProps extends NavbarProps {
   activeTab?: NavTab;

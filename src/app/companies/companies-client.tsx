@@ -674,14 +674,14 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                       )}
 
                       {/* Top-Right Floating Roles Badge (Trax Brand Red) */}
-                      <div className="absolute top-3 right-3 bg-[#E7040D] text-white text-[11.5px] font-bold px-2.5 py-1 rounded-none flex items-center gap-1 shadow-xs">
-                        <Briefcase size={13} weight="bold" className="text-white" />
-                        <span>
-                          {comp.openJobsCount > 0
-                            ? `${comp.openJobsCount} ${comp.openJobsCount === 1 ? "Role" : "Roles"}`
-                            : "1 Role"}
-                        </span>
-                      </div>
+                      {typeof comp.openJobsCount === "number" && comp.openJobsCount > 0 ? (
+                        <div className="absolute top-3 right-3 bg-[#E7040D] text-white text-[11.5px] font-bold px-2.5 py-1 rounded-none flex items-center gap-1 shadow-xs">
+                          <Briefcase size={13} weight="bold" className="text-white" />
+                          <span>
+                            {comp.openJobsCount} {comp.openJobsCount === 1 ? "Role" : "Roles"}
+                          </span>
+                        </div>
+                      ) : null}
                     </Link>
 
                     {/* 2. Card Body Content */}

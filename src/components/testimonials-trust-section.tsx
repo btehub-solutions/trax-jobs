@@ -84,19 +84,7 @@ export function TestimonialsTrustSection() {
   };
 
   return (
-    <section className="w-full bg-[#FAF8F5] py-20 sm:py-28 relative overflow-hidden">
-      {/* Graph-Paper Grid Background */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-60"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, #e8e4dc 1px, transparent 1px),
-            linear-gradient(to bottom, #e8e4dc 1px, transparent 1px)
-          `,
-          backgroundSize: "28px 28px",
-        }}
-      />
-
+    <section className="w-full bg-white py-20 sm:py-28 relative overflow-hidden border-b border-zinc-200">
       {/* Header: constrained */}
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
         {/* Header Row */}
