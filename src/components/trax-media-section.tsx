@@ -90,7 +90,7 @@ export function TraxMediaSection({ articles = TRAX_MEDIA_ARTICLES }: TraxMediaSe
               href="https://trax.ng"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-none bg-white hover:bg-zinc-100 text-zinc-900 text-[13px] sm:text-[13.5px] font-bold border border-zinc-200/90 shadow-2xs transition-all duration-200 group"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white hover:bg-zinc-100 text-zinc-900 text-[13px] sm:text-[13.5px] font-bold border border-zinc-200/90 shadow-2xs transition-all duration-200 group"
             >
               <span>View more on Trax Media</span>
               <ArrowUpRight size={14} weight="bold" className="text-zinc-500 group-hover:text-[#E7040D] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -101,14 +101,14 @@ export function TraxMediaSection({ articles = TRAX_MEDIA_ARTICLES }: TraxMediaSe
               <button
                 onClick={handlePrev}
                 aria-label="Previous story"
-                className="w-8.5 h-8.5 sm:w-9 sm:h-9 rounded-none flex items-center justify-center bg-white hover:bg-zinc-100 text-zinc-700 hover:text-[#E7040D] border border-zinc-200/90 shadow-2xs transition-colors cursor-pointer active:scale-95"
+                className="w-8.5 h-8.5 sm:w-9 sm:h-9 rounded-full flex items-center justify-center bg-white hover:bg-zinc-100 text-zinc-700 hover:text-[#E7040D] border border-zinc-200/90 shadow-2xs transition-colors cursor-pointer active:scale-95"
               >
                 <CaretLeft size={16} weight="bold" />
               </button>
               <button
                 onClick={handleNext}
                 aria-label="Next story"
-                className="w-8.5 h-8.5 sm:w-9 sm:h-9 rounded-none flex items-center justify-center bg-white hover:bg-zinc-100 text-zinc-700 hover:text-[#E7040D] border border-zinc-200/90 shadow-2xs transition-colors cursor-pointer active:scale-95"
+                className="w-8.5 h-8.5 sm:w-9 sm:h-9 rounded-full flex items-center justify-center bg-white hover:bg-zinc-100 text-zinc-700 hover:text-[#E7040D] border border-zinc-200/90 shadow-2xs transition-colors cursor-pointer active:scale-95"
               >
                 <CaretRight size={16} weight="bold" />
               </button>
