@@ -24,10 +24,6 @@ export function SocialProofSection() {
           
           {/* Left Column: Big Bold Headline & Callout */}
           <div className="lg:col-span-5 max-w-xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-none bg-[#fce8e0] text-[#E7040D] text-[11.5px] font-bold uppercase tracking-wider mb-4 border border-[#f9cbb9]">
-              The Trax Standard
-            </div>
-
             <h2 className="text-[34px] sm:text-[46px] lg:text-[50px] font-black tracking-[-0.03em] text-[#1F1F1F] leading-[1.12] mb-5">
               We are here for every step of your search.
             </h2>
