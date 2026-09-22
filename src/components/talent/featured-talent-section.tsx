@@ -174,32 +174,35 @@ export function FeaturedTalentSection({
                   {/* 1. Top Image Thumbnail Container (Studio Portrait Framing) */}
                   <Link
                     href={`/talent/${person.slug || person.id}`}
-                    className="relative h-[220px] sm:h-[215px] w-full bg-[#18181B] overflow-hidden block group/image"
+                    className="relative h-[220px] sm:h-[215px] w-full bg-[#121316] overflow-hidden block group/image"
                   >
-                    {/* Ambient Blurred Backdrop */}
+                    {/* Ambient subtle backdrop to smoothly blend container width */}
                     <div className="absolute inset-0 overflow-hidden pointer-events-none">
                       <Image
-                        src={person.avatar || "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=600"}
+                        src={
+                          person.avatar ||
+                          "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800"
+                        }
                         alt=""
                         fill
-                        sizes="120px"
-                        className="object-cover blur-2xl opacity-35 scale-125"
+                        sizes="380px"
+                        className="object-cover blur-xl opacity-25 scale-110"
                         unoptimized
                       />
-                      <div className="absolute inset-0 bg-black/25" />
+                      <div className="absolute inset-0 bg-black/40" />
                     </div>
 
-                    {/* Sharp, Fully In-Frame Centered Portrait */}
+                    {/* Razor-sharp, 100% fitted complete portrait - exactly like profile icon */}
                     <div className="relative w-full h-full flex items-center justify-center p-2 z-0">
                       <Image
                         src={
                           person.avatar ||
-                          "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=600"
+                          "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800"
                         }
                         alt={person.name}
                         fill
                         sizes="(max-width: 640px) 300px, 380px"
-                        className="object-contain object-center group-hover/image:scale-[1.03] transition-transform duration-300"
+                        className="object-contain object-center group-hover/image:scale-[1.03] transition-transform duration-300 drop-shadow-sm"
                         unoptimized
                       />
                     </div>
@@ -242,6 +245,7 @@ export function FeaturedTalentSection({
                           width={44}
                           height={44}
                           className="w-full h-full object-cover object-top"
+                          unoptimized
                         />
                       </div>
                       <div className="min-w-0 flex-1 flex items-center gap-1.5">

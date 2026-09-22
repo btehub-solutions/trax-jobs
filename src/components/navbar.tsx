@@ -172,8 +172,10 @@ export function Navbar({
 
       {/* Mobile Drawer Backdrop Overlay */}
       <div
-        className={`fixed inset-0 bg-black/45 backdrop-blur-xs z-50 transition-opacity duration-300 md:hidden ${
-          mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 bg-black/50 z-50 transition-all duration-300 touch-none md:hidden ${
+          mobileMenuOpen
+            ? "opacity-100 pointer-events-auto visible"
+            : "opacity-0 pointer-events-none invisible"
         }`}
         onClick={() => setMobileMenuOpen(false)}
         aria-hidden="true"
@@ -181,12 +183,15 @@ export function Navbar({
 
       {/* Mobile Slide-Out Side Drawer (Jobberman layout structure, Trax design system) */}
       <aside
-        className={`fixed top-0 right-0 bottom-0 w-[82%] max-w-[320px] bg-white z-50 shadow-2xl flex flex-col justify-between transform transition-transform duration-300 ease-in-out md:hidden overscroll-contain ${
-          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed top-0 right-0 bottom-0 h-[100dvh] w-[82%] max-w-[320px] bg-white z-[60] shadow-2xl flex flex-col justify-between transform transition-all duration-300 ease-in-out md:hidden overscroll-contain ${
+          mobileMenuOpen
+            ? "translate-x-0 opacity-100 visible pointer-events-auto"
+            : "translate-x-full opacity-0 invisible pointer-events-none"
         }`}
         role="dialog"
         aria-modal="true"
         aria-label="Navigation Menu"
+        aria-hidden={!mobileMenuOpen}
       >
         <div className="p-6 overflow-y-auto overscroll-contain">
           {/* Top Close Button (Pinned Right) */}
@@ -226,6 +231,8 @@ export function Navbar({
                 ? (activeTab === "jobs" && item.href === "/jobs") ||
                   (activeTab === "talent" && item.href === "/talent") ||
                   (activeTab === "companies" && item.href === "/companies") ||
+                  (activeTab === "learning" && item.href === "/learning") ||
+                  (activeTab === "guides" && item.href === "/guides") ||
                   (activeTab === "about" && item.href === "/about")
                 : pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
               return (
@@ -252,7 +259,7 @@ export function Navbar({
         </div>
 
         {/* Drawer Footer Branding */}
-        <div className="p-6 border-t border-zinc-100 bg-zinc-50/60">
+        <div className="p-6 pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] border-t border-zinc-100 bg-zinc-50/60">
           <div className="flex items-center gap-2 mb-1.5">
             <Image
               src="/images/trax-logo.png"
