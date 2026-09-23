@@ -35,8 +35,8 @@ export default async function Home() {
     subIndustry: c.industry ?? "Software & Services",
     description: c.description ?? "",
     openRoles: c.openJobsCount ?? 0,
-    coverImage: urlForImage(c.coverImage, { width: 600 }) || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=600",
-    logo: urlForImage(c.logo, { width: 120 }),
+    coverImage: urlForImage(c.coverImage, { width: 1200, quality: 95 }) || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    logo: urlForImage(c.logo, { width: 240, quality: 95 }),
   }));
 
   const sanityTalent = (rawTalent ?? []).map((t: any) => ({

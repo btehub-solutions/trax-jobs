@@ -380,6 +380,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                       fill
                       sizes="(max-width: 640px) 300px, 380px"
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      unoptimized
                     />
 
                     {/* Top-Right Floating Roles Badge (Trax Brand Red) */}
@@ -431,6 +432,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                             width={36}
                             height={36}
                             className="w-full h-full object-contain"
+                            unoptimized
                           />
                         ) : (
                           <CompanyVector name={company.name} />

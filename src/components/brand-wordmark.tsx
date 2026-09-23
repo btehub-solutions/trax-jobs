@@ -11,7 +11,9 @@ export type AfricanBrandKey =
   | "moove"
   | "cowrywise"
   | "opay"
-  | "carbon";
+  | "carbon"
+  | "btehub"
+  | "savey";
 
 interface BrandWordmarkProps {
   brand: AfricanBrandKey;
@@ -20,6 +22,34 @@ interface BrandWordmarkProps {
 
 export function BrandWordmark({ brand, className = "" }: BrandWordmarkProps) {
   switch (brand) {
+    case "btehub":
+      return (
+        <div className={`inline-flex items-center hover:scale-105 transition-all duration-200 select-none shrink-0 cursor-default ${className}`}>
+          <span className="text-[25px] sm:text-[29px] font-black tracking-[-0.04em] leading-none text-[#111827]">
+            BTE<span className="text-[#2563EB]">Hub</span>
+          </span>
+        </div>
+      );
+
+    case "savey":
+      return (
+        <div className={`inline-flex items-center gap-2 text-[#15803D] hover:scale-105 transition-all duration-200 select-none shrink-0 cursor-default ${className}`}>
+          {/* Savey brand emblem mark */}
+          <svg width="22" height="22" viewBox="0 0 32 32" fill="none" className="shrink-0">
+            <path
+              d="M4 13.5C9 13.5 15.5 10 24 10C20 13.5 14 16 7 16C5 16 4 14.5 4 13.5Z"
+              fill="#15803D"
+            />
+            <path
+              d="M4 18.5C11 18.5 17 22 24 22C19 19.5 13 16 6 16C4.5 16 4 17.5 4 18.5Z"
+              fill="#15803D"
+            />
+          </svg>
+          <span className="text-[25px] sm:text-[29px] font-black tracking-[-0.04em] leading-none lowercase text-[#15803D]">
+            savey
+          </span>
+        </div>
+      );
     case "paystack":
       return (
         <div className={`inline-flex items-center gap-2.5 text-[#0BA4DB] hover:opacity-80 hover:scale-105 transition-all duration-200 select-none shrink-0 cursor-default ${className}`}>
@@ -174,7 +204,9 @@ export function BrandWordmark({ brand, className = "" }: BrandWordmarkProps) {
 
 export const ALL_AFRICAN_BRANDS: AfricanBrandKey[] = [
   "paystack",
+  "btehub",
   "flutterwave",
+  "savey",
   "moniepoint",
   "interswitch",
   "kuda",
