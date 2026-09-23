@@ -171,41 +171,25 @@ export function FeaturedTalentSection({
                 className="w-[300px] sm:w-[360px] md:w-[380px] shrink-0 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start select-none"
               >
                 <div>
-                  {/* 1. Top Image Thumbnail Container (Studio Portrait Framing) */}
+                  {/* 1. Top Image Thumbnail Container (Landscape Cover Photo) */}
                   <Link
                     href={`/talent/${person.slug || person.id}`}
-                    className="relative h-[220px] sm:h-[215px] w-full bg-[#121316] overflow-hidden block group/image"
+                    className="relative h-[175px] w-full bg-[#0C1222] overflow-hidden block group/image"
                   >
-                    {/* Ambient subtle backdrop to smoothly blend container width */}
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                      <Image
-                        src={
-                          person.avatar ||
-                          "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800"
-                        }
-                        alt=""
-                        fill
-                        sizes="380px"
-                        className="object-cover blur-xl opacity-25 scale-110"
-                        unoptimized
-                      />
-                      <div className="absolute inset-0 bg-black/40" />
-                    </div>
+                    <Image
+                      src={
+                        person.coverImage ||
+                        "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      }
+                      alt={`${person.name} cover`}
+                      fill
+                      sizes="(max-width: 640px) 300px, 380px"
+                      className="object-cover object-center group-hover/image:scale-105 transition-transform duration-500 ease-out"
+                      unoptimized
+                    />
 
-                    {/* Razor-sharp, 100% fitted complete portrait - exactly like profile icon */}
-                    <div className="relative w-full h-full flex items-center justify-center p-2 z-0">
-                      <Image
-                        src={
-                          person.avatar ||
-                          "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800"
-                        }
-                        alt={person.name}
-                        fill
-                        sizes="(max-width: 640px) 300px, 380px"
-                        className="object-contain object-center group-hover/image:scale-[1.03] transition-transform duration-300 drop-shadow-sm"
-                        unoptimized
-                      />
-                    </div>
+                    {/* Ambient subtle gradient overlay for badge contrast and card depth */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-black/25 pointer-events-none" />
 
                     {/* Top-Right Floating Availability Badge (Trax Brand Red) */}
                     <div className="absolute top-3 right-3 z-10 bg-[#E7040D] text-white text-[11px] font-bold px-2.5 py-1 rounded-none flex items-center gap-1 shadow-sm">
