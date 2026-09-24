@@ -673,24 +673,25 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                         </div>
                       )}
 
-                      {/* Top-Right Floating Roles Badge (Trax Brand Red) */}
-                      {typeof comp.openJobsCount === "number" && comp.openJobsCount > 0 ? (
-                        <div className="absolute top-3 right-3 bg-[#E7040D] text-white text-[11.5px] font-bold px-2.5 py-1 rounded-none flex items-center gap-1 shadow-xs">
-                          <Briefcase size={13} weight="bold" className="text-white" />
-                          <span>
-                            {comp.openJobsCount} {comp.openJobsCount === 1 ? "Role" : "Roles"}
-                          </span>
-                        </div>
-                      ) : null}
                     </Link>
 
                     {/* 2. Card Body Content */}
                     <div className="p-5 space-y-3.5">
-                      {/* Sector/Industry Pill Tag + Follow Button */}
+                      {/* Sector/Industry Pill Tag + Open Roles Badge + Follow Button */}
                       <div className="flex items-center justify-between gap-2">
-                        <span className="inline-block px-3 py-1 bg-[#E0F2FE] text-[#0284C7] text-[12px] font-bold rounded-none">
-                          {comp.industry || "Technology"}
-                        </span>
+                        <div className="flex items-center gap-2 min-w-0">
+                          <span className="inline-block px-3 py-1 bg-[#E0F2FE] text-[#0284C7] text-[12px] font-bold rounded-none shrink-0">
+                            {comp.industry || "Technology"}
+                          </span>
+                          {typeof comp.openJobsCount === "number" && comp.openJobsCount > 0 ? (
+                            <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#E7040D] bg-[#fce8e0] border border-[#E7040D]/20 px-2 py-0.5 rounded-none shrink-0">
+                              <Briefcase size={12} weight="bold" className="text-[#E7040D]" />
+                              <span>
+                                {comp.openJobsCount} {comp.openJobsCount === 1 ? "Role" : "Roles"}
+                              </span>
+                            </span>
+                          ) : null}
+                        </div>
 
                         <button
                           type="button"

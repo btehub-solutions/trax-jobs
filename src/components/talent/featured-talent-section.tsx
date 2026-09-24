@@ -9,7 +9,6 @@ import {
   Users,
   MapPin,
   SealCheck,
-  Briefcase,
 } from "@phosphor-icons/react";
 import { TalentProfile } from "@/types";
 import { SAMPLE_TALENT } from "@/data/talent";
@@ -21,6 +20,24 @@ const TALENT_CATEGORIES = [
   "Product",
   "Data & AI",
 ];
+
+function formatAvailabilityBadge(val?: string): string {
+  if (!val) return "Available";
+  const lower = val.toLowerCase();
+  if (lower.includes("immediately") || lower.includes("now") || lower.includes("open")) {
+    return "Available";
+  }
+  if (lower.includes("contract")) {
+    return "Contract";
+  }
+  if (lower.includes("part-time")) {
+    return "Part-time";
+  }
+  if (lower.includes("notice")) {
+    return "Notice";
+  }
+  return val.length > 10 ? `${val.slice(0, 9)}...` : val;
+}
 
 interface FeaturedTalentSectionProps {
   talent?: TalentProfile[];
@@ -160,10 +177,7 @@ export function FeaturedTalentSection({
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {filteredTalent.map((person) => {
-            const availabilityLabel =
-              person.availability === "Available immediately"
-                ? "Available Now"
-                : person.availability || "Available Now";
+            const availabilityLabel = formatAvailabilityBadge(person.availability);
 
             return (
               <div
@@ -171,7 +185,7 @@ export function FeaturedTalentSection({
                 className="w-[300px] sm:w-[360px] md:w-[380px] shrink-0 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start select-none"
               >
                 <div>
-                  {/* 1. Top Image Thumbnail Container (Landscape Cover Photo) */}
+                  {/* 1. Top Image Thumbnail Container (Landscape Cover Photo) - Clean & Unobstructed */}
                   <Link
                     href={`/talent/${person.slug || person.id}`}
                     className="relative h-[175px] w-full bg-[#0C1222] overflow-hidden block group/image"
@@ -187,28 +201,25 @@ export function FeaturedTalentSection({
                       className="object-cover object-center group-hover/image:scale-105 transition-transform duration-500 ease-out"
                       unoptimized
                     />
-
-                    {/* Ambient subtle gradient overlay for badge contrast and card depth */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-black/25 pointer-events-none" />
-
-                    {/* Top-Right Floating Availability Badge (Trax Brand Red) */}
-                    <div className="absolute top-3 right-3 z-10 bg-[#E7040D] text-white text-[11px] font-bold px-2.5 py-1 rounded-none flex items-center gap-1 shadow-sm">
-                      <Briefcase size={12} weight="bold" className="text-white" />
-                      <span>{availabilityLabel}</span>
-                    </div>
                   </Link>
 
                   {/* 2. Card Body Content */}
                   <div className="p-5 space-y-3.5">
-                    {/* Category Pill Tag + Action Button */}
+                    {/* Category Pill Tag + Availability Indicator + Action Button */}
                     <div className="flex items-center justify-between gap-2">
-                      <span className="inline-block px-3 py-1 bg-[#E0F2FE] text-[#0284C7] text-[12px] font-bold rounded-none">
-                        {person.category || "Engineering"}
-                      </span>
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="inline-block px-3 py-1 bg-[#E0F2FE] text-[#0284C7] text-[12px] font-bold rounded-none shrink-0">
+                          {person.category || "Engineering"}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/70 px-2 py-0.5 rounded-none shrink-0">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                          <span className="truncate max-w-[110px]">{availabilityLabel}</span>
+                        </span>
+                      </div>
 
                       <Link
                         href={`/talent/${person.slug || person.id}`}
-                        className="px-2.5 py-0.5 rounded-none text-[11px] font-bold border transition-all cursor-pointer select-none active:scale-95 bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-800 hover:border-zinc-400 shadow-2xs"
+                        className="px-2.5 py-0.5 rounded-none text-[11px] font-bold border transition-all cursor-pointer select-none active:scale-95 bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-800 hover:border-zinc-400 shadow-2xs shrink-0"
                       >
                         Hire Talent
                       </Link>

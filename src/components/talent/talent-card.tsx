@@ -42,7 +42,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
         )}
         
         {/* Editorial Pill on Top Right */}
-        <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-white text-[11px] font-semibold tracking-wide">
+        <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 px-2 py-0.5 bg-black/40 backdrop-blur-md border border-white/20 text-white text-[10px] font-semibold tracking-wide">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
           <span>{talent.workPreference}</span>
         </div>

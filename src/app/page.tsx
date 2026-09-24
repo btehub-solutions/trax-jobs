@@ -128,14 +128,14 @@ export default async function Home() {
         {/* 4. Explore opportunities by experience level */}
         <ExperienceSection counts={experienceCounts} />
 
-        {/* 4b. Latest Verified Roles Carousel (Strictly real Sanity jobs) */}
-        <FeaturedJobsSection jobs={featuredJobs} />
-
         {/* 5. How it works (Direct Curation & Workflow) */}
         <HowItWorksSection />
 
         {/* 6. Choose the company that's meant for you (Featured Companies) */}
         <FeaturedCompaniesSection companies={sanityCompanies.length > 0 ? sanityCompanies : undefined} />
+
+        {/* 6b. Latest Verified Roles Carousel (Strictly real Sanity jobs) */}
+        <FeaturedJobsSection jobs={featuredJobs} />
 
         {/* 7. Hire Africa's finest tech talent (Featured Talent) */}
         <FeaturedTalentSection talent={sanityTalent.length > 0 ? sanityTalent : undefined} />
