@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/hero-section";
 import { ExperienceSection } from "@/components/experience-section";
 import { HowItWorksSection } from "@/components/how-it-works-section";
 import { FeaturedCompaniesSection } from "@/components/featured-companies-section";
+import { FeaturedJobsSection } from "@/components/featured-jobs-section";
 import { FeaturedTalentSection } from "@/components/talent/featured-talent-section";
 import { SocialProofSection } from "@/components/social-proof-section";
 import { Footer } from "@/components/footer";
@@ -11,7 +12,7 @@ import { fetchCompanies, fetchPublishedJobs, fetchPublishedTalent } from "@/sani
 import { urlForImage } from "@/sanity/image";
 import { SAMPLE_JOBS } from "@/data/jobs";
 import { calculateExperienceCounts } from "@/lib/experience";
-import { extractSkillsList, extractText } from "@/lib/utils";
+import { extractParagraphs, extractSkillsList, extractStringList, extractText, resolveJobTags } from "@/lib/utils";
 
 export const revalidate = 60;
 
@@ -24,6 +25,51 @@ export default async function Home() {
 
   const activeJobs = rawJobs && rawJobs.length > 0 ? rawJobs : SAMPLE_JOBS;
   const experienceCounts = calculateExperienceCounts(activeJobs);
+
+  // Strictly real jobs from Sanity (up to 6) - zero fake or mock jobs
+  const featuredJobs = (rawJobs ?? []).slice(0, 6).map((j: any) => ({
+    id: j._id,
+    slug: j.slug ?? j._id,
+    title: j.title ?? "",
+    summary: extractText(j.summary),
+    description: extractParagraphs(j.description),
+    requirements: extractStringList(j.requirements),
+    benefits: extractStringList(j.benefits),
+    location: j.location ?? "Lagos, Nigeria",
+    workplaceType: (j.workplaceType ?? "On-site") as any,
+    experienceLevel: (j.experienceLevel ?? "Mid-level") as any,
+    roleCategory: (j.category ?? "Engineering") as any,
+    contractType: (j.employmentType ?? "Permanent") as any,
+    salary: {
+      currency: "NGN" as const,
+      formatted: j.salary?.formatted ?? (typeof j.salary === "string" ? j.salary : ""),
+      rawMin: j.salary?.min ?? 0,
+      rawMax: j.salary?.max ?? 0,
+      period: "mo" as const,
+    },
+    tags: resolveJobTags(j.tags, {
+      title: j.title ?? "",
+      category: j.category ?? "",
+      requirements: extractStringList(j.requirements),
+      summary: extractText(j.summary),
+    }),
+    applicationLink: j.applicationLink ?? `/jobs/${j.slug ?? j._id}`,
+    isFeatured: j.isFeatured ?? false,
+    isVerified: j.isVerified ?? true,
+    postedDate: j.publishedAt ?? new Date().toISOString(),
+    company: {
+      id: j.company?._id ?? "",
+      name: j.company?.name ?? "Tech Employer",
+      slug: j.company?.slug ?? "",
+      logo: urlForImage(j.company?.logo),
+      coverImage: urlForImage(j.company?.coverImage, { width: 1200, quality: 90 }) || "",
+      industry: j.company?.industry ?? "Technology",
+      location: j.company?.location ?? "Lagos, Nigeria",
+      employeesCount: j.company?.employeesCount ?? "50+ team",
+      hq: j.company?.location ?? "Lagos, Nigeria",
+      verified: j.company?.verified ?? true,
+    },
+  }));
 
   const sanityCompanies = (rawCompanies ?? []).map((c: any) => ({
     name: c.name ?? "",
@@ -81,6 +127,9 @@ export default async function Home() {
 
         {/* 4. Explore opportunities by experience level */}
         <ExperienceSection counts={experienceCounts} />
+
+        {/* 4b. Latest Verified Roles Carousel (Strictly real Sanity jobs) */}
+        <FeaturedJobsSection jobs={featuredJobs} />
 
         {/* 5. How it works (Direct Curation & Workflow) */}
         <HowItWorksSection />
