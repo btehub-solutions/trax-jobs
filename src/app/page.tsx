@@ -7,8 +7,11 @@ import { FeaturedCompaniesSection } from "@/components/featured-companies-sectio
 import { FeaturedJobsSection } from "@/components/featured-jobs-section";
 import { FeaturedTalentSection } from "@/components/talent/featured-talent-section";
 import { SocialProofSection } from "@/components/social-proof-section";
+import { CareerGuidesSection } from "@/components/career-guides-section";
 import { Footer } from "@/components/footer";
-import { fetchCompanies, fetchPublishedJobs, fetchPublishedTalent } from "@/sanity/fetchers";
+import { fetchCompanies, fetchPublishedJobs, fetchPublishedTalent, fetchPublishedGuides } from "@/sanity/fetchers";
+import { mapSanityGuide } from "@/sanity/mappers";
+import { GUIDES_DATA, GuideArticle } from "@/data/guides";
 import { urlForImage } from "@/sanity/image";
 import { SAMPLE_JOBS } from "@/data/jobs";
 import { calculateExperienceCounts } from "@/lib/experience";
@@ -17,11 +20,17 @@ import { extractParagraphs, extractSkillsList, extractStringList, extractText, r
 export const revalidate = 60;
 
 export default async function Home() {
-  const [rawCompanies, rawJobs, rawTalent] = await Promise.all([
+  const [rawCompanies, rawJobs, rawTalent, rawGuides] = await Promise.all([
     fetchCompanies(),
     fetchPublishedJobs(),
     fetchPublishedTalent(),
+    fetchPublishedGuides(),
   ]);
+
+  let guides: GuideArticle[] = GUIDES_DATA;
+  if (rawGuides && rawGuides.length > 0) {
+    guides = rawGuides.map((g: any) => mapSanityGuide(g, rawGuides));
+  }
 
   const activeJobs = rawJobs && rawJobs.length > 0 ? rawJobs : SAMPLE_JOBS;
   const experienceCounts = calculateExperienceCounts(activeJobs);
@@ -142,6 +151,9 @@ export default async function Home() {
 
         {/* 8. Find teams that respect your craft (Ecosystem Standards & Direct Action CTAs) */}
         <SocialProofSection />
+
+        {/* 9. Guide to getting hired (African Tech Career Playbooks) */}
+        <CareerGuidesSection guides={guides} />
       </main>
 
       {/* 9. Footer */}
