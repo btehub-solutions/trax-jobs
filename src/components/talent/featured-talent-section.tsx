@@ -41,7 +41,7 @@ function formatAvailabilityBadge(val?: string): string {
 
 function TalentCoverImage({ src, name }: { src?: string; name: string }) {
   const [hasError, setHasError] = useState(false);
-  const fallback = "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800";
+  const fallback = "/images/trax-talent-cover-default.jpg";
   const finalSrc = !src || hasError ? fallback : src;
 
   return (

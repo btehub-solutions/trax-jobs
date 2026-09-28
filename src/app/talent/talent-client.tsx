@@ -435,9 +435,14 @@ export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
             {filteredTalent.map((item) => (
               <div key={item.id} className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_-6px_rgba(231,4,13,0.08)] hover:border-[#E7040D]/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group">
                 <div className="relative h-32 w-full bg-[#E5E7EB] overflow-hidden">
-                  {item.coverImage && (
-                    <Image src={item.coverImage} alt="" fill sizes="320px" className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-90" unoptimized />
-                  )}
+                  <Image
+                    src={item.coverImage || "/images/trax-talent-cover-default.jpg"}
+                    alt=""
+                    fill
+                    sizes="320px"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
+                    unoptimized
+                  />
                 </div>
 
                 <div className="p-5 pt-0 flex-1 flex flex-col justify-between">

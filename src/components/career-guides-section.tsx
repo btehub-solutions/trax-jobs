@@ -148,8 +148,8 @@ export function CareerGuidesSection({ guides }: CareerGuidesSectionProps = {}) {
                 href={`/guides/${guide.slug}`}
                 className="w-[80vw] max-w-[300px] sm:w-full sm:max-w-[280px] shrink-0 snap-start bg-white rounded-none border border-zinc-200/90 overflow-hidden shadow-[0_4px_16px_-4px_rgba(15,16,18,0.06)] hover:shadow-[0_16px_32px_-6px_rgba(231,4,13,0.12)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col group cursor-pointer"
               >
-                {/* Image Container with 4:3 landscape crop and square edges */}
-                <div className="relative h-[190px] sm:h-[195px] md:h-[200px] w-full bg-zinc-100 overflow-hidden rounded-none">
+                {/* Image Container with editorial portrait framing and square edges */}
+                <div className="relative h-[260px] sm:h-[280px] md:h-[300px] w-full bg-zinc-100 overflow-hidden rounded-none">
                   <Image
                     src={imageSrc}
                     alt={guide.title}

@@ -31,15 +31,13 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
       
       {/* Top Banner Cover Strip */}
       <div className="relative h-20 w-full bg-gradient-to-r from-[#0C1222] via-[#162038] to-[#1F1F1F] overflow-hidden">
-        {talent.coverImage && (
-          <Image
-            src={talent.coverImage}
-            alt=""
-            fill
-            sizes="400px"
-            className="object-cover opacity-25 mix-blend-overlay group-hover:scale-105 transition-transform duration-500"
-          />
-        )}
+        <Image
+          src={talent.coverImage || "/images/trax-talent-cover-default.jpg"}
+          alt=""
+          fill
+          sizes="400px"
+          className="object-cover opacity-35 mix-blend-overlay group-hover:scale-105 transition-transform duration-500"
+        />
         
         {/* Editorial Pill on Top Right */}
         <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 px-2 py-0.5 bg-black/40 backdrop-blur-md border border-white/20 text-white text-[10px] font-semibold tracking-wide">

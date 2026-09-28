@@ -83,7 +83,7 @@ function mapTalent(t: any, fallbackStatic?: any) {
     title: t.title ?? fallbackStatic?.title ?? "",
     category: t.category ?? fallbackStatic?.category ?? "Engineering",
     avatar: urlForImage(t.avatar) || fallbackStatic?.avatar || "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=300",
-    coverImage: urlForImage(t.coverImage) || fallbackStatic?.coverImage || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800",
+    coverImage: urlForImage(t.coverImage) || fallbackStatic?.coverImage || "/images/trax-talent-cover-default.jpg",
     experienceLevel: t.experienceLevel ?? fallbackStatic?.experienceLevel ?? "",
     experienceYears: t.experienceYears ?? fallbackStatic?.experienceYears ?? "",
     location: t.location ?? fallbackStatic?.location ?? "",
