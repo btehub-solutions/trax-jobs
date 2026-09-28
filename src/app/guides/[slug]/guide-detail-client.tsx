@@ -80,7 +80,7 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-between font-sans">
+    <div className="min-h-screen bg-[#FAF8F5] flex flex-col justify-between font-sans">
       {/* 1. Global Navbar */}
       <Navbar />
 

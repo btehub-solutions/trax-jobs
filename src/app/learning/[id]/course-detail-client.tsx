@@ -53,7 +53,7 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
   const whatsappUrl = `https://wa.me/${cleanPhone}?text=${whatsappMessage}`;
 
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-between font-sans">
+    <div className="min-h-screen bg-[#FAF8F5] flex flex-col justify-between font-sans">
       {/* 1. Global Navbar */}
       <Navbar />
 

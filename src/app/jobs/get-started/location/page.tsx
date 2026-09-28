@@ -37,7 +37,7 @@ function LocationPreferenceContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] flex flex-col justify-between relative">
+    <div className="min-h-screen bg-[#FAF8F5] flex flex-col justify-between relative">
       {/* Top Floating Header */}
       <header className="w-full relative z-50 pt-7 px-6 sm:px-12 lg:px-16">
         <div className="max-w-[1400px] mx-auto flex items-center justify-between">
@@ -164,7 +164,7 @@ export default function LocationPreferencePage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#FAFAFA] flex items-center justify-center p-6">
+        <div className="min-h-screen bg-[#FAF8F5] flex items-center justify-center p-6">
           <div className="w-full max-w-xl bg-white border border-zinc-200/90 p-8 space-y-4 animate-pulse">
             <div className="h-6 bg-zinc-200 w-1/2" />
             <div className="h-4 bg-zinc-100 w-3/4" />

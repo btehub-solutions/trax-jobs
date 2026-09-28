@@ -9,6 +9,9 @@ import {
   BookmarkSimple,
   ArrowRight,
   Briefcase,
+  CaretLeft,
+  CaretRight,
+  Users,
 } from "@phosphor-icons/react";
 import { Job } from "@/types";
 import { isValidImageUrl } from "@/lib/utils";
@@ -78,6 +81,36 @@ interface FeaturedJobsSectionProps {
 export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
   const [savedJobIds, setSavedJobIds] = useState<string[]>([]);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScrollability = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 10);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    checkScrollability();
+    el.addEventListener("scroll", checkScrollability, { passive: true });
+    window.addEventListener("resize", checkScrollability);
+    return () => {
+      el.removeEventListener("scroll", checkScrollability);
+      window.removeEventListener("resize", checkScrollability);
+    };
+  }, [jobs]);
+
+  const handleScroll = (direction: "left" | "right") => {
+    if (carouselRef.current) {
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+      const offset = direction === "left" ? (isMobile ? -294 : -321) : (isMobile ? 294 : 321);
+      carouselRef.current.scrollBy({ left: offset, behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     try {
@@ -113,7 +146,7 @@ export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
   }
 
   return (
-    <section className="w-full bg-[#FAF8F5] py-14 sm:py-20 px-6 sm:px-10 lg:px-16 border-t border-b border-zinc-200/80 overflow-hidden">
+    <section className="w-full bg-[#FAF8F5] py-14 sm:py-20 px-6 sm:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-[1440px] mx-auto">
         
         {/* Section Header with Top CTA */}
@@ -127,8 +160,39 @@ export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
             </p>
           </div>
 
-          {/* Top CTA Button in place of toggle */}
-          <div className="self-start sm:self-center">
+          {/* Top CTA & Carousel Controls */}
+          <div className="flex items-center gap-3 self-start sm:self-center">
+            {jobs.length > 3 && (
+              <div className="hidden sm:flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleScroll("left")}
+                  disabled={!canScrollLeft}
+                  className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all shadow-2xs ${
+                    canScrollLeft
+                      ? "bg-white border-zinc-200/90 text-zinc-800 hover:text-[#E7040D] hover:bg-zinc-50 cursor-pointer active:scale-95"
+                      : "bg-zinc-100/60 border-zinc-200/70 text-zinc-300 cursor-not-allowed"
+                  }`}
+                  aria-label="Previous roles"
+                >
+                  <CaretLeft size={16} weight="bold" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleScroll("right")}
+                  disabled={!canScrollRight}
+                  className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all shadow-2xs ${
+                    canScrollRight
+                      ? "bg-white border-zinc-200/90 text-zinc-800 hover:text-[#E7040D] hover:bg-zinc-50 cursor-pointer active:scale-95"
+                      : "bg-zinc-100/60 border-zinc-200/70 text-zinc-300 cursor-not-allowed"
+                  }`}
+                  aria-label="Next roles"
+                >
+                  <CaretRight size={16} weight="bold" />
+                </button>
+              </div>
+            )}
+
             <Link
               href="/jobs"
               className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] sm:text-[14px] font-bold shadow-xs hover:shadow-md transition-all duration-200 active:scale-95"
@@ -139,10 +203,10 @@ export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
           </div>
         </div>
 
-        {/* 3-Column Grid / Carousel Container (Identical size and structure to How It Works) */}
+        {/* Portrait Role Cards Track (Height longer than width) */}
         <div
           ref={carouselRef}
-          className="flex md:grid md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 overflow-x-auto md:overflow-visible no-scrollbar snap-x snap-mandatory pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0"
+          className="flex items-stretch gap-4 sm:gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 pt-1 -mx-6 px-6 sm:mx-0 sm:px-0"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {jobs.map((job) => {
@@ -155,26 +219,26 @@ export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
             return (
               <div
                 key={job.id}
-                className="bg-white rounded-none border border-zinc-200/90 p-6 sm:p-7 flex flex-col justify-between shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.1)] hover:border-[#E7040D]/40 hover:-translate-y-1 transition-all duration-300 group relative shrink-0 snap-start w-[84vw] max-w-[340px] md:w-auto"
+                className="w-[280px] sm:w-[295px] md:w-[305px] min-h-[350px] sm:min-h-[365px] bg-white rounded-none border border-zinc-200/90 p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.1)] hover:border-[#E7040D]/40 hover:-translate-y-1 transition-all duration-300 group relative shrink-0 snap-start select-none"
               >
                 {/* Top Section: Avatar, Title, Company, Status, Bookmark */}
                 <div>
-                  <div className="flex items-start justify-between gap-3 mb-4">
-                    <div className="flex items-start gap-3.5 min-w-0">
+                  <div className="flex items-start justify-between gap-3 mb-3.5">
+                    <div className="flex items-start gap-3 min-w-0">
                       <CompanyAvatar
                         name={job.company.name}
                         logo={job.company.logo}
                       />
-                      <div className="min-w-0">
+                      <div className="min-w-0 flex-1">
                         <Link href={`/jobs/${job.slug || job.id}`} className="block">
-                          <h3 className="text-[16px] sm:text-[17.5px] font-bold text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
+                          <h3 className="text-[16px] sm:text-[17px] font-bold text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
                             {job.title}
                           </h3>
                         </Link>
-                        <p className="text-[13.5px] font-semibold text-zinc-600 truncate mt-0.5">
+                        <p className="text-[13px] font-semibold text-zinc-600 truncate mt-0.5">
                           {job.company.name}
                         </p>
-                        <div className="flex items-center gap-1.5 text-zinc-400 text-[11.5px] font-medium mt-1">
+                        <div className="flex items-center gap-1.5 text-zinc-400 text-[11px] font-medium mt-1">
                           <Clock size={12} weight="regular" />
                           <span>Recently verified</span>
                         </div>
@@ -196,8 +260,15 @@ export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
                     </button>
                   </div>
 
+                  {/* Summary / Excerpt for rich vertical balance */}
+                  {job.summary ? (
+                    <p className="text-[13px] text-zinc-600 leading-[1.6] line-clamp-2 my-3 font-normal break-words">
+                      {job.summary}
+                    </p>
+                  ) : null}
+
                   {/* Middle Section: Filter Pill Badges */}
-                  <div className="flex flex-wrap items-center gap-1.5 my-4">
+                  <div className="flex flex-wrap items-center gap-1.5 my-2.5">
                     {/* Contract Type */}
                     <span className="px-2.5 py-1 rounded-none bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
                       {job.contractType || "Full-time"}
@@ -220,18 +291,57 @@ export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
                       {job.workplaceType || "Onsite"}
                     </span>
                   </div>
+
+                  {/* Key Skills / Tech Stack Tags */}
+                  {job.tags && job.tags.length > 0 ? (
+                    <div className="pt-2">
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        {job.tags.slice(0, 3).map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 py-0.5 bg-zinc-100/90 text-zinc-700 text-[10.5px] font-semibold border border-zinc-200/60 rounded-none"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {/* Employer Team Highlights */}
+                  <div className="flex items-center gap-2 text-[11px] text-zinc-500 pt-2.5 mt-2.5 border-t border-zinc-100">
+                    <span className="flex items-center gap-1 font-medium">
+                      <Users size={12} weight="regular" className="text-zinc-400 shrink-0" />
+                      <span>{job.company.employeesCount || "Verified Team"}</span>
+                    </span>
+                    <span className="text-zinc-300">•</span>
+                    <span className="text-emerald-700 font-bold flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                      Direct Apply
+                    </span>
+                  </div>
                 </div>
 
-                {/* Bottom Section: Location (Left) and Salary (Right) */}
-                <div className="pt-4 border-t border-zinc-100 flex items-center justify-between gap-3 text-[13px]">
-                  <div className="flex items-center gap-1.5 text-zinc-500 font-medium truncate">
-                    <MapPin size={14} weight="regular" className="shrink-0 text-zinc-400" />
-                    <span className="truncate">{job.location}</span>
+                {/* Bottom Section: Location & Salary + View Role CTA */}
+                <div className="pt-3.5 border-t border-zinc-100 mt-auto space-y-2.5">
+                  <div className="flex items-center justify-between gap-3 text-[12.5px]">
+                    <div className="flex items-center gap-1.5 text-zinc-500 font-medium min-w-0 flex-1 pr-1 overflow-hidden">
+                      <MapPin size={14} weight="regular" className="shrink-0 text-zinc-400" />
+                      <span className="truncate">{job.location}</span>
+                    </div>
+
+                    <div className="text-[#E7040D] font-extrabold text-[14px] sm:text-[14.5px] shrink-0 whitespace-nowrap">
+                      {salaryText}
+                    </div>
                   </div>
 
-                  <div className="text-[#E7040D] font-extrabold text-[14.5px] sm:text-[15px] shrink-0">
-                    {salaryText}
-                  </div>
+                  <Link
+                    href={`/jobs/${job.slug || job.id}`}
+                    className="w-full py-2 bg-zinc-950 hover:bg-[#E7040D] text-white text-[12px] font-bold flex items-center justify-center gap-1.5 transition-colors duration-150 rounded-none shadow-2xs"
+                  >
+                    <span>View Role</span>
+                    <ArrowRight size={13} weight="bold" />
+                  </Link>
                 </div>
               </div>
             );

@@ -644,84 +644,41 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
             </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6">
             {filteredCompanies.map((comp) => {
               const isFollowed = !!followedCompanies[comp.id];
               return (
                 <div
                   key={comp.id}
-                  className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group h-full"
+                  className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_-6px_rgba(231,4,13,0.08)] hover:border-[#E7040D]/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
                 >
-                  <div>
-                    {/* 1. Top Image Thumbnail Container */}
-                    <Link
-                      href={`/companies/${comp.slug}`}
-                      className="relative h-[215px] sm:h-52 w-full bg-zinc-100 overflow-hidden block"
-                    >
-                      {comp.coverImage ? (
-                        <Image
-                          src={comp.coverImage}
-                          alt={comp.name}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          unoptimized
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-950 flex items-center justify-center">
-                          <span className="text-zinc-500 font-bold text-base tracking-tight">{comp.name}</span>
-                        </div>
-                      )}
-
-                    </Link>
-
-                    {/* 2. Card Body Content */}
-                    <div className="p-5 space-y-3.5">
-                      {/* Sector/Industry Pill Tag + Open Roles Badge + Follow Button */}
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-2 min-w-0">
-                          <span className="inline-block px-3 py-1 bg-[#E0F2FE] text-[#0284C7] text-[12px] font-bold rounded-none shrink-0">
-                            {comp.industry || "Technology"}
-                          </span>
-                          {typeof comp.openJobsCount === "number" && comp.openJobsCount > 0 ? (
-                            <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#E7040D] bg-[#fce8e0] border border-[#E7040D]/20 px-2 py-0.5 rounded-none shrink-0">
-                              <Briefcase size={12} weight="bold" className="text-[#E7040D]" />
-                              <span>
-                                {comp.openJobsCount} {comp.openJobsCount === 1 ? "Role" : "Roles"}
-                              </span>
-                            </span>
-                          ) : null}
-                        </div>
-
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            toggleFollow(comp.id);
-                          }}
-                          className={`px-2.5 py-0.5 rounded-none text-[11px] font-bold border transition-all cursor-pointer select-none active:scale-95 ${
-                            isFollowed
-                              ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]"
-                              : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-800 hover:border-zinc-400 shadow-2xs"
-                          }`}
-                        >
-                          {isFollowed ? "Following" : "Follow"}
-                        </button>
+                  <div className="relative h-32 w-full bg-[#E5E7EB] overflow-hidden">
+                    {comp.coverImage ? (
+                      <Image
+                        src={comp.coverImage}
+                        alt={comp.name}
+                        fill
+                        sizes="320px"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
+                        unoptimized
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-950 flex items-center justify-center">
+                        <span className="text-zinc-500 font-bold text-base tracking-tight">{comp.name}</span>
                       </div>
+                    )}
+                  </div>
 
-                      {/* Company Identity: Logo + Name + Verified Badge */}
-                      <Link
-                        href={`/companies/${comp.slug}`}
-                        className="flex items-center gap-3 group/title"
-                      >
-                        <div className="w-11 h-11 rounded-none bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-1.5 overflow-hidden shrink-0">
+                  <div className="p-5 pt-0 flex-1 flex flex-col justify-between">
+                    <div>
+                      <Link href={`/companies/${comp.slug}`} className="block -mt-8 mb-3.5 relative z-10">
+                        <div className="w-16 h-16 rounded-none bg-white p-1 border-2 border-white shadow-md ring-1 ring-zinc-200/80 overflow-hidden group-hover:ring-[#E7040D]/40 transition-all flex items-center justify-center">
                           {isValidImageUrl(comp.logo) ? (
                             <Image
                               src={comp.logo}
                               alt={comp.name}
-                              width={36}
-                              height={36}
+                              width={56}
+                              height={56}
                               className="object-contain w-full h-full"
                               unoptimized
                             />
@@ -729,44 +686,57 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                             <CompanySquareMark name={comp.name} logo={comp.logo} accentColor={comp.accentColor} />
                           )}
                         </div>
-                        <div className="min-w-0 flex-1 flex items-center gap-1.5">
-                          <h3 className="text-[17px] font-bold text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
-                            {comp.name}
-                          </h3>
-                          <SealCheck size={16} weight="fill" className="text-[#E7040D] shrink-0" />
-                        </div>
                       </Link>
 
-                      {/* 2-line Bio / Editorial Pitch */}
-                      <p className="text-[13px] text-zinc-600 leading-[1.6] line-clamp-2 min-h-[42px] font-normal">
-                        {comp.bio || comp.description || "Leading technology team building transformative products across Africa."}
-                      </p>
+                      <div className="flex items-center gap-1.5 mb-2">
+                        <Link href={`/companies/${comp.slug}`}>
+                          <h2 className="text-[17px] font-black text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
+                            {comp.name}
+                          </h2>
+                        </Link>
+                        <SealCheck size={15} weight="fill" className="text-[#E7040D] shrink-0" />
+                      </div>
+
+                      <div className="space-y-1.5 text-[12.5px] text-zinc-600">
+                        <div className="flex items-center gap-2">
+                          <Briefcase size={14} weight="bold" className="text-zinc-400 shrink-0" />
+                          <span className="truncate">{comp.industry || "Technology"}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <MapPin size={14} weight="bold" className="text-zinc-400 shrink-0" />
+                          <span className="truncate">{comp.location?.split("•")[0]?.split(",")?.slice(0, 2)?.join(",")?.trim() || "Nigeria"}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Users size={14} weight="bold" className="text-zinc-400 shrink-0" />
+                          <span className="truncate flex items-center gap-1.5">
+                            <span>
+                              {comp.employeesCount
+                                ? comp.employeesCount.toLowerCase().includes("team") ||
+                                  comp.employeesCount.toLowerCase().includes("employee")
+                                  ? comp.employeesCount
+                                  : `${comp.employeesCount} team`
+                                : "10+ team"}
+                            </span>
+                            {typeof comp.openJobsCount === "number" && comp.openJobsCount > 0 && (
+                              <>
+                                <span>•</span>
+                                <span className="text-[#E7040D] font-bold">
+                                  {comp.openJobsCount} {comp.openJobsCount === 1 ? "role" : "roles"}
+                                </span>
+                              </>
+                            )}
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* 3. Bottom Metadata Divider Row (Exact Course Card Pattern) */}
-                  <div className="px-5 pb-4">
-                    <div className="border-t border-zinc-100 pt-3.5 flex items-center justify-between text-[12.5px] text-zinc-500 font-medium">
-                      {/* Location */}
-                      <div className="flex items-center gap-1.5 truncate max-w-[55%]">
-                        <MapPin size={14} weight="regular" className="text-zinc-400 shrink-0" />
-                        <span className="truncate">
-                          {comp.location?.split("•")[0]?.split(",")?.slice(0, 2)?.join(",")?.trim() || "Nigeria"}
-                        </span>
-                      </div>
-
-                      {/* Team Size */}
-                      <div className="flex items-center gap-1.5 shrink-0">
-                        <Users size={14} weight="regular" className="text-zinc-400 shrink-0" />
-                        <span>
-                          {comp.employeesCount
-                            ? comp.employeesCount.toLowerCase().includes("team") ||
-                              comp.employeesCount.toLowerCase().includes("employee")
-                              ? comp.employeesCount
-                              : `${comp.employeesCount} team`
-                            : "10 team"}
-                        </span>
-                      </div>
+                    <div className="pt-6">
+                      <Link
+                        href={`/companies/${comp.slug}`}
+                        className="block w-full py-2 rounded-none text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] active:scale-[0.98] transition-all duration-150 cursor-pointer text-center group-hover:border-[#E7040D] whitespace-nowrap"
+                      >
+                        {comp.openJobsCount ? `View Jobs (${comp.openJobsCount})` : "View Company"}
+                      </Link>
                     </div>
                   </div>
                 </div>

@@ -18,11 +18,11 @@ interface LearningClientProps {
 
 export function LearningClient({ courses }: LearningClientProps) {
   return (
-    <div className="min-h-screen bg-[#FAFAFA] text-[#1F1F1F] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#FAF8F5] text-[#1F1F1F] flex flex-col font-sans">
       <AppHeader activeTab="learning" />
 
       {/* Top Back Bar */}
-      <div className="bg-[#FAFAFA]">
+      <div className="bg-[#FAF8F5]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-6 pb-2">
           <Link
             href="/"

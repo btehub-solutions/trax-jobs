@@ -123,7 +123,7 @@ export default async function Home() {
   }));
 
   return (
-    <div className="min-h-screen bg-white flex flex-col w-full max-w-full overflow-x-clip">
+    <div className="min-h-screen bg-[#FAF8F5] flex flex-col w-full max-w-full overflow-x-clip">
       {/* 1. Navbar */}
       <Navbar />
 
@@ -131,7 +131,7 @@ export default async function Home() {
       <AnnouncementBar />
 
       {/* 3. Hero Section */}
-      <main className="flex-1">
+      <main className="flex-1 bg-[#FAF8F5]">
         <HeroSection />
 
         {/* 4. Explore opportunities by experience level */}

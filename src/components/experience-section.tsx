@@ -21,7 +21,7 @@ export function ExperienceSection({ counts: propCounts, jobs }: ExperienceSectio
     calculateExperienceCounts(jobs && jobs.length > 0 ? jobs : SAMPLE_JOBS);
 
   return (
-    <section className="w-full bg-white py-16 sm:py-20 px-6 sm:px-10 lg:px-16 border-b border-zinc-100 overflow-hidden">
+    <section className="w-full bg-[#FAF8F5] py-16 sm:py-20 px-6 sm:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-[1440px] mx-auto">
         {/* Section Header */}
         <div className="mb-10 sm:mb-12 max-w-3xl">

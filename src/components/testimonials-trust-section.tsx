@@ -84,7 +84,7 @@ export function TestimonialsTrustSection() {
   };
 
   return (
-    <section className="w-full bg-white py-20 sm:py-28 relative overflow-hidden border-b border-zinc-200">
+    <section className="w-full bg-[#FAF8F5] py-20 sm:py-28 relative overflow-hidden">
       {/* Header: constrained */}
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
         {/* Header Row */}

@@ -39,6 +39,57 @@ function formatAvailabilityBadge(val?: string): string {
   return val.length > 10 ? `${val.slice(0, 9)}...` : val;
 }
 
+function TalentCoverImage({ src, name }: { src?: string; name: string }) {
+  const [hasError, setHasError] = useState(false);
+  const fallback = "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800";
+  const finalSrc = !src || hasError ? fallback : src;
+
+  return (
+    <Image
+      src={finalSrc}
+      alt={`${name} cover`}
+      fill
+      sizes="(max-width: 640px) 280px, 305px"
+      className="object-cover object-center group-hover/image:scale-105 transition-transform duration-500 ease-out"
+      onError={() => setHasError(true)}
+      unoptimized
+    />
+  );
+}
+
+function TalentAvatar({ src, name }: { src?: string; name: string }) {
+  const [hasError, setHasError] = useState(false);
+
+  if (!src || hasError) {
+    const initials = name
+      ? name
+          .split(" ")
+          .filter(Boolean)
+          .slice(0, 2)
+          .map((n) => n[0].toUpperCase())
+          .join("")
+      : "T";
+
+    return (
+      <div className="w-full h-full bg-[#FAF8F5] border border-zinc-200/90 flex items-center justify-center font-bold text-[#E7040D] text-[13px] select-none">
+        {initials}
+      </div>
+    );
+  }
+
+  return (
+    <Image
+      src={src}
+      alt={name}
+      width={44}
+      height={44}
+      className="w-full h-full object-cover object-top"
+      onError={() => setHasError(true)}
+      unoptimized
+    />
+  );
+}
+
 interface FeaturedTalentSectionProps {
   talent?: TalentProfile[];
 }
@@ -95,17 +146,17 @@ export function FeaturedTalentSection({
       const offset =
         direction === "left"
           ? isMobile
-            ? -314
-            : -260
+            ? -294
+            : -321
           : isMobile
-          ? 314
-          : 260;
+          ? 294
+          : 321;
       scrollRef.current.scrollBy({ left: offset, behavior: "smooth" });
     }
   };
 
   return (
-    <section className="w-full bg-[#fbf9f6] py-20 sm:py-28 relative overflow-x-hidden">
+    <section className="w-full bg-[#FAF8F5] py-20 sm:py-28 relative overflow-x-hidden">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
@@ -182,44 +233,40 @@ export function FeaturedTalentSection({
             return (
               <div
                 key={person.id}
-                className="w-[300px] sm:w-[360px] md:w-[380px] shrink-0 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start select-none"
+                className="w-[280px] sm:w-[295px] md:w-[305px] shrink-0 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start select-none"
               >
                 <div>
-                  {/* 1. Top Image Thumbnail Container (Landscape Cover Photo) - Clean & Unobstructed */}
+                  {/* 1. Top Image Thumbnail Container (Landscape Cover Photo) with Floating Availability Badge */}
                   <Link
                     href={`/talent/${person.slug || person.id}`}
-                    className="relative h-[175px] w-full bg-[#0C1222] overflow-hidden block group/image"
+                    className="relative h-[165px] sm:h-[170px] w-full bg-[#0C1222] overflow-hidden block group/image"
                   >
-                    <Image
-                      src={
-                        person.coverImage ||
-                        "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      }
-                      alt={`${person.name} cover`}
-                      fill
-                      sizes="(max-width: 640px) 300px, 380px"
-                      className="object-cover object-center group-hover/image:scale-105 transition-transform duration-500 ease-out"
-                      unoptimized
+                    <TalentCoverImage
+                      src={person.coverImage}
+                      name={person.name}
                     />
+
+                    {/* Floating Availability Pill Badge (Top-Left on Cover) */}
+                    <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs border border-zinc-200/90 text-[11px] font-semibold text-emerald-800 px-2.5 py-0.5 rounded-none flex items-center gap-1.5 shadow-2xs z-10 pointer-events-none">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                      <span>{availabilityLabel}</span>
+                    </div>
                   </Link>
 
                   {/* 2. Card Body Content */}
                   <div className="p-5 space-y-3.5">
-                    {/* Category Pill Tag + Availability Indicator + Action Button */}
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2 min-w-0">
-                        <span className="inline-block px-3 py-1 bg-[#E0F2FE] text-[#0284C7] text-[12px] font-bold rounded-none shrink-0">
-                          {person.category || "Engineering"}
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/70 px-2 py-0.5 rounded-none shrink-0">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                          <span className="truncate max-w-[110px]">{availabilityLabel}</span>
-                        </span>
-                      </div>
+                    {/* Category Pill Tag + Action Button (Clean 2-item row with zero collision) */}
+                    <div className="flex items-center justify-between gap-3 min-w-0">
+                      <span
+                        className="inline-block px-3 py-1 bg-[#E0F2FE] text-[#0284C7] text-[12px] font-bold rounded-none truncate max-w-[160px]"
+                        title={person.category || "Engineering"}
+                      >
+                        {person.category || "Engineering"}
+                      </span>
 
                       <Link
                         href={`/talent/${person.slug || person.id}`}
-                        className="px-2.5 py-0.5 rounded-none text-[11px] font-bold border transition-all cursor-pointer select-none active:scale-95 bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-800 hover:border-zinc-400 shadow-2xs shrink-0"
+                        className="px-2.5 py-0.5 rounded-none text-[11px] font-bold border transition-all cursor-pointer select-none active:scale-95 bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-800 hover:border-zinc-400 shadow-2xs shrink-0 whitespace-nowrap ml-auto"
                       >
                         Hire Talent
                       </Link>
@@ -228,22 +275,15 @@ export function FeaturedTalentSection({
                     {/* Talent Identity: Square Avatar + Name + Verified Badge */}
                     <Link
                       href={`/talent/${person.slug || person.id}`}
-                      className="flex items-center gap-3 group/title"
+                      className="flex items-center gap-3 group/title min-w-0"
                     >
                       <div className="w-11 h-11 rounded-none bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center overflow-hidden shrink-0">
-                        <Image
-                          src={
-                            person.avatar ||
-                            "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=160"
-                          }
-                          alt={person.name}
-                          width={44}
-                          height={44}
-                          className="w-full h-full object-cover object-top"
-                          unoptimized
+                        <TalentAvatar
+                          src={person.avatar}
+                          name={person.name}
                         />
                       </div>
-                      <div className="min-w-0 flex-1 flex items-center gap-1.5">
+                      <div className="min-w-0 flex-1 flex items-center gap-1.5 overflow-hidden">
                         <h3 className="text-[17px] font-bold text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
                           {person.name}
                         </h3>
@@ -256,7 +296,7 @@ export function FeaturedTalentSection({
                     </Link>
 
                     {/* 2-line Bio / Editorial Headline */}
-                    <p className="text-[13px] text-zinc-600 leading-[1.6] line-clamp-2 min-h-[42px] font-normal">
+                    <p className="text-[13px] text-zinc-600 leading-[1.6] line-clamp-2 min-h-[42px] font-normal break-words overflow-hidden">
                       <strong className="text-zinc-950 font-bold">
                         {person.title}
                       </strong>{" "}
@@ -267,9 +307,9 @@ export function FeaturedTalentSection({
 
                 {/* 3. Bottom Metadata Divider Row */}
                 <div className="px-5 pb-4">
-                  <div className="border-t border-zinc-100 pt-3.5 flex items-center justify-between text-[12.5px] text-zinc-500 font-medium">
+                  <div className="border-t border-zinc-100 pt-3.5 flex items-center justify-between text-[12.5px] text-zinc-500 font-medium gap-2">
                     {/* Location */}
-                    <div className="flex items-center gap-1.5 truncate max-w-[55%]">
+                    <div className="flex items-center gap-1.5 min-w-0 flex-1 pr-1 overflow-hidden">
                       <MapPin
                         size={14}
                         weight="regular"
@@ -282,7 +322,7 @@ export function FeaturedTalentSection({
                     </div>
 
                     {/* Experience Years */}
-                    <div className="flex items-center gap-1.5 shrink-0 text-zinc-700 font-semibold">
+                    <div className="flex items-center gap-1.5 shrink-0 text-zinc-700 font-semibold whitespace-nowrap ml-auto">
                       <Users
                         size={14}
                         weight="regular"

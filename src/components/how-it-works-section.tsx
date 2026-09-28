@@ -99,7 +99,7 @@ export function HowItWorksSection() {
   }, [activeTab]);
 
   return (
-    <section className="w-full bg-white py-14 sm:py-20 px-6 sm:px-10 lg:px-16 border-b border-zinc-100 overflow-hidden">
+    <section className="w-full bg-[#FAF8F5] py-14 sm:py-20 px-6 sm:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-[1440px] mx-auto">
         {/* Section Header with Pill Toggle */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 sm:gap-6 mb-8 sm:mb-12">

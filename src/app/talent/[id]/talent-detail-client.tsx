@@ -134,7 +134,7 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
   }, [talent.publishedAt]);
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] text-[#1F1F1F] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#FAF8F5] text-[#1F1F1F] flex flex-col font-sans">
       <AppHeader activeTab="talent" />
 
       {/* Desktop Sticky top bar (hidden on mobile to prevent navbar collision) */}
@@ -195,7 +195,7 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
         </div>
       )}
 
-      <div className="bg-[#FAFAFA]">
+      <div className="bg-[#FAF8F5]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-6 pb-2">
           <button onClick={() => router.back()} className="inline-flex items-center gap-1.5 text-[13.5px] font-bold text-zinc-700 hover:text-[#E7040D] active:scale-95 transition-all cursor-pointer">
             <CaretLeft size={16} weight="bold" />

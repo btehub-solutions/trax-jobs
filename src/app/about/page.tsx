@@ -47,13 +47,13 @@ function AboutPageContent() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-between">
+    <div className="min-h-screen bg-[#FAF8F5] flex flex-col justify-between">
       <div>
         {/* 1. Main Navigation Bar */}
         <Navbar />
 
         {/* 2. Sub-navigation Tabs Strip */}
-        <div className="w-full bg-white border-b border-zinc-200">
+        <div className="w-full bg-[#FAF8F5] border-b border-zinc-200/80">
           <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
             <nav className="flex items-center gap-8 sm:gap-10 overflow-x-auto scrollbar-none" aria-label="About Us sub-navigation">
               {TABS.map((tab) => {
@@ -110,7 +110,7 @@ function AboutPageContent() {
         </section>
 
         {/* 4. Founder's Letter Section */}
-        <section className="w-full bg-[#FFFFFF] py-16 sm:py-24 border-b border-zinc-100">
+        <section className="w-full bg-[#FAF8F5] py-16 sm:py-24">
           <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
               
@@ -208,7 +208,7 @@ function AboutPageContent() {
         </section>
 
         {/* 5. Our Solutions Section */}
-        <section className="w-full bg-white py-20 sm:py-28 border-b border-zinc-200">
+        <section className="w-full bg-[#FAF8F5] py-20 sm:py-28">
           <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16">
             
             {/* Section Header */}
@@ -299,7 +299,7 @@ function AboutPageContent() {
         </section>
 
         {/* 6. Our Core Values Section */}
-        <section id="editorial-standards" className="w-full bg-white py-20 sm:py-28 border-b border-zinc-200">
+        <section id="editorial-standards" className="w-full bg-[#FAF8F5] py-20 sm:py-28">
           <div className="max-w-[1240px] mx-auto px-6 sm:px-10 lg:px-16">
             
             {/* Section Header */}
@@ -423,7 +423,7 @@ function AboutPageContent() {
         <TestimonialsTrustSection />
 
         {/* 9. Our People Section (100% Matching Arched Collage Reference) */}
-        <section className="w-full bg-white py-20 sm:py-28 border-b border-zinc-200">
+        <section className="w-full bg-[#FAF8F5] py-20 sm:py-28">
           <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16">
             
             {/* Header Content */}
@@ -580,14 +580,14 @@ function AboutPageContent() {
 
     {/* Active Tab: Post & Submit */}
     {activeTab === "post-and-submit" && (
-      <div className="min-h-[70vh] bg-white">
+      <div className="min-h-[70vh] bg-[#FAF8F5]">
         <PostAndSubmitHub initialType={typeParam || topicParam} />
       </div>
     )}
 
     {/* Active Tab: Contact */}
     {activeTab === "contact" && (
-      <div className="min-h-[70vh] bg-white">
+      <div className="min-h-[70vh] bg-[#FAF8F5]">
         <Contact topic={topicParam} />
       </div>
     )}
@@ -603,7 +603,7 @@ export default function AboutPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-white flex flex-col">
+        <div className="min-h-screen bg-[#FAF8F5] flex flex-col">
           <div className="w-full h-16 border-b border-zinc-200" />
           <div className="max-w-5xl mx-auto px-6 py-12 w-full space-y-6">
             <div className="h-10 w-64 bg-zinc-200 animate-pulse" />

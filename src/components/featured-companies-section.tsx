@@ -286,13 +286,13 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
   const handleScroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
-      const offset = direction === "left" ? (isMobile ? -314 : -260) : (isMobile ? 314 : 260);
+      const offset = direction === "left" ? (isMobile ? -294 : -321) : (isMobile ? 294 : 321);
       scrollRef.current.scrollBy({ left: offset, behavior: "smooth" });
     }
   };
 
   return (
-    <section className="w-full bg-[#fbf9f6] py-20 sm:py-28 border-t border-zinc-200/60 relative overflow-x-hidden">
+    <section className="w-full bg-[#FAF8F5] py-20 sm:py-28 relative overflow-x-hidden">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
 
         {/* Section Header */}
@@ -366,19 +366,19 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
             return (
               <div
                 key={company.name}
-                className="w-[300px] sm:w-[360px] md:w-[380px] shrink-0 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start select-none"
+                className="w-[280px] sm:w-[295px] md:w-[305px] shrink-0 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start select-none"
               >
                 <div>
-                  {/* 1. Top Image Thumbnail Container */}
+                  {/* 1. Top Image Thumbnail Container (16:9 Landscape Ratio) */}
                   <Link
                     href={`/companies/${company.slug}`}
-                    className="relative h-[215px] sm:h-52 w-full bg-zinc-100 overflow-hidden block"
+                    className="relative h-[165px] sm:h-[170px] w-full bg-zinc-100 overflow-hidden block"
                   >
                     <Image
                       src={company.coverImage || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800"}
                       alt={`${company.name} office`}
                       fill
-                      sizes="(max-width: 640px) 300px, 380px"
+                      sizes="(max-width: 640px) 280px, 305px"
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       unoptimized
                     />

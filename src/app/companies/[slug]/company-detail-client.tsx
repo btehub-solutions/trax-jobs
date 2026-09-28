@@ -184,7 +184,7 @@ export default function CompanyDetailClient({
   const fallbackCover = "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=1200";
 
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-between font-sans">
+    <div className="min-h-screen bg-[#FAF8F5] flex flex-col justify-between font-sans">
       {/* 1. Global Navigation */}
       <AppHeader activeTab="companies" />
 

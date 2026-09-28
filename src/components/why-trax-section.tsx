@@ -139,7 +139,7 @@ export function WhyTraxSection() {
   ];
 
   return (
-    <section className="w-full bg-white py-16 sm:py-24 lg:py-28 relative overflow-hidden border-b border-zinc-200">
+    <section className="w-full bg-[#FAF8F5] py-16 sm:py-24 lg:py-28 relative overflow-hidden">
       <div className="max-w-[1240px] mx-auto px-5 sm:px-10 lg:px-16 relative z-10">
         
         {/* Section Header */}
