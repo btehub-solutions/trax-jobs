@@ -13,6 +13,9 @@ import {
   X,
   SealCheck,
   Check,
+  Faders,
+  Briefcase,
+  Clock,
 } from "@phosphor-icons/react";
 import { AppHeader } from "@/components/navigation/app-header";
 import { HireTalentModal } from "@/components/talent/hire-talent-modal";
@@ -72,7 +75,41 @@ export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
   const [activeHireTalent, setActiveHireTalent] = useState<SanityTalentItem | null>(null);
   const [openDropdown, setOpenDropdown] = useState<"location" | "discipline" | "experience" | "availability" | null>(null);
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const searchBarRef = useRef<HTMLDivElement>(null);
+
+  // Lock body scroll and handle ESC key when mobile filter drawer is open
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileFiltersOpen(false);
+    };
+    if (mobileFiltersOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [mobileFiltersOpen]);
+
+  const activeFiltersCount = useMemo(() => {
+    let count = 0;
+    if (selectedLocation) count++;
+    if (selectedDiscipline) count++;
+    if (selectedExperience) count++;
+    if (selectedAvailability) count++;
+    return count;
+  }, [selectedLocation, selectedDiscipline, selectedExperience, selectedAvailability]);
+
+  const resetFilterOptions = () => {
+    setSelectedLocation("");
+    setSelectedDiscipline("");
+    setSelectedExperience("");
+    setSelectedAvailability("");
+  };
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -269,7 +306,50 @@ export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
   return (
     <div className="min-h-screen bg-[#FAF8F5] flex flex-col justify-between">
       <AppHeader activeTab="talent">
-        <div ref={searchBarRef} className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col md:flex-row items-stretch relative z-40">
+        {/* Mobile Sticky Search Bar (Pattern 1: Unified compact bar with inline Filters button) */}
+        <div className="block md:hidden">
+          <div className="bg-white rounded-none border border-zinc-200/90 shadow-2xs flex items-center gap-2 p-1.5 pl-3">
+            <MagnifyingGlass size={17} weight="bold" className="text-zinc-400 shrink-0" />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search candidate, role or skill ..."
+              className="flex-1 min-w-0 bg-transparent text-[13.5px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden"
+            />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm("")}
+                className="p-1 text-zinc-400 hover:text-zinc-700 cursor-pointer flex items-center justify-center shrink-0"
+                aria-label="Clear search query"
+              >
+                <X size={14} weight="bold" />
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => setMobileFiltersOpen(true)}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none text-[12px] font-bold border transition-all cursor-pointer shrink-0 select-none ${
+                activeFiltersCount > 0
+                  ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D]"
+                  : "bg-zinc-50 border-zinc-200 text-zinc-800 hover:bg-zinc-100"
+              }`}
+              aria-label="Open talent filters"
+            >
+              <Faders size={14} weight="bold" className={activeFiltersCount > 0 ? "text-[#E7040D]" : "text-zinc-500"} />
+              <span>Filters</span>
+              {activeFiltersCount > 0 && (
+                <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[#E7040D] text-white text-[10px] font-extrabold ml-0.5">
+                  {activeFiltersCount}
+                </span>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Desktop Full Horizontal Search/Filter Bar */}
+        <div ref={searchBarRef} className="hidden md:flex flex-row items-stretch bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] relative z-40">
 
           <div className="flex-1 flex items-center gap-3 px-4 py-3 border-b md:border-b-0 md:border-r border-zinc-200/80">
             <MagnifyingGlass size={18} weight="bold" className="text-zinc-400 shrink-0" />
@@ -498,6 +578,231 @@ export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
           )}
         </div>
       </main>
+
+      {/* Mobile Filter Drawer (Pattern 1: Clean Slide-Over Sheet) */}
+      <div
+        className={`fixed inset-0 z-50 md:hidden flex justify-end transition-opacity duration-300 ${
+          mobileFiltersOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
+          onClick={() => setMobileFiltersOpen(false)}
+          aria-hidden="true"
+        />
+        <div
+          className={`relative w-full max-w-[380px] h-full bg-white z-10 shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out overscroll-contain ${
+            mobileFiltersOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Filter Vetted Talent"
+        >
+          {/* Drawer Header */}
+          <div className="flex items-center justify-between px-5 h-16 border-b border-zinc-200/80 shrink-0 bg-white">
+            <div className="flex items-center gap-2">
+              <Faders size={18} weight="bold" className="text-[#E7040D]" />
+              <h2 className="text-[17px] font-black text-[#1F1F1F] tracking-tight">Filters</h2>
+              {activeFiltersCount > 0 && (
+                <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full bg-[#E7040D] text-white text-[11px] font-extrabold">
+                  {activeFiltersCount}
+                </span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-3">
+              {activeFiltersCount > 0 && (
+                <button
+                  type="button"
+                  onClick={resetFilterOptions}
+                  className="text-[12px] font-bold text-[#E7040D] hover:underline cursor-pointer"
+                >
+                  Reset all
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => setMobileFiltersOpen(false)}
+                className="w-9 h-9 -mr-1.5 flex items-center justify-center text-zinc-600 hover:text-zinc-950 active:scale-95 transition-all cursor-pointer rounded-none border border-zinc-200"
+                aria-label="Close filters"
+              >
+                <X size={18} weight="bold" />
+              </button>
+            </div>
+          </div>
+
+          {/* Drawer Body - Scrollable Filters */}
+          <div className="flex-1 overflow-y-auto p-5 space-y-6">
+            {/* 1. Location */}
+            <div>
+              <div className="flex items-center justify-between mb-2.5">
+                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <MapPin size={15} weight="bold" className="text-zinc-500" />
+                  <span>Location</span>
+                </span>
+                {selectedLocation && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedLocation("")}
+                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {LOCATIONS.map((loc) => {
+                  const isSelected = selectedLocation === loc || (!selectedLocation && loc === "All Locations");
+                  return (
+                    <button
+                      key={loc}
+                      type="button"
+                      onClick={() => setSelectedLocation(loc === "All Locations" ? "" : loc)}
+                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none ${
+                        isSelected
+                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
+                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
+                      }`}
+                    >
+                      {loc}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 2. Discipline */}
+            <div>
+              <div className="flex items-center justify-between mb-2.5">
+                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <Tag size={15} weight="bold" className="text-zinc-500" />
+                  <span>Discipline</span>
+                </span>
+                {selectedDiscipline && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedDiscipline("")}
+                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {DISCIPLINES.map((disc) => {
+                  const isSelected = selectedDiscipline === disc || (!selectedDiscipline && disc === "All Disciplines");
+                  return (
+                    <button
+                      key={disc}
+                      type="button"
+                      onClick={() => setSelectedDiscipline(disc === "All Disciplines" ? "" : disc)}
+                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none text-left ${
+                        isSelected
+                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
+                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
+                      }`}
+                    >
+                      {disc}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 3. Experience */}
+            <div>
+              <div className="flex items-center justify-between mb-2.5">
+                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <Briefcase size={15} weight="bold" className="text-zinc-500" />
+                  <span>Experience Level</span>
+                </span>
+                {selectedExperience && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedExperience("")}
+                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {EXPERIENCES.map((exp) => {
+                  const isSelected = selectedExperience === exp || (!selectedExperience && exp === "All Experience");
+                  return (
+                    <button
+                      key={exp}
+                      type="button"
+                      onClick={() => setSelectedExperience(exp === "All Experience" ? "" : exp)}
+                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none ${
+                        isSelected
+                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
+                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
+                      }`}
+                    >
+                      {exp}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 4. Availability */}
+            <div>
+              <div className="flex items-center justify-between mb-2.5">
+                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <Clock size={15} weight="bold" className="text-zinc-500" />
+                  <span>Availability</span>
+                </span>
+                {selectedAvailability && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedAvailability("")}
+                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {AVAILABILITIES.map((avail) => {
+                  const isSelected = selectedAvailability === avail || (!selectedAvailability && avail === "All Availability");
+                  return (
+                    <button
+                      key={avail}
+                      type="button"
+                      onClick={() => setSelectedAvailability(avail === "All Availability" ? "" : avail)}
+                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none ${
+                        isSelected
+                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
+                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
+                      }`}
+                    >
+                      {avail}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Drawer Sticky Footer Action */}
+          <div className="p-4 border-t border-zinc-200/80 bg-white shrink-0">
+            <button
+              type="button"
+              onClick={() => {
+                setMobileFiltersOpen(false);
+                const el = document.getElementById("talent-results");
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="w-full py-3 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.99] text-white text-[13.5px] font-bold rounded-none shadow-2xs transition-all cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>Show {filteredTalent.length} {filteredTalent.length === 1 ? "Profile" : "Profiles"}</span>
+              <CaretRight size={14} weight="bold" />
+            </button>
+          </div>
+        </div>
+      </div>
 
       <HireTalentModal talent={activeHireTalent as any} onClose={() => setActiveHireTalent(null)} />
     </div>

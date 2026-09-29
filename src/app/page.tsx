@@ -46,7 +46,7 @@ export default async function Home() {
   }));
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] flex flex-col w-full max-w-full overflow-x-clip">
+    <div className="min-h-screen bg-[#FAF8F5] flex flex-col w-full max-w-full">
       {/* 1. Navbar */}
       <Navbar />
 

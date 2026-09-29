@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -50,6 +51,11 @@ export function Navbar({
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,17 +88,20 @@ export function Navbar({
   const finalCtaText = ctaText || defaultCtaText;
   const finalCtaHref = ctaHref || defaultCtaHref;
 
-  // Lock background body scroll when mobile drawer is open
+  // Clean background body scroll lock when mobile drawer is open
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!mobileMenuOpen) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = originalOverflow;
     };
   }, [mobileMenuOpen]);
+
+  // Close drawer on route navigation
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   // Close drawer on ESC key
   useEffect(() => {
@@ -104,7 +113,7 @@ export function Navbar({
   }, []);
 
   return (
-    <header className={`w-full bg-white/95 backdrop-blur-md border-b border-zinc-100 sticky top-0 z-40 transition-all ${className}`}>
+    <header className={`w-full bg-white/95 backdrop-blur-md border-b border-zinc-100 sticky top-0 z-40 ${className}`}>
       <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16">
         <div className="flex items-center justify-between h-20">
           {/* Left: Brand Logo & Desktop Nav Links */}
@@ -179,16 +188,18 @@ export function Navbar({
         )}
       </div>
 
-      {/* Mobile Slide-In Menu (Matches trax.ng mobile layout & styling, 100% full screen with no gap) */}
-      <aside
-        className={`fixed inset-0 h-[100dvh] w-full bg-white z-[60] flex flex-col justify-between transform transition-transform duration-300 ease-in-out md:hidden overscroll-contain ${
-          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Navigation Menu"
-        aria-hidden={!mobileMenuOpen}
-      >
+      {/* Mobile Slide-In Menu (Teleported via React Portal to document.body for flawless viewport anchoring) */}
+      {mounted &&
+        createPortal(
+          <aside
+            className={`fixed inset-0 h-[100dvh] w-full bg-white z-[9999] flex flex-col justify-between transform transition-transform duration-300 ease-in-out md:hidden overscroll-contain ${
+              mobileMenuOpen ? "translate-x-0 pointer-events-auto" : "translate-x-full pointer-events-none"
+            }`}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation Menu"
+            aria-hidden={!mobileMenuOpen}
+          >
         {/* Top Header Bar inside Drawer */}
         <div className="flex items-center justify-between px-6 h-16 border-b border-zinc-100 shrink-0 bg-white">
           <Link href="/" onClick={() => setMobileMenuOpen(false)} aria-label="Trax Home" className="flex items-center">
@@ -427,7 +438,9 @@ export function Navbar({
             </Link>
           </div>
         </div>
-      </aside>
-    </header>
-  );
+      </aside>,
+      document.body
+    )}
+  </header>
+);
 }

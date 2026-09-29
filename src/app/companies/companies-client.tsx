@@ -14,6 +14,7 @@ import {
   Check,
   SealCheck,
   Briefcase,
+  Faders,
 } from "@phosphor-icons/react";
 import { AppHeader } from "@/components/navigation/app-header";
 import { isValidImageUrl } from "@/lib/utils";
@@ -186,7 +187,7 @@ function CompanySquareMark({
 }) {
   if (isValidImageUrl(logo)) {
     return (
-      <div className="w-full h-full rounded-none bg-white flex items-center justify-center p-1 overflow-hidden">
+      <div className="w-full h-full rounded-[6px] bg-white flex items-center justify-center p-1 overflow-hidden">
         <Image
           src={logo}
           alt={name}
@@ -202,7 +203,7 @@ function CompanySquareMark({
   const n = name.toLowerCase();
   if (n.includes("paystack")) {
     return (
-      <div className="w-full h-full rounded-none bg-white flex items-center justify-center p-1.5">
+      <div className="w-full h-full rounded-[6px] bg-white flex items-center justify-center p-1.5">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full text-[#00C3F8]">
           <path d="M15 22h70v16H15zM15 44h45v16H15zM15 66h70v15H15z" fill="currentColor" />
         </svg>
@@ -211,7 +212,7 @@ function CompanySquareMark({
   }
   if (n.includes("flutterwave")) {
     return (
-      <div className="w-full h-full rounded-none bg-white flex items-center justify-center p-1.5">
+      <div className="w-full h-full rounded-[6px] bg-white flex items-center justify-center p-1.5">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M20 50c0-16.569 13.431-30 30-30s30 13.431 30 30" stroke="#FB4E2D" strokeWidth="12" strokeLinecap="round" />
           <path d="M32 50c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="#FF9B00" strokeWidth="10" strokeLinecap="round" />
@@ -221,7 +222,7 @@ function CompanySquareMark({
   }
   if (n.includes("moniepoint")) {
     return (
-      <div className="w-full h-full rounded-none bg-[#0355D4] flex items-center justify-center p-1.5 text-white">
+      <div className="w-full h-full rounded-[6px] bg-[#0355D4] flex items-center justify-center p-1.5 text-white">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M22 22l28 28-28 28V22zM78 22L50 50l28 28V22z" fill="white" />
         </svg>
@@ -230,14 +231,14 @@ function CompanySquareMark({
   }
   if (n.includes("andela")) {
     return (
-      <div className="w-full h-full rounded-none bg-white flex items-center justify-center p-1">
+      <div className="w-full h-full rounded-[6px] bg-white flex items-center justify-center p-1">
         <span className="text-[#3359DF] font-black text-xl tracking-tighter">A</span>
       </div>
     );
   }
   if (n.includes("kuda")) {
     return (
-      <div className="w-full h-full rounded-none bg-[#40196D] flex items-center justify-center p-1">
+      <div className="w-full h-full rounded-[6px] bg-[#40196D] flex items-center justify-center p-1">
         <span className="text-white font-black text-xs tracking-tight">kuda.</span>
       </div>
     );
@@ -246,7 +247,7 @@ function CompanySquareMark({
   // Generic fallback using accentColor from Sanity
   return (
     <div
-      className="w-full h-full rounded-none flex items-center justify-center text-white font-bold text-xs"
+      className="w-full h-full rounded-[6px] flex items-center justify-center text-white font-bold text-xs"
       style={{ backgroundColor: accentColor || "#1F1F1F" }}
     >
       {name.slice(0, 2).toUpperCase()}
@@ -263,11 +264,46 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
   const [followedCompanies, setFollowedCompanies] = useState<Record<string, boolean>>({});
   const [openDropdown, setOpenDropdown] = useState<"location" | "sector" | "size" | "language" | null>(null);
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const searchBarRef = useRef<HTMLDivElement>(null);
+
+  // Lock body scroll and handle ESC key when mobile filter drawer is open
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileFiltersOpen(false);
+    };
+    if (mobileFiltersOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [mobileFiltersOpen]);
+
+  const activeFiltersCount = useMemo(() => {
+    let count = 0;
+    if (selectedLocation) count++;
+    if (selectedSector) count++;
+    if (selectedSize) count++;
+    if (selectedLanguage) count++;
+    return count;
+  }, [selectedLocation, selectedSector, selectedSize, selectedLanguage]);
+
+  const resetFilterOptions = () => {
+    setSelectedLocation("");
+    setSelectedSector("");
+    setSelectedSize("");
+    setSelectedLanguage("");
+  };
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      if (searchBarRef.current && !searchBarRef.current.contains(target)) {
         setOpenDropdown(null);
       }
     }
@@ -420,22 +456,66 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
   return (
     <div className="min-h-screen bg-[#FAF8F5] flex flex-col justify-between">
       <AppHeader activeTab="companies">
+        {/* Mobile Sticky Search Bar (Pattern 1: Unified compact bar with inline Filters button) */}
+        <div className="block md:hidden">
+          <div className="bg-white rounded-none border border-zinc-200/90 shadow-2xs flex items-center gap-2 p-1.5 pl-3">
+            <MagnifyingGlass size={17} weight="bold" className="text-zinc-400 shrink-0" />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search companies, keyword or tech ..."
+              className="flex-1 min-w-0 bg-transparent text-[13.5px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden"
+            />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm("")}
+                className="p-1 text-zinc-400 hover:text-zinc-700 cursor-pointer flex items-center justify-center shrink-0"
+                aria-label="Clear search query"
+              >
+                <X size={14} weight="bold" />
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => setMobileFiltersOpen(true)}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none text-[12px] font-bold border transition-all cursor-pointer shrink-0 select-none ${
+                activeFiltersCount > 0
+                  ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D]"
+                  : "bg-zinc-50 border-zinc-200 text-zinc-800 hover:bg-zinc-100"
+              }`}
+              aria-label="Open company filters"
+            >
+              <Faders size={14} weight="bold" className={activeFiltersCount > 0 ? "text-[#E7040D]" : "text-zinc-500"} />
+              <span>Filters</span>
+              {activeFiltersCount > 0 && (
+                <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[#E7040D] text-white text-[10px] font-extrabold ml-0.5">
+                  {activeFiltersCount}
+                </span>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Desktop Full Horizontal Search/Filter Bar */}
         <div
           ref={searchBarRef}
-          className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col md:flex-row items-stretch relative z-40"
+          className="hidden md:flex flex-row items-stretch bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] relative z-40"
         >
           {/* Keyword Input */}
-          <div className="flex-1 flex items-center gap-3 px-4 py-3 border-b md:border-b-0 md:border-r border-zinc-200/80">
+          <div className="flex-1 flex items-center gap-3 px-4 py-3 border-r border-zinc-200/80">
             <MagnifyingGlass size={18} weight="bold" className="text-zinc-400 shrink-0" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search by company, keyword or tech ..."
-              className="w-full bg-transparent text-[16px] sm:text-[13.5px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden"
+              className="w-full bg-transparent text-[13.5px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden"
             />
             {searchTerm && (
               <button
+                type="button"
                 onClick={() => setSearchTerm("")}
                 className="p-2 -mr-2 text-zinc-400 hover:text-zinc-700 cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center active:scale-95 transition-transform"
                 aria-label="Clear search query"
@@ -446,7 +526,7 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
           </div>
 
           {/* Location Dropdown */}
-          <div className="relative border-b md:border-b-0 md:border-r border-zinc-200/80 shrink-0">
+          <div className="relative border-r border-zinc-200/80 shrink-0">
             <button
               type="button"
               onClick={() => setOpenDropdown(openDropdown === "location" ? null : "location")}
@@ -484,7 +564,7 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
           </div>
 
           {/* Sector, Size, Language Dropdowns */}
-          <div className="grid grid-cols-3 md:flex md:items-center divide-x divide-zinc-200/80 border-b md:border-b-0 shrink-0">
+          <div className="flex items-center divide-x divide-zinc-200/80 shrink-0">
             {/* Sector */}
             <div className="relative shrink-0">
               <button
@@ -579,7 +659,7 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                 )}
               </button>
               {openDropdown === "language" && (
-                <div className="absolute top-full right-0 sm:right-0 mt-1 w-56 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 shadow-2xl py-1 z-50">
+                <div className="absolute top-full right-0 mt-1 w-56 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 shadow-2xl py-1 z-50">
                   {LANGUAGES.map((lang) => (
                     <button
                       key={lang}
@@ -599,6 +679,7 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
 
           {/* Search Button */}
           <button
+            type="button"
             onClick={handleSearchSubmit}
             className="flex items-center justify-center gap-2 px-8 py-3.5 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer shrink-0"
           >
@@ -609,7 +690,7 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
       </AppHeader>
 
       {/* Main Content */}
-      <main id="companies-results" className="flex-1 w-full max-w-[1360px] mx-auto py-8 px-6 sm:px-8 lg:px-10 space-y-10">
+      <main id="companies-results" className="flex-1 w-full max-w-[1360px] mx-auto py-6 sm:py-8 px-4 sm:px-8 lg:px-10 space-y-6 sm:space-y-10">
         <div>
           <div className="flex items-center justify-between pb-3.5 border-b border-zinc-200/80 gap-3">
             <div className="flex items-center gap-3 min-w-0">
@@ -650,9 +731,10 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
               return (
                 <div
                   key={comp.id}
-                  className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_-6px_rgba(231,4,13,0.08)] hover:border-[#E7040D]/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+                  className="bg-white rounded-[6px] border border-zinc-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px]"
                 >
-                  <div className="relative h-32 w-full bg-[#E5E7EB] overflow-hidden">
+                  {/* Top Cover Banner */}
+                  <Link href={`/companies/${comp.slug}`} className="block relative h-[140px] w-full bg-[#E5E7EB] overflow-hidden shrink-0">
                     {comp.coverImage ? (
                       <Image
                         src={comp.coverImage}
@@ -663,22 +745,22 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                         unoptimized
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-950 flex items-center justify-center">
-                        <span className="text-zinc-500 font-bold text-base tracking-tight">{comp.name}</span>
-                      </div>
+                      <div className="w-full h-full bg-[#E2E4E8]" />
                     )}
-                  </div>
+                  </Link>
 
-                  <div className="p-5 pt-0 flex-1 flex flex-col justify-between">
+                  {/* Card Content Area */}
+                  <div className="px-6 pb-5 pt-0 flex-1 flex flex-col justify-between">
                     <div>
-                      <Link href={`/companies/${comp.slug}`} className="block -mt-8 mb-3.5 relative z-10">
-                        <div className="w-16 h-16 rounded-none bg-white p-1 border-2 border-white shadow-md ring-1 ring-zinc-200/80 overflow-hidden group-hover:ring-[#E7040D]/40 transition-all flex items-center justify-center">
+                      {/* Overlapping Logo Box */}
+                      <Link href={`/companies/${comp.slug}`} className="block -mt-10 mb-4 relative z-10">
+                        <div className="w-[76px] h-[76px] rounded-[4px] bg-white p-2 border border-zinc-200 shadow-2xs overflow-hidden flex items-center justify-center group-hover:border-zinc-400 transition-colors">
                           {isValidImageUrl(comp.logo) ? (
                             <Image
                               src={comp.logo}
                               alt={comp.name}
-                              width={56}
-                              height={56}
+                              width={60}
+                              height={60}
                               className="object-contain w-full h-full"
                               unoptimized
                             />
@@ -688,55 +770,70 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
                         </div>
                       </Link>
 
-                      <div className="flex items-center gap-1.5 mb-2">
-                        <Link href={`/companies/${comp.slug}`}>
-                          <h2 className="text-[17px] font-black text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
+                      {/* Company Name */}
+                      <div className="flex items-center gap-1.5 mb-3">
+                        <Link href={`/companies/${comp.slug}`} className="min-w-0">
+                          <h2 className="text-[18px] font-bold text-black group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
                             {comp.name}
                           </h2>
                         </Link>
-                        <SealCheck size={15} weight="fill" className="text-[#E7040D] shrink-0" />
+                        {comp.verified && (
+                          <SealCheck size={16} weight="fill" className="text-[#E7040D] shrink-0" />
+                        )}
                       </div>
 
-                      <div className="space-y-1.5 text-[12.5px] text-zinc-600">
-                        <div className="flex items-center gap-2">
-                          <Briefcase size={14} weight="bold" className="text-zinc-400 shrink-0" />
+                      {/* 3-Row Vertical Metadata List */}
+                      <div className="space-y-2 text-[13px] text-zinc-600">
+                        <div className="flex items-center gap-2.5">
+                          <Tag size={15} weight="bold" className="text-zinc-500 shrink-0" />
                           <span className="truncate">{comp.industry || "Technology"}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <MapPin size={14} weight="bold" className="text-zinc-400 shrink-0" />
+                        <div className="flex items-center gap-2.5">
+                          <MapPin size={15} weight="bold" className="text-zinc-500 shrink-0" />
                           <span className="truncate">{comp.location?.split("•")[0]?.split(",")?.slice(0, 2)?.join(",")?.trim() || "Nigeria"}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Users size={14} weight="bold" className="text-zinc-400 shrink-0" />
-                          <span className="truncate flex items-center gap-1.5">
-                            <span>
-                              {comp.employeesCount
-                                ? comp.employeesCount.toLowerCase().includes("team") ||
-                                  comp.employeesCount.toLowerCase().includes("employee")
-                                  ? comp.employeesCount
-                                  : `${comp.employeesCount} team`
-                                : "10+ team"}
-                            </span>
-                            {typeof comp.openJobsCount === "number" && comp.openJobsCount > 0 && (
-                              <>
-                                <span>•</span>
-                                <span className="text-[#E7040D] font-bold">
-                                  {comp.openJobsCount} {comp.openJobsCount === 1 ? "role" : "roles"}
-                                </span>
-                              </>
-                            )}
+                        <div className="flex items-center gap-2.5">
+                          <Users size={15} weight="bold" className="text-zinc-500 shrink-0" />
+                          <span className="truncate">
+                            {comp.employeesCount
+                              ? comp.employeesCount.toLowerCase().includes("team") ||
+                                comp.employeesCount.toLowerCase().includes("employee")
+                                ? comp.employeesCount
+                                : `Between ${comp.employeesCount} employees`
+                              : "Between 20 and 500 employees"}
                           </span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="pt-6">
-                      <Link
-                        href={`/companies/${comp.slug}`}
-                        className="block w-full py-2 rounded-none text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] active:scale-[0.98] transition-all duration-150 cursor-pointer text-center group-hover:border-[#E7040D] whitespace-nowrap"
+                    {/* Bottom Action Area (Generous white space, pinned Follow button on bottom right) */}
+                    <div className="pt-6 mt-auto flex items-center justify-between">
+                      <div>
+                        {typeof comp.openJobsCount === "number" && comp.openJobsCount > 0 ? (
+                          <Link
+                            href={`/companies/${comp.slug}`}
+                            className="text-[12px] font-bold text-[#E7040D] hover:underline"
+                          >
+                            {comp.openJobsCount} open {comp.openJobsCount === 1 ? "role" : "roles"}
+                          </Link>
+                        ) : null}
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          toggleFollow(comp.id);
+                        }}
+                        className={`ml-auto px-4 py-1.5 text-[12px] font-medium rounded-[4px] border transition-colors cursor-pointer ${
+                          isFollowed
+                            ? "bg-black text-white border-black"
+                            : "bg-white text-black border-black hover:bg-zinc-100"
+                        }`}
                       >
-                        {comp.openJobsCount ? `View Jobs (${comp.openJobsCount})` : "View Company"}
-                      </Link>
+                        {isFollowed ? "Following" : "Follow"}
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -758,6 +855,233 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
           )}
         </div>
       </main>
+
+      {/* Mobile Filter Drawer (Pattern 1: Clean Slide-Over Sheet) */}
+      <div
+        className={`fixed inset-0 z-50 md:hidden flex justify-end transition-opacity duration-300 ${
+          mobileFiltersOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
+          onClick={() => setMobileFiltersOpen(false)}
+          aria-hidden="true"
+        />
+        <div
+          className={`relative w-full max-w-[380px] h-full bg-white z-10 shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out overscroll-contain ${
+            mobileFiltersOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Filter Companies"
+        >
+          {/* Drawer Header */}
+          <div className="flex items-center justify-between px-5 h-16 border-b border-zinc-200/80 shrink-0 bg-white">
+            <div className="flex items-center gap-2">
+              <Faders size={18} weight="bold" className="text-[#E7040D]" />
+              <h2 className="text-[17px] font-black text-[#1F1F1F] tracking-tight">Filters</h2>
+              {activeFiltersCount > 0 && (
+                <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full bg-[#E7040D] text-white text-[11px] font-extrabold">
+                  {activeFiltersCount}
+                </span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-3">
+              {activeFiltersCount > 0 && (
+                <button
+                  type="button"
+                  onClick={resetFilterOptions}
+                  className="text-[12px] font-bold text-[#E7040D] hover:underline cursor-pointer"
+                >
+                  Reset all
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => setMobileFiltersOpen(false)}
+                className="w-9 h-9 -mr-1.5 flex items-center justify-center text-zinc-600 hover:text-zinc-950 active:scale-95 transition-all cursor-pointer rounded-none border border-zinc-200"
+                aria-label="Close filters"
+              >
+                <X size={18} weight="bold" />
+              </button>
+            </div>
+          </div>
+
+          {/* Drawer Body - Scrollable Filters */}
+          <div className="flex-1 overflow-y-auto p-5 space-y-6">
+            {/* 1. Location */}
+            <div>
+              <div className="flex items-center justify-between mb-2.5">
+                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <MapPin size={15} weight="bold" className="text-zinc-500" />
+                  <span>Location</span>
+                </span>
+                {selectedLocation && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedLocation("")}
+                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {LOCATIONS.map((loc) => {
+                  const isSelected = selectedLocation === loc || (!selectedLocation && loc === "All Locations");
+                  return (
+                    <button
+                      key={loc}
+                      type="button"
+                      onClick={() => setSelectedLocation(loc === "All Locations" ? "" : loc)}
+                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none ${
+                        isSelected
+                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
+                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
+                      }`}
+                    >
+                      {loc}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 2. Sector */}
+            <div>
+              <div className="flex items-center justify-between mb-2.5">
+                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <Tag size={15} weight="bold" className="text-zinc-500" />
+                  <span>Sector / Industry</span>
+                </span>
+                {selectedSector && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedSector("")}
+                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {SECTORS.map((sec) => {
+                  const isSelected = selectedSector === sec || (!selectedSector && sec === "All Sectors");
+                  return (
+                    <button
+                      key={sec}
+                      type="button"
+                      onClick={() => setSelectedSector(sec === "All Sectors" ? "" : sec)}
+                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none text-left ${
+                        isSelected
+                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
+                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
+                      }`}
+                    >
+                      {sec}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 3. Company Size */}
+            <div>
+              <div className="flex items-center justify-between mb-2.5">
+                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <Users size={15} weight="bold" className="text-zinc-500" />
+                  <span>Company Size</span>
+                </span>
+                {selectedSize && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedSize("")}
+                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {SIZES.map((sz) => {
+                  const isSelected = selectedSize === sz || (!selectedSize && sz === "All Sizes");
+                  return (
+                    <button
+                      key={sz}
+                      type="button"
+                      onClick={() => setSelectedSize(sz === "All Sizes" ? "" : sz)}
+                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none ${
+                        isSelected
+                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
+                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
+                      }`}
+                    >
+                      {sz}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 4. Tech Stack */}
+            <div>
+              <div className="flex items-center justify-between mb-2.5">
+                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <Briefcase size={15} weight="bold" className="text-zinc-500" />
+                  <span>Tech Stack</span>
+                </span>
+                {selectedLanguage && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedLanguage("")}
+                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {LANGUAGES.map((lang) => {
+                  const isSelected = selectedLanguage === lang || (!selectedLanguage && lang === "All Stacks");
+                  return (
+                    <button
+                      key={lang}
+                      type="button"
+                      onClick={() => setSelectedLanguage(lang === "All Stacks" ? "" : lang)}
+                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none ${
+                        isSelected
+                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
+                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
+                      }`}
+                    >
+                      {lang}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Drawer Sticky Footer Action */}
+          <div className="p-4 border-t border-zinc-200/80 bg-white shrink-0">
+            <button
+              type="button"
+              onClick={() => {
+                setMobileFiltersOpen(false);
+                const el = document.getElementById("companies-results");
+                if (el) {
+                  el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              }}
+              className="w-full py-3 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.99] text-white text-[13.5px] font-bold rounded-none shadow-2xs transition-all cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>Show {filteredCompanies.length} {filteredCompanies.length === 1 ? "Company" : "Companies"}</span>
+              <CaretRight size={14} weight="bold" />
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

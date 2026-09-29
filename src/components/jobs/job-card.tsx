@@ -141,7 +141,15 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
   const photoSet = CULTURE_SETS[Math.abs(job.title.length) % CULTURE_SETS.length];
 
   return (
-    <div className="feed-card-reveal bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_14px_32px_-6px_rgba(231,4,13,0.08)] hover:border-[#E7040D]/40 hover:-translate-y-0.5 active:scale-[0.99] active:bg-zinc-50/50 transition-all duration-150 p-4 sm:p-6 md:p-7 flex flex-col justify-between group relative overflow-hidden">
+    <div className="feed-card-reveal relative pt-2.5 pr-2.5 sm:pt-3 sm:pr-3 group">
+      {/* Peach Geometric Offset Layer (Two-layer border / stacked depth) */}
+      <div
+        className="absolute top-0 right-0 w-[calc(100%-10px)] h-[calc(100%-10px)] sm:w-[calc(100%-12px)] sm:h-[calc(100%-12px)] bg-[#FCE8E0] border border-[#f5c4ae]/40 rounded-none z-0 pointer-events-none transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        aria-hidden="true"
+      />
+
+      {/* Main Job Card */}
+      <div className="relative z-10 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] group-hover:shadow-[0_14px_32px_-6px_rgba(231,4,13,0.08)] group-hover:border-[#E7040D]/40 group-hover:-translate-y-0.5 active:scale-[0.99] active:bg-zinc-50/50 transition-all duration-150 p-4 sm:p-6 md:p-7 flex flex-col justify-between overflow-hidden">
       
       {/* Top Section: Logo, Title, Company & Right-side 3-Photo Collage Widget */}
       <div>
@@ -286,5 +294,6 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
       </div>
 
     </div>
+  </div>
   );
 }
