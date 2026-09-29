@@ -150,7 +150,7 @@ export function JobsFilterSidebar({
     filters.contractTypes.length > 0;
 
   return (
-    <aside className={className || "w-full lg:w-[395px] shrink-0 sticky top-20"}>
+    <aside className={className || "w-full lg:w-[395px] shrink-0 sticky top-24 self-start"}>
       <div className={`bg-white rounded-none p-5 flex flex-col justify-between ${onCloseMobile ? "h-full max-h-full border-0 shadow-none" : "border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] max-h-[calc(100vh-120px)]"}`}>
         {/* Pinned Top Header: "Filter" */}
         <div className="flex items-center justify-between pb-3 border-b border-zinc-100 shrink-0">

@@ -254,7 +254,7 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
             onReset={handleResetFilters}
             onOpenWizard={() => {}}
             totalMatches={filteredJobs.length}
-            className="hidden lg:block w-[395px] shrink-0 sticky top-20"
+            className="hidden lg:block w-[395px] shrink-0 sticky top-24 self-start"
           />
 
           <div className="flex-1 w-full space-y-5">

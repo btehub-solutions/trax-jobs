@@ -90,7 +90,13 @@ function JobsPreviewInner({ jobs }: { jobs: any[] }) {
       <main className="flex-1 w-full max-w-[1280px] mx-auto py-6 sm:py-8 px-4 sm:px-8 lg:px-10">
         <div className="flex flex-col lg:flex-row items-start gap-8">
 
-          <JobsFilterSidebar filters={filters} onChange={setFilters} onReset={handleResetFilters} onOpenWizard={() => {}} />
+          <JobsFilterSidebar
+            filters={filters}
+            onChange={setFilters}
+            onReset={handleResetFilters}
+            onOpenWizard={() => {}}
+            className="hidden lg:block w-[395px] shrink-0 sticky top-24 self-start"
+          />
 
           <div className="flex-1 w-full space-y-5">
             <div className="flex items-center justify-between pb-1">

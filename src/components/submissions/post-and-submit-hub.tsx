@@ -757,7 +757,7 @@ function JobStudio() {
       </div>
 
       {/* Right: Sticky Live Proof Card */}
-      <div className="lg:col-span-5 sticky top-24 space-y-4">
+      <div className="lg:col-span-5 lg:sticky lg:top-24 self-start space-y-4">
         <div className="flex items-center justify-between px-1">
           <span className="text-[12px] font-bold text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
             <Eye size={15} weight="bold" className="text-[#E7040D]" />
@@ -1402,7 +1402,7 @@ function TalentStudio() {
       </div>
 
       {/* Right: Sticky Live Proof Card */}
-      <div className="lg:col-span-5 sticky top-24 space-y-4">
+      <div className="lg:col-span-5 lg:sticky lg:top-24 self-start space-y-4">
         <div className="flex items-center justify-between px-1">
           <span className="text-[12px] font-bold text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
             <Eye size={15} weight="bold" className="text-[#E7040D]" />
@@ -1415,12 +1415,12 @@ function TalentStudio() {
 
         {/* Live Trax Talent Card Replica */}
         <div className="bg-white border border-zinc-200/90 shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] overflow-hidden transition-all">
-          <div className="w-full h-24 relative overflow-hidden bg-[#FAF8F5]">
+          <div className="w-full h-40 sm:h-44 relative overflow-hidden bg-[#FAF8F5]">
             <Image
               src="/images/trax-talent-cover-default.jpg"
               alt="Trax Curated Talent"
               fill
-              className="object-cover"
+              className="object-cover object-center"
               unoptimized
             />
           </div>
@@ -1920,7 +1920,7 @@ function CompanyStudio() {
       </div>
 
       {/* Right: Sticky Live Proof Card */}
-      <div className="lg:col-span-5 sticky top-24 space-y-4">
+      <div className="lg:col-span-5 lg:sticky lg:top-24 self-start space-y-4">
         <div className="flex items-center justify-between px-1">
           <span className="text-[12px] font-bold text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
             <Eye size={15} weight="bold" className="text-[#E7040D]" />
