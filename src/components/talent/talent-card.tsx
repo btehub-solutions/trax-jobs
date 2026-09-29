@@ -30,17 +30,18 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
     <div className="feed-card-reveal bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_rgba(231,4,13,0.08)] hover:border-[#E7040D]/40 active:scale-[0.99] transition-all duration-150 flex flex-col justify-between overflow-hidden group relative">
       
       {/* Top Banner Cover Strip */}
-      <div className="relative h-20 w-full bg-gradient-to-r from-[#0C1222] via-[#162038] to-[#1F1F1F] overflow-hidden">
+      <div className="relative h-24 w-full bg-[#FAF8F5] overflow-hidden">
         <Image
-          src={talent.coverImage || "/images/trax-talent-cover-default.jpg"}
-          alt=""
+          src="/images/trax-talent-cover-default.jpg"
+          alt="Trax Curated Talent"
           fill
           sizes="400px"
-          className="object-cover opacity-35 mix-blend-overlay group-hover:scale-105 transition-transform duration-500"
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          unoptimized
         />
         
         {/* Editorial Pill on Top Right */}
-        <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 px-2 py-0.5 bg-black/40 backdrop-blur-md border border-white/20 text-white text-[10px] font-semibold tracking-wide">
+        <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 px-2 py-0.5 bg-black/60 backdrop-blur-md border border-white/20 text-white text-[10px] font-semibold tracking-wide z-10">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
           <span>{talent.workPreference}</span>
         </div>

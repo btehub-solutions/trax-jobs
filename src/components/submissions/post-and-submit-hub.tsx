@@ -882,8 +882,6 @@ function TalentStudio() {
   // Media
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
-  const [coverFile, setCoverFile] = useState<File | null>(null);
-  const [coverPreview, setCoverPreview] = useState<string | null>(null);
 
   const toggleSkill = (skill: string) => {
     setSelectedSkills((prev) =>
@@ -903,14 +901,6 @@ function TalentStudio() {
     if (file) {
       setAvatarFile(file);
       setAvatarPreview(URL.createObjectURL(file));
-    }
-  };
-
-  const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setCoverFile(file);
-      setCoverPreview(URL.createObjectURL(file));
     }
   };
 
@@ -948,7 +938,6 @@ function TalentStudio() {
       formData.append("bio", bio.trim());
 
       if (avatarFile) formData.append("avatar", avatarFile);
-      if (coverFile) formData.append("coverImage", coverFile);
 
       const res = await fetch("/api/submit-profile", {
         method: "POST",
@@ -981,8 +970,6 @@ function TalentStudio() {
           setHighlightMetric("");
           setAvatarFile(null);
           setAvatarPreview(null);
-          setCoverFile(null);
-          setCoverPreview(null);
         }}
       />
     );
@@ -1337,80 +1324,41 @@ function TalentStudio() {
               </div>
             </div>
 
-            {/* Media Dropzones */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-[12px] font-bold text-[#1F1F1F] uppercase tracking-wider mb-2">
-                  Headshot Portrait
-                </label>
-                <div className="border border-dashed border-zinc-300 p-3.5 bg-zinc-50/70 hover:border-zinc-400 transition-colors">
-                  {avatarPreview ? (
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="w-10 h-10 relative bg-zinc-900 border border-zinc-200 overflow-hidden shrink-0">
-                        <Image src={avatarPreview} alt="Avatar" fill className="object-cover" />
-                      </div>
-                      <div className="text-left flex-1 min-w-0">
-                        <p className="text-[12px] font-bold text-zinc-900 truncate">{avatarFile?.name}</p>
-                        <p className="text-[10.5px] text-zinc-500">{(avatarFile!.size / 1024).toFixed(0)} KB</p>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => { setAvatarFile(null); setAvatarPreview(null); }}
-                        className="p-1 text-zinc-400 hover:text-red-600 cursor-pointer"
-                      >
-                        <X size={15} weight="bold" />
-                      </button>
+            {/* Media Dropzone: Headshot Portrait */}
+            <div>
+              <label className="block text-[12px] font-bold text-[#1F1F1F] uppercase tracking-wider mb-2">
+                Headshot Portrait <span className="text-zinc-400 font-normal lowercase">(clean profile photo)</span>
+              </label>
+              <div className="border border-dashed border-zinc-300 p-3.5 bg-zinc-50/70 hover:border-zinc-400 transition-colors">
+                {avatarPreview ? (
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="w-10 h-10 relative bg-zinc-900 border border-zinc-200 overflow-hidden shrink-0">
+                      <Image src={avatarPreview} alt="Avatar" fill className="object-cover" />
                     </div>
-                  ) : (
-                    <label className="cursor-pointer flex items-center gap-3">
-                      <div className="w-9 h-9 bg-white border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-500">
-                        <UploadSimple size={18} weight="bold" />
-                      </div>
-                      <div className="text-left">
-                        <span className="text-[12.5px] font-bold text-zinc-900 block">Upload Portrait</span>
-                        <span className="text-[11px] text-zinc-500">Professional photo</span>
-                      </div>
-                      <input type="file" accept="image/*" onChange={handleAvatarChange} className="hidden" />
-                    </label>
-                  )}
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-[12px] font-bold text-[#1F1F1F] uppercase tracking-wider mb-2">
-                  Cover Photo
-                </label>
-                <div className="border border-dashed border-zinc-300 p-3.5 bg-zinc-50/70 hover:border-zinc-400 transition-colors">
-                  {coverPreview ? (
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="w-14 h-10 relative bg-zinc-950 border border-zinc-200 overflow-hidden shrink-0">
-                        <Image src={coverPreview} alt="Cover" fill className="object-cover" />
-                      </div>
-                      <div className="text-left flex-1 min-w-0">
-                        <p className="text-[12px] font-bold text-zinc-900 truncate">{coverFile?.name}</p>
-                        <p className="text-[10.5px] text-zinc-500">{(coverFile!.size / 1024).toFixed(0)} KB</p>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => { setCoverFile(null); setCoverPreview(null); }}
-                        className="p-1 text-zinc-400 hover:text-red-600 cursor-pointer"
-                      >
-                        <X size={15} weight="bold" />
-                      </button>
+                    <div className="text-left flex-1 min-w-0">
+                      <p className="text-[12px] font-bold text-zinc-900 truncate">{avatarFile?.name}</p>
+                      <p className="text-[10.5px] text-zinc-500">{(avatarFile!.size / 1024).toFixed(0)} KB</p>
                     </div>
-                  ) : (
-                    <label className="cursor-pointer flex items-center gap-3">
-                      <div className="w-9 h-9 bg-white border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-500">
-                        <UploadSimple size={18} weight="bold" />
-                      </div>
-                      <div className="text-left">
-                        <span className="text-[12.5px] font-bold text-zinc-900 block">Cover Banner</span>
-                        <span className="text-[11px] text-zinc-500">Minimal horizontal image</span>
-                      </div>
-                      <input type="file" accept="image/*" onChange={handleCoverChange} className="hidden" />
-                    </label>
-                  )}
-                </div>
+                    <button
+                      type="button"
+                      onClick={() => { setAvatarFile(null); setAvatarPreview(null); }}
+                      className="p-1 text-zinc-400 hover:text-red-600 cursor-pointer"
+                    >
+                      <X size={15} weight="bold" />
+                    </button>
+                  </div>
+                ) : (
+                  <label className="cursor-pointer flex items-center gap-3">
+                    <div className="w-9 h-9 bg-white border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-500">
+                      <UploadSimple size={18} weight="bold" />
+                    </div>
+                    <div className="text-left">
+                      <span className="text-[12.5px] font-bold text-zinc-900 block">Upload Portrait</span>
+                      <span className="text-[11px] text-zinc-500">Professional square or portrait photo</span>
+                    </div>
+                    <input type="file" accept="image/*" onChange={handleAvatarChange} className="hidden" />
+                  </label>
+                )}
               </div>
             </div>
 
@@ -1467,11 +1415,15 @@ function TalentStudio() {
 
         {/* Live Trax Talent Card Replica */}
         <div className="bg-white border border-zinc-200/90 shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] overflow-hidden transition-all">
-          {coverPreview && (
-            <div className="w-full h-24 relative overflow-hidden bg-zinc-950">
-              <Image src={coverPreview} alt="Banner" fill className="object-cover" />
-            </div>
-          )}
+          <div className="w-full h-24 relative overflow-hidden bg-[#FAF8F5]">
+            <Image
+              src="/images/trax-talent-cover-default.jpg"
+              alt="Trax Curated Talent"
+              fill
+              className="object-cover"
+              unoptimized
+            />
+          </div>
 
           <div className="p-6 space-y-5">
             {/* Avatar & Header */}

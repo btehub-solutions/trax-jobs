@@ -55,7 +55,7 @@ export default async function Home() {
     title: t.title ?? "",
     category: t.category ?? "Engineering",
     avatar: urlForImage(t.avatar, { width: 800, quality: 90 }) || "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800",
-    coverImage: urlForImage(t.coverImage, { width: 1200, quality: 90 }) || "/images/trax-talent-cover-default.jpg",
+    coverImage: "/images/trax-talent-cover-default.jpg",
     experienceLevel: t.experienceLevel ?? "",
     experienceYears: t.experienceYears ?? "",
     location: t.location ?? "",

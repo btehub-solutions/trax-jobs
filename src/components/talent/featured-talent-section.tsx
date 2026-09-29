@@ -39,19 +39,14 @@ function formatAvailabilityBadge(val?: string): string {
   return val.length > 10 ? `${val.slice(0, 9)}...` : val;
 }
 
-function TalentCoverImage({ src, name }: { src?: string; name: string }) {
-  const [hasError, setHasError] = useState(false);
-  const fallback = "/images/trax-talent-cover-default.jpg";
-  const finalSrc = !src || hasError ? fallback : src;
-
+function TalentCoverImage({ name }: { src?: string; name: string }) {
   return (
     <Image
-      src={finalSrc}
+      src="/images/trax-talent-cover-default.jpg"
       alt={`${name} cover`}
       fill
       sizes="(max-width: 640px) 280px, 305px"
       className="object-cover object-center group-hover/image:scale-105 transition-transform duration-500 ease-out"
-      onError={() => setHasError(true)}
       unoptimized
     />
   );

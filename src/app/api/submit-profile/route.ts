@@ -21,7 +21,6 @@ export async function POST(request: Request) {
     let githubUrl = "";
     let linkedinUrl = "";
     let avatarAsset: any = null;
-    let coverAsset: any = null;
 
     if (contentType.includes("multipart/form-data")) {
       const formData = await request.formData();
@@ -53,22 +52,6 @@ export async function POST(request: Request) {
           asset: {
             _type: "reference",
             _ref: uploadedAvatar._id,
-          },
-        };
-      }
-
-      const coverFile = formData.get("coverImage") as File | null;
-      if (coverFile && coverFile.size > 0 && typeof coverFile.arrayBuffer === "function") {
-        const buffer = Buffer.from(await coverFile.arrayBuffer());
-        const uploadedCover = await sanityWriteClient.assets.upload("image", buffer, {
-          filename: coverFile.name || "talent-cover",
-          contentType: coverFile.type || "image/jpeg",
-        });
-        coverAsset = {
-          _type: "image",
-          asset: {
-            _type: "reference",
-            _ref: uploadedCover._id,
           },
         };
       }
@@ -125,9 +108,6 @@ export async function POST(request: Request) {
 
     if (avatarAsset) {
       doc.avatar = avatarAsset;
-    }
-    if (coverAsset) {
-      doc.coverImage = coverAsset;
     }
 
     const result = await sanityWriteClient.create(doc);

@@ -18,12 +18,6 @@ export const profileSubmission = defineType({
       options: { hotspot: true },
     }),
     defineField({
-      name: "coverImage",
-      title: "Cover Image",
-      type: "image",
-      options: { hotspot: true },
-    }),
-    defineField({
       name: "email",
       title: "Email Address",
       type: "string",
