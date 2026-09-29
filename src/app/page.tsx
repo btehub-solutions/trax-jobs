@@ -4,25 +4,22 @@ import { HeroSection } from "@/components/hero-section";
 import { ExperienceSection } from "@/components/experience-section";
 import { HowItWorksSection } from "@/components/how-it-works-section";
 import { FeaturedCompaniesSection } from "@/components/featured-companies-section";
-import { FeaturedTalentSection } from "@/components/talent/featured-talent-section";
 import { SocialProofSection } from "@/components/social-proof-section";
 import { CareerGuidesSection } from "@/components/career-guides-section";
 import { Footer } from "@/components/footer";
-import { fetchCompanies, fetchPublishedJobs, fetchPublishedTalent, fetchPublishedGuides } from "@/sanity/fetchers";
+import { fetchCompanies, fetchPublishedJobs, fetchPublishedGuides } from "@/sanity/fetchers";
 import { mapSanityGuide } from "@/sanity/mappers";
 import { GUIDES_DATA, GuideArticle } from "@/data/guides";
 import { urlForImage } from "@/sanity/image";
 import { SAMPLE_JOBS } from "@/data/jobs";
 import { calculateExperienceCounts } from "@/lib/experience";
-import { extractSkillsList, extractText } from "@/lib/utils";
 
 export const revalidate = 60;
 
 export default async function Home() {
-  const [rawCompanies, rawJobs, rawTalent, rawGuides] = await Promise.all([
+  const [rawCompanies, rawJobs, rawGuides] = await Promise.all([
     fetchCompanies(),
     fetchPublishedJobs(),
-    fetchPublishedTalent(),
     fetchPublishedGuides(),
   ]);
 
@@ -48,34 +45,6 @@ export default async function Home() {
     logo: urlForImage(c.logo, { width: 240, quality: 95 }),
   }));
 
-  const sanityTalent = (rawTalent ?? []).map((t: any) => ({
-    id: t._id,
-    slug: t.slug ?? t._id,
-    name: t.name ?? "",
-    title: t.title ?? "",
-    category: t.category ?? "Engineering",
-    avatar: urlForImage(t.avatar, { width: 800, quality: 90 }) || "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800",
-    coverImage: "/images/trax-talent-cover-default.jpg",
-    experienceLevel: t.experienceLevel ?? "",
-    experienceYears: t.experienceYears ?? "",
-    location: t.location ?? "",
-    workPreference: t.workPreference ?? "Remote",
-    skills: extractSkillsList(t.skills),
-    bio: extractText(t.bio),
-    highlightMetric: t.highlightMetric ?? "",
-    rate: t.rate ?? "",
-    availability: t.availability ?? "Available immediately",
-    preferredContactMethod: t.preferredContactMethod ?? "email",
-    contactValue: t.email ?? t.whatsapp ?? "",
-    email: t.email ?? "",
-    whatsapp: t.whatsapp ?? "",
-    portfolioUrl: t.portfolioUrl ?? "",
-    githubUrl: t.githubUrl ?? "",
-    linkedinUrl: t.linkedinUrl ?? "",
-    verified: t.verified ?? true,
-    publishedAt: t.publishedAt ?? new Date().toISOString(),
-  }));
-
   return (
     <div className="min-h-screen bg-[#FAF8F5] flex flex-col w-full max-w-full overflow-x-clip">
       {/* 1. Navbar */}
@@ -97,13 +66,10 @@ export default async function Home() {
         {/* 6. Choose the company that's meant for you (Featured Companies) */}
         <FeaturedCompaniesSection companies={sanityCompanies.length > 0 ? sanityCompanies : undefined} />
 
-        {/* 7. Hire Africa's finest tech talent (Featured Talent) */}
-        <FeaturedTalentSection talent={sanityTalent.length > 0 ? sanityTalent : undefined} />
-
-        {/* 8. Find teams that respect your craft (Ecosystem Standards & Direct Action CTAs) */}
+        {/* 7. Find teams that respect your craft (Ecosystem Standards & Direct Action CTAs) */}
         <SocialProofSection />
 
-        {/* 9. Guide to getting hired (African Tech Career Playbooks) */}
+        {/* 8. Guide to getting hired (African Tech Career Playbooks) */}
         <CareerGuidesSection guides={guides} />
       </main>
 

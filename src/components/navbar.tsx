@@ -104,7 +104,7 @@ export function Navbar({
   }, []);
 
   return (
-    <header className={`w-full bg-white border-b border-zinc-100 relative z-40 ${className}`}>
+    <header className={`w-full bg-white/95 backdrop-blur-md border-b border-zinc-100 sticky top-0 z-40 transition-all ${className}`}>
       <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16">
         <div className="flex items-center justify-between h-20">
           {/* Left: Brand Logo & Desktop Nav Links */}
