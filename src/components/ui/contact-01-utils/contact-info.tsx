@@ -61,19 +61,33 @@ export default function ContactInfo() {
           Trusted by
         </span>
 
-        {/* Marquee Ticker Container with Overflow Hidden & Hover Pause */}
-        <div className="w-full overflow-hidden relative group py-2">
-          <div className="marquee-scroll gap-10 sm:gap-14 items-center select-none">
-            {/* Loop array for continuous seamless infinite animation */}
-            {[...ALL_AFRICAN_BRANDS, ...ALL_AFRICAN_BRANDS, ...ALL_AFRICAN_BRANDS].map((brand, index) => (
-              <div
-                key={`${brand}-${index}`}
-                className="flex items-center shrink-0 opacity-95 hover:opacity-100 transition-all duration-200 cursor-pointer hover:scale-105"
-              >
-                <BrandWordmark brand={brand} />
+        {/* Brand Showcase Container: Static layout when <= 2 companies, infinite marquee when > 2 companies */}
+        <div className="w-full relative group py-2">
+          {ALL_AFRICAN_BRANDS.length > 2 ? (
+            <div className="w-full overflow-hidden">
+              <div className="marquee-scroll gap-10 sm:gap-14 items-center select-none">
+                {[...ALL_AFRICAN_BRANDS, ...ALL_AFRICAN_BRANDS, ...ALL_AFRICAN_BRANDS].map((brand, index) => (
+                  <div
+                    key={`${brand}-${index}`}
+                    className="flex items-center shrink-0 opacity-95 hover:opacity-100 transition-all duration-200 cursor-pointer hover:scale-105"
+                  >
+                    <BrandWordmark brand={brand} />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ) : (
+            <div className="flex items-center gap-8 sm:gap-12 select-none flex-wrap">
+              {ALL_AFRICAN_BRANDS.map((brand) => (
+                <div
+                  key={brand}
+                  className="flex items-center shrink-0 opacity-95 hover:opacity-100 transition-all duration-200 cursor-pointer hover:scale-105"
+                >
+                  <BrandWordmark brand={brand} />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

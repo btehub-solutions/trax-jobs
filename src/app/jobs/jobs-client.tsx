@@ -101,6 +101,15 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
     workplaceTypes: [],
   });
 
+  // Synchronize incoming URL search parameter (?q=... or ?title=...)
+  useEffect(() => {
+    setFilters((prev) => {
+      if (prev.search === titleParam) return prev;
+      return { ...prev, search: titleParam };
+    });
+    setCurrentPage(1);
+  }, [titleParam]);
+
   const activeFiltersCount = useMemo(() => {
     return (
       (filters.search ? 1 : 0) +

@@ -566,18 +566,33 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
         </div>
       </div>
 
-      {/* Full-Bleed Infinite Horizontal Marquee Ticker with Bespoke Brand Wordmarks */}
-      <div className="w-full overflow-hidden py-6 mt-6">
-        <div className="marquee-scroll flex items-center gap-14 sm:gap-20 select-none">
-          {[...ALL_AFRICAN_BRANDS, ...ALL_AFRICAN_BRANDS, ...ALL_AFRICAN_BRANDS].map((brand, idx) => (
-            <div
-              key={`${brand}-${idx}`}
-              className="flex items-center shrink-0 opacity-95 hover:opacity-100 transition-all duration-200 cursor-pointer hover:scale-105"
-            >
-              <BrandWordmark brand={brand} />
+      {/* Company Showcase: Static layout when <= 2 companies, infinite marquee when > 2 companies */}
+      <div className="w-full py-6 mt-6">
+        {ALL_AFRICAN_BRANDS.length > 2 ? (
+          <div className="w-full overflow-hidden">
+            <div className="marquee-scroll flex items-center gap-14 sm:gap-20 select-none">
+              {[...ALL_AFRICAN_BRANDS, ...ALL_AFRICAN_BRANDS, ...ALL_AFRICAN_BRANDS].map((brand, idx) => (
+                <div
+                  key={`${brand}-${idx}`}
+                  className="flex items-center shrink-0 opacity-95 hover:opacity-100 transition-all duration-200 cursor-pointer hover:scale-105"
+                >
+                  <BrandWordmark brand={brand} />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        ) : (
+          <div className="flex items-center justify-center gap-12 sm:gap-20 select-none flex-wrap">
+            {ALL_AFRICAN_BRANDS.map((brand) => (
+              <div
+                key={brand}
+                className="flex items-center shrink-0 opacity-95 hover:opacity-100 transition-all duration-200 cursor-pointer hover:scale-105"
+              >
+                <BrandWordmark brand={brand} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

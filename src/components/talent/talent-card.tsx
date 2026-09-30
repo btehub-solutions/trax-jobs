@@ -27,28 +27,28 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <div className="feed-card-reveal bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_rgba(231,4,13,0.08)] hover:border-[#E7040D]/40 active:scale-[0.99] transition-all duration-150 flex flex-col justify-between overflow-hidden group relative">
+    <div className="feed-card-reveal bg-white rounded-[6px] border border-zinc-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px]">
       
       {/* Top Banner Cover Strip */}
-      <div className="relative h-24 w-full bg-[#FAF8F5] overflow-hidden">
+      <div className="relative h-[140px] w-full bg-[#E5E7EB] overflow-hidden shrink-0">
         <Image
           src="/images/trax-talent-cover-default.jpg"
           alt="Trax Curated Talent"
           fill
           sizes="400px"
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
           unoptimized
         />
         
         {/* Editorial Pill on Top Right */}
-        <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 px-2 py-0.5 bg-black/60 backdrop-blur-md border border-white/20 text-white text-[10px] font-semibold tracking-wide z-10">
+        <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 px-2.5 py-0.5 bg-black/60 backdrop-blur-xs border border-white/20 text-white text-[10px] font-semibold tracking-wide rounded-full shadow-2xs z-10">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
           <span>{talent.workPreference}</span>
         </div>
       </div>
 
       {/* Main Card Body */}
-      <div className="p-5 sm:p-6 pt-0 flex-1 flex flex-col justify-between">
+      <div className="px-6 pb-5 pt-0 flex-1 flex flex-col justify-between">
         <div>
           {/* Avatar & Verification Section */}
           <div className="flex items-start justify-between -mt-10 mb-4 relative z-10">
@@ -56,7 +56,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
             {/* Portrait Avatar */}
             <div className="relative">
               <Link href={`/talent/${talent.slug || talent.id}`} className="block">
-                <div className="w-20 h-20 rounded-none bg-white p-1 border-2 border-white shadow-md ring-1 ring-zinc-200/80 overflow-hidden bg-zinc-100 group-hover:ring-[#E7040D]/40 transition-all">
+                <div className="w-[76px] h-[76px] rounded-[4px] bg-white p-1 border border-zinc-200 shadow-2xs overflow-hidden flex items-center justify-center group-hover:border-zinc-400 transition-colors">
                   {!imageError ? (
                     <Image
                       src={talent.avatar}

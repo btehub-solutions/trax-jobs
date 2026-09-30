@@ -84,15 +84,15 @@ function AboutPageContent() {
           <>
             {/* 3. Panoramic Hero Banner */}
             <section className="relative w-full h-[380px] sm:h-[440px] lg:h-[480px] flex items-center justify-center overflow-hidden bg-zinc-950">
-          {/* Cityscape Background Image */}
+          {/* Team Collaboration Background Image */}
           <div className="absolute inset-0 z-0">
             <Image
-              src="/images/about-hero.jpg"
-              alt="African Black tech professionals collaborating in a row at a modern workspace"
+              src="/images/about-hero-team.jpg"
+              alt="Trax Jobs team collaborating at workspace"
               fill
               priority
               sizes="100vw"
-              className="object-cover object-[center_30%] brightness-75 scale-105"
+              className="object-cover object-[center_32%] brightness-75"
             />
             {/* Subtle multi-layer gradient for editorial contrast & readability */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/65" />

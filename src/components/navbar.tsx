@@ -56,19 +56,45 @@ export function Navbar({
     setMounted(true);
   }, []);
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/jobs?q=${encodeURIComponent(searchQuery.trim())}`);
-      setMobileMenuOpen(false);
-      setSearchQuery("");
-    }
-  };
-
-  // Context-aware CTA button calculation
+  // Context-aware CTA button & Search Scope calculation
   const isTalentPage = activeTab === "talent" || pathname.startsWith("/talent");
   const isCompaniesPage = activeTab === "companies" || pathname.startsWith("/companies");
   const isJobsPage = activeTab === "jobs" || pathname.startsWith("/jobs");
+
+  const [searchScope, setSearchScope] = useState<"jobs" | "companies" | "talent">(
+    isCompaniesPage ? "companies" : isTalentPage ? "talent" : "jobs"
+  );
+
+  useEffect(() => {
+    if (pathname.startsWith("/companies")) {
+      setSearchScope("companies");
+    } else if (pathname.startsWith("/talent")) {
+      setSearchScope("talent");
+    } else {
+      setSearchScope("jobs");
+    }
+  }, [pathname]);
+
+  const executeSearch = (overrideQuery?: string) => {
+    const q = (overrideQuery !== undefined ? overrideQuery : searchQuery).trim();
+    if (!q) return;
+
+    setMobileMenuOpen(false);
+
+    let target = `/jobs?q=${encodeURIComponent(q)}`;
+    if (searchScope === "companies") {
+      target = `/companies?q=${encodeURIComponent(q)}`;
+    } else if (searchScope === "talent") {
+      target = `/talent?q=${encodeURIComponent(q)}`;
+    }
+
+    router.push(target);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    executeSearch();
+  };
 
   let defaultCtaText = "Submit a Job";
   let defaultCtaHref = "/about?tab=post-and-submit&type=job";
@@ -249,18 +275,84 @@ export function Navbar({
         <div className="flex-1 overflow-y-auto px-6 pt-7 pb-10 space-y-8 overscroll-contain">
           {/* SEARCH PLATFORM */}
           <div>
-            <span className="block text-[11px] font-bold uppercase tracking-[0.08em] text-[#E7040D] mb-3">
-              SEARCH PLATFORM
-            </span>
-            <form onSubmit={handleSearchSubmit} className="relative flex items-center">
-              <MagnifyingGlass size={17} weight="regular" className="absolute left-3.5 text-zinc-400 pointer-events-none" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search jobs, roles, companies..."
-                className="w-full bg-[#f3f4f6] text-zinc-900 placeholder:text-zinc-400 pl-10 pr-4 py-2.5 rounded-xl text-[14px] font-normal border-0 focus:outline-none focus:ring-1 focus:ring-[#E7040D]/30 transition-all"
-              />
+            <div className="flex items-center justify-between mb-2.5">
+              <span className="block text-[11px] font-bold uppercase tracking-[0.08em] text-[#E7040D]">
+                SEARCH PLATFORM
+              </span>
+              {/* Category Scope Switcher */}
+              <div className="flex items-center gap-1 bg-[#f3f4f6] p-0.5 rounded-lg border border-zinc-200/80">
+                {(
+                  [
+                    { id: "jobs", label: "Jobs" },
+                    { id: "companies", label: "Companies" },
+                    { id: "talent", label: "Talent" },
+                  ] as const
+                ).map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setSearchScope(tab.id)}
+                    className={`px-2.5 py-1 text-[11.5px] font-bold transition-all rounded-[6px] select-none cursor-pointer ${
+                      searchScope === tab.id
+                        ? "bg-white text-[#1F1F1F] shadow-2xs"
+                        : "text-zinc-500 hover:text-zinc-900"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <form onSubmit={handleSearchSubmit} role="search" className="flex items-center gap-2">
+              <div className="relative flex-1 flex items-center">
+                <MagnifyingGlass
+                  size={17}
+                  weight="regular"
+                  className="absolute left-3.5 text-zinc-400 pointer-events-none"
+                />
+                <input
+                  type="search"
+                  name="q"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      executeSearch();
+                    }
+                  }}
+                  enterKeyHint="search"
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  spellCheck="false"
+                  placeholder={
+                    searchScope === "companies"
+                      ? "Search companies, industry..."
+                      : searchScope === "talent"
+                      ? "Search talent by role, skill..."
+                      : "Search jobs, roles, skills..."
+                  }
+                  className="w-full bg-[#f3f4f6] text-zinc-900 placeholder:text-zinc-400 pl-10 pr-8 py-2.5 rounded-xl text-[14px] font-normal border-0 focus:outline-none focus:ring-1 focus:ring-[#E7040D]/30 transition-all"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-2.5 p-1 text-zinc-400 hover:text-zinc-700 flex items-center justify-center cursor-pointer"
+                    aria-label="Clear search query"
+                  >
+                    <X size={14} weight="bold" />
+                  </button>
+                )}
+              </div>
+              <button
+                type="submit"
+                className="px-3.5 py-2.5 rounded-xl bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[13px] font-bold shadow-2xs transition-all cursor-pointer shrink-0"
+              >
+                Search
+              </button>
             </form>
           </div>
 

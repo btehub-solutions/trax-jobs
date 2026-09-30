@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useRef, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -255,8 +256,16 @@ function CompanySquareMark({
   );
 }
 
-export function CompaniesPageClient({ companies }: { companies: SanityCompany[] }) {
-  const [searchTerm, setSearchTerm] = useState("");
+function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
+  const searchParams = useSearchParams();
+  const qParam = searchParams.get("q") || searchParams.get("search") || "";
+  const [searchTerm, setSearchTerm] = useState(qParam);
+
+  useEffect(() => {
+    if (qParam !== undefined) {
+      setSearchTerm(qParam);
+    }
+  }, [qParam]);
   const [selectedLocation, setSelectedLocation] = useState<string>("");
   const [selectedSector, setSelectedSector] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
@@ -1083,5 +1092,13 @@ export function CompaniesPageClient({ companies }: { companies: SanityCompany[] 
         </div>
       </div>
     </div>
+  );
+}
+
+export function CompaniesPageClient({ companies }: { companies: SanityCompany[] }) {
+  return (
+    <Suspense fallback={null}>
+      <CompaniesPageInner companies={companies} />
+    </Suspense>
   );
 }

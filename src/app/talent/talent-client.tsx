@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -53,21 +54,36 @@ const LOCATIONS = ["All Locations", "Nigeria", "Lagos, Nigeria", "Abuja, Nigeria
 
 function TalentSquareMark({ item }: { item: SanityTalentItem }) {
   const [imageError, setImageError] = useState(false);
+  if (!imageError && item.avatar) {
+    return (
+      <Image
+        src={item.avatar}
+        alt={item.name}
+        width={72}
+        height={72}
+        className="w-full h-full object-cover object-top rounded-[2px]"
+        onError={() => setImageError(true)}
+        unoptimized
+      />
+    );
+  }
   return (
-    <div className="w-16 h-16 rounded-none bg-white border border-zinc-200/90 shadow-xs flex items-center justify-center overflow-hidden relative">
-      {!imageError && item.avatar ? (
-        <Image src={item.avatar} alt={item.name} width={64} height={64} className="w-full h-full object-cover object-top" onError={() => setImageError(true)} unoptimized />
-      ) : (
-        <div className="w-full h-full bg-[#1F1F1F] text-white font-bold flex items-center justify-center text-base">
-          {item.name.slice(0, 2).toUpperCase()}
-        </div>
-      )}
+    <div className="w-full h-full bg-[#1F1F1F] text-white font-bold flex items-center justify-center text-lg rounded-[2px]">
+      {item.name.slice(0, 2).toUpperCase()}
     </div>
   );
 }
 
-export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
-  const [searchTerm, setSearchTerm] = useState("");
+function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
+  const searchParams = useSearchParams();
+  const qParam = searchParams.get("q") || searchParams.get("search") || "";
+  const [searchTerm, setSearchTerm] = useState(qParam);
+
+  useEffect(() => {
+    if (qParam !== undefined) {
+      setSearchTerm(qParam);
+    }
+  }, [qParam]);
   const [selectedLocation, setSelectedLocation] = useState<string>("");
   const [selectedDiscipline, setSelectedDiscipline] = useState<string>("");
   const [selectedExperience, setSelectedExperience] = useState<string>("");
@@ -513,56 +529,97 @@ export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6">
             {filteredTalent.map((item) => (
-              <div key={item.id} className="bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_-6px_rgba(231,4,13,0.08)] hover:border-[#E7040D]/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden group">
-                <div className="relative h-32 w-full bg-[#FAF8F5] overflow-hidden">
+              <div
+                key={item.id}
+                className="bg-white rounded-[6px] border border-zinc-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px]"
+              >
+                {/* Top Cover Banner */}
+                <Link href={`/talent/${item.slug}`} className="block relative h-[140px] w-full bg-[#E5E7EB] overflow-hidden shrink-0">
                   <Image
-                    src="/images/trax-talent-cover-default.jpg"
-                    alt="Trax Curated Talent"
+                    src={item.coverImage || "/images/trax-talent-cover-default.jpg"}
+                    alt={item.name}
                     fill
                     sizes="320px"
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
                     unoptimized
                   />
-                </div>
+                  {item.availability && (
+                    <div className="absolute top-2.5 right-2.5 z-10">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-white bg-black/60 backdrop-blur-xs border border-white/20 px-2.5 py-0.5 rounded-full shadow-2xs">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span>{item.availability}</span>
+                      </span>
+                    </div>
+                  )}
+                </Link>
 
-                <div className="p-5 pt-0 flex-1 flex flex-col justify-between">
+                {/* Card Content Area */}
+                <div className="px-6 pb-5 pt-0 flex-1 flex flex-col justify-between">
                   <div>
-                    <Link href={`/talent/${item.slug}`} className="block -mt-8 mb-3.5 relative z-10">
-                      <TalentSquareMark item={item} />
+                    {/* Overlapping Logo / Avatar Box */}
+                    <Link href={`/talent/${item.slug}`} className="block -mt-10 mb-4 relative z-10">
+                      <div className="w-[76px] h-[76px] rounded-[4px] bg-white p-1 border border-zinc-200 shadow-2xs overflow-hidden flex items-center justify-center group-hover:border-zinc-400 transition-colors">
+                        <TalentSquareMark item={item} />
+                      </div>
                     </Link>
 
-                    <div className="flex items-center gap-1.5 mb-2">
-                      <Link href={`/talent/${item.slug}`}>
-                        <h2 className="text-[17px] font-black text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight">{item.name}</h2>
+                    {/* Talent Name */}
+                    <div className="flex items-center gap-1.5 mb-3">
+                      <Link href={`/talent/${item.slug}`} className="min-w-0">
+                        <h2 className="text-[18px] font-bold text-black group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
+                          {item.name}
+                        </h2>
                       </Link>
-                      <SealCheck size={15} weight="fill" className="text-[#E7040D] shrink-0" />
+                      <SealCheck size={16} weight="fill" className="text-[#E7040D] shrink-0" />
                     </div>
 
-                    <div className="space-y-1.5 text-[12.5px] text-zinc-600">
-                      <div className="flex items-center gap-2">
-                        <Tag size={14} weight="bold" className="text-zinc-400 shrink-0" />
+                    {/* 3-Row Vertical Metadata List */}
+                    <div className="space-y-2 text-[13px] text-zinc-600">
+                      <div className="flex items-center gap-2.5">
+                        <Tag size={15} weight="bold" className="text-zinc-500 shrink-0" />
                         <span className="truncate">{item.title}</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <MapPin size={14} weight="bold" className="text-zinc-400 shrink-0" />
-                        <span className="truncate">{item.location}</span>
+                      <div className="flex items-center gap-2.5">
+                        <MapPin size={15} weight="bold" className="text-zinc-500 shrink-0" />
+                        <span className="truncate">{item.location?.split("•")[0]?.split(",")?.slice(0, 2)?.join(",")?.trim() || "Nigeria"}</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Users size={14} weight="bold" className="text-zinc-400 shrink-0" />
-                        <span className="truncate flex items-center gap-1.5">
-                          <span>{item.experienceYears} • {item.availability}</span>
-                          {item.availability?.toLowerCase().includes("immediately") && (
-                            <span className="inline-flex w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" title="Available now" />
-                          )}
+                      <div className="flex items-center gap-2.5">
+                        <Users size={15} weight="bold" className="text-zinc-500 shrink-0" />
+                        <span className="truncate">
+                          {item.experienceYears ? `${item.experienceYears} experience` : item.experienceLevel || "Vetted Professional"}
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="pt-6">
-                    <Link href={`/talent/${item.slug}`} className="block w-full py-2 rounded-none text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] active:scale-[0.98] transition-all duration-150 cursor-pointer text-center group-hover:border-[#E7040D] whitespace-nowrap">
+                  {/* Bottom Action Area (Generous white space, pinned Hire button on bottom right) */}
+                  <div className="pt-6 mt-auto flex items-center justify-between">
+                    <div>
+                      {item.rate ? (
+                        <span className="text-[12px] font-bold text-[#E7040D]">
+                          {item.rate}
+                        </span>
+                      ) : (
+                        <Link
+                          href={`/talent/${item.slug}`}
+                          className="text-[12px] font-semibold text-zinc-500 hover:text-[#E7040D] transition-colors"
+                        >
+                          View profile →
+                        </Link>
+                      )}
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setActiveHireTalent(item);
+                      }}
+                      className="ml-auto px-4 py-1.5 text-[12px] font-medium rounded-[4px] border border-zinc-300 bg-white text-zinc-800 hover:border-black hover:text-black transition-colors cursor-pointer select-none active:scale-95 shadow-2xs"
+                    >
                       Hire Talent
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -806,5 +863,13 @@ export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
 
       <HireTalentModal talent={activeHireTalent as any} onClose={() => setActiveHireTalent(null)} />
     </div>
+  );
+}
+
+export function TalentPageClient({ talent }: { talent: SanityTalentItem[] }) {
+  return (
+    <Suspense fallback={null}>
+      <TalentPageInner talent={talent} />
+    </Suspense>
   );
 }
