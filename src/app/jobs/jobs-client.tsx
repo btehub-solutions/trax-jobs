@@ -191,9 +191,22 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
       if (filters.locations.length > 0) {
         const matchLoc = filters.locations.some((l) => {
           const q = l.toLowerCase();
+          const jLoc = (job.location || "").toLowerCase();
+          const jWp = (job.workplaceType || "").toLowerCase();
+          if (q === "nigeria") {
+            return (
+              jLoc.includes("nigeria") ||
+              jLoc.includes("lagos") ||
+              jLoc.includes("abuja") ||
+              jLoc.includes("ogun") ||
+              jLoc.includes("abeokuta") ||
+              jLoc.includes("ibadan") ||
+              jWp.includes("nigeria")
+            );
+          }
           return (
-            (job.location || "").toLowerCase().includes(q) ||
-            (job.workplaceType || "").toLowerCase().includes(q)
+            jLoc.includes(q) ||
+            jWp.includes(q)
           );
         });
         if (!matchLoc) return false;

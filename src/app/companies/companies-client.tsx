@@ -16,6 +16,8 @@ import {
   SealCheck,
   Briefcase,
   Faders,
+  CaretUp,
+  ArrowClockwise,
 } from "@phosphor-icons/react";
 import { AppHeader } from "@/components/navigation/app-header";
 import { isValidImageUrl } from "@/lib/utils";
@@ -65,6 +67,7 @@ const LOCATIONS = [
   "Lagos, Nigeria",
   "Abuja, Nigeria",
   "Abeokuta, Ogun State",
+  "Ibadan, Nigeria",
   "London & Lagos",
   "Lagos & San Francisco",
   "Remote Africa",
@@ -293,17 +296,50 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
     };
   }, [mobileFiltersOpen]);
 
+  const [openSections, setOpenSections] = useState({
+    sector: true,
+    size: true,
+    stack: false,
+    location: true,
+  });
+  const [keywordInput, setKeywordInput] = useState(searchTerm);
+  const [locationInput, setLocationInput] = useState(selectedLocation);
+
+  useEffect(() => {
+    setKeywordInput(searchTerm);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    setLocationInput(selectedLocation);
+  }, [selectedLocation]);
+
+  const toggleSection = (key: keyof typeof openSections) => {
+    setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const handleApplyKeyword = () => {
+    setSearchTerm(keywordInput.trim());
+  };
+
+  const handleApplyLocation = () => {
+    setSelectedLocation(locationInput.trim());
+  };
+
   const activeFiltersCount = useMemo(() => {
     let count = 0;
-    if (selectedLocation) count++;
-    if (selectedSector) count++;
-    if (selectedSize) count++;
-    if (selectedLanguage) count++;
+    if (searchTerm) count++;
+    if (selectedLocation && selectedLocation !== "All Locations") count++;
+    if (selectedSector && selectedSector !== "All Sectors") count++;
+    if (selectedSize && selectedSize !== "All Sizes") count++;
+    if (selectedLanguage && selectedLanguage !== "All Stacks") count++;
     return count;
-  }, [selectedLocation, selectedSector, selectedSize, selectedLanguage]);
+  }, [searchTerm, selectedLocation, selectedSector, selectedSize, selectedLanguage]);
 
   const resetFilterOptions = () => {
+    setSearchTerm("");
+    setKeywordInput("");
     setSelectedLocation("");
+    setLocationInput("");
     setSelectedSector("");
     setSelectedSize("");
     setSelectedLanguage("");
@@ -351,7 +387,8 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
             compLoc.includes("lagos") ||
             compLoc.includes("abuja") ||
             compLoc.includes("abeokuta") ||
-            compLoc.includes("ogun");
+            compLoc.includes("ogun") ||
+            compLoc.includes("ibadan");
           if (!isNigeria) return false;
         } else if (loc === "remote" || loc === "remote africa") {
           if (!compLoc.includes("remote")) return false;
@@ -851,12 +888,35 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
           </div>
 
           {filteredCompanies.length === 0 && (
-            <div className="py-16 text-center text-zinc-500 bg-white border border-zinc-200 mt-6">
-              <p className="text-[15px] font-bold text-zinc-900 mb-1">No companies match these filters</p>
-              <p className="text-[13px] text-zinc-500 mb-4">Try widening your search or clearing selected filters.</p>
+            <div className="py-20 px-4 text-center flex flex-col items-center justify-center">
+              <div className="relative w-40 h-40 bg-[#FED7AA] rounded-sm p-4 shadow-[12px_18px_32px_-6px_rgba(217,119,6,0.22)] transform rotate-2 hover:rotate-0 transition-transform duration-300 flex flex-col justify-between select-none">
+                <div className="absolute top-0 left-0 right-0 h-4 bg-black/5 pointer-events-none" />
+                <div className="w-full h-full border border-amber-500/40 rounded-sm p-2 flex flex-col items-center justify-center">
+                  <svg viewBox="0 0 100 100" fill="none" stroke="#C2410C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 opacity-85">
+                    {/* Modern Headquarters / Office Tower Silhouette */}
+                    <path d="M15 85h70" />
+                    <rect x="25" y="30" width="32" height="55" rx="1" />
+                    <rect x="57" y="45" width="22" height="40" rx="1" />
+                    {/* Tower Roof Spire */}
+                    <path d="M41 18v12" />
+                    <circle cx="41" cy="15" r="2.5" />
+                    {/* Windows Grid */}
+                    <path d="M33 40h4M45 40h4M33 50h4M45 50h4M33 60h4M45 60h4M33 70h4M45 70h4" strokeWidth="2" />
+                    <path d="M65 55h6M65 65h6M65 75h6" strokeWidth="2" />
+                    {/* Entrance */}
+                    <path d="M37 85v-7h8v7" />
+                    {/* Subtle decorative accents */}
+                    <path d="M78 28l4 4M82 28l-4 4" strokeWidth="1.5" />
+                    <path d="M16 42l3 3M19 42l-3 3" strokeWidth="1.5" />
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-[24px] sm:text-[26px] font-black text-zinc-950 mt-10 mb-2 tracking-tight">No companies in sight</h3>
+              <p className="text-[14.5px] sm:text-[15.5px] text-zinc-600 leading-relaxed max-w-md">No companies match these filters right now.</p>
+              <p className="text-[14.5px] sm:text-[15.5px] text-zinc-600 leading-relaxed max-w-md mt-0.5">Try widening your search or clearing selected filters.</p>
               <button
                 onClick={resetFilters}
-                className="px-4 py-2 bg-[#0C1222] text-white text-[12.5px] font-bold cursor-pointer"
+                className="mt-6 px-6 py-2.5 bg-[#0C1222] hover:bg-[#E7040D] text-white text-[13px] font-bold rounded-none transition-colors cursor-pointer shadow-xs active:scale-98"
               >
                 Reset all filters
               </button>
@@ -865,7 +925,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
         </div>
       </main>
 
-      {/* Mobile Filter Drawer (Pattern 1: Clean Slide-Over Sheet) */}
+      {/* Mobile Filter Drawer (Replicated from Job Filter UI) */}
       <div
         className={`fixed inset-0 z-50 md:hidden flex justify-end transition-opacity duration-300 ${
           mobileFiltersOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -877,20 +937,19 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
           aria-hidden="true"
         />
         <div
-          className={`relative w-full max-w-[380px] h-full bg-white z-10 shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out overscroll-contain ${
+          className={`relative w-full max-w-[400px] h-full bg-white z-10 shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out overscroll-contain ${
             mobileFiltersOpen ? "translate-x-0" : "translate-x-full"
           }`}
           role="dialog"
           aria-modal="true"
           aria-label="Filter Companies"
         >
-          {/* Drawer Header */}
-          <div className="flex items-center justify-between px-5 h-16 border-b border-zinc-200/80 shrink-0 bg-white">
+          {/* Drawer Pinned Top Header */}
+          <div className="flex items-center justify-between pb-3 px-5 pt-4 border-b border-zinc-100 shrink-0 bg-white">
             <div className="flex items-center gap-2">
-              <Faders size={18} weight="bold" className="text-[#E7040D]" />
-              <h2 className="text-[17px] font-black text-[#1F1F1F] tracking-tight">Filters</h2>
+              <h2 className="text-[14px] font-bold text-[#1F1F1F]">Filters</h2>
               {activeFiltersCount > 0 && (
-                <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full bg-[#E7040D] text-white text-[11px] font-extrabold">
+                <span className="text-[11px] font-bold text-zinc-500 bg-zinc-100 px-2 py-0.5 rounded-full">
                   {activeFiltersCount}
                 </span>
               )}
@@ -901,15 +960,16 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                 <button
                   type="button"
                   onClick={resetFilterOptions}
-                  className="text-[12px] font-bold text-[#E7040D] hover:underline cursor-pointer"
+                  className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#E7040D] hover:underline cursor-pointer"
                 >
-                  Reset all
+                  <ArrowClockwise size={13} weight="bold" />
+                  <span>Reset all</span>
                 </button>
               )}
               <button
                 type="button"
                 onClick={() => setMobileFiltersOpen(false)}
-                className="w-9 h-9 -mr-1.5 flex items-center justify-center text-zinc-600 hover:text-zinc-950 active:scale-95 transition-all cursor-pointer rounded-none border border-zinc-200"
+                className="p-1 -mr-1 rounded-lg text-zinc-500 hover:text-zinc-950 hover:bg-zinc-100 transition-colors cursor-pointer"
                 aria-label="Close filters"
               >
                 <X size={18} weight="bold" />
@@ -917,176 +977,331 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
             </div>
           </div>
 
-          {/* Drawer Body - Scrollable Filters */}
-          <div className="flex-1 overflow-y-auto p-5 space-y-6">
-            {/* 1. Location */}
-            <div>
-              <div className="flex items-center justify-between mb-2.5">
-                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
-                  <MapPin size={15} weight="bold" className="text-zinc-500" />
-                  <span>Location</span>
-                </span>
-                {selectedLocation && (
+          {/* Drawer Body - Scrollable Area */}
+          <div className="flex-1 overflow-y-auto p-5 space-y-5 custom-scrollbar">
+            {/* 1. "Active preferences" Dark Navy Card */}
+            <div className="bg-[#0C1222] border border-[#0C1222] rounded-none p-4 space-y-2.5 shadow-xs">
+              <div className="flex items-center justify-between">
+                <h3 className="text-[13.5px] font-bold text-white tracking-tight">
+                  Active preferences
+                </h3>
+                {activeFiltersCount > 0 && (
                   <button
                     type="button"
-                    onClick={() => setSelectedLocation("")}
-                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
+                    onClick={resetFilterOptions}
+                    className="text-[11px] font-bold text-[#FF4D55] hover:text-white hover:underline transition-colors cursor-pointer"
                   >
-                    Clear
+                    Clear all
                   </button>
                 )}
               </div>
-              <div className="flex flex-wrap gap-1.5">
-                {LOCATIONS.map((loc) => {
-                  const isSelected = selectedLocation === loc || (!selectedLocation && loc === "All Locations");
-                  return (
-                    <button
-                      key={loc}
-                      type="button"
-                      onClick={() => setSelectedLocation(loc === "All Locations" ? "" : loc)}
-                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none ${
-                        isSelected
-                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
-                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
-                      }`}
-                    >
-                      {loc}
-                    </button>
-                  );
-                })}
-              </div>
+
+              {activeFiltersCount > 0 ? (
+                <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                  {searchTerm && (
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                      <Tag size={12} weight="bold" className="text-[#E7040D] shrink-0" />
+                      <span className="truncate max-w-[120px]">{searchTerm}</span>
+                      <button
+                        onClick={() => {
+                          setSearchTerm("");
+                          setKeywordInput("");
+                        }}
+                        className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
+                        aria-label="Remove search filter"
+                      >
+                        <X size={11} weight="bold" />
+                      </button>
+                    </div>
+                  )}
+
+                  {selectedSector && selectedSector !== "All Sectors" && (
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                      <span className="truncate max-w-[130px]">{selectedSector}</span>
+                      <button
+                        onClick={() => setSelectedSector("")}
+                        className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
+                        aria-label="Remove sector filter"
+                      >
+                        <X size={11} weight="bold" />
+                      </button>
+                    </div>
+                  )}
+
+                  {selectedSize && selectedSize !== "All Sizes" && (
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                      <span>{selectedSize}</span>
+                      <button
+                        onClick={() => setSelectedSize("")}
+                        className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
+                        aria-label="Remove size filter"
+                      >
+                        <X size={11} weight="bold" />
+                      </button>
+                    </div>
+                  )}
+
+                  {selectedLanguage && selectedLanguage !== "All Stacks" && (
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                      <span>{selectedLanguage}</span>
+                      <button
+                        onClick={() => setSelectedLanguage("")}
+                        className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
+                        aria-label="Remove stack filter"
+                      >
+                        <X size={11} weight="bold" />
+                      </button>
+                    </div>
+                  )}
+
+                  {selectedLocation && selectedLocation !== "All Locations" && (
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                      <MapPin size={12} weight="bold" className="text-[#E7040D] shrink-0" />
+                      <span>{selectedLocation}</span>
+                      <button
+                        onClick={() => {
+                          setSelectedLocation("");
+                          setLocationInput("");
+                        }}
+                        className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
+                        aria-label="Remove location filter"
+                      >
+                        <X size={11} weight="bold" />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <p className="text-[12px] text-white/70 leading-relaxed py-1">
+                  No filters applied. Select from the criteria below to filter open roles.
+                </p>
+              )}
             </div>
 
-            {/* 2. Sector */}
-            <div>
-              <div className="flex items-center justify-between mb-2.5">
-                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
-                  <Tag size={15} weight="bold" className="text-zinc-500" />
-                  <span>Sector / Industry</span>
-                </span>
-                {selectedSector && (
-                  <button
-                    type="button"
-                    onClick={() => setSelectedSector("")}
-                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
-                  >
-                    Clear
-                  </button>
-                )}
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {SECTORS.map((sec) => {
-                  const isSelected = selectedSector === sec || (!selectedSector && sec === "All Sectors");
-                  return (
-                    <button
-                      key={sec}
-                      type="button"
-                      onClick={() => setSelectedSector(sec === "All Sectors" ? "" : sec)}
-                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none text-left ${
-                        isSelected
-                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
-                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
-                      }`}
-                    >
-                      {sec}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            {/* 2. "Edit preferences" Accordion List */}
+            <div className="space-y-3.5 pt-1">
+              <h4 className="text-[13.5px] font-bold text-[#1F1F1F]">
+                Edit preferences
+              </h4>
 
-            {/* 3. Company Size */}
-            <div>
-              <div className="flex items-center justify-between mb-2.5">
-                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
-                  <Users size={15} weight="bold" className="text-zinc-500" />
-                  <span>Company Size</span>
-                </span>
-                {selectedSize && (
-                  <button
-                    type="button"
-                    onClick={() => setSelectedSize("")}
-                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
-                  >
-                    Clear
-                  </button>
-                )}
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {SIZES.map((sz) => {
-                  const isSelected = selectedSize === sz || (!selectedSize && sz === "All Sizes");
-                  return (
-                    <button
-                      key={sz}
-                      type="button"
-                      onClick={() => setSelectedSize(sz === "All Sizes" ? "" : sz)}
-                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none ${
-                        isSelected
-                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
-                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
-                      }`}
-                    >
-                      {sz}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+              {/* Accordion Item: Sector & Industry */}
+              <div className="border-b border-zinc-100 pb-3">
+                <button
+                  type="button"
+                  onClick={() => toggleSection("sector")}
+                  className="w-full flex items-center justify-between text-[13.5px] font-semibold text-[#1F1F1F] hover:text-[#E7040D] transition-colors py-1 cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <Tag size={15} weight="bold" className="text-zinc-700" />
+                    <span>Sector & Industry</span>
+                  </div>
+                  {openSections.sector ? <CaretUp size={12} weight="bold" /> : <CaretDown size={12} weight="bold" />}
+                </button>
 
-            {/* 4. Tech Stack */}
-            <div>
-              <div className="flex items-center justify-between mb-2.5">
-                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
-                  <Briefcase size={15} weight="bold" className="text-zinc-500" />
-                  <span>Tech Stack</span>
-                </span>
-                {selectedLanguage && (
-                  <button
-                    type="button"
-                    onClick={() => setSelectedLanguage("")}
-                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
-                  >
-                    Clear
-                  </button>
+                {openSections.sector && (
+                  <div className="mt-2.5 space-y-2.5">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={keywordInput}
+                        onChange={(e) => setKeywordInput(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") handleApplyKeyword();
+                        }}
+                        placeholder="e.g. Fintech, Payments, Kuda..."
+                        className="flex-1 h-9 px-3 rounded-none bg-white border border-zinc-200 text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleApplyKeyword}
+                        className="h-9 px-3.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[12px] font-bold transition-all cursor-pointer shadow-2xs"
+                      >
+                        Apply
+                      </button>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {[
+                        "Payments & Financial Infrastructure",
+                        "Commercial Banking & POS Terminals",
+                        "Neobanking & Consumer Fintech",
+                        "Data, ML & AI",
+                        "Engineering & Software",
+                      ].map((sec) => {
+                        const isSelected = selectedSector === sec;
+                        return (
+                          <button
+                            key={sec}
+                            type="button"
+                            onClick={() => setSelectedSector(isSelected ? "" : sec)}
+                            className={`px-2.5 py-1 text-[11px] font-medium border transition-all cursor-pointer ${
+                              isSelected
+                                ? "bg-[#fce8e0] text-[#E7040D] border-[#E7040D] font-bold"
+                                : "bg-[#FAFAFA] text-zinc-600 border-zinc-200 hover:border-zinc-300"
+                            }`}
+                          >
+                            {sec.split("&")[0].trim()}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
                 )}
               </div>
-              <div className="flex flex-wrap gap-1.5">
-                {LANGUAGES.map((lang) => {
-                  const isSelected = selectedLanguage === lang || (!selectedLanguage && lang === "All Stacks");
-                  return (
-                    <button
-                      key={lang}
-                      type="button"
-                      onClick={() => setSelectedLanguage(lang === "All Stacks" ? "" : lang)}
-                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none ${
-                        isSelected
-                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
-                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
-                      }`}
-                    >
-                      {lang}
-                    </button>
-                  );
-                })}
+
+              {/* Accordion Item: Company Size */}
+              <div className="border-b border-zinc-100 pb-3">
+                <button
+                  type="button"
+                  onClick={() => toggleSection("size")}
+                  className="w-full flex items-center justify-between text-[13.5px] font-semibold text-[#1F1F1F] hover:text-[#E7040D] transition-colors py-1 cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <Users size={15} weight="bold" className="text-zinc-700" />
+                    <span>Company Size</span>
+                  </div>
+                  {openSections.size ? <CaretUp size={12} weight="bold" /> : <CaretDown size={12} weight="bold" />}
+                </button>
+
+                {openSections.size && (
+                  <div className="mt-2 space-y-1.5">
+                    {SIZES.filter((sz) => sz !== "All Sizes").map((sz) => {
+                      const isSelected = selectedSize === sz;
+                      return (
+                        <button
+                          key={sz}
+                          type="button"
+                          onClick={() => setSelectedSize(isSelected ? "" : sz)}
+                          className={`w-full text-left px-3 py-2 rounded-none text-[12px] font-medium transition-all flex items-center justify-between cursor-pointer ${
+                            isSelected
+                              ? "bg-[#fce8e0] text-[#E7040D] border border-[#E7040D] font-bold"
+                              : "bg-[#F9F9FB] hover:bg-[#F0F0F3] text-[#1F1F1F] border border-zinc-200/50"
+                          }`}
+                        >
+                          <span className="truncate">{sz}</span>
+                          {isSelected && <Check size={12} weight="bold" className="text-[#E7040D]" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Accordion Item: Tech Stack */}
+              <div className="border-b border-zinc-100 pb-3">
+                <button
+                  type="button"
+                  onClick={() => toggleSection("stack")}
+                  className="w-full flex items-center justify-between text-[13.5px] font-semibold text-[#1F1F1F] hover:text-[#E7040D] transition-colors py-1 cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <Briefcase size={15} weight="bold" className="text-zinc-700" />
+                    <span>Tech Stack</span>
+                  </div>
+                  {openSections.stack ? <CaretUp size={12} weight="bold" /> : <CaretDown size={12} weight="bold" />}
+                </button>
+
+                {openSections.stack && (
+                  <div className="mt-2 space-y-1.5">
+                    {LANGUAGES.filter((lang) => lang !== "All Stacks").map((lang) => {
+                      const isSelected = selectedLanguage === lang;
+                      return (
+                        <button
+                          key={lang}
+                          type="button"
+                          onClick={() => setSelectedLanguage(isSelected ? "" : lang)}
+                          className={`w-full text-left px-3 py-2 rounded-none text-[12px] font-medium transition-all flex items-center justify-between cursor-pointer ${
+                            isSelected
+                              ? "bg-[#fce8e0] text-[#E7040D] border border-[#E7040D] font-bold"
+                              : "bg-[#F9F9FB] hover:bg-[#F0F0F3] text-[#1F1F1F] border border-zinc-200/50"
+                          }`}
+                        >
+                          <span className="truncate">{lang}</span>
+                          {isSelected && <Check size={12} weight="bold" className="text-[#E7040D]" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Accordion Item: Location */}
+              <div className="border-b border-zinc-100 pb-3">
+                <button
+                  type="button"
+                  onClick={() => toggleSection("location")}
+                  className="w-full flex items-center justify-between text-[13.5px] font-semibold text-[#1F1F1F] hover:text-[#E7040D] transition-colors py-1 cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <MapPin size={15} weight="bold" className="text-zinc-700" />
+                    <span>Location</span>
+                  </div>
+                  {openSections.location ? <CaretUp size={12} weight="bold" /> : <CaretDown size={12} weight="bold" />}
+                </button>
+
+                {openSections.location && (
+                  <div className="mt-2.5 space-y-2.5">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={locationInput}
+                        onChange={(e) => setLocationInput(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") handleApplyLocation();
+                        }}
+                        placeholder="e.g. Lagos, Ogun, Remote..."
+                        className="flex-1 h-9 px-3 rounded-none bg-white border border-zinc-200 text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleApplyLocation}
+                        className="h-9 px-3.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[12px] font-bold transition-all cursor-pointer shadow-2xs"
+                      >
+                        Apply
+                      </button>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {["Lagos", "Abuja", "Ogun", "London", "Remote"].map((loc) => {
+                        const isSelected = selectedLocation.toLowerCase().includes(loc.toLowerCase());
+                        return (
+                          <button
+                            key={loc}
+                            type="button"
+                            onClick={() => {
+                              const next = isSelected ? "" : loc;
+                              setSelectedLocation(next);
+                              setLocationInput(next);
+                            }}
+                            className={`px-2.5 py-1 text-[11px] font-medium border transition-all cursor-pointer ${
+                              isSelected
+                                ? "bg-[#fce8e0] text-[#E7040D] border-[#E7040D] font-bold"
+                                : "bg-[#FAFAFA] text-zinc-600 border-zinc-200 hover:border-zinc-300"
+                            }`}
+                          >
+                            {loc}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
-          {/* Drawer Sticky Footer Action */}
-          <div className="p-4 border-t border-zinc-200/80 bg-white shrink-0">
+          {/* Drawer Pinned Bottom Action Button */}
+          <div className="p-4 border-t border-zinc-100 shrink-0 bg-white">
             <button
               type="button"
               onClick={() => {
                 setMobileFiltersOpen(false);
                 const el = document.getElementById("companies-results");
-                if (el) {
-                  el.scrollIntoView({ behavior: "smooth", block: "start" });
-                }
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
               className="w-full py-3 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.99] text-white text-[13.5px] font-bold rounded-none shadow-2xs transition-all cursor-pointer flex items-center justify-center gap-2"
             >
               <span>Show {filteredCompanies.length} {filteredCompanies.length === 1 ? "Company" : "Companies"}</span>
-              <CaretRight size={14} weight="bold" />
             </button>
           </div>
         </div>

@@ -32,6 +32,7 @@ const SUGGESTED_ROLES = [
 ];
 
 const POPULAR_LOCATIONS = [
+  "Nigeria",
   "Lagos, NG",
   "Abuja, NG",
   "Remote Africa",

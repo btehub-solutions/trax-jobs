@@ -193,7 +193,7 @@ export const PUBLISHED_TALENT_QUERY = `
     skills,
     bio,
     highlightMetric,
-    "rate": coalesce(rate, "$3,000 - $5,000 / mo"),
+    "rate": rate,
     "availability": coalesce(availability, "Open to offers"),
     preferredContactMethod,
     "contactValue": coalesce(contactValue, select(preferredContactMethod == "whatsapp" => whatsapp, email)),

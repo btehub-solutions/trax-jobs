@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { fetchPublishedJobs } from "@/sanity/fetchers";
 import { urlForImage } from "@/sanity/image";
 import { SAMPLE_JOBS } from "@/data/jobs";
+import { SAMPLE_COMPANIES } from "@/data/companies";
 import { extractText, extractParagraphs, extractStringList, resolveJobTags } from "@/lib/utils";
 import { JobsPageClient } from "./jobs-client";
 
@@ -64,6 +65,7 @@ export default async function JobsPage() {
             name: j.company?.name ?? "",
             slug: j.company?.slug ?? "",
             logo: urlForImage(j.company?.logo),
+            coverImage: urlForImage(j.company?.coverImage) || j.company?.coverImage,
             industry: j.company?.industry ?? "",
             location: j.company?.location ?? "",
             employeesCount: j.company?.employeesCount ?? "",
@@ -98,6 +100,11 @@ export default async function JobsPage() {
             name: j.company.name,
             slug: j.company.slug,
             logo: j.company.logo,
+            coverImage:
+              j.company.coverImage ||
+              SAMPLE_COMPANIES.find(
+                (c) => c.slug === j.company.slug || c.name.toLowerCase() === j.company.name.toLowerCase()
+              )?.coverImage,
             industry: j.company.industry,
             location: j.company.hq,
             employeesCount: j.company.employeesCount,

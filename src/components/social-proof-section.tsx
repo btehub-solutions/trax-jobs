@@ -117,19 +117,19 @@ export function SocialProofSection() {
 
                 {/* Inner Sticky Note Body with Generous Vertical Length */}
                 <div className="px-5 sm:px-6 pt-4 pb-7 sm:pb-8">
-                  {/* Author Header with Trax Brand Red Icon Badge */}
+                  {/* Header with Trax Brand Red Icon Badge */}
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-7 h-7 rounded-[5px] bg-[#E7040D] text-white flex items-center justify-center shrink-0 shadow-2xs">
                       <Quotes size={14} weight="fill" />
                     </div>
                     <span className="text-[14px] sm:text-[15px] font-bold tracking-tight text-zinc-950">
-                      Maria&apos;s story
+                      The Trax Standard
                     </span>
                   </div>
 
-                  {/* Elongated Quote Text with Relaxed Editorial Line Height */}
-                  <p className="text-[14.5px] sm:text-[15.5px] text-zinc-900 leading-[1.62] font-normal tracking-[-0.01em] mb-6">
-                    &ldquo;When you find a team that respects your craft, that is when belonging stops being a word and starts being something real.&rdquo;
+                  {/* Editorial Quote Text with Relaxed Editorial Line Height */}
+                  <p className="text-[14px] sm:text-[15px] text-zinc-900 leading-[1.62] font-normal tracking-[-0.01em] mb-6 italic">
+                    &ldquo;Our newsroom verifies every opening directly with founders and hiring leads across Africa before a single role goes live.&rdquo;
                   </p>
 
                   {/* Action Pill Button with Trax Red Hover Glow */}
@@ -138,7 +138,7 @@ export function SocialProofSection() {
                       href="/about"
                       className="inline-block px-5 py-2.5 rounded-full bg-black hover:bg-[#E7040D] text-white text-[12.5px] font-bold shadow-sm transition-all duration-150 active:scale-95"
                     >
-                      Read more
+                      About our review
                     </Link>
                   </div>
                 </div>

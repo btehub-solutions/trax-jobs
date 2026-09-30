@@ -21,6 +21,7 @@ export interface Job {
     name: string;
     slug: string;
     logo: string;
+    coverImage?: string;
     employeesCount: string;
     industry: string;
     hq: string;

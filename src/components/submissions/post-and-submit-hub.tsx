@@ -60,6 +60,7 @@ const WORKPLACE_TYPES = [
 ];
 
 const AFRICAN_LOCATIONS = [
+  "Nigeria",
   "Lagos, Nigeria",
   "Abuja, Nigeria",
   "Abeokuta, Ogun State",
@@ -174,11 +175,11 @@ export function PostAndSubmitHub({ initialType }: PostAndSubmitHubProps) {
 
         {/* 3-Pill Segmented Switcher */}
         <div className="flex justify-center mb-10">
-          <div className="inline-flex p-1.5 bg-white border border-zinc-200/90 shadow-2xs gap-1 max-w-full overflow-x-auto">
+          <div className="inline-flex p-1.5 bg-white border border-zinc-200/90 rounded-lg shadow-2xs gap-1 max-w-full overflow-x-auto">
             <button
               type="button"
               onClick={() => setActiveType("job")}
-              className={`flex items-center gap-2 px-5 sm:px-7 py-3 text-[13.5px] font-bold transition-all cursor-pointer select-none whitespace-nowrap ${
+              className={`flex items-center gap-2 px-5 sm:px-7 py-3 text-[13.5px] font-bold rounded-md transition-all cursor-pointer select-none whitespace-nowrap ${
                 activeType === "job"
                   ? "bg-[#E7040D] text-white shadow-xs"
                   : "text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50"
@@ -191,7 +192,7 @@ export function PostAndSubmitHub({ initialType }: PostAndSubmitHubProps) {
             <button
               type="button"
               onClick={() => setActiveType("talent")}
-              className={`flex items-center gap-2 px-5 sm:px-7 py-3 text-[13.5px] font-bold transition-all cursor-pointer select-none whitespace-nowrap ${
+              className={`flex items-center gap-2 px-5 sm:px-7 py-3 text-[13.5px] font-bold rounded-md transition-all cursor-pointer select-none whitespace-nowrap ${
                 activeType === "talent"
                   ? "bg-[#E7040D] text-white shadow-xs"
                   : "text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50"
@@ -204,7 +205,7 @@ export function PostAndSubmitHub({ initialType }: PostAndSubmitHubProps) {
             <button
               type="button"
               onClick={() => setActiveType("company")}
-              className={`flex items-center gap-2 px-5 sm:px-7 py-3 text-[13.5px] font-bold transition-all cursor-pointer select-none whitespace-nowrap ${
+              className={`flex items-center gap-2 px-5 sm:px-7 py-3 text-[13.5px] font-bold rounded-md transition-all cursor-pointer select-none whitespace-nowrap ${
                 activeType === "company"
                   ? "bg-[#E7040D] text-white shadow-xs"
                   : "text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50"
@@ -351,7 +352,7 @@ function JobStudio() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       {/* Left: 21st.dev Stepper Form */}
-      <div className="lg:col-span-7 bg-white border border-zinc-200/90 shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] p-6 sm:p-8">
+      <div className="lg:col-span-7 bg-white border border-zinc-200/90 rounded-lg shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] p-6 sm:p-8">
         
         {/* Step Indicator Header */}
         <div className="flex items-center justify-between pb-6 mb-6 border-b border-zinc-200/90">
@@ -769,7 +770,7 @@ function JobStudio() {
         </div>
 
         {/* Live Trax Job Card Replica */}
-        <div className="bg-white border border-zinc-200/90 shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] overflow-hidden transition-all">
+        <div className="bg-white border border-zinc-200/90 rounded-lg shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] overflow-hidden transition-all">
           {/* Top Banner if uploaded */}
           {coverPreview && (
             <div className="w-full h-24 relative overflow-hidden bg-zinc-950">
@@ -843,7 +844,7 @@ function JobStudio() {
         </div>
 
         {/* Advisory Note */}
-        <div className="p-3.5 bg-white border border-zinc-200 text-zinc-600 text-[12px] leading-relaxed">
+        <div className="p-3.5 bg-white border border-zinc-200 rounded-lg text-zinc-600 text-[12px] leading-relaxed">
           <p className="font-bold text-zinc-900 mb-0.5">Editorial Guarantee</p>
           Submissions with verified domains, transparent salary benchmarks, and high-resolution SVG marks receive priority publication.
         </div>
@@ -978,7 +979,7 @@ function TalentStudio() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       {/* Left Form */}
-      <div className="lg:col-span-7 bg-white border border-zinc-200/90 shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] p-6 sm:p-8">
+      <div className="lg:col-span-7 bg-white border border-zinc-200/90 rounded-lg shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] p-6 sm:p-8">
         
         {/* Step Indicator Header */}
         <div className="flex items-center justify-between pb-6 mb-6 border-b border-zinc-200/90">
@@ -1414,7 +1415,7 @@ function TalentStudio() {
         </div>
 
         {/* Live Trax Talent Card Replica */}
-        <div className="bg-white border border-zinc-200/90 shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] overflow-hidden transition-all">
+        <div className="bg-white border border-zinc-200/90 rounded-lg shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] overflow-hidden transition-all">
           <div className="w-full h-40 sm:h-44 relative overflow-hidden bg-[#FAF8F5]">
             <Image
               src="/images/trax-talent-cover-default.jpg"
@@ -1499,7 +1500,7 @@ function TalentStudio() {
         </div>
 
         {/* Advisory Note */}
-        <div className="p-3.5 bg-white border border-zinc-200 text-zinc-600 text-[12px] leading-relaxed">
+        <div className="p-3.5 bg-white border border-zinc-200 rounded-lg text-zinc-600 text-[12px] leading-relaxed">
           <p className="font-bold text-zinc-900 mb-0.5">Vetting Standards</p>
           Talent submissions undergo portfolio and experience verification before gaining public status in the Trax Talent Directory.
         </div>
@@ -1617,7 +1618,7 @@ function CompanyStudio() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       {/* Left Form */}
-      <div className="lg:col-span-7 bg-white border border-zinc-200/90 shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] p-6 sm:p-8">
+      <div className="lg:col-span-7 bg-white border border-zinc-200/90 rounded-lg shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] p-6 sm:p-8">
         
         {/* Step Indicator Header */}
         <div className="flex items-center justify-between pb-6 mb-6 border-b border-zinc-200/90">
@@ -1932,7 +1933,7 @@ function CompanyStudio() {
         </div>
 
         {/* Live Trax Company Card Replica */}
-        <div className="bg-white border border-zinc-200/90 shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] overflow-hidden transition-all">
+        <div className="bg-white border border-zinc-200/90 rounded-lg shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] overflow-hidden transition-all">
           {coverPreview && (
             <div className="w-full h-24 relative overflow-hidden bg-zinc-950">
               <Image src={coverPreview} alt="Banner" fill className="object-cover" />
@@ -2000,7 +2001,7 @@ function CompanyStudio() {
         </div>
 
         {/* Advisory Note */}
-        <div className="p-3.5 bg-white border border-zinc-200 text-zinc-600 text-[12px] leading-relaxed">
+        <div className="p-3.5 bg-white border border-zinc-200 rounded-lg text-zinc-600 text-[12px] leading-relaxed">
           <p className="font-bold text-zinc-900 mb-0.5">Corporate Verification</p>
           Registered companies receive an official Trax Verified badge and direct candidate inquiry handling.
         </div>
@@ -2014,7 +2015,7 @@ function CompanyStudio() {
 ───────────────────────────────────────────────────────────── */
 function SuccessState({ title, email, onReset }: { title: string; email: string; onReset: () => void }) {
   return (
-    <div className="py-12 px-4 text-center max-w-lg mx-auto space-y-5 bg-white border border-zinc-200/90 shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] p-8">
+    <div className="py-12 px-4 text-center max-w-lg mx-auto space-y-5 bg-white border border-zinc-200/90 rounded-lg shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] p-8">
       <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-none flex items-center justify-center mx-auto shadow-xs border border-emerald-200">
         <CheckCircle size={36} weight="fill" />
       </div>

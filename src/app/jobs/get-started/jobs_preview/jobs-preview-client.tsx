@@ -49,7 +49,21 @@ function JobsPreviewInner({ jobs }: { jobs: any[] }) {
         if (!filters.experienceLevels.includes(job.experienceLevel as ExperienceTier)) return false;
       }
       if (filters.locations.length > 0) {
-        const matchLoc = filters.locations.some((l) => job.location.toLowerCase().includes(l.toLowerCase()));
+        const matchLoc = filters.locations.some((l) => {
+          const q = l.toLowerCase();
+          const jLoc = job.location.toLowerCase();
+          if (q === "nigeria") {
+            return (
+              jLoc.includes("nigeria") ||
+              jLoc.includes("lagos") ||
+              jLoc.includes("abuja") ||
+              jLoc.includes("ogun") ||
+              jLoc.includes("abeokuta") ||
+              jLoc.includes("ibadan")
+            );
+          }
+          return jLoc.includes(q);
+        });
         if (!matchLoc) return false;
       }
       if (filters.contractTypes.length > 0) {

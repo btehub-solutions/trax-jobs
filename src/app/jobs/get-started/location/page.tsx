@@ -123,7 +123,7 @@ function LocationPreferenceContent() {
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleFindJobs();
                 }}
-                placeholder="E.g. Lagos, Ogun, Remote Nigeria, Global Remote"
+                placeholder="E.g. Nigeria, Lagos, Ogun, Remote Africa, Global Remote"
                 autoFocus
                 className="w-full h-12 px-4 rounded-none bg-[#FAFAF8] border border-zinc-200 text-[14px] font-medium text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-950 focus:bg-white transition-all"
               />

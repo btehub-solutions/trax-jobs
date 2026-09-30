@@ -47,8 +47,11 @@ export const companySubmission = defineType({
       type: "string",
       options: {
         list: [
+          { title: "Nigeria", value: "Nigeria" },
           { title: "Lagos, Nigeria", value: "Lagos, Nigeria" },
           { title: "Abuja, Nigeria", value: "Abuja, Nigeria" },
+          { title: "Abeokuta, Ogun State", value: "Abeokuta, Ogun State" },
+          { title: "Ibadan, Nigeria", value: "Ibadan, Nigeria" },
           { title: "Nairobi, Kenya", value: "Nairobi, Kenya" },
           { title: "Cape Town, South Africa", value: "Cape Town, South Africa" },
           { title: "Johannesburg, South Africa", value: "Johannesburg, South Africa" },

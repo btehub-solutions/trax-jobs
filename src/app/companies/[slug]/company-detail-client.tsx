@@ -369,18 +369,33 @@ export default function CompanyDetailClient({
                       ))}
                     </div>
                   ) : (
-                    <div className="bg-zinc-50 rounded-none border border-zinc-200 p-8 text-center space-y-3">
-                      <p className="text-[14.5px] font-bold text-zinc-900">
+                    <div className="py-16 px-4 text-center flex flex-col items-center justify-center bg-white border border-zinc-200">
+                      <div className="relative w-36 h-36 bg-[#85D4FF] rounded-sm p-3.5 shadow-[12px_18px_32px_-6px_rgba(0,100,200,0.22)] transform -rotate-2 hover:rotate-0 transition-transform duration-300 flex flex-col justify-between select-none">
+                        <div className="absolute top-0 left-0 right-0 h-3.5 bg-black/5 pointer-events-none" />
+                        <div className="w-full h-full border border-sky-400/40 rounded-sm p-2 flex flex-col items-center justify-center">
+                          <svg viewBox="0 0 100 100" fill="none" stroke="#0355D4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-16 h-16 opacity-85">
+                            <path d="M15 70h70M25 70v15M75 70v15" />
+                            <path d="M30 45h40v25H30z" />
+                            <path d="M40 70v-10h20v10" />
+                            <path d="M35 30h30v15H35z" />
+                            <path d="M45 20h10v10H45z" />
+                            <circle cx="50" cy="15" r="3" />
+                            <path d="M78 25l4 4M82 25l-4 4" strokeWidth="1.5" />
+                            <path d="M18 35l3 3M21 35l-3 3" strokeWidth="1.5" />
+                          </svg>
+                        </div>
+                      </div>
+                      <h4 className="text-[20px] sm:text-[22px] font-black text-zinc-950 mt-8 mb-2 tracking-tight">
                         No active openings listed right now
-                      </p>
-                      <p className="text-[13px] text-zinc-500 max-w-md mx-auto">
+                      </h4>
+                      <p className="text-[14px] text-zinc-600 leading-relaxed max-w-md">
                         {company.name} is not currently hiring through Trax Jobs, but new openings are reviewed and published weekly.
                       </p>
                       <button
                         onClick={() => setIsFollowed(!isFollowed)}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-white border border-zinc-300 text-zinc-900 text-[12.5px] font-bold hover:bg-zinc-100 transition-all cursor-pointer shadow-2xs"
+                        className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-zinc-300 text-zinc-900 text-[13px] font-bold hover:bg-zinc-50 hover:border-zinc-400 transition-all cursor-pointer shadow-2xs rounded-none active:scale-98"
                       >
-                        <Heart size={14} weight={isFollowed ? "fill" : "bold"} className={isFollowed ? "text-[#E7040D]" : "text-zinc-600"} />
+                        <Heart size={15} weight={isFollowed ? "fill" : "bold"} className={isFollowed ? "text-[#E7040D]" : "text-zinc-600"} />
                         <span>{isFollowed ? "Following for alerts" : "Follow for role alerts"}</span>
                       </button>
                     </div>

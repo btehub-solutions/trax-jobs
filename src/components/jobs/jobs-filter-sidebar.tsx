@@ -42,7 +42,7 @@ const CONTRACT_OPTIONS = [
 ];
 
 const QUICK_ROLES = ["Data & AI", "Engineering", "Design", "Product", "DevOps & Cloud"];
-const QUICK_LOCATIONS = ["Lagos", "Abuja", "Ogun", "Remote"];
+const QUICK_LOCATIONS = ["Nigeria", "Lagos", "Abuja", "Ogun", "Remote"];
 
 export function JobsFilterSidebar({
   filters,

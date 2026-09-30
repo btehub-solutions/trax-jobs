@@ -17,9 +17,10 @@ import {
   Faders,
   Briefcase,
   Clock,
+  CaretUp,
+  ArrowClockwise,
 } from "@phosphor-icons/react";
 import { AppHeader } from "@/components/navigation/app-header";
-import { HireTalentModal } from "@/components/talent/hire-talent-modal";
 
 export interface SanityTalentItem {
   id: string;
@@ -50,7 +51,7 @@ export interface SanityTalentItem {
 const DISCIPLINES = ["All Disciplines", "Engineering", "Design", "Product", "Data & AI", "DevOps & Cloud"];
 const EXPERIENCES = ["All Experience", "Senior (5-8 yrs)", "Lead / Staff (8+ yrs)", "Mid-level (3-5 yrs)", "Expert (10+ yrs)"];
 const AVAILABILITIES = ["All Availability", "Available immediately", "2 weeks notice", "Part-time / Contract"];
-const LOCATIONS = ["All Locations", "Nigeria", "Lagos, Nigeria", "Abuja, Nigeria", "Abeokuta, Ogun State", "Nairobi, Kenya", "Accra, Ghana", "Kigali, Rwanda", "Cape Town, South Africa", "Remote Africa"];
+const LOCATIONS = ["All Locations", "Nigeria", "Lagos, Nigeria", "Abuja, Nigeria", "Abeokuta, Ogun State", "Ibadan, Nigeria", "Nairobi, Kenya", "Accra, Ghana", "Kigali, Rwanda", "Cape Town, South Africa", "Remote Africa"];
 
 function TalentSquareMark({ item }: { item: SanityTalentItem }) {
   const [imageError, setImageError] = useState(false);
@@ -88,7 +89,6 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
   const [selectedDiscipline, setSelectedDiscipline] = useState<string>("");
   const [selectedExperience, setSelectedExperience] = useState<string>("");
   const [selectedAvailability, setSelectedAvailability] = useState<string>("");
-  const [activeHireTalent, setActiveHireTalent] = useState<SanityTalentItem | null>(null);
   const [openDropdown, setOpenDropdown] = useState<"location" | "discipline" | "experience" | "availability" | null>(null);
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -111,17 +111,50 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
     };
   }, [mobileFiltersOpen]);
 
+  const [openSections, setOpenSections] = useState({
+    discipline: true,
+    experience: true,
+    availability: false,
+    location: true,
+  });
+  const [keywordInput, setKeywordInput] = useState(searchTerm);
+  const [locationInput, setLocationInput] = useState(selectedLocation);
+
+  useEffect(() => {
+    setKeywordInput(searchTerm);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    setLocationInput(selectedLocation);
+  }, [selectedLocation]);
+
+  const toggleSection = (key: keyof typeof openSections) => {
+    setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const handleApplyKeyword = () => {
+    setSearchTerm(keywordInput.trim());
+  };
+
+  const handleApplyLocation = () => {
+    setSelectedLocation(locationInput.trim());
+  };
+
   const activeFiltersCount = useMemo(() => {
     let count = 0;
-    if (selectedLocation) count++;
-    if (selectedDiscipline) count++;
-    if (selectedExperience) count++;
-    if (selectedAvailability) count++;
+    if (searchTerm) count++;
+    if (selectedLocation && selectedLocation !== "All Locations") count++;
+    if (selectedDiscipline && selectedDiscipline !== "All Disciplines") count++;
+    if (selectedExperience && selectedExperience !== "All Experience") count++;
+    if (selectedAvailability && selectedAvailability !== "All Availability") count++;
     return count;
-  }, [selectedLocation, selectedDiscipline, selectedExperience, selectedAvailability]);
+  }, [searchTerm, selectedLocation, selectedDiscipline, selectedExperience, selectedAvailability]);
 
   const resetFilterOptions = () => {
+    setSearchTerm("");
+    setKeywordInput("");
     setSelectedLocation("");
+    setLocationInput("");
     setSelectedDiscipline("");
     setSelectedExperience("");
     setSelectedAvailability("");
@@ -592,34 +625,14 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                     </div>
                   </div>
 
-                  {/* Bottom Action Area (Generous white space, pinned Hire button on bottom right) */}
-                  <div className="pt-6 mt-auto flex items-center justify-between">
-                    <div>
-                      {item.rate ? (
-                        <span className="text-[12px] font-bold text-[#E7040D]">
-                          {item.rate}
-                        </span>
-                      ) : (
-                        <Link
-                          href={`/talent/${item.slug}`}
-                          className="text-[12px] font-semibold text-zinc-500 hover:text-[#E7040D] transition-colors"
-                        >
-                          View profile →
-                        </Link>
-                      )}
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setActiveHireTalent(item);
-                      }}
-                      className="ml-auto px-4 py-1.5 text-[12px] font-medium rounded-[4px] border border-zinc-300 bg-white text-zinc-800 hover:border-black hover:text-black transition-colors cursor-pointer select-none active:scale-95 shadow-2xs"
+                  {/* Bottom Action Area: Direct link to talent profile */}
+                  <div className="pt-6 mt-auto">
+                    <Link
+                      href={`/talent/${item.slug}`}
+                      className="block w-full py-2 rounded-none text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] active:scale-[0.98] transition-all duration-150 cursor-pointer text-center group-hover:border-[#E7040D] whitespace-nowrap"
                     >
                       Hire Talent
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -627,16 +640,44 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
           </div>
 
           {filteredTalent.length === 0 && (
-            <div className="py-16 text-center text-zinc-500 bg-white border border-zinc-200 mt-6">
-              <p className="text-[15px] font-bold text-zinc-900 mb-1">No talent matches these filters</p>
-              <p className="text-[13px] text-zinc-500 mb-4">Try clearing one or more search filters.</p>
-              <button onClick={resetFilters} className="px-4 py-2 bg-[#0C1222] text-white text-[12.5px] font-bold cursor-pointer">Reset all filters</button>
+            <div className="py-20 px-4 text-center flex flex-col items-center justify-center">
+              <div className="relative w-40 h-40 bg-[#A7F3D0] rounded-sm p-4 shadow-[12px_18px_32px_-6px_rgba(5,150,105,0.22)] transform -rotate-2 hover:rotate-0 transition-transform duration-300 flex flex-col justify-between select-none">
+                <div className="absolute top-0 left-0 right-0 h-4 bg-black/5 pointer-events-none" />
+                <div className="w-full h-full border border-emerald-500/40 rounded-sm p-2 flex flex-col items-center justify-center">
+                  <svg viewBox="0 0 100 100" fill="none" stroke="#047857" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 opacity-85">
+                    {/* Talent Profile Card / Verified Professional Badge */}
+                    <rect x="20" y="20" width="60" height="65" rx="3" />
+                    {/* User Avatar Circle */}
+                    <circle cx="50" cy="42" r="12" />
+                    {/* Shoulders */}
+                    <path d="M34 64c0-8.837 7.163-12 16-12s16 3.163 16 12" />
+                    {/* Verified Badge Checkmark */}
+                    <circle cx="68" cy="30" r="7" fill="#047857" stroke="none" />
+                    <path d="M65 30l2 2 4-4" stroke="white" strokeWidth="1.8" />
+                    {/* Skills/Meta lines */}
+                    <path d="M35 73h30" strokeWidth="2" />
+                    <path d="M42 79h16" strokeWidth="2" />
+                    {/* Decorative Sparkles */}
+                    <path d="M14 26l3 3M17 26l-3 3" strokeWidth="1.5" />
+                    <path d="M84 55l3 3M87 55l-3 3" strokeWidth="1.5" />
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-[24px] sm:text-[26px] font-black text-zinc-950 mt-10 mb-2 tracking-tight">No talent in sight</h3>
+              <p className="text-[14.5px] sm:text-[15.5px] text-zinc-600 leading-relaxed max-w-md">No vetted professionals match these filters right now.</p>
+              <p className="text-[14.5px] sm:text-[15.5px] text-zinc-600 leading-relaxed max-w-md mt-0.5">Try clearing one or more filters to explore available talent.</p>
+              <button
+                onClick={resetFilters}
+                className="mt-6 px-6 py-2.5 bg-[#0C1222] hover:bg-[#E7040D] text-white text-[13px] font-bold rounded-none transition-colors cursor-pointer shadow-xs active:scale-98"
+              >
+                Reset all filters
+              </button>
             </div>
           )}
         </div>
       </main>
 
-      {/* Mobile Filter Drawer (Pattern 1: Clean Slide-Over Sheet) */}
+      {/* Mobile Filter Drawer (Replicated from Job Filter UI) */}
       <div
         className={`fixed inset-0 z-50 md:hidden flex justify-end transition-opacity duration-300 ${
           mobileFiltersOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -648,20 +689,19 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
           aria-hidden="true"
         />
         <div
-          className={`relative w-full max-w-[380px] h-full bg-white z-10 shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out overscroll-contain ${
+          className={`relative w-full max-w-[400px] h-full bg-white z-10 shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out overscroll-contain ${
             mobileFiltersOpen ? "translate-x-0" : "translate-x-full"
           }`}
           role="dialog"
           aria-modal="true"
           aria-label="Filter Vetted Talent"
         >
-          {/* Drawer Header */}
-          <div className="flex items-center justify-between px-5 h-16 border-b border-zinc-200/80 shrink-0 bg-white">
+          {/* Drawer Pinned Top Header */}
+          <div className="flex items-center justify-between pb-3 px-5 pt-4 border-b border-zinc-100 shrink-0 bg-white">
             <div className="flex items-center gap-2">
-              <Faders size={18} weight="bold" className="text-[#E7040D]" />
-              <h2 className="text-[17px] font-black text-[#1F1F1F] tracking-tight">Filters</h2>
+              <h2 className="text-[14px] font-bold text-[#1F1F1F]">Filters</h2>
               {activeFiltersCount > 0 && (
-                <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full bg-[#E7040D] text-white text-[11px] font-extrabold">
+                <span className="text-[11px] font-bold text-zinc-500 bg-zinc-100 px-2 py-0.5 rounded-full">
                   {activeFiltersCount}
                 </span>
               )}
@@ -672,15 +712,16 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                 <button
                   type="button"
                   onClick={resetFilterOptions}
-                  className="text-[12px] font-bold text-[#E7040D] hover:underline cursor-pointer"
+                  className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#E7040D] hover:underline cursor-pointer"
                 >
-                  Reset all
+                  <ArrowClockwise size={13} weight="bold" />
+                  <span>Reset all</span>
                 </button>
               )}
               <button
                 type="button"
                 onClick={() => setMobileFiltersOpen(false)}
-                className="w-9 h-9 -mr-1.5 flex items-center justify-center text-zinc-600 hover:text-zinc-950 active:scale-95 transition-all cursor-pointer rounded-none border border-zinc-200"
+                className="p-1 -mr-1 rounded-lg text-zinc-500 hover:text-zinc-950 hover:bg-zinc-100 transition-colors cursor-pointer"
                 aria-label="Close filters"
               >
                 <X size={18} weight="bold" />
@@ -688,163 +729,316 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
             </div>
           </div>
 
-          {/* Drawer Body - Scrollable Filters */}
-          <div className="flex-1 overflow-y-auto p-5 space-y-6">
-            {/* 1. Location */}
-            <div>
-              <div className="flex items-center justify-between mb-2.5">
-                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
-                  <MapPin size={15} weight="bold" className="text-zinc-500" />
-                  <span>Location</span>
-                </span>
-                {selectedLocation && (
+          {/* Drawer Body - Scrollable Area */}
+          <div className="flex-1 overflow-y-auto p-5 space-y-5 custom-scrollbar">
+            {/* 1. "Active preferences" Dark Navy Card */}
+            <div className="bg-[#0C1222] border border-[#0C1222] rounded-none p-4 space-y-2.5 shadow-xs">
+              <div className="flex items-center justify-between">
+                <h3 className="text-[13.5px] font-bold text-white tracking-tight">
+                  Active preferences
+                </h3>
+                {activeFiltersCount > 0 && (
                   <button
                     type="button"
-                    onClick={() => setSelectedLocation("")}
-                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
+                    onClick={resetFilterOptions}
+                    className="text-[11px] font-bold text-[#FF4D55] hover:text-white hover:underline transition-colors cursor-pointer"
                   >
-                    Clear
+                    Clear all
                   </button>
                 )}
               </div>
-              <div className="flex flex-wrap gap-1.5">
-                {LOCATIONS.map((loc) => {
-                  const isSelected = selectedLocation === loc || (!selectedLocation && loc === "All Locations");
-                  return (
-                    <button
-                      key={loc}
-                      type="button"
-                      onClick={() => setSelectedLocation(loc === "All Locations" ? "" : loc)}
-                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none ${
-                        isSelected
-                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
-                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
-                      }`}
-                    >
-                      {loc}
-                    </button>
-                  );
-                })}
-              </div>
+
+              {activeFiltersCount > 0 ? (
+                <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                  {searchTerm && (
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                      <Briefcase size={12} weight="bold" className="text-[#E7040D] shrink-0" />
+                      <span className="truncate max-w-[120px]">{searchTerm}</span>
+                      <button
+                        onClick={() => {
+                          setSearchTerm("");
+                          setKeywordInput("");
+                        }}
+                        className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
+                        aria-label="Remove search filter"
+                      >
+                        <X size={11} weight="bold" />
+                      </button>
+                    </div>
+                  )}
+
+                  {selectedDiscipline && selectedDiscipline !== "All Disciplines" && (
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                      <span>{selectedDiscipline}</span>
+                      <button
+                        onClick={() => setSelectedDiscipline("")}
+                        className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
+                        aria-label="Remove discipline filter"
+                      >
+                        <X size={11} weight="bold" />
+                      </button>
+                    </div>
+                  )}
+
+                  {selectedExperience && selectedExperience !== "All Experience" && (
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                      <span>{selectedExperience.split(" ")[0]}</span>
+                      <button
+                        onClick={() => setSelectedExperience("")}
+                        className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
+                        aria-label="Remove experience filter"
+                      >
+                        <X size={11} weight="bold" />
+                      </button>
+                    </div>
+                  )}
+
+                  {selectedAvailability && selectedAvailability !== "All Availability" && (
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                      <Clock size={12} weight="bold" className="text-[#E7040D] shrink-0" />
+                      <span>{selectedAvailability}</span>
+                      <button
+                        onClick={() => setSelectedAvailability("")}
+                        className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
+                        aria-label="Remove availability filter"
+                      >
+                        <X size={11} weight="bold" />
+                      </button>
+                    </div>
+                  )}
+
+                  {selectedLocation && selectedLocation !== "All Locations" && (
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                      <MapPin size={12} weight="bold" className="text-[#E7040D] shrink-0" />
+                      <span>{selectedLocation}</span>
+                      <button
+                        onClick={() => {
+                          setSelectedLocation("");
+                          setLocationInput("");
+                        }}
+                        className="text-zinc-400 hover:text-[#E7040D] ml-0.5 cursor-pointer transition-colors"
+                        aria-label="Remove location filter"
+                      >
+                        <X size={11} weight="bold" />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <p className="text-[12px] text-white/70 leading-relaxed py-1">
+                  No filters applied. Select from the criteria below to filter open roles.
+                </p>
+              )}
             </div>
 
-            {/* 2. Discipline */}
-            <div>
-              <div className="flex items-center justify-between mb-2.5">
-                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
-                  <Tag size={15} weight="bold" className="text-zinc-500" />
-                  <span>Discipline</span>
-                </span>
-                {selectedDiscipline && (
-                  <button
-                    type="button"
-                    onClick={() => setSelectedDiscipline("")}
-                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
-                  >
-                    Clear
-                  </button>
-                )}
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {DISCIPLINES.map((disc) => {
-                  const isSelected = selectedDiscipline === disc || (!selectedDiscipline && disc === "All Disciplines");
-                  return (
-                    <button
-                      key={disc}
-                      type="button"
-                      onClick={() => setSelectedDiscipline(disc === "All Disciplines" ? "" : disc)}
-                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none text-left ${
-                        isSelected
-                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
-                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
-                      }`}
-                    >
-                      {disc}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            {/* 2. "Edit preferences" Accordion List */}
+            <div className="space-y-3.5 pt-1">
+              <h4 className="text-[13.5px] font-bold text-[#1F1F1F]">
+                Edit preferences
+              </h4>
 
-            {/* 3. Experience */}
-            <div>
-              <div className="flex items-center justify-between mb-2.5">
-                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
-                  <Briefcase size={15} weight="bold" className="text-zinc-500" />
-                  <span>Experience Level</span>
-                </span>
-                {selectedExperience && (
-                  <button
-                    type="button"
-                    onClick={() => setSelectedExperience("")}
-                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
-                  >
-                    Clear
-                  </button>
-                )}
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {EXPERIENCES.map((exp) => {
-                  const isSelected = selectedExperience === exp || (!selectedExperience && exp === "All Experience");
-                  return (
-                    <button
-                      key={exp}
-                      type="button"
-                      onClick={() => setSelectedExperience(exp === "All Experience" ? "" : exp)}
-                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none ${
-                        isSelected
-                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
-                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
-                      }`}
-                    >
-                      {exp}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+              {/* Accordion Item: Role & Title */}
+              <div className="border-b border-zinc-100 pb-3">
+                <button
+                  type="button"
+                  onClick={() => toggleSection("discipline")}
+                  className="w-full flex items-center justify-between text-[13.5px] font-semibold text-[#1F1F1F] hover:text-[#E7040D] transition-colors py-1 cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <Briefcase size={15} weight="bold" className="text-zinc-700" />
+                    <span>Role & Title</span>
+                  </div>
+                  {openSections.discipline ? <CaretUp size={12} weight="bold" /> : <CaretDown size={12} weight="bold" />}
+                </button>
 
-            {/* 4. Availability */}
-            <div>
-              <div className="flex items-center justify-between mb-2.5">
-                <span className="text-[12.5px] font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
-                  <Clock size={15} weight="bold" className="text-zinc-500" />
-                  <span>Availability</span>
-                </span>
-                {selectedAvailability && (
-                  <button
-                    type="button"
-                    onClick={() => setSelectedAvailability("")}
-                    className="text-[11.5px] font-semibold text-zinc-400 hover:text-[#E7040D] cursor-pointer"
-                  >
-                    Clear
-                  </button>
+                {openSections.discipline && (
+                  <div className="mt-2.5 space-y-2.5">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={keywordInput}
+                        onChange={(e) => setKeywordInput(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") handleApplyKeyword();
+                        }}
+                        placeholder="e.g. AI Engineer, Product..."
+                        className="flex-1 h-9 px-3 rounded-none bg-white border border-zinc-200 text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleApplyKeyword}
+                        className="h-9 px-3.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[12px] font-bold transition-all cursor-pointer shadow-2xs"
+                      >
+                        Apply
+                      </button>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {DISCIPLINES.filter((d) => d !== "All Disciplines").map((disc) => {
+                        const isSelected = selectedDiscipline === disc;
+                        return (
+                          <button
+                            key={disc}
+                            type="button"
+                            onClick={() => setSelectedDiscipline(isSelected ? "" : disc)}
+                            className={`px-2.5 py-1 text-[11px] font-medium border transition-all cursor-pointer ${
+                              isSelected
+                                ? "bg-[#fce8e0] text-[#E7040D] border-[#E7040D] font-bold"
+                                : "bg-[#FAFAFA] text-zinc-600 border-zinc-200 hover:border-zinc-300"
+                            }`}
+                          >
+                            {disc}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
                 )}
               </div>
-              <div className="flex flex-wrap gap-1.5">
-                {AVAILABILITIES.map((avail) => {
-                  const isSelected = selectedAvailability === avail || (!selectedAvailability && avail === "All Availability");
-                  return (
-                    <button
-                      key={avail}
-                      type="button"
-                      onClick={() => setSelectedAvailability(avail === "All Availability" ? "" : avail)}
-                      className={`px-3 py-1.5 rounded-none text-[12px] font-semibold border transition-all cursor-pointer select-none ${
-                        isSelected
-                          ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D] font-bold shadow-2xs"
-                          : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
-                      }`}
-                    >
-                      {avail}
-                    </button>
-                  );
-                })}
+
+              {/* Accordion Item: Experience Level */}
+              <div className="border-b border-zinc-100 pb-3">
+                <button
+                  type="button"
+                  onClick={() => toggleSection("experience")}
+                  className="w-full flex items-center justify-between text-[13.5px] font-semibold text-[#1F1F1F] hover:text-[#E7040D] transition-colors py-1 cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <Briefcase size={15} weight="bold" className="text-zinc-700" />
+                    <span>Experience level</span>
+                  </div>
+                  {openSections.experience ? <CaretUp size={12} weight="bold" /> : <CaretDown size={12} weight="bold" />}
+                </button>
+
+                {openSections.experience && (
+                  <div className="mt-2 space-y-1.5">
+                    {EXPERIENCES.filter((exp) => exp !== "All Experience").map((exp) => {
+                      const isSelected = selectedExperience === exp;
+                      return (
+                        <button
+                          key={exp}
+                          type="button"
+                          onClick={() => setSelectedExperience(isSelected ? "" : exp)}
+                          className={`w-full text-left px-3 py-2 rounded-none text-[12px] font-medium transition-all flex items-center justify-between cursor-pointer ${
+                            isSelected
+                              ? "bg-[#fce8e0] text-[#E7040D] border border-[#E7040D] font-bold"
+                              : "bg-[#F9F9FB] hover:bg-[#F0F0F3] text-[#1F1F1F] border border-zinc-200/50"
+                          }`}
+                        >
+                          <span className="truncate">{exp}</span>
+                          {isSelected && <Check size={12} weight="bold" className="text-[#E7040D]" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Accordion Item: Availability */}
+              <div className="border-b border-zinc-100 pb-3">
+                <button
+                  type="button"
+                  onClick={() => toggleSection("availability")}
+                  className="w-full flex items-center justify-between text-[13.5px] font-semibold text-[#1F1F1F] hover:text-[#E7040D] transition-colors py-1 cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <Clock size={15} weight="bold" className="text-zinc-700" />
+                    <span>Availability</span>
+                  </div>
+                  {openSections.availability ? <CaretUp size={12} weight="bold" /> : <CaretDown size={12} weight="bold" />}
+                </button>
+
+                {openSections.availability && (
+                  <div className="mt-2 space-y-1.5">
+                    {AVAILABILITIES.filter((avail) => avail !== "All Availability").map((avail) => {
+                      const isSelected = selectedAvailability === avail;
+                      return (
+                        <button
+                          key={avail}
+                          type="button"
+                          onClick={() => setSelectedAvailability(isSelected ? "" : avail)}
+                          className={`w-full text-left px-3 py-2 rounded-none text-[12px] font-medium transition-all flex items-center justify-between cursor-pointer ${
+                            isSelected
+                              ? "bg-[#fce8e0] text-[#E7040D] border border-[#E7040D] font-bold"
+                              : "bg-[#F9F9FB] hover:bg-[#F0F0F3] text-[#1F1F1F] border border-zinc-200/50"
+                          }`}
+                        >
+                          <span className="truncate">{avail}</span>
+                          {isSelected && <Check size={12} weight="bold" className="text-[#E7040D]" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Accordion Item: Location */}
+              <div className="border-b border-zinc-100 pb-3">
+                <button
+                  type="button"
+                  onClick={() => toggleSection("location")}
+                  className="w-full flex items-center justify-between text-[13.5px] font-semibold text-[#1F1F1F] hover:text-[#E7040D] transition-colors py-1 cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <MapPin size={15} weight="bold" className="text-zinc-700" />
+                    <span>Location</span>
+                  </div>
+                  {openSections.location ? <CaretUp size={12} weight="bold" /> : <CaretDown size={12} weight="bold" />}
+                </button>
+
+                {openSections.location && (
+                  <div className="mt-2.5 space-y-2.5">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={locationInput}
+                        onChange={(e) => setLocationInput(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") handleApplyLocation();
+                        }}
+                        placeholder="e.g. Lagos, Ogun, Remote..."
+                        className="flex-1 h-9 px-3 rounded-none bg-white border border-zinc-200 text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleApplyLocation}
+                        className="h-9 px-3.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[12px] font-bold transition-all cursor-pointer shadow-2xs"
+                      >
+                        Apply
+                      </button>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {["Lagos", "Abuja", "Ogun", "Remote"].map((loc) => {
+                        const isSelected = selectedLocation.toLowerCase().includes(loc.toLowerCase());
+                        return (
+                          <button
+                            key={loc}
+                            type="button"
+                            onClick={() => {
+                              const next = isSelected ? "" : loc;
+                              setSelectedLocation(next);
+                              setLocationInput(next);
+                            }}
+                            className={`px-2.5 py-1 text-[11px] font-medium border transition-all cursor-pointer ${
+                              isSelected
+                                ? "bg-[#fce8e0] text-[#E7040D] border-[#E7040D] font-bold"
+                                : "bg-[#FAFAFA] text-zinc-600 border-zinc-200 hover:border-zinc-300"
+                            }`}
+                          >
+                            {loc}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
-          {/* Drawer Sticky Footer Action */}
-          <div className="p-4 border-t border-zinc-200/80 bg-white shrink-0">
+          {/* Drawer Pinned Bottom Action Button */}
+          <div className="p-4 border-t border-zinc-100 shrink-0 bg-white">
             <button
               type="button"
               onClick={() => {
@@ -855,13 +1049,10 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
               className="w-full py-3 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.99] text-white text-[13.5px] font-bold rounded-none shadow-2xs transition-all cursor-pointer flex items-center justify-center gap-2"
             >
               <span>Show {filteredTalent.length} {filteredTalent.length === 1 ? "Profile" : "Profiles"}</span>
-              <CaretRight size={14} weight="bold" />
             </button>
           </div>
         </div>
       </div>
-
-      <HireTalentModal talent={activeHireTalent as any} onClose={() => setActiveHireTalent(null)} />
     </div>
   );
 }
