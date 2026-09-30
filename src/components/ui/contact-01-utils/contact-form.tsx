@@ -104,7 +104,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
   };
 
   return (
-    <div className="bg-white border border-zinc-200/90 rounded-none p-5 sm:p-8 md:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.03)]">
+    <div className="bg-white border border-zinc-200/90 rounded-lg p-5 sm:p-8 md:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.03)]">
       {submitted ? (
         <div className="py-12 text-center space-y-4">
           <CheckCircle size={48} weight="fill" className="text-[#E7040D] mx-auto" />

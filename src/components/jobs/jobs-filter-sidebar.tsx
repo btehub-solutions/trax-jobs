@@ -151,7 +151,7 @@ export function JobsFilterSidebar({
 
   return (
     <aside className={className || "w-full lg:w-[395px] shrink-0 sticky top-24 self-start"}>
-      <div className={`bg-white rounded-none p-5 flex flex-col justify-between ${onCloseMobile ? "h-full max-h-full border-0 shadow-none" : "border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] max-h-[calc(100vh-120px)]"}`}>
+      <div className={`bg-white rounded-lg p-5 flex flex-col justify-between ${onCloseMobile ? "h-full max-h-full border-0 shadow-none" : "border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] max-h-[calc(100vh-120px)]"}`}>
         {/* Pinned Top Header: "Filter" */}
         <div className="flex items-center justify-between pb-3 border-b border-zinc-100 shrink-0">
           <div className="flex items-center gap-2">
@@ -189,7 +189,7 @@ export function JobsFilterSidebar({
         {/* Scrollable Middle Body Area */}
         <div className="flex-1 overflow-y-auto py-3 pr-1.5 space-y-5 custom-scrollbar">
           {/* 1. "Your Preferences" Container: Matches Footer Navy Theme */}
-          <div className="bg-[#0C1222] border border-[#0C1222] rounded-none p-4 space-y-2.5 shadow-xs">
+          <div className="bg-[#0C1222] border border-[#0C1222] rounded-md p-4 space-y-2.5 shadow-xs">
             <div className="flex items-center justify-between">
               <h3 className="text-[13.5px] font-bold text-white tracking-tight">
                 Active preferences
@@ -582,7 +582,7 @@ export function JobsFilterSidebar({
           <button
             type="button"
             onClick={handleApplyInputs}
-            className={`flex-1 py-2.5 rounded-none text-white text-[13px] font-bold shadow-2xs transition-all duration-150 cursor-pointer text-center flex items-center justify-center gap-1.5 active:scale-[0.98] ${
+            className={`flex-1 py-2.5 rounded-md text-white text-[13px] font-bold shadow-2xs transition-all duration-150 cursor-pointer text-center flex items-center justify-center gap-1.5 active:scale-[0.98] ${
               appliedFlash
                 ? "bg-emerald-600 hover:bg-emerald-700"
                 : "bg-[#E7040D] hover:bg-[#CB030B]"
@@ -607,7 +607,7 @@ export function JobsFilterSidebar({
             <button
               type="button"
               onClick={handleResetAll}
-              className="px-4 py-2.5 rounded-none bg-zinc-100 hover:bg-zinc-200 active:scale-95 text-zinc-700 text-[13px] font-semibold transition-all cursor-pointer text-center"
+              className="px-4 py-2.5 rounded-md bg-zinc-100 hover:bg-zinc-200 active:scale-95 text-zinc-700 text-[13px] font-semibold transition-all cursor-pointer text-center"
             >
               Reset
             </button>

@@ -504,7 +504,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
       <AppHeader activeTab="companies">
         {/* Mobile Sticky Search Bar (Pattern 1: Unified compact bar with inline Filters button) */}
         <div className="block md:hidden">
-          <div className="bg-white rounded-none border border-zinc-200/90 shadow-2xs flex items-center gap-2 p-1.5 pl-3">
+          <div className="bg-white rounded-lg border border-zinc-200/90 shadow-2xs flex items-center gap-2 p-1.5 pl-3">
             <MagnifyingGlass size={17} weight="bold" className="text-zinc-400 shrink-0" />
             <input
               type="text"
@@ -526,7 +526,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
             <button
               type="button"
               onClick={() => setMobileFiltersOpen(true)}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none text-[12px] font-bold border transition-all cursor-pointer shrink-0 select-none ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-bold border transition-all cursor-pointer shrink-0 select-none ${
                 activeFiltersCount > 0
                   ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D]"
                   : "bg-zinc-50 border-zinc-200 text-zinc-800 hover:bg-zinc-100"
@@ -547,7 +547,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
         {/* Desktop Full Horizontal Search/Filter Bar */}
         <div
           ref={searchBarRef}
-          className="hidden md:flex flex-row items-stretch bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] relative z-40"
+          className="hidden md:flex flex-row items-stretch bg-white rounded-lg border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] relative z-40 overflow-hidden"
         >
           {/* Keyword Input */}
           <div className="flex-1 flex items-center gap-3 px-4 py-3 border-r border-zinc-200/80">

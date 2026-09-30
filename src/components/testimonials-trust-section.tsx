@@ -124,7 +124,7 @@ export function TestimonialsTrustSection() {
           {[...TESTIMONIALS, ...TESTIMONIALS].map((t, idx) => (
             <div
               key={idx}
-              className="w-[310px] sm:w-[350px] shrink-0 bg-white rounded-none border border-zinc-200/80 shadow-[0_8px_24px_-4px_rgba(15,16,18,0.05)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.1)] hover:-translate-y-1 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between group cursor-grab active:cursor-grabbing"
+              className="w-[310px] sm:w-[350px] shrink-0 bg-white rounded-lg border border-zinc-200/80 shadow-[0_8px_24px_-4px_rgba(15,16,18,0.05)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.1)] hover:-translate-y-1 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between group cursor-grab active:cursor-grabbing"
             >
               {/* User Identity & Avatar */}
               <div>
