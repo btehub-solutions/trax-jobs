@@ -133,9 +133,9 @@ export function CareerGuidesSection({ guides }: CareerGuidesSectionProps = {}) {
           })}
         </div>
 
-        {/* Visual Guide Cards: Mobile Peek Carousel (80vw) & Desktop Grid (max-w-[880px]) */}
+        {/* Visual Guide Cards: Mobile Carousel & Desktop Grid (max-w-[880px]) */}
         <div
-          className="flex sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 overflow-x-auto sm:overflow-visible no-scrollbar snap-x snap-mandatory pb-5 sm:pb-0 -mx-6 px-6 sm:mx-0 sm:px-0 max-w-[880px]"
+          className="flex sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 overflow-x-auto sm:overflow-visible no-scrollbar snap-x snap-mandatory pb-6 sm:pb-0 pt-1 -mx-6 px-6 sm:mx-0 sm:px-0 max-w-[880px] scroll-px-6 sm:scroll-px-0"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {visibleGuides.map((guide) => {
@@ -146,7 +146,7 @@ export function CareerGuidesSection({ guides }: CareerGuidesSectionProps = {}) {
               <Link
                 key={guide.slug}
                 href={`/guides/${guide.slug}`}
-                className="w-[80vw] max-w-[300px] sm:w-full sm:max-w-[280px] shrink-0 snap-start bg-white rounded-none border border-zinc-200/90 overflow-hidden shadow-[0_4px_16px_-4px_rgba(15,16,18,0.06)] hover:shadow-[0_16px_32px_-6px_rgba(231,4,13,0.12)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col group cursor-pointer"
+                className="w-[280px] sm:w-full sm:max-w-[280px] shrink-0 snap-start bg-white rounded-none border border-zinc-200/90 overflow-hidden shadow-[0_4px_16px_-4px_rgba(15,16,18,0.06)] hover:shadow-[0_16px_32px_-6px_rgba(231,4,13,0.12)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col group cursor-pointer"
               >
                 {/* Image Container with editorial portrait framing and square edges */}
                 <div className="relative h-[260px] sm:h-[280px] md:h-[300px] w-full bg-zinc-100 overflow-hidden rounded-none">

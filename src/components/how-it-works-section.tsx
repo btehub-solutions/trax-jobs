@@ -144,13 +144,13 @@ export function HowItWorksSection() {
         {/* 3 Cards Grid / Mobile Carousel */}
         <div
           ref={carouselRef}
-          className="flex md:grid md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 overflow-x-auto md:overflow-visible no-scrollbar snap-x snap-mandatory pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0"
+          className="flex md:grid md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 overflow-x-auto md:overflow-visible no-scrollbar snap-x snap-mandatory pb-6 md:pb-0 pt-1 -mx-6 sm:-mx-10 px-6 sm:px-10 md:mx-0 md:px-0 scroll-px-6 sm:scroll-px-10 md:scroll-px-0"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {steps.map((step) => (
             <div
               key={step.id}
-              className="flex flex-col group shrink-0 snap-start w-[84vw] max-w-[340px] md:w-auto"
+              className="flex flex-col group shrink-0 snap-start w-[280px] sm:w-[300px] md:w-auto"
             >
               {/* Media Card Container (Clickable to target page) */}
               <Link

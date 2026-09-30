@@ -34,7 +34,7 @@ export function ExperienceSection({ counts: propCounts, jobs }: ExperienceSectio
         </div>
 
         {/* Mobile Single-Line Carousel / Desktop 6-Column Grid */}
-        <div className="flex sm:grid sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5 overflow-x-auto sm:overflow-visible no-scrollbar snap-x snap-mandatory pb-4 sm:pb-0 -mx-6 px-6 sm:mx-0 sm:px-0">
+        <div className="flex sm:grid sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5 overflow-x-auto sm:overflow-visible no-scrollbar snap-x snap-mandatory pb-6 sm:pb-0 pt-1 -mx-6 px-6 sm:mx-0 sm:px-0 scroll-px-6 sm:scroll-px-0">
           {EXPERIENCE_LEVEL_CARDS.map((level) => {
             const count = effectiveCounts[level.id] ?? 0;
 
@@ -42,7 +42,7 @@ export function ExperienceSection({ counts: propCounts, jobs }: ExperienceSectio
               <Link
                 key={level.id}
                 href={level.href}
-                className="group relative shrink-0 snap-start w-[260px] xs:w-[280px] sm:w-auto h-[440px] sm:h-[390px] lg:h-[420px] overflow-hidden bg-zinc-100 flex flex-col justify-end shadow-xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5"
+                className="group relative shrink-0 snap-start w-[280px] sm:w-auto h-[440px] sm:h-[390px] lg:h-[420px] overflow-hidden bg-zinc-100 flex flex-col justify-end shadow-xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5"
               >
                 {/* Studio Portrait Image */}
                 <Image

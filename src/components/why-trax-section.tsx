@@ -146,7 +146,7 @@ export function WhyTraxSection() {
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 sm:mb-16 lg:mb-20">
           <div className="max-w-2xl">
             <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] font-black tracking-[-0.025em] text-[#1F1F1F] leading-[1.18]">
-              We are here for every step of your search
+              Finally, a job that works for you
             </h2>
             <p className="text-[15px] sm:text-[16.5px] text-zinc-600 leading-[1.7] mt-3">
               Trax curates every listing, every company profile, and every talent card on this platform. When you find something here, it has earned its place.

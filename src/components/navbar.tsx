@@ -9,7 +9,6 @@ import {
   List,
   X,
   MagnifyingGlass,
-  ArrowRight,
 } from "@phosphor-icons/react";
 
 const desktopNavLinks = [
@@ -382,46 +381,19 @@ export function Navbar({
             </div>
           </div>
 
-          {/* Editorial Talent Promo Banner (Option A: Curated Horizontal Split) */}
+          {/* Trax Talent Network Banner */}
           <Link
             href="/about?tab=post-and-submit&type=talent"
             onClick={() => setMobileMenuOpen(false)}
-            className="group block bg-[#fdf2ee] border border-[#fce8e0] hover:border-[#f9cbb9] transition-all overflow-hidden shadow-2xs"
+            className="group block relative w-full aspect-[16/9] overflow-hidden rounded-none border border-zinc-200/90 shadow-2xs hover:shadow-md transition-all active:scale-[0.99] bg-[#FAF8F5]"
           >
-            <div className="flex items-stretch justify-between">
-              {/* Left Column: Dedicated Editorial Copy */}
-              <div className="flex-1 p-4 sm:p-5 flex flex-col justify-between">
-                <div>
-                  <span className="inline-block text-[10px] font-black uppercase tracking-[0.1em] text-[#E7040D] mb-1.5">
-                    TRAX TALENT NETWORK
-                  </span>
-                  <h4 className="text-[14.5px] font-extrabold text-[#161616] leading-snug tracking-tight mb-1">
-                    Get Discovered by Top Startups
-                  </h4>
-                  <p className="text-[11.5px] text-zinc-600 leading-relaxed font-normal line-clamp-2">
-                    Join the curated roster of vetted African engineers, designers, and operators.
-                  </p>
-                </div>
-
-                <div className="pt-3">
-                  <span className="inline-flex items-center gap-1 text-[12px] font-bold text-[#E7040D] group-hover:text-[#CB030B] transition-colors">
-                    Submit Your Profile
-                    <ArrowRight size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
-                  </span>
-                </div>
-              </div>
-
-              {/* Right Column: Cleanly Framed Portrait Photo */}
-              <div className="w-[115px] sm:w-[130px] relative shrink-0 overflow-hidden bg-[#FAF8F5]">
-                <Image
-                  src="/images/trax-talent-promo.jpg"
-                  alt="African Tech Professional on Trax Roster"
-                  fill
-                  sizes="130px"
-                  className="object-cover object-[25%_15%] group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-            </div>
+            <Image
+              src="/images/trax-talent-network-banner.jpg"
+              alt="Trax Talent Network - Get Discovered by Top Startups"
+              fill
+              sizes="(max-width: 768px) 100vw, 360px"
+              className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
+            />
           </Link>
         </div>
 
