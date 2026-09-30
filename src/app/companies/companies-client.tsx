@@ -937,7 +937,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
           aria-hidden="true"
         />
         <div
-          className={`relative w-full max-w-[400px] h-full bg-white z-10 shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out overscroll-contain ${
+          className={`relative w-full max-w-[400px] h-full bg-white z-10 shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out overscroll-contain rounded-l-lg overflow-hidden ${
             mobileFiltersOpen ? "translate-x-0" : "translate-x-full"
           }`}
           role="dialog"
@@ -980,7 +980,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
           {/* Drawer Body - Scrollable Area */}
           <div className="flex-1 overflow-y-auto p-5 space-y-5 custom-scrollbar">
             {/* 1. "Active preferences" Dark Navy Card */}
-            <div className="bg-[#0C1222] border border-[#0C1222] rounded-none p-4 space-y-2.5 shadow-xs">
+            <div className="bg-[#0C1222] border border-[#0C1222] rounded-md p-4 space-y-2.5 shadow-xs">
               <div className="flex items-center justify-between">
                 <h3 className="text-[13.5px] font-bold text-white tracking-tight">
                   Active preferences
@@ -1299,7 +1299,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                 const el = document.getElementById("companies-results");
                 if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className="w-full py-3 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.99] text-white text-[13.5px] font-bold rounded-none shadow-2xs transition-all cursor-pointer flex items-center justify-center gap-2"
+              className="w-full py-3 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.99] text-white text-[13.5px] font-bold rounded-md shadow-2xs transition-all cursor-pointer flex items-center justify-center gap-2"
             >
               <span>Show {filteredCompanies.length} {filteredCompanies.length === 1 ? "Company" : "Companies"}</span>
             </button>

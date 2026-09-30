@@ -162,16 +162,7 @@ export function PostAndSubmitHub({ initialType }: PostAndSubmitHubProps) {
   return (
     <div className="w-full bg-[#FAF8F5] py-10 sm:py-16">
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Editorial Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-[#1F1F1F] tracking-[-0.025em] leading-[1.15] mb-3.5">
-            Editorial Submission Studio
-          </h2>
-          <p className="text-[15px] sm:text-[16px] text-zinc-600 leading-[1.7] max-w-2xl mx-auto">
-            Every listing on Trax Jobs is manually vetted by our editorial team within 24 hours. Compose and proof your submission live before sending to the editorial review queue.
-          </p>
-        </div>
+
 
         {/* 3-Pill Segmented Switcher */}
         <div className="flex justify-center mb-10">

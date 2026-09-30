@@ -399,7 +399,7 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
           aria-hidden="true"
         />
         <div
-          className={`relative w-full max-w-[400px] h-full bg-white z-10 shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out overscroll-contain ${
+          className={`relative w-full max-w-[400px] h-full bg-white z-10 shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out overscroll-contain rounded-l-lg overflow-hidden ${
             mobileFiltersOpen ? "translate-x-0" : "translate-x-full"
           }`}
           role="dialog"
