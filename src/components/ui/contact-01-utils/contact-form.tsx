@@ -157,7 +157,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
                 setMessage("");
                 setAgreed(false);
               }}
-              className="w-full sm:w-auto px-6 py-2.5 bg-[#1F1F1F] hover:bg-[#E7040D] text-white text-[13px] font-bold transition-all rounded-sm cursor-pointer shadow-xs active:scale-[0.98]"
+              className="w-full sm:w-auto px-6 py-2.5 bg-[#1F1F1F] hover:bg-[#E7040D] text-white text-[13px] font-bold transition-all rounded-lg cursor-pointer shadow-xs active:scale-[0.98]"
             >
               Send Another Inquiry
             </button>
@@ -165,7 +165,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               href="https://wa.me/2347045422815"
               target="_blank"
               rel="noreferrer"
-              className="w-full sm:w-auto px-6 py-2.5 bg-white hover:bg-zinc-50 border border-zinc-300 text-zinc-800 text-[13px] font-bold transition-all rounded-sm flex items-center justify-center gap-2 cursor-pointer shadow-2xs hover:border-zinc-400 active:scale-[0.98]"
+              className="w-full sm:w-auto px-6 py-2.5 bg-white hover:bg-zinc-50 border border-zinc-300 text-zinc-800 text-[13px] font-bold transition-all rounded-lg flex items-center justify-center gap-2 cursor-pointer shadow-2xs hover:border-zinc-400 active:scale-[0.98]"
             >
               <WhatsappLogo size={18} weight="fill" className="text-[#25D366]" />
               <span>Chat on WhatsApp</span>

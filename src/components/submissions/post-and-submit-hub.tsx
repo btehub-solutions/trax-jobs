@@ -348,7 +348,7 @@ function JobStudio() {
         {/* Step Indicator Header */}
         <div className="flex items-center justify-between pb-6 mb-6 border-b border-zinc-200/90">
           <div className="flex items-center gap-3">
-            <span className={`w-7 h-7 flex items-center justify-center text-[12px] font-black ${
+            <span className={`w-7 h-7 rounded-md flex items-center justify-center text-[12px] font-black ${
               step === 1 ? "bg-[#E7040D] text-white" : "bg-zinc-100 text-zinc-900 border border-zinc-300"
             }`}>
               1
@@ -362,7 +362,7 @@ function JobStudio() {
           <div className="h-px w-12 bg-zinc-200 hidden sm:block" />
 
           <div className="flex items-center gap-3">
-            <span className={`w-7 h-7 flex items-center justify-center text-[12px] font-black ${
+            <span className={`w-7 h-7 rounded-md flex items-center justify-center text-[12px] font-black ${
               step === 2 ? "bg-[#E7040D] text-white" : "bg-zinc-100 text-zinc-500 border border-zinc-300"
             }`}>
               2
@@ -377,7 +377,7 @@ function JobStudio() {
         </div>
 
         {error && (
-          <div className="p-3.5 mb-6 bg-red-50 border border-red-200 text-red-700 text-[13px] font-medium flex items-center gap-2">
+          <div className="p-3.5 mb-6 bg-red-50 border border-red-200 text-red-700 text-[13px] font-medium flex items-center gap-2 rounded-lg">
             <WarningCircle size={18} weight="fill" className="shrink-0" />
             <span>{error}</span>
           </div>
@@ -403,7 +403,7 @@ function JobStudio() {
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
                     placeholder="e.g. Paystack, Moniepoint"
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all rounded-lg"
                   />
                 </div>
               </div>
@@ -424,7 +424,7 @@ function JobStudio() {
                     value={contactEmail}
                     onChange={(e) => setContactEmail(e.target.value)}
                     placeholder="recruiter@company.com"
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all rounded-lg"
                   />
                 </div>
               </div>
@@ -445,7 +445,7 @@ function JobStudio() {
                   value={jobTitle}
                   onChange={(e) => setJobTitle(e.target.value)}
                   placeholder="e.g. Senior Frontend Infrastructure Engineer"
-                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all rounded-lg"
                 />
               </div>
             </div>
@@ -461,7 +461,7 @@ function JobStudio() {
                     key={cat}
                     type="button"
                     onClick={() => setRoleCategory(cat)}
-                    className={`px-3 py-2 text-[12.5px] font-bold text-left transition-all border cursor-pointer select-none truncate ${
+                    className={`px-3 py-2 text-[12.5px] font-bold text-left transition-all border cursor-pointer select-none truncate rounded-lg ${
                       roleCategory === cat
                         ? "bg-[#0C1222] text-white border-[#0C1222]"
                         : "bg-zinc-50/60 text-zinc-700 border-zinc-200 hover:border-zinc-400 hover:bg-zinc-100"
@@ -484,7 +484,7 @@ function JobStudio() {
                     key={wpt}
                     type="button"
                     onClick={() => setWorkplaceType(wpt)}
-                    className={`px-3.5 py-2 text-[12.5px] font-bold transition-all border cursor-pointer select-none ${
+                    className={`px-3.5 py-2 text-[12.5px] font-bold transition-all border cursor-pointer select-none rounded-lg ${
                       workplaceType === wpt
                         ? "bg-[#E7040D] text-white border-[#E7040D]"
                         : "bg-zinc-50 text-zinc-700 border-zinc-200 hover:border-zinc-400"
@@ -506,7 +506,7 @@ function JobStudio() {
                   <select
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer"
+                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer rounded-lg"
                   >
                     {AFRICAN_LOCATIONS.map((loc) => (
                       <option key={loc} value={loc}>{loc}</option>
@@ -524,7 +524,7 @@ function JobStudio() {
                   <select
                     value={experienceLevel}
                     onChange={(e) => setExperienceLevel(e.target.value)}
-                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer"
+                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer rounded-lg"
                   >
                     {EXPERIENCE_LEVELS.map((el) => (
                       <option key={el} value={el}>{el}</option>
@@ -542,7 +542,7 @@ function JobStudio() {
                 onClick={() => {
                   if (validateStep1()) setStep(2);
                 }}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer select-none active:scale-95 shadow-xs"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer select-none active:scale-95 shadow-xs rounded-lg"
               >
                 <span>Continue to Step 2: Scope & Proof</span>
                 <ArrowRight size={16} weight="bold" />
@@ -566,7 +566,7 @@ function JobStudio() {
                       key={et}
                       type="button"
                       onClick={() => setEmploymentType(et)}
-                      className={`px-3 py-2 text-[12px] font-bold text-center border cursor-pointer select-none transition-all ${
+                      className={`px-3 py-2 text-[12px] font-bold text-center border cursor-pointer select-none transition-all rounded-lg ${
                         employmentType === et
                           ? "bg-[#0C1222] text-white border-[#0C1222]"
                           : "bg-zinc-50 text-zinc-700 border-zinc-200 hover:border-zinc-400"
@@ -586,7 +586,7 @@ function JobStudio() {
                   <select
                     value={salaryRange}
                     onChange={(e) => setSalaryRange(e.target.value)}
-                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer"
+                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer rounded-lg"
                   >
                     {SALARY_RANGES.map((sr) => (
                       <option key={sr} value={sr}>{sr}</option>
@@ -613,7 +613,7 @@ function JobStudio() {
                   value={applicationLink}
                   onChange={(e) => setApplicationLink(e.target.value)}
                   placeholder="https://jobs.lever.co/company/job-id or https://company.com/careers"
-                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-mono placeholder:font-sans placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-mono placeholder:font-sans placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all rounded-lg"
                 />
               </div>
             </div>
@@ -624,10 +624,10 @@ function JobStudio() {
                 <label className="block text-[12px] font-bold text-[#1F1F1F] uppercase tracking-wider mb-2">
                   Company Brand Mark
                 </label>
-                <div className="border border-dashed border-zinc-300 p-3.5 bg-zinc-50/70 hover:border-zinc-400 transition-colors">
+                <div className="border border-dashed border-zinc-300 p-3.5 bg-zinc-50/70 hover:border-zinc-400 transition-colors rounded-lg">
                   {logoPreview ? (
                     <div className="flex items-center justify-between gap-3">
-                      <div className="w-10 h-10 relative bg-white border border-zinc-200 p-0.5 shrink-0">
+                      <div className="w-10 h-10 relative bg-white border border-zinc-200 p-0.5 shrink-0 rounded-md overflow-hidden">
                         <Image src={logoPreview} alt="Logo" fill className="object-contain" />
                       </div>
                       <div className="text-left flex-1 min-w-0">
@@ -644,7 +644,7 @@ function JobStudio() {
                     </div>
                   ) : (
                     <label className="cursor-pointer flex items-center gap-3">
-                      <div className="w-9 h-9 bg-white border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-500">
+                      <div className="w-9 h-9 bg-white border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-500 rounded-md">
                         <UploadSimple size={18} weight="bold" />
                       </div>
                       <div className="text-left">
@@ -661,10 +661,10 @@ function JobStudio() {
                 <label className="block text-[12px] font-bold text-[#1F1F1F] uppercase tracking-wider mb-2">
                   Office / Culture Photo
                 </label>
-                <div className="border border-dashed border-zinc-300 p-3.5 bg-zinc-50/70 hover:border-zinc-400 transition-colors">
+                <div className="border border-dashed border-zinc-300 p-3.5 bg-zinc-50/70 hover:border-zinc-400 transition-colors rounded-lg">
                   {coverPreview ? (
                     <div className="flex items-center justify-between gap-3">
-                      <div className="w-14 h-10 relative bg-zinc-950 border border-zinc-200 overflow-hidden shrink-0">
+                      <div className="w-14 h-10 relative bg-zinc-950 border border-zinc-200 overflow-hidden shrink-0 rounded-md">
                         <Image src={coverPreview} alt="Cover" fill className="object-cover" />
                       </div>
                       <div className="text-left flex-1 min-w-0">
@@ -681,7 +681,7 @@ function JobStudio() {
                     </div>
                   ) : (
                     <label className="cursor-pointer flex items-center gap-3">
-                      <div className="w-9 h-9 bg-white border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-500">
+                      <div className="w-9 h-9 bg-white border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-500 rounded-md">
                         <UploadSimple size={18} weight="bold" />
                       </div>
                       <div className="text-left">
@@ -705,7 +705,7 @@ function JobStudio() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="What will this person build, and how does the role impact your platform scale?"
-                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed"
+                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed rounded-lg"
               />
             </div>
 
@@ -719,7 +719,7 @@ function JobStudio() {
                 value={requirements}
                 onChange={(e) => setRequirements(e.target.value)}
                 placeholder="Key tech stack, libraries, and years of experience expected."
-                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed"
+                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed rounded-lg"
               />
             </div>
 
@@ -728,7 +728,7 @@ function JobStudio() {
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-[13px] font-bold transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-[13px] font-bold transition-all cursor-pointer rounded-lg"
               >
                 <ArrowLeft size={15} weight="bold" />
                 <span>Back to Step 1</span>
@@ -737,7 +737,7 @@ function JobStudio() {
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex items-center gap-2 px-7 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer select-none active:scale-95 disabled:opacity-50 shadow-xs"
+                className="inline-flex items-center gap-2 px-7 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer select-none active:scale-95 disabled:opacity-50 shadow-xs rounded-lg"
               >
                 {loading ? <span>Dispatching to Review...</span> : <span>Publish to Editorial Queue</span>}
                 <ArrowRight size={16} weight="bold" />
@@ -755,7 +755,7 @@ function JobStudio() {
             <Eye size={15} weight="bold" className="text-[#E7040D]" />
             Live Editorial Proof
           </span>
-          <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 border border-emerald-200">
+          <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 border border-emerald-200 rounded-md">
             Real-Time Sync
           </span>
         </div>
@@ -773,11 +773,11 @@ function JobStudio() {
             {/* Logo & Company */}
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-white border border-zinc-200 flex items-center justify-center p-1 shrink-0 overflow-hidden shadow-2xs">
+                <div className="w-12 h-12 bg-white border border-zinc-200 flex items-center justify-center p-1 shrink-0 overflow-hidden shadow-2xs rounded-lg">
                   {logoPreview ? (
                     <Image src={logoPreview} alt="Logo" width={44} height={44} className="w-full h-full object-contain" />
                   ) : (
-                    <div className="w-full h-full bg-[#E7040D]/10 flex items-center justify-center text-[#E7040D] font-black text-sm">
+                    <div className="w-full h-full bg-[#E7040D]/10 flex items-center justify-center text-[#E7040D] font-black text-sm rounded-md">
                       {companyName ? companyName.slice(0, 2).toUpperCase() : "TX"}
                     </div>
                   )}
@@ -793,7 +793,7 @@ function JobStudio() {
                 </div>
               </div>
 
-              <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 bg-[#fce8e0] text-[#E7040D]">
+              <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 bg-[#fce8e0] text-[#E7040D] rounded-md">
                 {workplaceType}
               </span>
             </div>
@@ -810,13 +810,13 @@ function JobStudio() {
 
             {/* Specification Badges */}
             <div className="flex flex-wrap gap-2 pt-2 border-t border-zinc-100">
-              <span className="px-2.5 py-1 bg-zinc-100 text-zinc-700 text-[11.5px] font-medium">
+              <span className="px-2.5 py-1 bg-zinc-100 text-zinc-700 text-[11.5px] font-medium rounded-md">
                 {roleCategory}
               </span>
-              <span className="px-2.5 py-1 bg-zinc-100 text-zinc-700 text-[11.5px] font-medium">
+              <span className="px-2.5 py-1 bg-zinc-100 text-zinc-700 text-[11.5px] font-medium rounded-md">
                 {employmentType}
               </span>
-              <span className="px-2.5 py-1 bg-zinc-100 text-zinc-700 text-[11.5px] font-medium">
+              <span className="px-2.5 py-1 bg-zinc-100 text-zinc-700 text-[11.5px] font-medium rounded-md">
                 {experienceLevel.split(" ")[0]}
               </span>
             </div>
@@ -827,7 +827,7 @@ function JobStudio() {
                 <span className="text-[11px] text-zinc-400 uppercase font-bold block">Package</span>
                 <span className="text-[13px] font-black text-[#1F1F1F]">{salaryRange}</span>
               </div>
-              <div className="px-4 py-2 bg-[#0C1222] text-white text-[12px] font-bold select-none cursor-default opacity-90">
+              <div className="px-4 py-2 bg-[#0C1222] text-white text-[12px] font-bold select-none cursor-default opacity-90 rounded-lg">
                 Apply External &rarr;
               </div>
             </div>
@@ -975,7 +975,7 @@ function TalentStudio() {
         {/* Step Indicator Header */}
         <div className="flex items-center justify-between pb-6 mb-6 border-b border-zinc-200/90">
           <div className="flex items-center gap-3">
-            <span className={`w-7 h-7 flex items-center justify-center text-[12px] font-black ${
+            <span className={`w-7 h-7 rounded-md flex items-center justify-center text-[12px] font-black ${
               step === 1 ? "bg-[#E7040D] text-white" : "bg-zinc-100 text-zinc-900 border border-zinc-300"
             }`}>
               1
@@ -989,7 +989,7 @@ function TalentStudio() {
           <div className="h-px w-12 bg-zinc-200 hidden sm:block" />
 
           <div className="flex items-center gap-3">
-            <span className={`w-7 h-7 flex items-center justify-center text-[12px] font-black ${
+            <span className={`w-7 h-7 rounded-md flex items-center justify-center text-[12px] font-black ${
               step === 2 ? "bg-[#E7040D] text-white" : "bg-zinc-100 text-zinc-500 border border-zinc-300"
             }`}>
               2
@@ -1004,7 +1004,7 @@ function TalentStudio() {
         </div>
 
         {error && (
-          <div className="p-3.5 mb-6 bg-red-50 border border-red-200 text-red-700 text-[13px] font-medium flex items-center gap-2">
+          <div className="p-3.5 mb-6 bg-red-50 border border-red-200 text-red-700 text-[13px] font-medium flex items-center gap-2 rounded-lg">
             <WarningCircle size={18} weight="fill" className="shrink-0" />
             <span>{error}</span>
           </div>
@@ -1029,7 +1029,7 @@ function TalentStudio() {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="e.g. Babatunde Adeleke"
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all rounded-lg"
                   />
                 </div>
               </div>
@@ -1050,7 +1050,7 @@ function TalentStudio() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="engineer@gmail.com"
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all rounded-lg"
                   />
                 </div>
               </div>
@@ -1071,7 +1071,7 @@ function TalentStudio() {
                   value={roleTitle}
                   onChange={(e) => setRoleTitle(e.target.value)}
                   placeholder="e.g. Staff Distributed Systems Engineer"
-                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all rounded-lg"
                 />
               </div>
             </div>
@@ -1093,7 +1093,7 @@ function TalentStudio() {
                     value={whatsapp}
                     onChange={(e) => setWhatsapp(e.target.value)}
                     placeholder="+234 801 234 5678"
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all rounded-lg"
                   />
                 </div>
               </div>
@@ -1106,10 +1106,10 @@ function TalentStudio() {
                   <button
                     type="button"
                     onClick={() => setPreferredContactMethod("whatsapp")}
-                    className={`px-3 py-2 text-[12.5px] font-bold border cursor-pointer select-none transition-all ${
+                    className={`px-3 py-2 text-[12.5px] font-bold border cursor-pointer select-none transition-all rounded-lg ${
                       preferredContactMethod === "whatsapp"
                         ? "bg-[#0C1222] text-white border-[#0C1222]"
-                        : "bg-zinc-50 text-zinc-700 border-zinc-200"
+                        : "bg-zinc-50 text-zinc-700 border-zinc-200 hover:border-zinc-300"
                     }`}
                   >
                     WhatsApp
@@ -1117,10 +1117,10 @@ function TalentStudio() {
                   <button
                     type="button"
                     onClick={() => setPreferredContactMethod("email")}
-                    className={`px-3 py-2 text-[12.5px] font-bold border cursor-pointer select-none transition-all ${
+                    className={`px-3 py-2 text-[12.5px] font-bold border cursor-pointer select-none transition-all rounded-lg ${
                       preferredContactMethod === "email"
                         ? "bg-[#0C1222] text-white border-[#0C1222]"
-                        : "bg-zinc-50 text-zinc-700 border-zinc-200"
+                        : "bg-zinc-50 text-zinc-700 border-zinc-200 hover:border-zinc-300"
                     }`}
                   >
                     Email
@@ -1139,7 +1139,7 @@ function TalentStudio() {
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer"
+                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer rounded-lg"
                   >
                     {ROLE_CATEGORIES.map((cat) => (
                       <option key={cat} value={cat}>{cat}</option>
@@ -1157,7 +1157,7 @@ function TalentStudio() {
                   <select
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer"
+                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer rounded-lg"
                   >
                     {AFRICAN_LOCATIONS.map((loc) => (
                       <option key={loc} value={loc}>{loc}</option>
@@ -1175,7 +1175,7 @@ function TalentStudio() {
                 onClick={() => {
                   if (validateStep1()) setStep(2);
                 }}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer select-none active:scale-95 shadow-xs"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer select-none active:scale-95 shadow-xs rounded-lg"
               >
                 <span>Continue to Step 2: Stack & Proof</span>
                 <ArrowRight size={16} weight="bold" />
@@ -1198,7 +1198,7 @@ function TalentStudio() {
                   value={highlightMetric}
                   onChange={(e) => setHighlightMetric(e.target.value)}
                   placeholder="e.g. Scaled API to 40M req/day or +42% signups"
-                  className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                  className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all rounded-lg"
                 />
               </div>
 
@@ -1210,7 +1210,7 @@ function TalentStudio() {
                   <select
                     value={experienceYears}
                     onChange={(e) => setExperienceYears(e.target.value)}
-                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer"
+                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer rounded-lg"
                   >
                     <option value="1-2 years">1-2 years</option>
                     <option value="3-5 years">3-5 years</option>
@@ -1235,7 +1235,7 @@ function TalentStudio() {
                       key={skill}
                       type="button"
                       onClick={() => toggleSkill(skill)}
-                      className={`px-2.5 py-1 text-[12px] font-bold transition-all border cursor-pointer select-none flex items-center gap-1 ${
+                      className={`px-2.5 py-1 text-[12px] font-bold transition-all border cursor-pointer select-none flex items-center gap-1 rounded-md ${
                         isSelected
                           ? "bg-[#0C1222] text-white border-[#0C1222]"
                           : "bg-zinc-50 text-zinc-700 border-zinc-200 hover:border-zinc-300"
@@ -1261,12 +1261,12 @@ function TalentStudio() {
                     }
                   }}
                   placeholder="Type other technology and click add..."
-                  className="flex-1 px-3 py-1.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[12.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none"
+                  className="flex-1 px-3 py-1.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[12.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none rounded-lg"
                 />
                 <button
                   type="button"
                   onClick={addCustomSkill}
-                  className="px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-[12px] font-bold cursor-pointer border border-zinc-300 flex items-center gap-1"
+                  className="px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-[12px] font-bold cursor-pointer border border-zinc-300 flex items-center gap-1 rounded-lg"
                 >
                   <Plus size={14} weight="bold" />
                   <span>Add</span>
@@ -1285,7 +1285,7 @@ function TalentStudio() {
                   value={portfolioUrl}
                   onChange={(e) => setPortfolioUrl(e.target.value)}
                   placeholder="https://..."
-                  className="w-full px-3 py-2 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[12.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none"
+                  className="w-full px-3 py-2 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[12.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none rounded-lg"
                 />
               </div>
 
@@ -1298,7 +1298,7 @@ function TalentStudio() {
                   value={githubUrl}
                   onChange={(e) => setGithubUrl(e.target.value)}
                   placeholder="https://github.com/..."
-                  className="w-full px-3 py-2 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[12.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none"
+                  className="w-full px-3 py-2 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[12.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none rounded-lg"
                 />
               </div>
 
@@ -1311,7 +1311,7 @@ function TalentStudio() {
                   value={linkedinUrl}
                   onChange={(e) => setLinkedinUrl(e.target.value)}
                   placeholder="https://linkedin.com/in/..."
-                  className="w-full px-3 py-2 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[12.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none"
+                  className="w-full px-3 py-2 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[12.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none rounded-lg"
                 />
               </div>
             </div>
@@ -1321,10 +1321,10 @@ function TalentStudio() {
               <label className="block text-[12px] font-bold text-[#1F1F1F] uppercase tracking-wider mb-2">
                 Headshot Portrait <span className="text-zinc-400 font-normal lowercase">(clean profile photo)</span>
               </label>
-              <div className="border border-dashed border-zinc-300 p-3.5 bg-zinc-50/70 hover:border-zinc-400 transition-colors">
+              <div className="border border-dashed border-zinc-300 p-3.5 bg-zinc-50/70 hover:border-zinc-400 transition-colors rounded-lg">
                 {avatarPreview ? (
                   <div className="flex items-center justify-between gap-3">
-                    <div className="w-10 h-10 relative bg-zinc-900 border border-zinc-200 overflow-hidden shrink-0">
+                    <div className="w-10 h-10 relative bg-zinc-900 border border-zinc-200 overflow-hidden shrink-0 rounded-md">
                       <Image src={avatarPreview} alt="Avatar" fill className="object-cover" />
                     </div>
                     <div className="text-left flex-1 min-w-0">
@@ -1341,7 +1341,7 @@ function TalentStudio() {
                   </div>
                 ) : (
                   <label className="cursor-pointer flex items-center gap-3">
-                    <div className="w-9 h-9 bg-white border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-500">
+                    <div className="w-9 h-9 bg-white border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-500 rounded-md">
                       <UploadSimple size={18} weight="bold" />
                     </div>
                     <div className="text-left">
@@ -1364,7 +1364,7 @@ function TalentStudio() {
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="2-3 sentences summarizing your specialty, scale of projects shipped, and current availability."
-                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed"
+                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed rounded-lg"
               />
             </div>
 
@@ -1373,7 +1373,7 @@ function TalentStudio() {
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-[13px] font-bold transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-[13px] font-bold transition-all cursor-pointer rounded-lg"
               >
                 <ArrowLeft size={15} weight="bold" />
                 <span>Back to Step 1</span>
@@ -1382,7 +1382,7 @@ function TalentStudio() {
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex items-center gap-2 px-7 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer select-none active:scale-95 disabled:opacity-50 shadow-xs"
+                className="inline-flex items-center gap-2 px-7 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer select-none active:scale-95 disabled:opacity-50 shadow-xs rounded-lg"
               >
                 {loading ? <span>Submitting Profile...</span> : <span>Send Profile for Verification</span>}
                 <ArrowRight size={16} weight="bold" />
@@ -1400,7 +1400,7 @@ function TalentStudio() {
             <Eye size={15} weight="bold" className="text-[#E7040D]" />
             Live Talent Profile Proof
           </span>
-          <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 border border-emerald-200">
+          <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 border border-emerald-200 rounded-md">
             Real-Time Sync
           </span>
         </div>
@@ -1420,11 +1420,11 @@ function TalentStudio() {
           <div className="p-6 space-y-5">
             {/* Avatar & Header */}
             <div className="flex items-start gap-3.5">
-              <div className="w-14 h-14 bg-zinc-900 border border-zinc-200 flex items-center justify-center shrink-0 overflow-hidden shadow-2xs relative">
+              <div className="w-14 h-14 bg-zinc-900 border border-zinc-200 flex items-center justify-center shrink-0 overflow-hidden shadow-2xs relative rounded-lg">
                 {avatarPreview ? (
                   <Image src={avatarPreview} alt="Avatar" fill className="object-cover" />
                 ) : (
-                  <div className="w-full h-full bg-[#0C1222] text-white flex items-center justify-center font-black text-base">
+                  <div className="w-full h-full bg-[#0C1222] text-white flex items-center justify-center font-black text-base rounded-md">
                     {fullName ? fullName.slice(0, 2).toUpperCase() : "TP"}
                   </div>
                 )}
@@ -1449,11 +1449,11 @@ function TalentStudio() {
 
             {/* Impact Metric callout */}
             {highlightMetric ? (
-              <div className="p-2.5 bg-[#FAF8F5] border-l-2 border-[#E7040D] text-[12.5px] font-bold text-zinc-900">
+              <div className="p-2.5 bg-[#FAF8F5] border-l-2 border-[#E7040D] text-[12.5px] font-bold text-zinc-900 rounded-md">
                 {highlightMetric}
               </div>
             ) : (
-              <div className="p-2.5 bg-zinc-50 text-[12px] text-zinc-500 italic">
+              <div className="p-2.5 bg-zinc-50 text-[12px] text-zinc-500 italic rounded-md">
                 Highlight metric appears here (e.g. +34% conversion rate)
               </div>
             )}
@@ -1466,12 +1466,12 @@ function TalentStudio() {
             {/* Selected Skills Chips */}
             <div className="flex flex-wrap gap-1.5 pt-2 border-t border-zinc-100">
               {selectedSkills.slice(0, 5).map((skill) => (
-                <span key={skill} className="px-2 py-0.5 bg-zinc-100 text-zinc-700 text-[11px] font-bold">
+                <span key={skill} className="px-2 py-0.5 bg-zinc-100 text-zinc-700 text-[11px] font-bold rounded-md">
                   {skill}
                 </span>
               ))}
               {selectedSkills.length > 5 && (
-                <span className="px-2 py-0.5 bg-zinc-100 text-zinc-500 text-[11px] font-bold">
+                <span className="px-2 py-0.5 bg-zinc-100 text-zinc-500 text-[11px] font-bold rounded-md">
                   +{selectedSkills.length - 5} more
                 </span>
               )}
@@ -1483,7 +1483,7 @@ function TalentStudio() {
                 <Clock size={14} weight="bold" />
                 <span>{experienceYears}</span>
               </span>
-              <div className="px-4 py-2 bg-[#E7040D] text-white text-[12px] font-bold select-none cursor-default">
+              <div className="px-4 py-2 bg-[#E7040D] text-white text-[12px] font-bold select-none cursor-default rounded-lg">
                 Hire via {preferredContactMethod === "whatsapp" ? "WhatsApp" : "Email"} &rarr;
               </div>
             </div>
@@ -1614,7 +1614,7 @@ function CompanyStudio() {
         {/* Step Indicator Header */}
         <div className="flex items-center justify-between pb-6 mb-6 border-b border-zinc-200/90">
           <div className="flex items-center gap-3">
-            <span className={`w-7 h-7 flex items-center justify-center text-[12px] font-black ${
+            <span className={`w-7 h-7 rounded-md flex items-center justify-center text-[12px] font-black ${
               step === 1 ? "bg-[#E7040D] text-white" : "bg-zinc-100 text-zinc-900 border border-zinc-300"
             }`}>
               1
@@ -1628,7 +1628,7 @@ function CompanyStudio() {
           <div className="h-px w-12 bg-zinc-200 hidden sm:block" />
 
           <div className="flex items-center gap-3">
-            <span className={`w-7 h-7 flex items-center justify-center text-[12px] font-black ${
+            <span className={`w-7 h-7 rounded-md flex items-center justify-center text-[12px] font-black ${
               step === 2 ? "bg-[#E7040D] text-white" : "bg-zinc-100 text-zinc-500 border border-zinc-300"
             }`}>
               2
@@ -1643,7 +1643,7 @@ function CompanyStudio() {
         </div>
 
         {error && (
-          <div className="p-3.5 mb-6 bg-red-50 border border-red-200 text-red-700 text-[13px] font-medium flex items-center gap-2">
+          <div className="p-3.5 mb-6 bg-red-50 border border-red-200 text-red-700 text-[13px] font-medium flex items-center gap-2 rounded-lg">
             <WarningCircle size={18} weight="fill" className="shrink-0" />
             <span>{error}</span>
           </div>
@@ -1668,7 +1668,7 @@ function CompanyStudio() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Flutterwave, Kuda"
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-semibold placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all rounded-lg"
                   />
                 </div>
               </div>
@@ -1689,7 +1689,7 @@ function CompanyStudio() {
                     value={contactEmail}
                     onChange={(e) => setContactEmail(e.target.value)}
                     placeholder="talent@company.com"
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all rounded-lg"
                   />
                 </div>
               </div>
@@ -1710,7 +1710,7 @@ function CompanyStudio() {
                   value={website}
                   onChange={(e) => setWebsite(e.target.value)}
                   placeholder="https://company.com"
-                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all"
+                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all rounded-lg"
                 />
               </div>
             </div>
@@ -1726,7 +1726,7 @@ function CompanyStudio() {
                     key={sec}
                     type="button"
                     onClick={() => setIndustry(sec)}
-                    className={`px-3 py-2 text-[12px] font-bold text-left border cursor-pointer select-none transition-all truncate ${
+                    className={`px-3 py-2 text-[12px] font-bold text-left border cursor-pointer select-none transition-all truncate rounded-lg ${
                       industry === sec
                         ? "bg-[#0C1222] text-white border-[#0C1222]"
                         : "bg-zinc-50 text-zinc-700 border-zinc-200 hover:border-zinc-300"
@@ -1745,7 +1745,7 @@ function CompanyStudio() {
                 onClick={() => {
                   if (validateStep1()) setStep(2);
                 }}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer select-none active:scale-95 shadow-xs"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer select-none active:scale-95 shadow-xs rounded-lg"
               >
                 <span>Continue to Step 2: Branding & Proof</span>
                 <ArrowRight size={16} weight="bold" />
@@ -1766,7 +1766,7 @@ function CompanyStudio() {
                   <select
                     value={headquarters}
                     onChange={(e) => setHeadquarters(e.target.value)}
-                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer"
+                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer rounded-lg"
                   >
                     {AFRICAN_LOCATIONS.map((loc) => (
                       <option key={loc} value={loc}>{loc}</option>
@@ -1784,7 +1784,7 @@ function CompanyStudio() {
                   <select
                     value={employeesCount}
                     onChange={(e) => setEmployeesCount(e.target.value)}
-                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer"
+                    className="w-full appearance-none pl-3.5 pr-8 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[13px] font-medium focus:bg-white focus:border-[#E7040D] focus:outline-none cursor-pointer rounded-lg"
                   >
                     {COMPANY_SIZES.map((sz) => (
                       <option key={sz} value={sz}>{sz}</option>
@@ -1801,10 +1801,10 @@ function CompanyStudio() {
                 <label className="block text-[12px] font-bold text-[#1F1F1F] uppercase tracking-wider mb-2">
                   Vector / Brand Logo
                 </label>
-                <div className="border border-dashed border-zinc-300 p-3.5 bg-zinc-50/70 hover:border-zinc-400 transition-colors">
+                <div className="border border-dashed border-zinc-300 p-3.5 bg-zinc-50/70 hover:border-zinc-400 transition-colors rounded-lg">
                   {logoPreview ? (
                     <div className="flex items-center justify-between gap-3">
-                      <div className="w-10 h-10 relative bg-white border border-zinc-200 p-0.5 shrink-0">
+                      <div className="w-10 h-10 relative bg-white border border-zinc-200 p-0.5 shrink-0 rounded-md overflow-hidden">
                         <Image src={logoPreview} alt="Logo" fill className="object-contain" />
                       </div>
                       <div className="text-left flex-1 min-w-0">
@@ -1821,7 +1821,7 @@ function CompanyStudio() {
                     </div>
                   ) : (
                     <label className="cursor-pointer flex items-center gap-3">
-                      <div className="w-9 h-9 bg-white border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-500">
+                      <div className="w-9 h-9 bg-white border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-500 rounded-md">
                         <UploadSimple size={18} weight="bold" />
                       </div>
                       <div className="text-left">
@@ -1838,10 +1838,10 @@ function CompanyStudio() {
                 <label className="block text-[12px] font-bold text-[#1F1F1F] uppercase tracking-wider mb-2">
                   Workspace Banner
                 </label>
-                <div className="border border-dashed border-zinc-300 p-3.5 bg-zinc-50/70 hover:border-zinc-400 transition-colors">
+                <div className="border border-dashed border-zinc-300 p-3.5 bg-zinc-50/70 hover:border-zinc-400 transition-colors rounded-lg">
                   {coverPreview ? (
                     <div className="flex items-center justify-between gap-3">
-                      <div className="w-14 h-10 relative bg-zinc-950 border border-zinc-200 overflow-hidden shrink-0">
+                      <div className="w-14 h-10 relative bg-zinc-950 border border-zinc-200 overflow-hidden shrink-0 rounded-md">
                         <Image src={coverPreview} alt="Cover" fill className="object-cover" />
                       </div>
                       <div className="text-left flex-1 min-w-0">
@@ -1858,7 +1858,7 @@ function CompanyStudio() {
                     </div>
                   ) : (
                     <label className="cursor-pointer flex items-center gap-3">
-                      <div className="w-9 h-9 bg-white border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-500">
+                      <div className="w-9 h-9 bg-white border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-500 rounded-md">
                         <UploadSimple size={18} weight="bold" />
                       </div>
                       <div className="text-left">
@@ -1882,7 +1882,7 @@ function CompanyStudio() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Briefly describe what your organization builds and the engineering standards of your team."
-                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed"
+                className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all leading-relaxed rounded-lg"
               />
             </div>
 
@@ -1891,7 +1891,7 @@ function CompanyStudio() {
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-[13px] font-bold transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-[13px] font-bold transition-all cursor-pointer rounded-lg"
               >
                 <ArrowLeft size={15} weight="bold" />
                 <span>Back to Step 1</span>
@@ -1900,7 +1900,7 @@ function CompanyStudio() {
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex items-center gap-2 px-7 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer select-none active:scale-95 disabled:opacity-50 shadow-xs"
+                className="inline-flex items-center gap-2 px-7 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-all cursor-pointer select-none active:scale-95 disabled:opacity-50 shadow-xs rounded-lg"
               >
                 {loading ? <span>Registering Entity...</span> : <span>Register Company for Review</span>}
                 <ArrowRight size={16} weight="bold" />
@@ -1918,7 +1918,7 @@ function CompanyStudio() {
             <Eye size={15} weight="bold" className="text-[#E7040D]" />
             Live Company Showcase Proof
           </span>
-          <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 border border-emerald-200">
+          <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 border border-emerald-200 rounded-md">
             Real-Time Sync
           </span>
         </div>
@@ -1934,11 +1934,11 @@ function CompanyStudio() {
           <div className="p-6 space-y-5">
             {/* Logo & Header */}
             <div className="flex items-start gap-3.5">
-              <div className="w-14 h-14 bg-white border border-zinc-200 flex items-center justify-center p-1 shrink-0 overflow-hidden shadow-2xs">
+              <div className="w-14 h-14 bg-white border border-zinc-200 flex items-center justify-center p-1 shrink-0 overflow-hidden shadow-2xs rounded-lg">
                 {logoPreview ? (
                   <Image src={logoPreview} alt="Logo" width={48} height={48} className="w-full h-full object-contain" />
                 ) : (
-                  <div className="w-full h-full bg-[#E7040D]/10 flex items-center justify-center text-[#E7040D] font-black text-sm">
+                  <div className="w-full h-full bg-[#E7040D]/10 flex items-center justify-center text-[#E7040D] font-black text-sm rounded-md">
                     {name ? name.slice(0, 2).toUpperCase() : "CO"}
                   </div>
                 )}
@@ -1971,10 +1971,10 @@ function CompanyStudio() {
 
             {/* Badges */}
             <div className="flex flex-wrap gap-2 pt-2 border-t border-zinc-100">
-              <span className="px-2.5 py-1 bg-zinc-100 text-zinc-700 text-[11.5px] font-bold">
+              <span className="px-2.5 py-1 bg-zinc-100 text-zinc-700 text-[11.5px] font-bold rounded-md">
                 {industry}
               </span>
-              <span className="px-2.5 py-1 bg-zinc-100 text-zinc-700 text-[11.5px] font-medium">
+              <span className="px-2.5 py-1 bg-zinc-100 text-zinc-700 text-[11.5px] font-medium rounded-md">
                 {employeesCount.split(" ")[0]}
               </span>
             </div>
@@ -1984,7 +1984,7 @@ function CompanyStudio() {
               <span className="text-[11px] font-bold text-emerald-600 uppercase tracking-wider">
                 Active Verification Queue
               </span>
-              <div className="px-4 py-2 bg-[#0C1222] text-white text-[12px] font-bold select-none cursor-default">
+              <div className="px-4 py-2 bg-[#0C1222] text-white text-[12px] font-bold select-none cursor-default rounded-lg">
                 View Profile &rarr;
               </div>
             </div>
@@ -2006,31 +2006,59 @@ function CompanyStudio() {
 ───────────────────────────────────────────────────────────── */
 function SuccessState({ title, email, onReset }: { title: string; email: string; onReset: () => void }) {
   return (
-    <div className="py-12 px-4 text-center max-w-lg mx-auto space-y-5 bg-white border border-zinc-200/90 rounded-lg shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] p-8">
-      <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center mx-auto shadow-xs border border-emerald-200">
-        <CheckCircle size={36} weight="fill" />
+    <div className="py-8 sm:py-12 px-6 sm:px-10 text-center max-w-xl mx-auto flex flex-col items-center justify-center bg-white border border-zinc-200/90 rounded-lg shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)]">
+      {/* Signature Tilted Editorial Badge */}
+      <div className="relative w-36 h-36 sm:w-40 sm:h-40 bg-[#FCE8E0] rounded-sm p-4 shadow-[12px_18px_32px_-6px_rgba(231,4,13,0.18)] transform -rotate-2 hover:rotate-0 transition-transform duration-300 flex flex-col justify-between select-none">
+        <div className="absolute top-0 left-0 right-0 h-4 bg-black/5 pointer-events-none" />
+        <div className="w-full h-full border border-[#E7040D]/30 rounded-sm p-2 flex flex-col items-center justify-center">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#E7040D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 opacity-90">
+            {/* Dispatch Envelope Body */}
+            <rect x="18" y="28" width="64" height="46" rx="2" />
+            <path d="M18 32l32 24 32-24" />
+            <path d="M18 70l24-20" />
+            <path d="M82 70l-24-20" />
+            {/* Verified Seal / Checkmark badge */}
+            <circle cx="68" cy="28" r="9" fill="#E7040D" stroke="none" />
+            <path d="M64 28l3 3 5-5" stroke="white" strokeWidth="2" />
+            {/* Subtle sparkle accents */}
+            <path d="M14 20l3 3M17 20l-3 3" strokeWidth="1.5" />
+            <path d="M86 58l3 3M89 58l-3 3" strokeWidth="1.5" />
+          </svg>
+        </div>
       </div>
-      <div className="space-y-2">
-        <h3 className="text-2xl font-black text-[#1F1F1F] tracking-tight">{title}</h3>
-        <p className="text-[14px] text-zinc-600 leading-[1.7]">
-          Thank you for publishing with Trax Jobs. Your submission has been securely ingested into our editorial database.
-          A confirmation was sent to <strong className="text-zinc-900">{email}</strong>.
-        </p>
+
+      {/* Editorial Kicker Badge */}
+      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fce8e0] text-[#E7040D] text-[11px] font-bold tracking-wider uppercase mt-8 mb-3">
+        Submission Logged
       </div>
-      <div className="p-3 bg-[#fce8e0] text-[#E7040D] text-[12.5px] font-bold text-center rounded-lg">
-        Editorial Review SLA: Under 24 Hours
+
+      {/* Editorial Headline */}
+      <h3 className="text-[24px] sm:text-[28px] font-black text-zinc-950 tracking-[-0.02em] mb-3">
+        {title}
+      </h3>
+
+      {/* Context Copy */}
+      <p className="text-[14.5px] sm:text-[15px] text-zinc-600 max-w-md mx-auto leading-[1.7] mb-4">
+        Thank you for publishing with Trax Jobs. Your submission has been securely ingested into our editorial database. A confirmation was sent to <span className="font-semibold text-zinc-900">{email}</span>.
+      </p>
+
+      {/* Editorial SLA Callout */}
+      <div className="inline-block px-4 py-2 bg-[#FAF8F5] border border-zinc-200/80 rounded-md text-[12px] font-semibold text-zinc-700 tracking-tight mb-2">
+        Editorial Review SLA: <span className="text-[#E7040D] font-bold">Under 24 Hours</span>
       </div>
-      <div className="pt-3 flex items-center justify-center gap-3">
+
+      {/* Action CTAs */}
+      <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
         <button
           type="button"
           onClick={onReset}
-          className="px-5 py-2.5 bg-white border border-zinc-300 hover:bg-zinc-50 text-zinc-900 text-[13px] font-bold rounded-lg transition-all cursor-pointer"
+          className="w-full sm:w-auto px-6 py-2.5 bg-[#1F1F1F] hover:bg-[#E7040D] text-white text-[13px] font-bold transition-all rounded-lg cursor-pointer shadow-xs active:scale-[0.98]"
         >
           Submit Another Entry
         </button>
         <Link
           href="/jobs"
-          className="px-5 py-2.5 bg-[#0C1222] hover:bg-zinc-800 text-white text-[13px] font-bold rounded-lg transition-all"
+          className="w-full sm:w-auto px-6 py-2.5 bg-white hover:bg-zinc-50 border border-zinc-300 text-zinc-800 text-[13px] font-bold transition-all rounded-lg flex items-center justify-center gap-2 cursor-pointer shadow-2xs hover:border-zinc-400 active:scale-[0.98]"
         >
           Browse Verified Jobs
         </Link>
