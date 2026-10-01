@@ -577,14 +577,6 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                     className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
                     unoptimized
                   />
-                  {item.availability && (
-                    <div className="absolute top-2.5 right-2.5 z-10">
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-white bg-black/60 backdrop-blur-xs border border-white/20 px-2.5 py-0.5 rounded-full shadow-2xs">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                        <span>{item.availability}</span>
-                      </span>
-                    </div>
-                  )}
                 </Link>
 
                 {/* Card Content Area */}
