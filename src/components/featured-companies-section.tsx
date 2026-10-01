@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -262,7 +262,18 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
     }));
   };
 
-  const activeList = dynamicCompanies && dynamicCompanies.length > 0 ? dynamicCompanies : COMPANIES;
+  const activeList = useMemo(() => {
+    if (!dynamicCompanies || dynamicCompanies.length === 0) return COMPANIES;
+
+    const dynamicSlugs = new Set(dynamicCompanies.map((c) => (c.slug || "").toLowerCase()));
+    const dynamicNames = new Set(dynamicCompanies.map((c) => (c.name || "").toLowerCase()));
+
+    const remainingCurated = COMPANIES.filter(
+      (c) => !dynamicSlugs.has((c.slug || "").toLowerCase()) && !dynamicNames.has((c.name || "").toLowerCase())
+    );
+
+    return [...dynamicCompanies, ...remainingCurated];
+  }, [dynamicCompanies]);
 
   const filteredCompanies =
     activeCategory === "Highlight"
@@ -300,7 +311,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
   const handleScroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
-      const offset = direction === "left" ? (isMobile ? -296 : -316) : (isMobile ? 296 : 316);
+      const offset = direction === "left" ? (isMobile ? -256 : -228) : (isMobile ? 256 : 228);
       scrollRef.current.scrollBy({ left: offset, behavior: "smooth" });
     }
   };
@@ -310,7 +321,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
 
         {/* Section Header */}
-        <div className="max-w-3xl mb-12">
+        <div className="max-w-3xl mb-10 md:mb-6">
           <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] font-black tracking-[-0.025em] text-[#1F1F1F] leading-[1.18] mb-4">
             Choose the company that&apos;s meant for you
           </h2>
@@ -320,7 +331,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
         </div>
 
         {/* Filter Pills & Carousel Controls Row */}
-        <div className="flex items-center justify-between gap-4 mb-8">
+        <div className="flex items-center justify-between gap-4 mb-7 md:mb-4">
           {/* Scrollable Filter Badges */}
           <div className="flex items-center gap-2.5 overflow-x-auto no-scrollbar py-1 pr-4">
             {CATEGORIES.map((cat) => {
@@ -329,7 +340,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-5 py-2.5 rounded-lg text-[13.5px] font-bold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 select-none ${isActive
+                  className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-[13px] sm:text-[13.5px] font-bold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 select-none ${isActive
                       ? "bg-[#E7040D] text-white shadow-xs"
                       : "bg-white text-zinc-700 hover:text-zinc-950 border border-zinc-200/80 hover:border-zinc-300 hover:bg-zinc-50"
                     }`}
@@ -345,184 +356,182 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
             <button
               onClick={() => handleScroll("left")}
               disabled={!canScrollLeft}
-              className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all shadow-2xs ${
+              className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all shadow-2xs ${
                 canScrollLeft
                   ? "bg-white border-zinc-200/90 text-zinc-800 hover:text-[#E7040D] hover:bg-zinc-50 cursor-pointer active:scale-95"
                   : "bg-zinc-100/60 border-zinc-200/70 text-zinc-300 cursor-not-allowed"
               }`}
               aria-label="Previous companies"
             >
-              <CaretLeft size={18} weight="bold" />
+              <CaretLeft size={16} weight="bold" />
             </button>
             <button
               onClick={() => handleScroll("right")}
               disabled={!canScrollRight}
-              className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all shadow-2xs ${
+              className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all shadow-2xs ${
                 canScrollRight
                   ? "bg-white border-zinc-200/90 text-zinc-800 hover:text-[#E7040D] hover:bg-zinc-50 cursor-pointer active:scale-95"
                   : "bg-zinc-100/60 border-zinc-200/70 text-zinc-300 cursor-not-allowed"
               }`}
               aria-label="Next companies"
             >
-              <CaretRight size={18} weight="bold" />
+              <CaretRight size={16} weight="bold" />
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Full-Bleed Centered Carousel Track with Balanced Side Padding & Scroll Snapping */}
-      <div className="w-full overflow-hidden">
-        <div
-          ref={scrollRef}
-          className="flex items-stretch gap-4 sm:gap-5 overflow-x-auto no-scrollbar pb-6 pt-2 snap-x snap-mandatory px-6 sm:px-10 lg:px-16 scroll-px-6 sm:scroll-px-10 lg:scroll-px-16 xl:px-[max(2.5rem,calc((100vw-1440px)/2))] xl:scroll-px-[max(2.5rem,calc((100vw-1440px)/2))]"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {filteredCompanies.map((company) => {
-            const isFollowed = !!followedCompanies[company.slug];
-            const locations = parseLocations(company.location);
+        {/* Contained Carousel Track */}
+        <div className="w-full overflow-hidden">
+          <div
+            ref={scrollRef}
+            className="flex items-stretch gap-4 md:gap-2.5 overflow-x-auto no-scrollbar pb-6 pt-2 md:pb-4 md:pt-1 snap-x snap-mandatory scroll-smooth"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {filteredCompanies.map((company) => {
+              const isFollowed = !!followedCompanies[company.slug];
+              const locations = parseLocations(company.location);
 
-            return (
-              <div
-                key={company.name}
-                className="w-[280px] sm:w-[290px] md:w-[295px] min-h-[395px] sm:min-h-[415px] shrink-0 bg-white rounded-lg border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start select-none"
-              >
-                <div>
-                  {/* 1. Top Cover Image (Taller Landscape Ratio with Rounded Top Corners) */}
-                  <Link
-                    href={`/companies/${company.slug}`}
-                    className="relative h-[145px] sm:h-[150px] w-full bg-zinc-100 overflow-hidden block"
-                  >
-                    <Image
-                      src={company.coverImage || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800"}
-                      alt={`${company.name} office`}
-                      fill
-                      sizes="(max-width: 640px) 280px, 300px"
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      unoptimized
-                    />
-
-                    {/* Active Open Roles Badge */}
-                    {typeof company.openRoles === "number" && company.openRoles > 0 ? (
-                      <div className="absolute top-2.5 right-2.5 z-10">
-                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-white bg-[#E7040D] shadow-xs px-2.5 py-0.5 rounded-full">
-                          <Briefcase size={11} weight="bold" className="text-white" />
-                          <span>
-                            {company.openRoles} {company.openRoles === 1 ? "Role" : "Roles"}
-                          </span>
-                        </span>
-                      </div>
-                    ) : null}
-                  </Link>
-
-                  {/* 2. Card Body Content */}
-                  <div className="p-4 sm:p-4.5">
-                    {/* Company Identity: Logo Box + Name + Verified Badge */}
+              return (
+                <div
+                  key={company.name}
+                  className="w-[240px] sm:w-[250px] md:w-[218px] min-h-[350px] sm:min-h-[360px] md:min-h-[325px] shrink-0 bg-white rounded-lg border border-zinc-200/90 shadow-2xs hover:shadow-md hover:border-zinc-300 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start select-none"
+                >
+                  <div>
+                    {/* 1. Top Cover Image (Compact Landscape Ratio with Rounded Top Corners) */}
                     <Link
                       href={`/companies/${company.slug}`}
-                      className="flex items-center gap-2.5 group/title mb-1"
+                      className="relative h-[125px] sm:h-[130px] md:h-[110px] w-full bg-zinc-100 overflow-hidden block"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-1.5 overflow-hidden shrink-0">
-                        {company.logo ? (
-                          <Image
-                            src={company.logo}
-                            alt={company.name}
-                            width={36}
-                            height={36}
-                            className="w-full h-full object-contain"
-                            unoptimized
-                          />
-                        ) : (
-                          <CompanyVector name={company.name} />
-                        )}
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-1">
-                          <h3 className="text-[15px] sm:text-[15.5px] font-bold text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-tight tracking-tight truncate">
-                            {company.name}
-                          </h3>
-                          <SealCheck size={15} weight="fill" className="text-[#E7040D] shrink-0" />
+                      <Image
+                        src={company.coverImage || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800"}
+                        alt={`${company.name} office`}
+                        fill
+                        sizes="(max-width: 640px) 240px, 218px"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        unoptimized
+                      />
+
+                      {/* Active Open Roles Badge */}
+                      {typeof company.openRoles === "number" && company.openRoles > 0 ? (
+                        <div className="absolute top-2 right-2 z-10">
+                          <span className="inline-flex items-center gap-1 text-[9.5px] sm:text-[10px] font-bold text-white bg-[#E7040D] shadow-xs px-2 py-0.5 rounded-full">
+                            <Briefcase size={10} weight="bold" className="text-white" />
+                            <span>
+                              {company.openRoles} {company.openRoles === 1 ? "Role" : "Roles"}
+                            </span>
+                          </span>
                         </div>
-                      </div>
+                      ) : null}
                     </Link>
 
-                    {/* 3. Welcome to the Jungle Style Tag Pills */}
-                    <div className="flex flex-wrap gap-1.5 mt-3.5">
-                      {/* Team Size Tag */}
-                      {company.size ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F4F4F6] text-zinc-700 text-[11px] font-medium rounded-lg">
-                          <Users size={12} weight="regular" className="text-zinc-500 shrink-0" />
-                          <span className="truncate max-w-[140px]">
-                            {company.size.toLowerCase().includes("team") || company.size.toLowerCase().includes("employee")
-                              ? company.size
-                              : `${company.size} employees`}
+                    {/* 2. Card Body Content */}
+                    <div className="p-3.5 sm:p-4 md:p-2.5">
+                      {/* Company Identity: Logo Box + Name + Verified Badge */}
+                      <Link
+                        href={`/companies/${company.slug}`}
+                        className="flex items-center gap-2 group/title mb-1"
+                      >
+                        <div className="w-9 h-9 md:w-8 md:h-8 rounded-lg bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-1 overflow-hidden shrink-0">
+                          {company.logo ? (
+                            <Image
+                              src={company.logo}
+                              alt={company.name}
+                              width={32}
+                              height={32}
+                              className="w-full h-full object-contain"
+                              unoptimized
+                            />
+                          ) : (
+                            <CompanyVector name={company.name} />
+                          )}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-1">
+                            <h3 className="text-[14px] sm:text-[14.5px] md:text-[13.5px] font-bold text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-tight tracking-tight truncate">
+                              {company.name}
+                            </h3>
+                            <SealCheck size={14} weight="fill" className="text-[#E7040D] shrink-0" />
+                          </div>
+                        </div>
+                      </Link>
+
+                      {/* 3. Welcome to the Jungle Style Tag Pills */}
+                      <div className="flex flex-wrap gap-1 mt-2.5 md:mt-2">
+                        {/* Team Size Tag */}
+                        {company.size ? (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#F4F4F6] text-zinc-700 text-[10.5px] sm:text-[11px] md:text-[10px] font-medium rounded-md">
+                            <Users size={11} weight="regular" className="text-zinc-500 shrink-0" />
+                            <span className="truncate max-w-[110px] md:max-w-[95px]">
+                              {company.size.toLowerCase().includes("team") || company.size.toLowerCase().includes("employee")
+                                ? company.size
+                                : `${company.size} employees`}
+                            </span>
                           </span>
-                        </span>
-                      ) : null}
+                        ) : null}
 
-                      {/* Individual Location Tags */}
-                      {locations.map((loc) => (
-                        <span
-                          key={loc}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F4F4F6] text-zinc-700 text-[11px] font-medium rounded-lg"
-                        >
-                          <MapPin size={12} weight="regular" className="text-zinc-500 shrink-0" />
-                          <span>{loc}</span>
-                        </span>
-                      ))}
+                        {/* Individual Location Tags */}
+                        {locations.map((loc) => (
+                          <span
+                            key={loc}
+                            className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#F4F4F6] text-zinc-700 text-[10.5px] sm:text-[11px] md:text-[10px] font-medium rounded-md"
+                          >
+                            <MapPin size={11} weight="regular" className="text-zinc-500 shrink-0" />
+                            <span>{loc}</span>
+                          </span>
+                        ))}
 
-                      {/* Primary Industry Tag */}
-                      {company.industry || company.category ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F4F4F6] text-zinc-700 text-[11px] font-medium rounded-lg truncate max-w-[160px]">
-                          <Tag size={12} weight="regular" className="text-zinc-500 shrink-0" />
-                          <span className="truncate">{company.industry || company.category}</span>
-                        </span>
-                      ) : null}
+                        {/* Primary Industry Tag */}
+                        {company.industry || company.category ? (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#F4F4F6] text-zinc-700 text-[10.5px] sm:text-[11px] md:text-[10px] font-medium rounded-md truncate max-w-[130px] md:max-w-[110px]">
+                            <Tag size={11} weight="regular" className="text-zinc-500 shrink-0" />
+                            <span className="truncate">{company.industry || company.category}</span>
+                          </span>
+                        ) : null}
 
-                      {/* Sub-industry Tag if distinct */}
-                      {company.subIndustry && company.subIndustry !== company.industry ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F4F4F6] text-zinc-700 text-[11px] font-medium rounded-lg truncate max-w-[160px]">
-                          <Tag size={12} weight="regular" className="text-zinc-500 shrink-0" />
-                          <span className="truncate">{company.subIndustry}</span>
-                        </span>
-                      ) : null}
+                        {/* Sub-industry Tag if distinct */}
+                        {company.subIndustry && company.subIndustry !== company.industry ? (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#F4F4F6] text-zinc-700 text-[10.5px] sm:text-[11px] md:text-[10px] font-medium rounded-md truncate max-w-[130px] md:max-w-[110px]">
+                            <Tag size={11} weight="regular" className="text-zinc-500 shrink-0" />
+                            <span className="truncate">{company.subIndustry}</span>
+                          </span>
+                        ) : null}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 4. Bottom Footer with Pinned Follow Button */}
+                  <div className="p-3.5 sm:p-4 md:p-2.5 pt-0 mt-auto">
+                    <div className="flex items-center justify-between pt-2">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          toggleFollow(company.slug);
+                        }}
+                        className={`px-3.5 py-1.5 md:px-3 md:py-1 rounded-lg text-[11.5px] md:text-[11px] font-bold border transition-all cursor-pointer select-none active:scale-95 ${
+                          isFollowed
+                            ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]"
+                            : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-800 hover:border-zinc-400 shadow-2xs"
+                        }`}
+                      >
+                        {isFollowed ? "Following" : "Follow"}
+                      </button>
+
+                      <Link
+                        href={`/companies/${company.slug}`}
+                        className="text-[11.5px] md:text-[11px] font-semibold text-zinc-500 hover:text-[#E7040D] transition-colors"
+                      >
+                        View profile →
+                      </Link>
                     </div>
                   </div>
                 </div>
-
-                {/* 4. Bottom Footer with Pinned Follow Button */}
-                <div className="p-4 sm:p-4.5 pt-0 mt-auto">
-                  <div className="flex items-center justify-between pt-3">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        toggleFollow(company.slug);
-                      }}
-                      className={`px-4 py-1.5 rounded-lg text-[12px] font-bold border transition-all cursor-pointer select-none active:scale-95 ${
-                        isFollowed
-                          ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]"
-                          : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-800 hover:border-zinc-400 shadow-2xs"
-                      }`}
-                    >
-                      {isFollowed ? "Following" : "Follow"}
-                    </button>
-
-                    <Link
-                      href={`/companies/${company.slug}`}
-                      className="text-[12px] font-semibold text-zinc-500 hover:text-[#E7040D] transition-colors"
-                    >
-                      View profile →
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
 
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
         {/* Mobile Carousel Navigation Controls matching reference layout */}
         <div className="flex sm:hidden items-center gap-2 mt-4 pt-1">
           <button

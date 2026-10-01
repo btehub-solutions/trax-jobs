@@ -31,19 +31,45 @@ export default async function Home() {
   const activeJobs = rawJobs && rawJobs.length > 0 ? rawJobs : SAMPLE_JOBS;
   const experienceCounts = calculateExperienceCounts(activeJobs);
 
-  const sanityCompanies = (rawCompanies ?? []).map((c: any) => ({
-    name: c.name ?? "",
-    slug: c.slug ?? "",
-    category: c.industry ?? "Technology",
-    size: c.employeesCount ? `${c.employeesCount} team` : "50+ team",
-    location: c.location ?? "Lagos, Nigeria",
-    industry: c.industry ?? "Technology",
-    subIndustry: c.industry ?? "Software & Services",
-    description: c.description ?? "",
-    openRoles: c.openJobsCount ?? 0,
-    coverImage: urlForImage(c.coverImage, { width: 1200, quality: 95 }) || "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    logo: urlForImage(c.logo, { width: 240, quality: 95 }),
-  }));
+  const sanityCompanies = (rawCompanies ?? []).map((c: any) => {
+    const slug = (c.slug ?? "").toLowerCase();
+    const fallbackCover =
+      slug.includes("btehub")
+        ? "https://images.pexels.com/photos/3182746/pexels-photo-3182746.jpeg?auto=compress&cs=tinysrgb&w=800"
+        : slug.includes("savey")
+        ? "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
+        : "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800";
+
+    const coverUrl = urlForImage(c.coverImage, { width: 1200, quality: 95 });
+    const isLogoAsCover = !coverUrl || (c.coverImage?._ref && c.logo?._ref && c.coverImage._ref === c.logo._ref) || slug.includes("btehub") || slug.includes("savey");
+    const finalCover = isLogoAsCover ? fallbackCover : coverUrl;
+
+    let category = "Fintech";
+    const ind = (c.industry ?? "").toLowerCase();
+    if (ind.includes("data") || ind.includes("ai") || ind.includes("developer") || ind.includes("software")) {
+      category = "Developer Tools";
+    } else if (ind.includes("logistics") || ind.includes("mobility") || ind.includes("delivery")) {
+      category = "Mobility / Logistics";
+    } else if (ind.includes("talent") || ind.includes("hr")) {
+      category = "Talent & HR";
+    } else if (ind.includes("banking") || ind.includes("switch")) {
+      category = "Banking Infrastructure";
+    }
+
+    return {
+      name: c.name ?? "",
+      slug: c.slug ?? "",
+      category,
+      size: c.employeesCount ? `${c.employeesCount} team` : "50+ team",
+      location: c.location ?? "Lagos, Nigeria",
+      industry: c.industry ?? "Technology",
+      subIndustry: c.industry ?? "Software & Services",
+      description: c.description ?? "",
+      openRoles: c.openJobsCount ?? 0,
+      coverImage: finalCover,
+      logo: urlForImage(c.logo, { width: 240, quality: 95 }),
+    };
+  });
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] flex flex-col w-full max-w-full">

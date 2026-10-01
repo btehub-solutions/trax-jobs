@@ -37,6 +37,11 @@ This repository is ready for production. All existing pages, layouts, components
 4. **Authoritative Domain**:
    - The canonical production domain for this application is strictly `https://jobs.trax.ng` (NOT `https://trax.ng`, which is the separate Trax news site). All metadataBase configurations, sitemaps, robots.txt, and Open Graph previews must resolve to `https://jobs.trax.ng`.
 
+5. **Fast Execution & Verification Workflow (STRICT TOKEN & SPEED POLICY)**:
+   - **Zero intermediate verification loops**: Do NOT run `curl`, server status checks (`200 OK`), browser subagent checks, or `git` commands after every individual file edit. This wastes tokens and delays the user.
+   - **Silent, rapid batch editing**: Apply all code and style modifications directly and concisely across all target files in a single pass.
+   - **Final verification only**: Run typecheck, server status, and git checks only once, at the very end, when the user explicitly asks for compilation or signals that all edits are finished.
+
 ---
 
 ## Project context
