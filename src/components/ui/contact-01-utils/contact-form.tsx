@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle, CaretDown, WhatsappLogo } from "@phosphor-icons/react";
+import { CaretDown, WhatsappLogo } from "@phosphor-icons/react";
 
 interface ContactFormProps {
   initialTopic?: string | null;
@@ -106,15 +106,44 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
   return (
     <div className="bg-white border border-zinc-200/90 rounded-lg p-5 sm:p-8 md:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.03)]">
       {submitted ? (
-        <div className="py-12 text-center space-y-4">
-          <CheckCircle size={48} weight="fill" className="text-[#E7040D] mx-auto" />
-          <h3 className="text-2xl font-black text-[#1F1F1F] tracking-tight">
-            Inquiry Received
+        <div className="py-8 sm:py-12 text-center flex flex-col items-center justify-center">
+          {/* Signature Tilted Editorial Badge */}
+          <div className="relative w-36 h-36 sm:w-40 sm:h-40 bg-[#FCE8E0] rounded-sm p-4 shadow-[12px_18px_32px_-6px_rgba(231,4,13,0.18)] transform -rotate-2 hover:rotate-0 transition-transform duration-300 flex flex-col justify-between select-none">
+            <div className="absolute top-0 left-0 right-0 h-4 bg-black/5 pointer-events-none" />
+            <div className="w-full h-full border border-[#E7040D]/30 rounded-sm p-2 flex flex-col items-center justify-center">
+              <svg viewBox="0 0 100 100" fill="none" stroke="#E7040D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 opacity-90">
+                {/* Dispatch Envelope Body */}
+                <rect x="18" y="28" width="64" height="46" rx="2" />
+                <path d="M18 32l32 24 32-24" />
+                <path d="M18 70l24-20" />
+                <path d="M82 70l-24-20" />
+                {/* Verified Seal / Checkmark badge */}
+                <circle cx="68" cy="28" r="9" fill="#E7040D" stroke="none" />
+                <path d="M64 28l3 3 5-5" stroke="white" strokeWidth="2" />
+                {/* Subtle sparkle accents */}
+                <path d="M14 20l3 3M17 20l-3 3" strokeWidth="1.5" />
+                <path d="M86 58l3 3M89 58l-3 3" strokeWidth="1.5" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Editorial Kicker Badge */}
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fce8e0] text-[#E7040D] text-[11px] font-bold tracking-wider uppercase mt-8 mb-3">
+            Inquiry Logged
+          </div>
+
+          {/* Editorial Headline */}
+          <h3 className="text-[24px] sm:text-[28px] font-black text-zinc-950 tracking-[-0.02em] mb-3">
+            Inquiry in good hands
           </h3>
-          <p className="text-[14px] text-zinc-600 max-w-sm mx-auto leading-relaxed">
-            Thank you, <span className="font-bold text-zinc-900">{firstName} {lastName}</span>. An editor from our desk will review your submission and follow up at <span className="font-bold text-zinc-900">{email}</span> within 24 business hours.
+
+          {/* Context Copy */}
+          <p className="text-[14.5px] sm:text-[15px] text-zinc-600 max-w-md mx-auto leading-[1.7] mb-2">
+            Thank you, <span className="font-semibold text-zinc-900">{firstName} {lastName}</span>. An editor from the Trax desk has received your note and will review it within 24 business hours at <span className="font-semibold text-zinc-900">{email}</span>.
           </p>
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+
+          {/* Action CTAs */}
+          <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
             <button
               onClick={() => {
                 setSubmitted(false);
@@ -128,7 +157,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
                 setMessage("");
                 setAgreed(false);
               }}
-              className="w-full sm:w-auto px-6 py-2.5 bg-[#1F1F1F] hover:bg-[#E7040D] text-white text-xs font-bold transition-all rounded-lg cursor-pointer"
+              className="w-full sm:w-auto px-6 py-2.5 bg-[#1F1F1F] hover:bg-[#E7040D] text-white text-[13px] font-bold transition-all rounded-sm cursor-pointer shadow-xs active:scale-[0.98]"
             >
               Send Another Inquiry
             </button>
@@ -136,9 +165,9 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               href="https://wa.me/2347045422815"
               target="_blank"
               rel="noreferrer"
-              className="w-full sm:w-auto px-6 py-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold transition-all rounded-lg flex items-center justify-center gap-1.5"
+              className="w-full sm:w-auto px-6 py-2.5 bg-white hover:bg-zinc-50 border border-zinc-300 text-zinc-800 text-[13px] font-bold transition-all rounded-sm flex items-center justify-center gap-2 cursor-pointer shadow-2xs hover:border-zinc-400 active:scale-[0.98]"
             >
-              <WhatsappLogo size={16} weight="fill" />
+              <WhatsappLogo size={18} weight="fill" className="text-[#25D366]" />
               <span>Chat on WhatsApp</span>
             </a>
           </div>
