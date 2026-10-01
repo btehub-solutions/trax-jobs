@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -262,18 +262,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
     }));
   };
 
-  const activeList = useMemo(() => {
-    if (!dynamicCompanies || dynamicCompanies.length === 0) return COMPANIES;
-
-    const dynamicSlugs = new Set(dynamicCompanies.map((c) => (c.slug || "").toLowerCase()));
-    const dynamicNames = new Set(dynamicCompanies.map((c) => (c.name || "").toLowerCase()));
-
-    const remainingCurated = COMPANIES.filter(
-      (c) => !dynamicSlugs.has((c.slug || "").toLowerCase()) && !dynamicNames.has((c.name || "").toLowerCase())
-    );
-
-    return [...dynamicCompanies, ...remainingCurated];
-  }, [dynamicCompanies]);
+  const activeList = dynamicCompanies && dynamicCompanies.length > 0 ? dynamicCompanies : COMPANIES;
 
   const filteredCompanies =
     activeCategory === "Highlight"
