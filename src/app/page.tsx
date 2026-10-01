@@ -32,18 +32,6 @@ export default async function Home() {
   const experienceCounts = calculateExperienceCounts(activeJobs);
 
   const sanityCompanies = (rawCompanies ?? []).map((c: any) => {
-    const slug = (c.slug ?? "").toLowerCase();
-    const fallbackCover =
-      slug.includes("btehub")
-        ? "https://images.pexels.com/photos/3182746/pexels-photo-3182746.jpeg?auto=compress&cs=tinysrgb&w=800"
-        : slug.includes("savey")
-        ? "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
-        : "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800";
-
-    const coverUrl = urlForImage(c.coverImage, { width: 1200, quality: 95 });
-    const isLogoAsCover = !coverUrl || (c.coverImage?._ref && c.logo?._ref && c.coverImage._ref === c.logo._ref) || slug.includes("btehub") || slug.includes("savey");
-    const finalCover = isLogoAsCover ? fallbackCover : coverUrl;
-
     let category = "Fintech";
     const ind = (c.industry ?? "").toLowerCase();
     if (ind.includes("data") || ind.includes("ai") || ind.includes("developer") || ind.includes("software")) {
@@ -66,7 +54,7 @@ export default async function Home() {
       subIndustry: c.industry ?? "Software & Services",
       description: c.description ?? "",
       openRoles: c.openJobsCount ?? 0,
-      coverImage: finalCover,
+      coverImage: urlForImage(c.coverImage, { width: 1200, quality: 95 }) || "",
       logo: urlForImage(c.logo, { width: 240, quality: 95 }),
     };
   });
