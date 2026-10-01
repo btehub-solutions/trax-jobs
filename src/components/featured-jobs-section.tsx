@@ -219,7 +219,7 @@ export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
             return (
               <div
                 key={job.id}
-                className="w-[280px] sm:w-[295px] md:w-[305px] min-h-[350px] sm:min-h-[365px] bg-white rounded-lg border border-zinc-200/90 p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.1)] hover:border-[#E7040D]/40 hover:-translate-y-1 transition-all duration-300 group relative shrink-0 snap-start select-none"
+                className="w-[280px] sm:w-[295px] md:w-[305px] min-h-[350px] sm:min-h-[365px] bg-white rounded-lg border border-zinc-200/90 p-5 sm:p-6 flex flex-col justify-between shadow-2xs hover:shadow-md hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 group relative shrink-0 snap-start select-none"
               >
                 {/* Top Section: Avatar, Title, Company, Status, Bookmark */}
                 <div>

@@ -84,13 +84,13 @@ export function TestimonialsTrustSection() {
   };
 
   return (
-    <section className="w-full bg-[#FAF8F5] py-20 sm:py-28 relative overflow-hidden">
+    <section className="w-full bg-[#FAF8F5] py-16 sm:py-20 lg:py-24 relative overflow-hidden">
       {/* Header: constrained */}
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
         {/* Header Row */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
           <div>
-            <h2 className="text-[32px] sm:text-[44px] lg:text-[48px] font-extrabold tracking-[-0.03em] text-zinc-950 leading-[1.15]">
+            <h2 className="text-[32px] sm:text-[44px] lg:text-[48px] font-black tracking-[-0.03em] text-[#1F1F1F] leading-[1.12]">
               Why people trust us
             </h2>
             <p className="text-[15px] sm:text-[16px] text-zinc-600 leading-relaxed mt-2 max-w-xl">
@@ -124,7 +124,7 @@ export function TestimonialsTrustSection() {
           {[...TESTIMONIALS, ...TESTIMONIALS].map((t, idx) => (
             <div
               key={idx}
-              className="w-[310px] sm:w-[350px] shrink-0 bg-white rounded-lg border border-zinc-200/80 shadow-[0_8px_24px_-4px_rgba(15,16,18,0.05)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.1)] hover:-translate-y-1 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between group cursor-grab active:cursor-grabbing"
+              className="w-[310px] sm:w-[350px] shrink-0 bg-white rounded-lg border border-zinc-200/90 shadow-2xs hover:shadow-md hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between group cursor-grab active:cursor-grabbing"
             >
               {/* User Identity & Avatar */}
               <div>

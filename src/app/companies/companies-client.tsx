@@ -740,7 +740,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
         <div>
           <div className="flex items-center justify-between pb-3.5 border-b border-zinc-200/80 gap-3">
             <div className="flex items-center gap-3 min-w-0">
-              <h1 className="text-[24px] sm:text-[30px] font-black text-[#1F1F1F] tracking-tight min-w-0">
+              <h1 className="text-[24px] sm:text-[30px] font-black text-[#1F1F1F] tracking-[-0.02em] min-w-0">
                 New companies to explore
               </h1>
               <span className="hidden sm:inline-flex items-center px-2 py-0.5 bg-zinc-100 text-zinc-600 text-[11px] font-bold border border-zinc-200/70 rounded-lg">

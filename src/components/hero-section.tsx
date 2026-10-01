@@ -85,7 +85,7 @@ export function HeroSection() {
             {/* Trax Brand Red Search Button */}
             <button
               type="submit"
-              className="inline-flex items-center justify-center px-10 py-3.5 sm:py-4 rounded-lg bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.97] hover:shadow-[0_10px_26px_-4px_rgba(231,4,13,0.35)] text-white text-[16px] font-semibold transition-all duration-150 shadow-sm shrink-0 cursor-pointer select-none"
+              className="inline-flex items-center justify-center px-10 py-3.5 sm:py-4 rounded-lg bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.97] hover:shadow-md text-white text-[16px] font-semibold transition-all duration-150 shadow-sm shrink-0 cursor-pointer select-none"
             >
               Search
             </button>

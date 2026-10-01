@@ -282,7 +282,7 @@ function JobsPageInner({ jobs }: { jobs: SanityJob[] }) {
           <div className="flex-1 w-full space-y-5">
             <div id="jobs-results-heading" className="flex items-center justify-between pb-1 gap-3">
               <div className="flex items-center gap-3 min-w-0">
-                <h1 className="text-[26px] sm:text-[30px] font-extrabold text-zinc-950 tracking-tight shrink-0">
+                <h1 className="text-[26px] sm:text-[30px] font-black text-[#1F1F1F] tracking-[-0.02em] shrink-0">
                   {filteredJobs.length} {filteredJobs.length === 1 ? "job" : "jobs"}
                 </h1>
 

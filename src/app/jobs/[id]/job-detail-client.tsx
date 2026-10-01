@@ -195,7 +195,7 @@ export default function JobDetailClient({
               </div>
             </div>
             <div className="flex items-center gap-3 shrink-0">
-              <a href={job.applicationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-5 py-2 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] hover:shadow-[0_8px_20px_-4px_rgba(231,4,13,0.35)] text-white text-[13px] font-bold rounded-lg shadow-2xs transition-all cursor-pointer select-none">
+              <a href={job.applicationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-5 py-2 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] hover:shadow-sm text-white text-[13px] font-bold rounded-lg shadow-2xs transition-all cursor-pointer select-none">
                 <span>Apply</span>
                 <ArrowSquareOut size={14} weight="bold" />
               </a>
@@ -300,7 +300,7 @@ export default function JobDetailClient({
 
               <div className="pt-6 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <a href={job.applicationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-6 py-2.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] hover:shadow-[0_10px_24px_-4px_rgba(231,4,13,0.35)] text-white text-[13.5px] font-bold rounded-lg shadow-2xs transition-all cursor-pointer select-none">
+                  <a href={job.applicationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-6 py-2.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] hover:shadow-sm text-white text-[13.5px] font-bold rounded-lg shadow-2xs transition-all cursor-pointer select-none">
                     <span>Apply</span>
                     <ArrowSquareOut size={15} weight="bold" />
                   </a>

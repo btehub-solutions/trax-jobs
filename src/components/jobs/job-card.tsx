@@ -310,7 +310,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
 
             <Link
               href={`/jobs/${job.slug || job.id}`}
-              className="flex-1 py-2 rounded-lg text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] active:scale-[0.98] transition-all duration-150 cursor-pointer text-center group-hover:border-[#E7040D] whitespace-nowrap"
+              className="flex-1 py-2 rounded-lg text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs hover:shadow-xs active:scale-[0.98] transition-all duration-150 cursor-pointer text-center group-hover:border-[#E7040D] whitespace-nowrap"
             >
               View Job
             </Link>
@@ -327,7 +327,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
         />
 
         {/* Main Job Card */}
-        <div className="relative z-10 bg-white rounded-lg border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] group-hover:shadow-[0_14px_32px_-6px_rgba(231,4,13,0.08)] group-hover:border-[#E7040D]/40 group-hover:-translate-y-0.5 active:scale-[0.99] active:bg-zinc-50/50 transition-all duration-150 p-4 sm:p-6 md:p-7 flex flex-col justify-between overflow-hidden">
+        <div className="relative z-10 bg-white rounded-lg border border-zinc-200/90 shadow-2xs group-hover:shadow-md group-hover:border-zinc-300 group-hover:-translate-y-0.5 active:scale-[0.99] active:bg-zinc-50/50 transition-all duration-150 p-4 sm:p-6 md:p-7 flex flex-col justify-between overflow-hidden">
         
         {/* Top Section: Logo, Title, Company & Right-side 3-Photo Collage Widget */}
         <div>
@@ -464,7 +464,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
           {/* Details Button (Navigates to Job Detail Page) */}
           <Link
             href={`/jobs/${job.slug || job.id}`}
-            className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-md bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] text-white text-[12px] sm:text-[12.5px] font-bold shadow-2xs transition-all duration-150 cursor-pointer select-none whitespace-nowrap shrink-0"
+            className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-md bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 hover:shadow-xs text-white text-[12px] sm:text-[12.5px] font-bold shadow-2xs transition-all duration-150 cursor-pointer select-none whitespace-nowrap shrink-0"
           >
             <span>Details</span>
             <ArrowUpRight size={13} weight="bold" className="shrink-0" />

@@ -227,7 +227,7 @@ export function HowItWorksSection() {
 
                       {/* Trax Red Accent Badge */}
                       <div className="absolute top-5 left-5 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 border border-white/15 backdrop-blur-sm">
-                        <span className="w-2 h-2 rounded-full bg-[#E7040D] animate-pulse" />
+                        <span className="w-2 h-2 rounded-full bg-[#E7040D]" />
                         <span className="text-[11px] font-bold tracking-wider uppercase text-white">
                           Verified Roles
                         </span>

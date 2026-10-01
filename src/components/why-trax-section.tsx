@@ -139,7 +139,7 @@ export function WhyTraxSection() {
   ];
 
   return (
-    <section className="w-full bg-[#FAF8F5] py-16 sm:py-24 lg:py-28 relative overflow-hidden">
+    <section className="w-full bg-[#FAF8F5] py-16 sm:py-20 lg:py-24 relative overflow-hidden">
       <div className="max-w-[1240px] mx-auto px-5 sm:px-10 lg:px-16 relative z-10">
         
         {/* Section Header */}
@@ -175,7 +175,7 @@ export function WhyTraxSection() {
             onMouseLeave={() => setIsHovered(false)}
           >
             {/* Main Card with Crisp Subtle 8px Corners */}
-            <div className="bg-white rounded-[8px] overflow-hidden shadow-[0_14px_34px_-8px_rgba(15,16,18,0.11)] border border-black/10 select-none transition-all duration-300">
+            <div className="bg-white rounded-lg overflow-hidden shadow-2xs border border-zinc-200/90 select-none transition-all duration-300">
               {/* Sliding Carousel Track */}
               <div
                 className="flex transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform"
@@ -203,7 +203,7 @@ export function WhyTraxSection() {
                       </div>
 
                       {/* Front Main Job Card */}
-                      <div className="relative z-10 w-full bg-white rounded-[8px] p-3.5 shadow-[0_10px_24px_-6px_rgba(15,16,18,0.12)] border border-black/10 space-y-2.5">
+                      <div className="relative z-10 w-full bg-white rounded-lg p-3.5 shadow-sm border border-zinc-200/90 space-y-2.5">
                         <div>
                           <h4 className="text-[15px] font-black text-black tracking-tight leading-tight">
                             Senior Frontend Engineer
@@ -302,7 +302,7 @@ export function WhyTraxSection() {
                     </div>
 
                     {/* Main Curated Profile Card */}
-                    <div className="relative z-10 w-full max-w-[210px] bg-white rounded-[8px] p-3.5 shadow-md border border-black/10 text-center flex flex-col items-center mt-2.5">
+                    <div className="relative z-10 w-full max-w-[210px] bg-white rounded-lg p-3.5 shadow-sm border border-zinc-200/90 text-center flex flex-col items-center mt-2.5">
                       <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5">
                         Curated Profile
                       </p>
@@ -326,7 +326,7 @@ export function WhyTraxSection() {
                       </p>
                       <p className="text-[9px] text-zinc-400">Ex-Paystack &bull; Lagos, NG</p>
                       <div className="mt-2 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#E2F2E6] text-[#14532D] text-[9px] font-bold border border-emerald-200">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                         <span>2 recruiter requests</span>
                       </div>
                     </div>
@@ -377,7 +377,7 @@ export function WhyTraxSection() {
                     {/* 3-Column Micro Culture Grid */}
                     <div className="grid grid-cols-3 gap-1.5">
                       {/* Col 1: Office */}
-                      <div className="bg-white rounded-lg overflow-hidden shadow-2xs border border-black/10 flex flex-col h-[175px]">
+                      <div className="bg-white rounded-lg overflow-hidden shadow-2xs border border-zinc-200/90 flex flex-col h-[175px]">
                         <div className="h-5.5 border-b border-zinc-100 flex items-center justify-center text-[9px] font-bold text-zinc-800">
                           Office
                         </div>
@@ -406,7 +406,7 @@ export function WhyTraxSection() {
                       </div>
 
                       {/* Col 2: Benefits */}
-                      <div className="bg-white rounded-lg p-1.5 shadow-2xs border border-black/10 flex flex-col justify-between h-[175px] overflow-hidden">
+                      <div className="bg-white rounded-lg p-1.5 shadow-2xs border border-zinc-200/90 flex flex-col justify-between h-[175px] overflow-hidden">
                         <div className="h-5.5 border-b border-zinc-100 flex items-center justify-center text-[9px] font-bold text-zinc-800 -mx-1.5 -mt-1.5 mb-1">
                           Benefits
                         </div>
@@ -436,7 +436,7 @@ export function WhyTraxSection() {
                       </div>
 
                       {/* Col 3: Team */}
-                      <div className="bg-white rounded-lg overflow-hidden shadow-2xs border border-black/10 flex flex-col h-[175px]">
+                      <div className="bg-white rounded-lg overflow-hidden shadow-2xs border border-zinc-200/90 flex flex-col h-[175px]">
                         <div className="h-5.5 border-b border-zinc-100 flex items-center justify-center text-[9px] font-bold text-zinc-800">
                           Meet team
                         </div>
@@ -573,7 +573,7 @@ export function WhyTraxSection() {
             
             {/* Left Notepad Card */}
             <div
-              className="w-full max-w-[270px] lg:w-[270px] min-h-[255px] sm:min-h-[265px] bg-white rounded-lg p-5 sm:p-5.5 shadow-[0_12px_28px_-8px_rgba(15,16,18,0.1)] border border-black/5 relative z-20 lg:-rotate-3 lg:-mr-6 lg:mt-5 shrink-0 transition-transform duration-300 hover:rotate-0 flex flex-col justify-start"
+              className="w-full max-w-[270px] lg:w-[270px] min-h-[255px] sm:min-h-[265px] bg-white rounded-lg p-5 sm:p-5.5 shadow-2xs border border-zinc-200/90 relative z-20 lg:-rotate-3 lg:-mr-6 lg:mt-5 shrink-0 transition-transform duration-300 hover:rotate-0 flex flex-col justify-start"
               style={{
                 backgroundImage: `
                   repeating-linear-gradient(0deg, rgba(0,0,0,0.035) 0px, rgba(0,0,0,0.035) 1px, transparent 1px, transparent 16px),
@@ -606,7 +606,7 @@ export function WhyTraxSection() {
             </div>
 
             {/* Right Container: Warm Peach Alabaster (#FCE8DC) with Stacked Job Cards */}
-            <div className="w-full max-w-[600px] lg:w-[600px] bg-white rounded-lg overflow-hidden shadow-[0_16px_36px_-10px_rgba(231,4,13,0.08)] border border-black/5 relative z-10 mt-5 lg:mt-0 shrink-0">
+            <div className="w-full max-w-[600px] lg:w-[600px] bg-white rounded-lg overflow-hidden shadow-2xs border border-zinc-200/90 relative z-10 mt-5 lg:mt-0 shrink-0">
               {/* White header bar */}
               <div className="h-7 bg-white border-b border-zinc-100" />
 
@@ -631,7 +631,7 @@ export function WhyTraxSection() {
                   </div>
 
                   {/* Front Main Job Card */}
-                  <div className="relative z-10 w-full bg-white rounded-lg p-4 sm:p-5 shadow-[0_14px_30px_-6px_rgba(15,16,18,0.14)] border border-black/5 space-y-3">
+                  <div className="relative z-10 w-full bg-white rounded-lg p-4 sm:p-5 shadow-sm border border-zinc-200/90 space-y-3">
                     
                     {/* Role Title & Company Header */}
                     <div>
@@ -711,7 +711,7 @@ export function WhyTraxSection() {
           <div className="relative flex flex-col lg:flex-row items-center lg:items-start justify-center pt-2 pb-8">
             
             {/* Left Container: Pale Honey Linen with African Candidate Profile */}
-            <div className="w-full max-w-[600px] lg:w-[600px] bg-white rounded-lg overflow-hidden shadow-[0_16px_36px_-10px_rgba(202,138,4,0.12)] border border-black/5 relative z-10 order-2 lg:order-1 mt-5 lg:mt-0 shrink-0">
+            <div className="w-full max-w-[600px] lg:w-[600px] bg-white rounded-lg overflow-hidden shadow-2xs border border-zinc-200/90 relative z-10 order-2 lg:order-1 mt-5 lg:mt-0 shrink-0">
               {/* White header bar */}
               <div className="h-7 bg-white border-b border-zinc-100" />
 
@@ -719,7 +719,7 @@ export function WhyTraxSection() {
               <div className="p-6 sm:p-8 bg-[#FBF4DC] flex items-center justify-center min-h-[280px] relative overflow-hidden">
                 
                 {/* Floating Notification Bubble 1 (Top Left: Flutterwave) */}
-                <div className="absolute top-3 left-3 sm:left-5 z-20 w-[205px] sm:w-[225px] bg-white rounded-lg p-2.5 shadow-[0_10px_24px_-4px_rgba(15,16,18,0.14)] border border-zinc-200/80 flex items-start gap-2 -rotate-3">
+                <div className="absolute top-3 left-3 sm:left-5 z-20 w-[205px] sm:w-[225px] bg-white rounded-lg p-2.5 shadow-sm border border-zinc-200/90 flex items-start gap-2 -rotate-3">
                   <BrandLogo name="Flutterwave" />
                   <div className="min-w-0">
                     <p className="text-[10.5px] font-bold text-zinc-950 truncate leading-tight">
@@ -732,7 +732,7 @@ export function WhyTraxSection() {
                 </div>
 
                 {/* Main Candidate Card */}
-                <div className="relative z-10 w-full max-w-[250px] bg-white rounded-lg p-4 sm:p-4.5 shadow-[0_14px_30px_-6px_rgba(15,16,18,0.14)] border border-black/5 text-center flex flex-col items-center">
+                <div className="relative z-10 w-full max-w-[250px] bg-white rounded-lg p-4 sm:p-4.5 shadow-sm border border-zinc-200/90 text-center flex flex-col items-center">
                   
                   <p className="text-[9.5px] font-bold uppercase tracking-wider text-zinc-400 mb-2">
                     Curated Profile
@@ -765,13 +765,13 @@ export function WhyTraxSection() {
 
                   {/* Status Badge */}
                   <div className="mt-2.5 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#E2F2E6] text-[#14532D] text-[9.5px] font-bold border border-emerald-200">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                     <span>2 new recruiter requests</span>
                   </div>
                 </div>
 
                 {/* Floating Notification Bubble 2 (Bottom Left: Moniepoint) */}
-                <div className="absolute bottom-3 left-3 sm:left-6 z-20 w-[205px] sm:w-[225px] bg-white rounded-lg p-2.5 shadow-[0_10px_24px_-4px_rgba(15,16,18,0.14)] border border-zinc-200/80 flex items-start gap-2 rotate-3">
+                <div className="absolute bottom-3 left-3 sm:left-6 z-20 w-[205px] sm:w-[225px] bg-white rounded-lg p-2.5 shadow-sm border border-zinc-200/90 flex items-start gap-2 rotate-3">
                   <BrandLogo name="Moniepoint" />
                   <div className="min-w-0">
                     <p className="text-[10.5px] font-bold text-zinc-950 truncate leading-tight">
@@ -788,7 +788,7 @@ export function WhyTraxSection() {
 
             {/* Right Notepad Card */}
             <div
-              className="w-full max-w-[270px] lg:w-[270px] min-h-[255px] sm:min-h-[265px] bg-white rounded-lg p-5 sm:p-5.5 shadow-[0_12px_28px_-8px_rgba(15,16,18,0.1)] border border-black/5 relative z-20 order-1 lg:order-2 lg:rotate-2 lg:-ml-6 lg:mt-5 shrink-0 transition-transform duration-300 hover:rotate-0 flex flex-col justify-start"
+              className="w-full max-w-[270px] lg:w-[270px] min-h-[255px] sm:min-h-[265px] bg-white rounded-lg p-5 sm:p-5.5 shadow-2xs border border-zinc-200/90 relative z-20 order-1 lg:order-2 lg:rotate-2 lg:-ml-6 lg:mt-5 shrink-0 transition-transform duration-300 hover:rotate-0 flex flex-col justify-start"
               style={{
                 backgroundImage: `
                   repeating-linear-gradient(0deg, rgba(0,0,0,0.035) 0px, rgba(0,0,0,0.035) 1px, transparent 1px, transparent 16px),
@@ -832,7 +832,7 @@ export function WhyTraxSection() {
 
             {/* Left Notepad Card */}
             <div
-              className="w-full max-w-[270px] lg:w-[270px] min-h-[255px] sm:min-h-[265px] bg-white rounded-lg p-5 sm:p-5.5 shadow-[0_12px_28px_-8px_rgba(15,16,18,0.1)] border border-black/5 relative z-20 lg:-rotate-3 lg:-mr-6 lg:mt-5 shrink-0 transition-transform duration-300 hover:rotate-0 flex flex-col justify-start"
+              className="w-full max-w-[270px] lg:w-[270px] min-h-[255px] sm:min-h-[265px] bg-white rounded-lg p-5 sm:p-5.5 shadow-2xs border border-zinc-200/90 relative z-20 lg:-rotate-3 lg:-mr-6 lg:mt-5 shrink-0 transition-transform duration-300 hover:rotate-0 flex flex-col justify-start"
               style={{
                 backgroundImage: `
                   repeating-linear-gradient(0deg, rgba(0,0,0,0.035) 0px, rgba(0,0,0,0.035) 1px, transparent 1px, transparent 16px),
@@ -868,7 +868,7 @@ export function WhyTraxSection() {
             </div>
 
             {/* Right Container: Celadon Mint Linen (#E2F2E6) with Culture Tray */}
-            <div className="w-full max-w-[600px] lg:w-[600px] bg-white rounded-lg overflow-hidden shadow-[0_16px_36px_-10px_rgba(22,101,52,0.1)] border border-black/5 relative z-10 mt-5 lg:mt-0 shrink-0">
+            <div className="w-full max-w-[600px] lg:w-[600px] bg-white rounded-lg overflow-hidden shadow-2xs border border-zinc-200/90 relative z-10 mt-5 lg:mt-0 shrink-0">
               
               {/* White header bar */}
               <div className="h-7 bg-white border-b border-zinc-100" />
@@ -890,7 +890,7 @@ export function WhyTraxSection() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
 
                   {/* Column 1: Lagos HQ Location */}
-                  <div className="bg-white rounded-lg overflow-hidden shadow-2xs border border-black/5 flex flex-col h-[235px]">
+                  <div className="bg-white rounded-lg overflow-hidden shadow-2xs border border-zinc-200/90 flex flex-col h-[235px]">
                     <div className="h-7 border-b border-zinc-100 flex items-center justify-center text-[10.5px] font-bold text-zinc-800">
                       Office location
                     </div>
@@ -933,7 +933,7 @@ export function WhyTraxSection() {
                   </div>
 
                   {/* Column 2: Authentic Benefits */}
-                  <div className="bg-white rounded-lg p-2 shadow-2xs border border-black/5 flex flex-col justify-between h-[235px] overflow-hidden">
+                  <div className="bg-white rounded-lg p-2 shadow-2xs border border-zinc-200/90 flex flex-col justify-between h-[235px] overflow-hidden">
                     <div className="h-7 border-b border-zinc-100 flex items-center justify-center text-[10.5px] font-bold text-zinc-800 -mx-2 -mt-2 mb-1.5 px-2">
                       Benefits
                     </div>
@@ -979,7 +979,7 @@ export function WhyTraxSection() {
                   </div>
 
                   {/* Column 3: Meet African Engineering Lead */}
-                  <div className="bg-white rounded-lg overflow-hidden shadow-2xs border border-black/5 flex flex-col h-[235px]">
+                  <div className="bg-white rounded-lg overflow-hidden shadow-2xs border border-zinc-200/90 flex flex-col h-[235px]">
                     <div className="h-7 border-b border-zinc-100 flex items-center justify-center text-[10.5px] font-bold text-zinc-800">
                       Meet your team
                     </div>

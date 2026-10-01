@@ -12,6 +12,7 @@ import {
 } from "@phosphor-icons/react";
 import { TalentProfile } from "@/types";
 import { SAMPLE_TALENT } from "@/data/talent";
+import { formatTalentExperience } from "@/lib/utils";
 
 const TALENT_CATEGORIES = [
   "All Specialties",
@@ -151,7 +152,7 @@ export function FeaturedTalentSection({
   };
 
   return (
-    <section className="w-full bg-[#FAF8F5] py-20 sm:py-28 relative overflow-x-hidden">
+    <section className="w-full bg-[#FAF8F5] py-16 sm:py-20 lg:py-24 relative overflow-x-hidden">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
@@ -243,7 +244,7 @@ export function FeaturedTalentSection({
 
                     {/* Floating Availability Pill Badge (Top-Left on Cover) */}
                     <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs border border-zinc-200/90 text-[11px] font-semibold text-emerald-800 px-2.5 py-0.5 rounded-lg flex items-center gap-1.5 shadow-2xs z-10 pointer-events-none">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
                       <span>{availabilityLabel}</span>
                     </div>
                   </Link>
@@ -323,7 +324,7 @@ export function FeaturedTalentSection({
                         weight="regular"
                         className="text-zinc-400 shrink-0"
                       />
-                      <span>{person.experienceYears || "5+ yrs exp"}</span>
+                      <span>{formatTalentExperience(person.experienceYears, person.experienceLevel || "5+ years")}</span>
                     </div>
                   </div>
                 </div>

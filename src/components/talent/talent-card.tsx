@@ -17,6 +17,7 @@ import {
   CheckCircle,
 } from "@phosphor-icons/react";
 import { TalentProfile } from "@/types";
+import { formatTalentExperience } from "@/lib/utils";
 
 interface TalentCardProps {
   talent: TalentProfile;
@@ -42,7 +43,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
         
         {/* Editorial Pill on Top Right */}
         <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 px-2.5 py-0.5 bg-black/60 backdrop-blur-xs border border-white/20 text-white text-[10px] font-semibold tracking-wide rounded-full shadow-2xs z-10">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
           <span>{talent.workPreference}</span>
         </div>
       </div>
@@ -123,7 +124,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
             <span className="text-zinc-300">•</span>
             <div className="flex items-center gap-1">
               <Briefcase size={13} weight="bold" className="text-zinc-400" />
-              <span className="font-semibold text-zinc-700">{talent.experienceYears}</span>
+              <span className="font-semibold text-zinc-700">{formatTalentExperience(talent.experienceYears, talent.experienceLevel)}</span>
             </div>
           </div>
 

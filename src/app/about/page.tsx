@@ -209,12 +209,12 @@ function AboutPageContent() {
         </section>
 
         {/* 5. Our Solutions Section */}
-        <section className="w-full bg-[#FAF8F5] py-20 sm:py-28">
+        <section className="w-full bg-[#FAF8F5] py-16 sm:py-20 lg:py-24">
           <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16">
             
             {/* Section Header */}
             <div className="text-center mb-12 sm:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-[#1F1F1F] tracking-[-0.02em]">
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-[#1F1F1F] tracking-[-0.025em] leading-[1.15]">
                 Our solutions
               </h2>
             </div>
@@ -300,12 +300,12 @@ function AboutPageContent() {
         </section>
 
         {/* 6. Our Core Values Section */}
-        <section id="editorial-standards" className="w-full bg-[#FAF8F5] py-20 sm:py-28">
+        <section id="editorial-standards" className="w-full bg-[#FAF8F5] py-16 sm:py-20 lg:py-24">
           <div className="max-w-[1240px] mx-auto px-6 sm:px-10 lg:px-16">
             
             {/* Section Header */}
             <div className="text-center mb-16 sm:mb-20">
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-[#1F1F1F] tracking-[-0.02em]">
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-[#1F1F1F] tracking-[-0.025em] leading-[1.15]">
                 Our Core Values
               </h2>
             </div>
@@ -424,12 +424,12 @@ function AboutPageContent() {
         <TestimonialsTrustSection />
 
         {/* 9. Our People Section (100% Matching Arched Collage Reference) */}
-        <section className="w-full bg-[#FAF8F5] py-20 sm:py-28">
+        <section className="w-full bg-[#FAF8F5] py-16 sm:py-20 lg:py-24">
           <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16">
             
             {/* Header Content */}
             <div className="max-w-4xl mb-12 sm:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-[#1F1F1F] tracking-[-0.02em] mb-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-[#1F1F1F] tracking-[-0.025em] leading-[1.15] mb-4">
                 Our People
               </h2>
               <p className="text-[15px] sm:text-[16.5px] text-zinc-700 leading-[1.75] font-normal">
@@ -453,8 +453,6 @@ function AboutPageContent() {
                 
                 {/* 1. Team Member 1 (Left of top row on mobile, Col 1 on desktop) */}
                 <div className="flex flex-col items-center w-full lg:order-1">
-                  {/* Floating Geometric Accent */}
-                  <div className="w-3 sm:w-3.5 h-3 sm:h-3.5 bg-[#06B6D4] rotate-45 mb-2 sm:mb-2.5 shadow-2xs" />
                   <div className="h-[210px] xs:h-[260px] sm:h-[320px] lg:h-[350px] xl:h-[380px] w-full bg-[#1F1F1F] rounded-t-[50px] xs:rounded-t-[65px] sm:rounded-t-[100px] lg:rounded-t-[60px] xl:rounded-t-[75px] rounded-b-xl lg:rounded-b-none relative overflow-hidden flex items-end group shadow-sm">
                     <Image
                       src="/images/team-member-1.jpg"
@@ -470,8 +468,6 @@ function AboutPageContent() {
 
                 {/* 2. Ben Sam Oladoyin (Founder & Publisher - Center of top row on mobile, Col 4 Center on desktop) */}
                 <div className="flex flex-col items-center w-full lg:order-4">
-                  {/* Floating Geometric Accent (Trax Brand Red) */}
-                  <div className="w-0 h-0 border-l-[6px] sm:border-l-[7px] border-l-transparent border-r-[6px] sm:border-r-[7px] border-r-transparent border-b-[10px] sm:border-b-[12px] border-b-[#E7040D] mb-2 sm:mb-2.5 shadow-2xs" />
                   <div className="h-[250px] xs:h-[310px] sm:h-[380px] lg:h-[390px] xl:h-[420px] w-full bg-[#1F1F1F] rounded-t-[60px] xs:rounded-t-[80px] sm:rounded-t-[120px] lg:rounded-t-[70px] xl:rounded-t-[85px] rounded-b-xl lg:rounded-b-none relative overflow-hidden flex items-end group border border-[#E7040D]/30 shadow-md">
                     <Image
                       src="/images/founder.jpg"
@@ -487,8 +483,6 @@ function AboutPageContent() {
 
                 {/* 3. Team Member 2 (Right of top row on mobile, Col 6 on desktop) */}
                 <div className="flex flex-col items-center w-full lg:order-6">
-                  {/* Floating Geometric Accent */}
-                  <div className="w-3 sm:w-3.5 h-3 sm:h-3.5 bg-[#10B981] rotate-45 mb-2 sm:mb-2.5 shadow-2xs" />
                   <div className="h-[210px] xs:h-[260px] sm:h-[320px] lg:h-[350px] xl:h-[380px] w-full bg-[#1F1F1F] rounded-t-[50px] xs:rounded-t-[65px] sm:rounded-t-[100px] lg:rounded-t-[60px] xl:rounded-t-[75px] rounded-b-xl lg:rounded-b-none relative overflow-hidden flex items-end group shadow-sm">
                     <Image
                       src="/images/team-member-2.jpg"
@@ -504,8 +498,6 @@ function AboutPageContent() {
 
                 {/* 4. Team Member 3 (Left of bottom row on mobile, Col 2 on desktop) */}
                 <div className="flex flex-col items-center w-full lg:order-2">
-                  {/* Floating Geometric Accent */}
-                  <div className="w-3 sm:w-3.5 h-3 sm:h-3.5 bg-[#F59E0B] rotate-45 mb-2 sm:mb-2.5 shadow-2xs" />
                   <div className="h-[210px] xs:h-[260px] sm:h-[320px] lg:h-[350px] xl:h-[380px] w-full bg-[#1F1F1F] rounded-t-[50px] xs:rounded-t-[65px] sm:rounded-t-[100px] lg:rounded-t-[60px] xl:rounded-t-[75px] rounded-b-none relative overflow-hidden flex items-end group shadow-sm">
                     <Image
                       src="/images/team-member-3.png"
@@ -521,8 +513,6 @@ function AboutPageContent() {
 
                 {/* 5. Team Member 4 (Center of bottom row on mobile, Col 3 on desktop) */}
                 <div className="flex flex-col items-center w-full lg:order-3">
-                  {/* Floating Geometric Accent */}
-                  <div className="w-3 sm:w-3.5 h-3 sm:h-3.5 bg-[#F97316] rotate-45 mb-2 sm:mb-2.5 shadow-2xs" />
                   <div className="h-[235px] xs:h-[290px] sm:h-[355px] lg:h-[370px] xl:h-[400px] w-full bg-[#1F1F1F] rounded-t-[55px] xs:rounded-t-[75px] sm:rounded-t-[115px] lg:rounded-t-[65px] xl:rounded-t-[80px] rounded-b-none relative overflow-hidden flex items-end group shadow-sm">
                     <Image
                       src="/images/team-member-4.png"
@@ -538,8 +528,6 @@ function AboutPageContent() {
 
                 {/* 6. Team Member 5 (Right of bottom row on mobile, Col 7 on desktop) */}
                 <div className="flex flex-col items-center w-full lg:order-7">
-                  {/* Floating Geometric Accent */}
-                  <div className="w-3 sm:w-3.5 h-3 sm:h-3.5 bg-[#8B5CF6] rotate-45 mb-2 sm:mb-2.5 shadow-2xs" />
                   <div className="h-[210px] xs:h-[260px] sm:h-[320px] lg:h-[350px] xl:h-[380px] w-full bg-[#1F1F1F] rounded-t-[50px] xs:rounded-t-[65px] sm:rounded-t-[100px] lg:rounded-t-[60px] xl:rounded-t-[75px] rounded-b-none relative overflow-hidden flex items-end group shadow-sm">
                     <Image
                       src="/images/team-member-5.png"
@@ -555,8 +543,6 @@ function AboutPageContent() {
 
                 {/* 7. Team Member 6 (Centered on 3rd row on mobile, Col 5 on desktop) */}
                 <div className="flex flex-col items-center w-full col-start-2 lg:col-start-auto lg:order-5">
-                  {/* Floating Geometric Accent */}
-                  <div className="w-3 sm:w-3.5 h-3 sm:h-3.5 bg-[#0284C7] rotate-45 mb-2 sm:mb-2.5 shadow-2xs" />
                   <div className="h-[235px] xs:h-[290px] sm:h-[355px] lg:h-[370px] xl:h-[400px] w-full bg-[#1F1F1F] rounded-t-[55px] xs:rounded-t-[75px] sm:rounded-t-[115px] lg:rounded-t-[65px] xl:rounded-t-[80px] rounded-b-xl lg:rounded-b-none relative overflow-hidden flex items-end group shadow-sm">
                     <Image
                       src="/images/team-member-6.jpg"

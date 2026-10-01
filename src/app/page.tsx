@@ -66,11 +66,22 @@ export default async function Home() {
         {/* 6. Choose the company that's meant for you (Featured Companies) */}
         <FeaturedCompaniesSection companies={sanityCompanies.length > 0 ? sanityCompanies : undefined} />
 
-        {/* 7. Find teams that respect your craft (Ecosystem Standards & Direct Action CTAs) */}
-        <SocialProofSection />
-
-        {/* 8. Guide to getting hired (African Tech Career Playbooks) */}
-        <CareerGuidesSection guides={guides} />
+        {/* 7 & 8. Continuous Seamless Graph-Paper Canvas (Social Proof & Career Playbooks) */}
+        <div className="relative overflow-hidden bg-[#FAF8F5]">
+          {/* Continuous Graph-Paper Grid Background spanning both sections without boundary interruption */}
+          <div
+            className="absolute inset-0 pointer-events-none opacity-60"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, #e8e4dc 1px, transparent 1px),
+                linear-gradient(to bottom, #e8e4dc 1px, transparent 1px)
+              `,
+              backgroundSize: "28px 28px",
+            }}
+          />
+          <SocialProofSection showGrid={false} />
+          <CareerGuidesSection guides={guides} showGrid={false} />
+        </div>
       </main>
 
       {/* 9. Footer */}

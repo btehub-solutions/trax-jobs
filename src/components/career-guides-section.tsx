@@ -56,12 +56,14 @@ function formatDisplayTitle(slug: string, fullTitle: string): string {
 
 interface CareerGuidesSectionProps {
   guides?: GuideArticle[];
+  showGrid?: boolean;
+  className?: string;
 }
 
 /* ─────────────────────────────────────────────────────────────
    Main Component: Dynamic Guide to Getting Hired
 ───────────────────────────────────────────────────────────── */
-export function CareerGuidesSection({ guides }: CareerGuidesSectionProps = {}) {
+export function CareerGuidesSection({ guides, showGrid = true, className = "" }: CareerGuidesSectionProps = {}) {
   const [activeTab, setActiveTab] = useState("job-hunters");
 
   // Fallback to verified local GUIDES_DATA if live Sanity dataset is loading or empty
@@ -85,18 +87,20 @@ export function CareerGuidesSection({ guides }: CareerGuidesSectionProps = {}) {
   const visibleGuides = populatedGuides.slice(0, 3);
 
   return (
-    <section className="w-full bg-[#FAF8F5] pt-6 sm:pt-10 lg:pt-14 pb-20 sm:pb-28 relative overflow-hidden">
+    <section className={`w-full ${showGrid ? "bg-[#FAF8F5]" : "bg-transparent"} pt-10 sm:pt-14 lg:pt-16 pb-16 sm:pb-20 lg:pb-24 relative overflow-hidden ${className}`}>
       {/* Graph Paper Grid Canvas */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-60"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, #e8e4dc 1px, transparent 1px),
-            linear-gradient(to bottom, #e8e4dc 1px, transparent 1px)
-          `,
-          backgroundSize: "28px 28px",
-        }}
-      />
+      {showGrid && (
+        <div
+          className="absolute inset-0 pointer-events-none opacity-60"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #e8e4dc 1px, transparent 1px),
+              linear-gradient(to bottom, #e8e4dc 1px, transparent 1px)
+            `,
+            backgroundSize: "28px 28px",
+          }}
+        />
+      )}
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
         {/* Header Block */}
@@ -146,7 +150,7 @@ export function CareerGuidesSection({ guides }: CareerGuidesSectionProps = {}) {
               <Link
                 key={guide.slug}
                 href={`/guides/${guide.slug}`}
-                className="w-[280px] sm:w-full sm:max-w-[280px] shrink-0 snap-start bg-white rounded-lg border border-zinc-200/90 overflow-hidden shadow-[0_4px_16px_-4px_rgba(15,16,18,0.06)] hover:shadow-[0_16px_32px_-6px_rgba(231,4,13,0.12)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col group cursor-pointer"
+                className="w-[280px] sm:w-full sm:max-w-[280px] shrink-0 snap-start bg-white rounded-lg border border-zinc-200/90 overflow-hidden shadow-2xs hover:shadow-md hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col group cursor-pointer"
               >
                 {/* Image Container with editorial portrait framing */}
                 <div className="relative h-[260px] sm:h-[280px] md:h-[300px] w-full bg-zinc-100 overflow-hidden">

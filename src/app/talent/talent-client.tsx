@@ -21,6 +21,7 @@ import {
   ArrowClockwise,
 } from "@phosphor-icons/react";
 import { AppHeader } from "@/components/navigation/app-header";
+import { formatTalentExperience } from "@/lib/utils";
 
 export interface SanityTalentItem {
   id: string;
@@ -529,7 +530,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
         <div>
           <div className="flex items-center justify-between pb-3.5 border-b border-zinc-200/80 gap-3">
             <div className="flex items-center gap-3 min-w-0">
-              <h1 className="text-[24px] sm:text-[30px] font-black text-[#1F1F1F] tracking-tight min-w-0">
+              <h1 className="text-[24px] sm:text-[30px] font-black text-[#1F1F1F] tracking-[-0.02em] min-w-0">
                 Vetted talent to explore
               </h1>
               <span className="hidden sm:inline-flex items-center px-2 py-0.5 bg-zinc-100 text-zinc-600 text-[11px] font-bold border border-zinc-200/70 rounded-lg">
@@ -579,7 +580,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                   {item.availability && (
                     <div className="absolute top-2.5 right-2.5 z-10">
                       <span className="inline-flex items-center gap-1 text-[10px] font-bold text-white bg-black/60 backdrop-blur-xs border border-white/20 px-2.5 py-0.5 rounded-full shadow-2xs">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                         <span>{item.availability}</span>
                       </span>
                     </div>
@@ -619,7 +620,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                       <div className="flex items-center gap-2.5">
                         <Users size={15} weight="bold" className="text-zinc-500 shrink-0" />
                         <span className="truncate">
-                          {item.experienceYears ? `${item.experienceYears} experience` : item.experienceLevel || "Vetted Professional"}
+                          {formatTalentExperience(item.experienceYears, item.experienceLevel)}
                         </span>
                       </div>
                     </div>
@@ -629,7 +630,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                   <div className="pt-6 mt-auto">
                     <Link
                       href={`/talent/${item.slug}`}
-                      className="block w-full py-2 rounded-lg text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] active:scale-[0.98] transition-all duration-150 cursor-pointer text-center group-hover:border-[#E7040D] whitespace-nowrap"
+                      className="block w-full py-2 rounded-lg text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs hover:shadow-xs active:scale-[0.98] transition-all duration-150 cursor-pointer text-center group-hover:border-[#E7040D] whitespace-nowrap"
                     >
                       Hire Talent
                     </Link>

@@ -4,20 +4,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Quotes } from "@phosphor-icons/react";
 
-export function SocialProofSection() {
+interface SocialProofSectionProps {
+  showGrid?: boolean;
+  className?: string;
+}
+
+export function SocialProofSection({ showGrid = true, className = "" }: SocialProofSectionProps = {}) {
   return (
-    <section className="w-full bg-[#FAF8F5] pt-16 sm:pt-28 lg:pt-32 pb-8 sm:pb-20 lg:pb-28 relative overflow-hidden">
+    <section className={`w-full ${showGrid ? "bg-[#FAF8F5]" : "bg-transparent"} py-16 sm:py-20 lg:py-24 relative overflow-hidden ${className}`}>
       {/* Subtle Graph-Paper Grid Background */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-60"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, #e8e4dc 1px, transparent 1px),
-            linear-gradient(to bottom, #e8e4dc 1px, transparent 1px)
-          `,
-          backgroundSize: "28px 28px",
-        }}
-      />
+      {showGrid && (
+        <div
+          className="absolute inset-0 pointer-events-none opacity-60"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #e8e4dc 1px, transparent 1px),
+              linear-gradient(to bottom, #e8e4dc 1px, transparent 1px)
+            `,
+            backgroundSize: "28px 28px",
+          }}
+        />
+      )}
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">

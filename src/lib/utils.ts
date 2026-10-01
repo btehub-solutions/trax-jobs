@@ -215,3 +215,21 @@ export function isValidImageUrl(url?: string | null): url is string {
     trimmed.startsWith("data:image/")
   );
 }
+
+/**
+ * Formats a talent experience string cleanly, preventing duplicate suffixes like "5+ yrs exp experience".
+ * Normalizes "5+ yrs exp", "5+ years", or "5+ yrs" to "5+ years experience".
+ */
+export function formatTalentExperience(exp?: string | null, fallback?: string): string {
+  if (!exp || !exp.trim()) return fallback || "Vetted Professional";
+  let cleaned = exp.trim();
+  // If it already has "experience", clean up any abbreviations like "exp" preceding it
+  if (/\bexperience\b/i.test(cleaned)) {
+    return cleaned.replace(/\bexp\b/gi, "").replace(/\byrs\b/gi, "years").replace(/\byr\b/gi, "year").replace(/\s+/g, " ").trim();
+  }
+  // Strip "exp" abbreviation
+  cleaned = cleaned.replace(/\bexp\b/gi, "").trim();
+  // Normalize "yrs" to "years" and "yr" to "year"
+  cleaned = cleaned.replace(/\byrs\b/gi, "years").replace(/\byr\b/gi, "year").replace(/\s+/g, " ").trim();
+  return `${cleaned} experience`;
+}

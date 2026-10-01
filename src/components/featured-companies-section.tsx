@@ -306,7 +306,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
   };
 
   return (
-    <section className="w-full bg-[#FAF8F5] py-20 sm:py-28 relative overflow-x-hidden">
+    <section className="w-full bg-[#FAF8F5] py-16 sm:py-20 lg:py-24 relative overflow-x-hidden">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
 
         {/* Section Header */}

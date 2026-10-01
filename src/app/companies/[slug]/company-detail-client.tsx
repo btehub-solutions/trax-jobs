@@ -239,7 +239,7 @@ export default function CompanyDetailClient({
               <CompanyHeroMark name={company.name} logo={company.logo} accentColor={company.accentColor} />
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <h1 className="text-[24px] sm:text-[28px] font-bold text-zinc-900 leading-snug tracking-tight">
+                  <h1 className="text-[26px] sm:text-[32px] font-black text-[#1F1F1F] leading-tight tracking-[-0.02em]">
                     {company.name}
                   </h1>
                   {company.verified !== false && (
