@@ -594,8 +594,8 @@ function AboutPageContent() {
     )}
   </div>
 
-    {/* Footer: Only shown on the About Us tab */}
-    {activeTab === "about" && <Footer />}
+    {/* Footer: Shown on About Us and Contact tabs */}
+    {(activeTab === "about" || activeTab === "contact") && <Footer />}
   </div>
   );
 }
