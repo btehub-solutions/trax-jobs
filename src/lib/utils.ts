@@ -205,7 +205,7 @@ export function resolveJobTags(
  * Validates that an image source is a parseable URL or path for next/image.
  * Prevents fatal ERR_INVALID_URL crashes when company names or arbitrary strings are passed.
  */
-export function isValidImageUrl(url?: string | null): boolean {
+export function isValidImageUrl(url?: string | null): url is string {
   if (!url || typeof url !== "string") return false;
   const trimmed = url.trim();
   return (
