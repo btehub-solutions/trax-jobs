@@ -43,13 +43,13 @@ function CompanyHeroMark({
 }) {
   if (isValidImageUrl(logo)) {
     return (
-      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-none bg-white border border-zinc-200/90 shadow-2xs flex items-center justify-center p-2 overflow-hidden shrink-0">
+      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-white border border-zinc-200/90 shadow-2xs flex items-center justify-center p-2 overflow-hidden shrink-0">
         <Image
           src={logo}
           alt={name}
           width={80}
           height={80}
-          className="object-contain w-full h-full"
+          className="object-contain w-full h-full rounded-md"
           unoptimized
         />
       </div>
@@ -59,7 +59,7 @@ function CompanyHeroMark({
   const n = name.toLowerCase();
   if (n.includes("paystack")) {
     return (
-      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-none bg-white border border-zinc-200/90 shadow-2xs flex items-center justify-center p-3 shrink-0">
+      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-white border border-zinc-200/90 shadow-2xs flex items-center justify-center p-3 shrink-0">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full text-[#00C3F8]">
           <path d="M15 22h70v16H15zM15 44h45v16H15zM15 66h70v15H15z" fill="currentColor" />
         </svg>
@@ -68,7 +68,7 @@ function CompanyHeroMark({
   }
   if (n.includes("flutterwave")) {
     return (
-      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-none bg-white border border-zinc-200/90 shadow-2xs flex items-center justify-center p-3 shrink-0">
+      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-white border border-zinc-200/90 shadow-2xs flex items-center justify-center p-3 shrink-0">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M20 50c0-16.569 13.431-30 30-30s30 13.431 30 30" stroke="#FB4E2D" strokeWidth="12" strokeLinecap="round" />
           <path d="M32 50c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="#FF9B00" strokeWidth="10" strokeLinecap="round" />
@@ -78,7 +78,7 @@ function CompanyHeroMark({
   }
   if (n.includes("moniepoint")) {
     return (
-      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-none bg-[#0355D4] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-3 text-white shrink-0">
+      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-[#0355D4] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-3 text-white shrink-0">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M22 22l28 28-28 28V22zM78 22L50 50l28 28V22z" fill="white" />
         </svg>
@@ -87,14 +87,14 @@ function CompanyHeroMark({
   }
   if (n.includes("andela")) {
     return (
-      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-none bg-white border border-zinc-200/90 shadow-2xs flex items-center justify-center p-2 shrink-0">
+      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-white border border-zinc-200/90 shadow-2xs flex items-center justify-center p-2 shrink-0">
         <span className="text-[#3359DF] font-black text-2xl tracking-tighter">A</span>
       </div>
     );
   }
   if (n.includes("kuda")) {
     return (
-      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-none bg-[#40196D] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-2 shrink-0">
+      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-[#40196D] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-2 shrink-0">
         <span className="text-white font-black text-base tracking-tight">kuda.</span>
       </div>
     );
@@ -102,7 +102,7 @@ function CompanyHeroMark({
 
   return (
     <div
-      className="w-16 h-16 sm:w-20 sm:h-20 rounded-none border border-zinc-200/90 shadow-2xs flex items-center justify-center text-white font-bold text-xl shrink-0"
+      className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg border border-zinc-200/90 shadow-2xs flex items-center justify-center text-white font-bold text-xl shrink-0"
       style={{ backgroundColor: accentColor || "#1F1F1F" }}
     >
       {name.slice(0, 2).toUpperCase()}
@@ -215,7 +215,7 @@ export default function CompanyDetailClient({
           <div className="lg:col-span-7 space-y-6">
 
             {/* Feature Cover Banner Container */}
-            <div className="relative w-full h-[280px] sm:h-[340px] md:h-[360px] rounded-none overflow-hidden border border-zinc-200/90 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-950">
+            <div className="relative w-full h-[280px] sm:h-[340px] md:h-[360px] rounded-lg overflow-hidden border border-zinc-200/90 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-950">
               <Image
                 src={company.coverImage || fallbackCover}
                 alt={`${company.name} office`}
@@ -228,7 +228,7 @@ export default function CompanyDetailClient({
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
               {/* Floating Status Badge in Trax Brand Red */}
-              <div className="absolute top-4 right-4 bg-[#E7040D] text-white text-[12px] font-bold px-3.5 py-1 rounded-none flex items-center gap-1.5 shadow-sm">
+              <div className="absolute top-4 right-4 bg-[#E7040D] text-white text-[12px] font-bold px-3.5 py-1 rounded-lg flex items-center gap-1.5 shadow-sm">
                 <Briefcase size={14} weight="bold" className="text-white" />
                 <span>{companyJobs.length > 0 ? `${companyJobs.length} ${companyJobs.length === 1 ? "Open Role" : "Open Roles"}` : "Verified Employer"}</span>
               </div>
@@ -369,7 +369,7 @@ export default function CompanyDetailClient({
                       ))}
                     </div>
                   ) : (
-                    <div className="py-16 px-4 text-center flex flex-col items-center justify-center bg-white border border-zinc-200">
+                    <div className="py-16 px-4 text-center flex flex-col items-center justify-center bg-white border border-zinc-200 rounded-lg">
                       <div className="relative w-36 h-36 bg-[#85D4FF] rounded-sm p-3.5 shadow-[12px_18px_32px_-6px_rgba(0,100,200,0.22)] transform -rotate-2 hover:rotate-0 transition-transform duration-300 flex flex-col justify-between select-none">
                         <div className="absolute top-0 left-0 right-0 h-3.5 bg-black/5 pointer-events-none" />
                         <div className="w-full h-full border border-sky-400/40 rounded-sm p-2 flex flex-col items-center justify-center">
@@ -393,7 +393,7 @@ export default function CompanyDetailClient({
                       </p>
                       <button
                         onClick={() => setIsFollowed(!isFollowed)}
-                        className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-zinc-300 text-zinc-900 text-[13px] font-bold hover:bg-zinc-50 hover:border-zinc-400 transition-all cursor-pointer shadow-2xs rounded-none active:scale-98"
+                        className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-zinc-300 text-zinc-900 text-[13px] font-bold hover:bg-zinc-50 hover:border-zinc-400 transition-all cursor-pointer shadow-2xs rounded-lg active:scale-98"
                       >
                         <Heart size={15} weight={isFollowed ? "fill" : "bold"} className={isFollowed ? "text-[#E7040D]" : "text-zinc-600"} />
                         <span>{isFollowed ? "Following for alerts" : "Follow for role alerts"}</span>
@@ -406,7 +406,7 @@ export default function CompanyDetailClient({
               {/* Tab 3: Culture & Policy */}
               {activeTab === "policy" && (
                 <div className="py-6 space-y-5 text-zinc-800">
-                  <div className="p-5 bg-zinc-50 border border-zinc-200 space-y-2">
+                  <div className="p-5 bg-zinc-50 border border-zinc-200 rounded-lg space-y-2">
                     <h3 className="text-[15px] font-bold text-zinc-900">
                       Work Arrangement &amp; Location
                     </h3>
@@ -446,7 +446,7 @@ export default function CompanyDetailClient({
               Matching the Course Detail Page Sidebar Card Exactly
           ───────────────────────────────────────────────────────────── */}
           <div className="lg:col-span-5">
-            <div className="bg-white rounded-none border border-zinc-200 shadow-none p-6 space-y-6 sticky top-24">
+            <div className="bg-white rounded-lg border border-zinc-200 shadow-none p-6 space-y-6 sticky top-24">
 
               {/* 1. Metadata Specs Rows with Phosphor Icons */}
               <div className="space-y-3.5 text-[14px]">
@@ -548,7 +548,7 @@ export default function CompanyDetailClient({
                   <button
                     type="button"
                     onClick={() => setActiveTab("jobs")}
-                    className="w-full py-3.5 px-4 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[14.5px] font-bold rounded-none flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md active:scale-[0.99]"
+                    className="w-full py-3.5 px-4 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[14.5px] font-bold rounded-lg flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md active:scale-[0.99]"
                   >
                     <Briefcase size={18} weight="bold" />
                     <span>View {companyJobs.length} {companyJobs.length === 1 ? "Open Role" : "Open Roles"}</span>
@@ -558,7 +558,7 @@ export default function CompanyDetailClient({
                     href={company.website.startsWith("http") ? company.website : `https://${company.website}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3.5 px-4 bg-[#0C1222] hover:bg-zinc-800 text-white text-[14.5px] font-bold rounded-none flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer shadow-xs active:scale-[0.99]"
+                    className="w-full py-3.5 px-4 bg-[#0C1222] hover:bg-zinc-800 text-white text-[14.5px] font-bold rounded-lg flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer shadow-xs active:scale-[0.99]"
                   >
                     <Globe size={18} weight="bold" />
                     <span>Visit Company Website</span>
@@ -568,7 +568,7 @@ export default function CompanyDetailClient({
                 <button
                   type="button"
                   onClick={() => setIsFollowed(!isFollowed)}
-                  className={`w-full py-2.5 px-4 border text-[13px] font-bold rounded-none flex items-center justify-center gap-2 transition-all duration-150 cursor-pointer shadow-2xs active:scale-[0.99] select-none ${
+                  className={`w-full py-2.5 px-4 border text-[13px] font-bold rounded-lg flex items-center justify-center gap-2 transition-all duration-150 cursor-pointer shadow-2xs active:scale-[0.99] select-none ${
                     isFollowed
                       ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]"
                       : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-950 hover:border-zinc-300"
@@ -590,7 +590,7 @@ export default function CompanyDetailClient({
                   <button
                     type="button"
                     onClick={handleCopyLink}
-                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-zinc-50 hover:bg-zinc-100 active:scale-95 border border-zinc-200 rounded-none text-[12.5px] font-medium text-zinc-700 transition-all cursor-pointer select-none"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-zinc-50 hover:bg-zinc-100 active:scale-95 border border-zinc-200 rounded-lg text-[12.5px] font-medium text-zinc-700 transition-all cursor-pointer select-none"
                   >
                     {copied ? (
                       <>
@@ -609,7 +609,7 @@ export default function CompanyDetailClient({
                   <button
                     type="button"
                     onClick={shareOnFacebook}
-                    className="w-8 h-8 flex items-center justify-center bg-zinc-50 hover:bg-zinc-100 active:scale-95 border border-zinc-200 rounded-none text-zinc-700 hover:text-blue-600 transition-all cursor-pointer"
+                    className="w-8 h-8 flex items-center justify-center bg-zinc-50 hover:bg-zinc-100 active:scale-95 border border-zinc-200 rounded-lg text-zinc-700 hover:text-blue-600 transition-all cursor-pointer"
                     aria-label="Share on Facebook"
                   >
                     <FacebookLogo size={16} weight="regular" />
@@ -619,7 +619,7 @@ export default function CompanyDetailClient({
                   <button
                     type="button"
                     onClick={shareOnTwitter}
-                    className="w-8 h-8 flex items-center justify-center bg-zinc-50 hover:bg-zinc-100 active:scale-95 border border-zinc-200 rounded-none text-zinc-700 hover:text-zinc-950 transition-all cursor-pointer"
+                    className="w-8 h-8 flex items-center justify-center bg-zinc-50 hover:bg-zinc-100 active:scale-95 border border-zinc-200 rounded-lg text-zinc-700 hover:text-zinc-950 transition-all cursor-pointer"
                     aria-label="Share on X"
                   >
                     <XLogo size={16} weight="regular" />
@@ -629,7 +629,7 @@ export default function CompanyDetailClient({
                   <button
                     type="button"
                     onClick={shareByEmail}
-                    className="w-8 h-8 flex items-center justify-center bg-zinc-50 hover:bg-zinc-100 active:scale-95 border border-zinc-200 rounded-none text-zinc-700 hover:text-zinc-950 transition-all cursor-pointer"
+                    className="w-8 h-8 flex items-center justify-center bg-zinc-50 hover:bg-zinc-100 active:scale-95 border border-zinc-200 rounded-lg text-zinc-700 hover:text-zinc-950 transition-all cursor-pointer"
                     aria-label="Share via Email"
                   >
                     <EnvelopeSimple size={16} weight="regular" />
@@ -639,7 +639,7 @@ export default function CompanyDetailClient({
                   <button
                     type="button"
                     onClick={shareOnWhatsApp}
-                    className="w-8 h-8 flex items-center justify-center bg-zinc-50 hover:bg-zinc-100 active:scale-95 border border-zinc-200 rounded-none text-zinc-700 hover:text-emerald-600 transition-all cursor-pointer"
+                    className="w-8 h-8 flex items-center justify-center bg-zinc-50 hover:bg-zinc-100 active:scale-95 border border-zinc-200 rounded-lg text-zinc-700 hover:text-emerald-600 transition-all cursor-pointer"
                     aria-label="Share on WhatsApp"
                   >
                     <WhatsappLogo size={16} weight="regular" />

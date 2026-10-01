@@ -329,7 +329,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-5 py-2.5 rounded-xl text-[13.5px] font-bold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 select-none ${isActive
+                  className={`px-5 py-2.5 rounded-lg text-[13.5px] font-bold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 select-none ${isActive
                       ? "bg-[#E7040D] text-white shadow-xs"
                       : "bg-white text-zinc-700 hover:text-zinc-950 border border-zinc-200/80 hover:border-zinc-300 hover:bg-zinc-50"
                     }`}
@@ -384,7 +384,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
             return (
               <div
                 key={company.name}
-                className="w-[280px] sm:w-[290px] md:w-[295px] min-h-[395px] sm:min-h-[415px] shrink-0 bg-white rounded-[16px] border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start select-none"
+                className="w-[280px] sm:w-[290px] md:w-[295px] min-h-[395px] sm:min-h-[415px] shrink-0 bg-white rounded-lg border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-300 flex flex-col justify-between overflow-hidden group snap-start select-none"
               >
                 <div>
                   {/* 1. Top Cover Image (Taller Landscape Ratio with Rounded Top Corners) */}
@@ -421,7 +421,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                       href={`/companies/${company.slug}`}
                       className="flex items-center gap-2.5 group/title mb-1"
                     >
-                      <div className="w-10 h-10 rounded-[10px] bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-1.5 overflow-hidden shrink-0">
+                      <div className="w-10 h-10 rounded-lg bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center p-1.5 overflow-hidden shrink-0">
                         {company.logo ? (
                           <Image
                             src={company.logo}
@@ -449,7 +449,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                     <div className="flex flex-wrap gap-1.5 mt-3.5">
                       {/* Team Size Tag */}
                       {company.size ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F4F4F6] text-zinc-700 text-[11px] font-medium rounded-[7px]">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F4F4F6] text-zinc-700 text-[11px] font-medium rounded-lg">
                           <Users size={12} weight="regular" className="text-zinc-500 shrink-0" />
                           <span className="truncate max-w-[140px]">
                             {company.size.toLowerCase().includes("team") || company.size.toLowerCase().includes("employee")
@@ -463,7 +463,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                       {locations.map((loc) => (
                         <span
                           key={loc}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F4F4F6] text-zinc-700 text-[11px] font-medium rounded-[7px]"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F4F4F6] text-zinc-700 text-[11px] font-medium rounded-lg"
                         >
                           <MapPin size={12} weight="regular" className="text-zinc-500 shrink-0" />
                           <span>{loc}</span>
@@ -472,7 +472,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
 
                       {/* Primary Industry Tag */}
                       {company.industry || company.category ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F4F4F6] text-zinc-700 text-[11px] font-medium rounded-[7px] truncate max-w-[160px]">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F4F4F6] text-zinc-700 text-[11px] font-medium rounded-lg truncate max-w-[160px]">
                           <Tag size={12} weight="regular" className="text-zinc-500 shrink-0" />
                           <span className="truncate">{company.industry || company.category}</span>
                         </span>
@@ -480,7 +480,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
 
                       {/* Sub-industry Tag if distinct */}
                       {company.subIndustry && company.subIndustry !== company.industry ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F4F4F6] text-zinc-700 text-[11px] font-medium rounded-[7px] truncate max-w-[160px]">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F4F4F6] text-zinc-700 text-[11px] font-medium rounded-lg truncate max-w-[160px]">
                           <Tag size={12} weight="regular" className="text-zinc-500 shrink-0" />
                           <span className="truncate">{company.subIndustry}</span>
                         </span>
@@ -499,7 +499,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                         e.stopPropagation();
                         toggleFollow(company.slug);
                       }}
-                      className={`px-4 py-1.5 rounded-[7px] text-[12px] font-bold border transition-all cursor-pointer select-none active:scale-95 ${
+                      className={`px-4 py-1.5 rounded-lg text-[12px] font-bold border transition-all cursor-pointer select-none active:scale-95 ${
                         isFollowed
                           ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]"
                           : "bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-800 hover:border-zinc-400 shadow-2xs"

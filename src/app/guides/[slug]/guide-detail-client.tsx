@@ -120,7 +120,7 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
             <button
               type="button"
               onClick={handleCopyLink}
-              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-zinc-100 active:scale-90 flex items-center justify-center text-zinc-600 transition-all cursor-pointer select-none"
+              className="w-8 h-8 rounded-lg border border-zinc-200/80 hover:bg-zinc-100 active:scale-90 flex items-center justify-center text-zinc-600 transition-all cursor-pointer select-none"
               aria-label="Copy article link"
               title={copied ? "Link Copied!" : "Copy Link"}
             >
@@ -135,7 +135,7 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
             <button
               type="button"
               onClick={() => openSharePopup(shareLinks.whatsapp, "WhatsAppShare")}
-              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-emerald-50 hover:border-[#25D366]/40 hover:text-[#25D366] flex items-center justify-center text-zinc-600 transition-colors cursor-pointer select-none active:scale-95"
+              className="w-8 h-8 rounded-lg border border-zinc-200/80 hover:bg-emerald-50 hover:border-[#25D366]/40 hover:text-[#25D366] flex items-center justify-center text-zinc-600 transition-colors cursor-pointer select-none active:scale-95"
               aria-label="Share on WhatsApp"
               title="Share on WhatsApp"
             >
@@ -146,7 +146,7 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
             <button
               type="button"
               onClick={() => openSharePopup(shareLinks.twitter, "TwitterShare")}
-              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-zinc-100 hover:text-black flex items-center justify-center text-zinc-600 transition-colors cursor-pointer select-none active:scale-95"
+              className="w-8 h-8 rounded-lg border border-zinc-200/80 hover:bg-zinc-100 hover:text-black flex items-center justify-center text-zinc-600 transition-colors cursor-pointer select-none active:scale-95"
               aria-label="Share on X (Twitter)"
               title="Share on X"
             >
@@ -157,7 +157,7 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
             <button
               type="button"
               onClick={() => openSharePopup(shareLinks.linkedin, "LinkedInShare")}
-              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-blue-50 hover:border-[#0077B5]/40 hover:text-[#0077B5] flex items-center justify-center text-zinc-600 transition-colors cursor-pointer select-none active:scale-95"
+              className="w-8 h-8 rounded-lg border border-zinc-200/80 hover:bg-blue-50 hover:border-[#0077B5]/40 hover:text-[#0077B5] flex items-center justify-center text-zinc-600 transition-colors cursor-pointer select-none active:scale-95"
               aria-label="Share on LinkedIn"
               title="Share on LinkedIn"
             >
@@ -168,7 +168,7 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
             <button
               type="button"
               onClick={() => openSharePopup(shareLinks.facebook, "FacebookShare")}
-              className="w-8 h-8 rounded-none border border-zinc-200/80 hover:bg-blue-50 hover:border-[#1877F2]/40 hover:text-[#1877F2] flex items-center justify-center text-zinc-600 transition-colors cursor-pointer select-none active:scale-95"
+              className="w-8 h-8 rounded-lg border border-zinc-200/80 hover:bg-blue-50 hover:border-[#1877F2]/40 hover:text-[#1877F2] flex items-center justify-center text-zinc-600 transition-colors cursor-pointer select-none active:scale-95"
               aria-label="Share on Facebook"
               title="Share on Facebook"
             >
@@ -255,7 +255,7 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
                     {article.topics.map((t, idx) => (
                       <span
                         key={idx}
-                        className="px-3.5 py-1.5 bg-zinc-50 border border-zinc-200 text-zinc-800 text-[12.5px] font-medium rounded-none hover:bg-zinc-100 transition-colors"
+                        className="px-3.5 py-1.5 bg-zinc-50 border border-zinc-200 text-zinc-800 text-[12.5px] font-medium rounded-lg hover:bg-zinc-100 transition-colors"
                       >
                         {t}
                       </span>
@@ -270,8 +270,8 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
           <div className="lg:col-span-5 space-y-8">
             {/* Top Featured Image with Peach Geometric Offset Background */}
             <div className="relative pt-4 pr-4">
-              <div className="absolute top-0 right-0 w-[92%] h-[92%] bg-[#FCE8E0] rounded-none z-0" />
-              <div className="relative z-10 w-full h-[280px] sm:h-[340px] rounded-none overflow-hidden border border-zinc-200 shadow-sm">
+              <div className="absolute top-0 right-0 w-[92%] h-[92%] bg-[#FCE8E0] rounded-lg z-0" />
+              <div className="relative z-10 w-full h-[280px] sm:h-[340px] rounded-lg overflow-hidden border border-zinc-200 shadow-sm">
                 <Image
                   src={article.image}
                   alt={article.title}
@@ -368,7 +368,7 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
                         href={`/guides/${rel.slug}`}
                         className="pt-3 flex items-center gap-3.5 group cursor-pointer"
                       >
-                        <div className="relative w-14 h-14 shrink-0 bg-zinc-100 border border-zinc-200/80 rounded-none overflow-hidden">
+                        <div className="relative w-14 h-14 shrink-0 bg-zinc-100 border border-zinc-200/80 rounded-lg overflow-hidden">
                           <Image
                             src={rel.image}
                             alt={rel.title}
@@ -395,7 +395,7 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
         <button
           type="button"
           onClick={handleNativeShare}
-          className="inline-flex items-center gap-2 px-4 py-2.5 bg-black hover:bg-zinc-800 text-white text-[13px] font-bold rounded-none shadow-lg cursor-pointer transition-all active:scale-[0.98]"
+          className="inline-flex items-center gap-2 px-4 py-2.5 bg-black hover:bg-zinc-800 text-white text-[13px] font-bold rounded-lg shadow-lg cursor-pointer transition-all active:scale-[0.98]"
         >
           <ShareNetwork size={16} weight="bold" />
           <span>{copied ? "Link Copied!" : "Share"}</span>

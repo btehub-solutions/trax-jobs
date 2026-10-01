@@ -45,12 +45,12 @@ export function HireTalentModal({ talent, onClose }: HireTalentModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150">
       
       {/* Pristine Clean Modal Container */}
-      <div className="w-full max-w-[480px] bg-white rounded-none border border-zinc-200/90 shadow-[0_20px_50px_rgba(0,0,0,0.15)] relative overflow-hidden animate-in zoom-in-95 duration-150">
+      <div className="w-full max-w-[480px] bg-white rounded-lg border border-zinc-200/90 shadow-[0_20px_50px_rgba(0,0,0,0.15)] relative overflow-hidden animate-in zoom-in-95 duration-150">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 text-zinc-400 hover:text-zinc-950 p-1.5 transition-colors cursor-pointer z-10"
+          className="absolute top-5 right-5 text-zinc-400 hover:text-zinc-950 p-1.5 rounded-lg transition-colors cursor-pointer z-10"
           aria-label="Close"
         >
           <X size={18} weight="bold" />
@@ -60,13 +60,13 @@ export function HireTalentModal({ talent, onClose }: HireTalentModalProps) {
           
           {/* Candidate Profile Header */}
           <div className="flex items-start gap-4 mb-6">
-            <div className="w-16 h-16 rounded-none bg-white border border-zinc-200/90 shadow-2xs overflow-hidden shrink-0">
+            <div className="w-16 h-16 rounded-lg bg-white border border-zinc-200/90 shadow-2xs overflow-hidden shrink-0">
               <Image
                 src={talent.avatar}
                 alt={talent.name}
                 width={64}
                 height={64}
-                className="w-full h-full object-cover object-top"
+                className="w-full h-full object-cover object-top rounded-md"
               />
             </div>
 
@@ -110,7 +110,7 @@ export function HireTalentModal({ talent, onClose }: HireTalentModalProps) {
               href={whatsappLink}
               target="_blank"
               rel="noreferrer"
-              className="w-full flex items-center justify-center gap-2.5 py-3 px-4 rounded-none bg-[#25D366] hover:bg-[#20bd5a] text-white text-[13.5px] font-bold transition-colors shadow-2xs text-center"
+              className="w-full flex items-center justify-center gap-2.5 py-3 px-4 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white text-[13.5px] font-bold transition-colors shadow-2xs text-center"
             >
               <WhatsappLogo size={18} weight="fill" />
               <span>Chat on WhatsApp</span>
@@ -119,7 +119,7 @@ export function HireTalentModal({ talent, onClose }: HireTalentModalProps) {
             {/* Email CTA */}
             <a
               href={mailtoLink}
-              className="w-full flex items-center justify-center gap-2.5 py-3 px-4 rounded-none bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-colors shadow-2xs text-center"
+              className="w-full flex items-center justify-center gap-2.5 py-3 px-4 rounded-lg bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13.5px] font-bold transition-colors shadow-2xs text-center"
             >
               <EnvelopeSimple size={18} weight="bold" />
               <span>Send Email</span>
@@ -127,14 +127,14 @@ export function HireTalentModal({ talent, onClose }: HireTalentModalProps) {
           </div>
 
           {/* Clean Contact Box with Copy Button */}
-          <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#FAF8F5] border border-zinc-200/80 text-[12.5px]">
+          <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#FAF8F5] border border-zinc-200/80 rounded-lg text-[12.5px]">
             <span className="text-zinc-600 truncate pr-2 font-mono text-[12px]">
               {talent.email}
             </span>
 
             <button
               onClick={copyEmail}
-              className="inline-flex items-center gap-1 px-3 py-1 bg-white border border-zinc-200/90 text-zinc-800 hover:text-black font-bold text-[11.5px] transition-colors cursor-pointer shrink-0 shadow-2xs"
+              className="inline-flex items-center gap-1 px-3 py-1 bg-white border border-zinc-200/90 text-zinc-800 hover:text-black font-bold text-[11.5px] rounded-lg transition-colors cursor-pointer shrink-0 shadow-2xs"
             >
               {copied ? (
                 <>

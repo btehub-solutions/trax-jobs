@@ -56,8 +56,8 @@ export function GuidesClient({ guides }: GuidesClientProps) {
             >
               {/* Image with Peach Geometric Offset Background (Stacked Card Depth) */}
               <div className="relative pt-3.5 pr-3.5 sm:pt-4 sm:pr-4 mb-5">
-                <div className="absolute top-0 right-0 w-[92%] h-[92%] bg-[#FCE8E0] rounded-none z-0" />
-                <div className="relative z-10 w-full aspect-[16/10] sm:aspect-[16/9] bg-zinc-100 overflow-hidden rounded-none border border-zinc-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.06)] group-hover:shadow-[0_12px_28px_rgba(15,16,18,0.09)] transition-shadow duration-300">
+                <div className="absolute top-0 right-0 w-[92%] h-[92%] bg-[#FCE8E0] rounded-lg z-0" />
+                <div className="relative z-10 w-full aspect-[16/10] sm:aspect-[16/9] bg-zinc-100 overflow-hidden rounded-lg border border-zinc-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.06)] group-hover:shadow-[0_12px_28px_rgba(15,16,18,0.09)] transition-shadow duration-300">
                   <Image
                     src={article.image}
                     alt={article.title}
@@ -65,7 +65,7 @@ export function GuidesClient({ guides }: GuidesClientProps) {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
-                  <div className="absolute top-3 left-3 px-2.5 py-1 bg-white/95 backdrop-blur-md text-[10.5px] font-bold text-[#1F1F1F] uppercase tracking-wider border border-zinc-200/40">
+                  <div className="absolute top-3 left-3 px-2.5 py-1 bg-white/95 backdrop-blur-md text-[10.5px] font-bold text-[#1F1F1F] uppercase tracking-wider border border-zinc-200/40 rounded-lg">
                     {article.categoryLabel}
                   </div>
                 </div>

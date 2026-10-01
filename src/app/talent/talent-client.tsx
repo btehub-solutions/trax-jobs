@@ -62,14 +62,14 @@ function TalentSquareMark({ item }: { item: SanityTalentItem }) {
         alt={item.name}
         width={72}
         height={72}
-        className="w-full h-full object-cover object-top rounded-[2px]"
+        className="w-full h-full object-cover object-top rounded-lg"
         onError={() => setImageError(true)}
         unoptimized
       />
     );
   }
   return (
-    <div className="w-full h-full bg-[#1F1F1F] text-white font-bold flex items-center justify-center text-lg rounded-[2px]">
+    <div className="w-full h-full bg-[#1F1F1F] text-white font-bold flex items-center justify-center text-lg rounded-lg">
       {item.name.slice(0, 2).toUpperCase()}
     </div>
   );
@@ -379,7 +379,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
             <button
               type="button"
               onClick={() => setMobileFiltersOpen(true)}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-bold border transition-all cursor-pointer shrink-0 select-none ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-bold border transition-all cursor-pointer shrink-0 select-none ${
                 activeFiltersCount > 0
                   ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D]"
                   : "bg-zinc-50 border-zinc-200 text-zinc-800 hover:bg-zinc-100"
@@ -431,7 +431,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
               )}
             </button>
             {openDropdown === "location" && (
-              <div className="absolute top-full left-0 mt-1 w-56 bg-white border border-zinc-200/90 shadow-xl py-1 z-50 animate-in fade-in zoom-in-95 duration-100">
+              <div className="absolute top-full left-0 mt-1 w-56 bg-white border border-zinc-200/90 rounded-lg shadow-xl py-1 z-50 animate-in fade-in zoom-in-95 duration-100">
                 {LOCATIONS.map((loc) => (
                   <button key={loc} onClick={() => { setSelectedLocation(loc === "All Locations" ? "" : loc); setOpenDropdown(null); }} className="w-full text-left px-4 py-2 text-[13px] font-medium text-zinc-700 hover:bg-zinc-50 hover:text-black flex items-center justify-between cursor-pointer">
                     <span>{loc}</span>
@@ -480,7 +480,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                 </button>
                 {openDropdown === key && (
                   <div
-                    className={`absolute top-full mt-1 w-56 sm:w-60 bg-white border border-zinc-200/90 shadow-2xl py-1 z-50 animate-in fade-in zoom-in-95 duration-100 ${
+                    className={`absolute top-full mt-1 w-56 sm:w-60 bg-white border border-zinc-200/90 rounded-lg shadow-2xl py-1 z-50 animate-in fade-in zoom-in-95 duration-100 ${
                       idx === 2
                         ? "right-0 left-auto"
                         : idx === 1
@@ -532,14 +532,14 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
               <h1 className="text-[24px] sm:text-[30px] font-black text-[#1F1F1F] tracking-tight min-w-0">
                 Vetted talent to explore
               </h1>
-              <span className="hidden sm:inline-flex items-center px-2 py-0.5 bg-zinc-100 text-zinc-600 text-[11px] font-bold border border-zinc-200/70">
+              <span className="hidden sm:inline-flex items-center px-2 py-0.5 bg-zinc-100 text-zinc-600 text-[11px] font-bold border border-zinc-200/70 rounded-lg">
                 {filteredTalent.length}
               </span>
             </div>
             <button
               type="button"
               onClick={handleDiscoverAll}
-              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-none bg-white border border-zinc-200/90 text-[12.5px] font-bold text-[#1F1F1F] hover:bg-zinc-50 hover:border-[#E7040D] hover:text-[#E7040D] active:scale-95 transition-all duration-150 shadow-2xs cursor-pointer shrink-0 whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-lg bg-white border border-zinc-200/90 text-[12.5px] font-bold text-[#1F1F1F] hover:bg-zinc-50 hover:border-[#E7040D] hover:text-[#E7040D] active:scale-95 transition-all duration-150 shadow-2xs cursor-pointer shrink-0 whitespace-nowrap"
               title="View all vetted talent"
             >
               <span>Discover all ({talent.length})</span>
@@ -548,7 +548,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
           </div>
 
           {feedbackMessage && (
-            <div className="mt-3.5 px-4 py-2.5 bg-[#FDF2EE] border border-[#fce8e0] text-[#E7040D] text-[12.5px] font-semibold flex items-center justify-between transition-all">
+            <div className="mt-3.5 px-4 py-2.5 bg-[#FDF2EE] border border-[#fce8e0] rounded-lg text-[#E7040D] text-[12.5px] font-semibold flex items-center justify-between transition-all">
               <span>{feedbackMessage}</span>
               <button
                 type="button"
@@ -564,7 +564,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
             {filteredTalent.map((item) => (
               <div
                 key={item.id}
-                className="bg-white rounded-[6px] border border-zinc-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px]"
+                className="bg-white rounded-lg border border-zinc-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px]"
               >
                 {/* Top Cover Banner */}
                 <Link href={`/talent/${item.slug}`} className="block relative h-[140px] w-full bg-[#E5E7EB] overflow-hidden shrink-0">
@@ -591,7 +591,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                   <div>
                     {/* Overlapping Logo / Avatar Box */}
                     <Link href={`/talent/${item.slug}`} className="block -mt-10 mb-4 relative z-10">
-                      <div className="w-[76px] h-[76px] rounded-[4px] bg-white p-1 border border-zinc-200 shadow-2xs overflow-hidden flex items-center justify-center group-hover:border-zinc-400 transition-colors">
+                      <div className="w-[76px] h-[76px] rounded-lg bg-white p-1 border border-zinc-200 shadow-2xs overflow-hidden flex items-center justify-center group-hover:border-zinc-400 transition-colors">
                         <TalentSquareMark item={item} />
                       </div>
                     </Link>
@@ -629,7 +629,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                   <div className="pt-6 mt-auto">
                     <Link
                       href={`/talent/${item.slug}`}
-                      className="block w-full py-2 rounded-none text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] active:scale-[0.98] transition-all duration-150 cursor-pointer text-center group-hover:border-[#E7040D] whitespace-nowrap"
+                      className="block w-full py-2 rounded-lg text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] active:scale-[0.98] transition-all duration-150 cursor-pointer text-center group-hover:border-[#E7040D] whitespace-nowrap"
                     >
                       Hire Talent
                     </Link>
@@ -668,7 +668,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
               <p className="text-[14.5px] sm:text-[15.5px] text-zinc-600 leading-relaxed max-w-md mt-0.5">Try clearing one or more filters to explore available talent.</p>
               <button
                 onClick={resetFilters}
-                className="mt-6 px-6 py-2.5 bg-[#0C1222] hover:bg-[#E7040D] text-white text-[13px] font-bold rounded-none transition-colors cursor-pointer shadow-xs active:scale-98"
+                className="mt-6 px-6 py-2.5 bg-[#0C1222] hover:bg-[#E7040D] text-white text-[13px] font-bold rounded-lg transition-colors cursor-pointer shadow-xs active:scale-98"
               >
                 Reset all filters
               </button>
@@ -732,7 +732,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
           {/* Drawer Body - Scrollable Area */}
           <div className="flex-1 overflow-y-auto p-5 space-y-5 custom-scrollbar">
             {/* 1. "Active preferences" Dark Navy Card */}
-            <div className="bg-[#0C1222] border border-[#0C1222] rounded-md p-4 space-y-2.5 shadow-xs">
+            <div className="bg-[#0C1222] border border-[#0C1222] rounded-lg p-4 space-y-2.5 shadow-xs">
               <div className="flex items-center justify-between">
                 <h3 className="text-[13.5px] font-bold text-white tracking-tight">
                   Active preferences
@@ -751,7 +751,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
               {activeFiltersCount > 0 ? (
                 <div className="flex flex-wrap items-center gap-1.5 pt-1">
                   {searchTerm && (
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
                       <Briefcase size={12} weight="bold" className="text-[#E7040D] shrink-0" />
                       <span className="truncate max-w-[120px]">{searchTerm}</span>
                       <button
@@ -768,7 +768,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                   )}
 
                   {selectedDiscipline && selectedDiscipline !== "All Disciplines" && (
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
                       <span>{selectedDiscipline}</span>
                       <button
                         onClick={() => setSelectedDiscipline("")}
@@ -781,7 +781,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                   )}
 
                   {selectedExperience && selectedExperience !== "All Experience" && (
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
                       <span>{selectedExperience.split(" ")[0]}</span>
                       <button
                         onClick={() => setSelectedExperience("")}
@@ -794,7 +794,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                   )}
 
                   {selectedAvailability && selectedAvailability !== "All Availability" && (
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
                       <Clock size={12} weight="bold" className="text-[#E7040D] shrink-0" />
                       <span>{selectedAvailability}</span>
                       <button
@@ -808,7 +808,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                   )}
 
                   {selectedLocation && selectedLocation !== "All Locations" && (
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
                       <MapPin size={12} weight="bold" className="text-[#E7040D] shrink-0" />
                       <span>{selectedLocation}</span>
                       <button
@@ -862,12 +862,12 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                           if (e.key === "Enter") handleApplyKeyword();
                         }}
                         placeholder="e.g. AI Engineer, Product..."
-                        className="flex-1 h-9 px-3 rounded-none bg-white border border-zinc-200 text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
+                        className="flex-1 h-9 px-3 rounded-lg bg-white border border-zinc-200 text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
                       />
                       <button
                         type="button"
                         onClick={handleApplyKeyword}
-                        className="h-9 px-3.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[12px] font-bold transition-all cursor-pointer shadow-2xs"
+                        className="h-9 px-3.5 rounded-lg bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[12px] font-bold transition-all cursor-pointer shadow-2xs"
                       >
                         Apply
                       </button>
@@ -881,7 +881,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                             key={disc}
                             type="button"
                             onClick={() => setSelectedDiscipline(isSelected ? "" : disc)}
-                            className={`px-2.5 py-1 text-[11px] font-medium border transition-all cursor-pointer ${
+                            className={`px-2.5 py-1 rounded-lg text-[11px] font-medium border transition-all cursor-pointer ${
                               isSelected
                                 ? "bg-[#fce8e0] text-[#E7040D] border-[#E7040D] font-bold"
                                 : "bg-[#FAFAFA] text-zinc-600 border-zinc-200 hover:border-zinc-300"
@@ -919,7 +919,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                           key={exp}
                           type="button"
                           onClick={() => setSelectedExperience(isSelected ? "" : exp)}
-                          className={`w-full text-left px-3 py-2 rounded-none text-[12px] font-medium transition-all flex items-center justify-between cursor-pointer ${
+                          className={`w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium transition-all flex items-center justify-between cursor-pointer ${
                             isSelected
                               ? "bg-[#fce8e0] text-[#E7040D] border border-[#E7040D] font-bold"
                               : "bg-[#F9F9FB] hover:bg-[#F0F0F3] text-[#1F1F1F] border border-zinc-200/50"
@@ -957,10 +957,10 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                           key={avail}
                           type="button"
                           onClick={() => setSelectedAvailability(isSelected ? "" : avail)}
-                          className={`w-full text-left px-3 py-2 rounded-none text-[12px] font-medium transition-all flex items-center justify-between cursor-pointer ${
+                          className={`w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium transition-all flex items-center justify-between cursor-pointer ${
                             isSelected
                               ? "bg-[#fce8e0] text-[#E7040D] border border-[#E7040D] font-bold"
-                              : "bg-[#F9F9FB] hover:bg-[#F0F0F3] text-[#1F1F1F] border border-zinc-200/50"
+                            : "bg-[#F9F9FB] hover:bg-[#F0F0F3] text-[#1F1F1F] border border-zinc-200/50"
                           }`}
                         >
                           <span className="truncate">{avail}</span>
@@ -997,12 +997,12 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                           if (e.key === "Enter") handleApplyLocation();
                         }}
                         placeholder="e.g. Lagos, Ogun, Remote..."
-                        className="flex-1 h-9 px-3 rounded-none bg-white border border-zinc-200 text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
+                        className="flex-1 h-9 px-3 rounded-lg bg-white border border-zinc-200 text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
                       />
                       <button
                         type="button"
                         onClick={handleApplyLocation}
-                        className="h-9 px-3.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[12px] font-bold transition-all cursor-pointer shadow-2xs"
+                        className="h-9 px-3.5 rounded-lg bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[12px] font-bold transition-all cursor-pointer shadow-2xs"
                       >
                         Apply
                       </button>
@@ -1020,7 +1020,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                               setSelectedLocation(next);
                               setLocationInput(next);
                             }}
-                            className={`px-2.5 py-1 text-[11px] font-medium border transition-all cursor-pointer ${
+                            className={`px-2.5 py-1 rounded-lg text-[11px] font-medium border transition-all cursor-pointer ${
                               isSelected
                                 ? "bg-[#fce8e0] text-[#E7040D] border-[#E7040D] font-bold"
                                 : "bg-[#FAFAFA] text-zinc-600 border-zinc-200 hover:border-zinc-300"
@@ -1046,7 +1046,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
                 const el = document.getElementById("talent-results");
                 if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className="w-full py-3 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.99] text-white text-[13.5px] font-bold rounded-md shadow-2xs transition-all cursor-pointer flex items-center justify-center gap-2"
+              className="w-full py-3 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.99] text-white text-[13.5px] font-bold rounded-lg shadow-2xs transition-all cursor-pointer flex items-center justify-center gap-2"
             >
               <span>Show {filteredTalent.length} {filteredTalent.length === 1 ? "Profile" : "Profiles"}</span>
             </button>

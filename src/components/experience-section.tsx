@@ -42,7 +42,7 @@ export function ExperienceSection({ counts: propCounts, jobs }: ExperienceSectio
               <Link
                 key={level.id}
                 href={level.href}
-                className="group relative shrink-0 snap-start w-[280px] sm:w-auto h-[440px] sm:h-[390px] lg:h-[420px] overflow-hidden bg-zinc-100 flex flex-col justify-end shadow-xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5"
+                className="group relative shrink-0 snap-start w-[280px] sm:w-auto h-[440px] sm:h-[390px] lg:h-[420px] rounded-lg overflow-hidden bg-zinc-100 flex flex-col justify-end shadow-xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5"
               >
                 {/* Studio Portrait Image */}
                 <Image

@@ -66,7 +66,7 @@ function TalentAvatar({ src, name }: { src?: string; name: string }) {
       : "T";
 
     return (
-      <div className="w-full h-full bg-[#FAF8F5] border border-zinc-200/90 flex items-center justify-center font-bold text-[#E7040D] text-[13px] select-none">
+      <div className="w-full h-full bg-[#FAF8F5] border border-zinc-200/90 rounded-lg flex items-center justify-center font-bold text-[#E7040D] text-[13px] select-none">
         {initials}
       </div>
     );
@@ -78,7 +78,7 @@ function TalentAvatar({ src, name }: { src?: string; name: string }) {
       alt={name}
       width={44}
       height={44}
-      className="w-full h-full object-cover object-top"
+      className="w-full h-full object-cover object-top rounded-lg"
       onError={() => setHasError(true)}
       unoptimized
     />
@@ -175,7 +175,7 @@ export function FeaturedTalentSection({
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-5 py-2.5 rounded-xl text-[13.5px] font-bold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 select-none ${
+                  className={`px-5 py-2.5 rounded-lg text-[13.5px] font-bold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 select-none ${
                     isActive
                       ? "bg-[#E7040D] text-white shadow-xs"
                       : "bg-white text-zinc-700 hover:text-zinc-950 border border-zinc-200/80 hover:border-zinc-300 hover:bg-zinc-50"
@@ -228,7 +228,7 @@ export function FeaturedTalentSection({
             return (
               <div
                 key={person.id}
-                className="w-[280px] sm:w-[295px] md:w-[305px] shrink-0 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start select-none"
+                className="w-[280px] sm:w-[295px] md:w-[305px] shrink-0 bg-white rounded-lg border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start select-none"
               >
                 <div>
                   {/* 1. Top Image Thumbnail Container (Landscape Cover Photo) with Floating Availability Badge */}
@@ -242,7 +242,7 @@ export function FeaturedTalentSection({
                     />
 
                     {/* Floating Availability Pill Badge (Top-Left on Cover) */}
-                    <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs border border-zinc-200/90 text-[11px] font-semibold text-emerald-800 px-2.5 py-0.5 rounded-none flex items-center gap-1.5 shadow-2xs z-10 pointer-events-none">
+                    <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs border border-zinc-200/90 text-[11px] font-semibold text-emerald-800 px-2.5 py-0.5 rounded-lg flex items-center gap-1.5 shadow-2xs z-10 pointer-events-none">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
                       <span>{availabilityLabel}</span>
                     </div>
@@ -253,7 +253,7 @@ export function FeaturedTalentSection({
                     {/* Category Pill Tag + Action Button (Clean 2-item row with zero collision) */}
                     <div className="flex items-center justify-between gap-3 min-w-0">
                       <span
-                        className="inline-block px-3 py-1 bg-[#E0F2FE] text-[#0284C7] text-[12px] font-bold rounded-none truncate max-w-[160px]"
+                        className="inline-block px-3 py-1 bg-[#E0F2FE] text-[#0284C7] text-[12px] font-bold rounded-lg truncate max-w-[160px]"
                         title={person.category || "Engineering"}
                       >
                         {person.category || "Engineering"}
@@ -261,7 +261,7 @@ export function FeaturedTalentSection({
 
                       <Link
                         href={`/talent/${person.slug || person.id}`}
-                        className="px-2.5 py-0.5 rounded-none text-[11px] font-bold border transition-all cursor-pointer select-none active:scale-95 bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-800 hover:border-zinc-400 shadow-2xs shrink-0 whitespace-nowrap ml-auto"
+                        className="px-2.5 py-0.5 rounded-lg text-[11px] font-bold border transition-all cursor-pointer select-none active:scale-95 bg-white hover:bg-zinc-50 border-zinc-200/90 text-zinc-800 hover:border-zinc-400 shadow-2xs shrink-0 whitespace-nowrap ml-auto"
                       >
                         Hire Talent
                       </Link>
@@ -272,7 +272,7 @@ export function FeaturedTalentSection({
                       href={`/talent/${person.slug || person.id}`}
                       className="flex items-center gap-3 group/title min-w-0"
                     >
-                      <div className="w-11 h-11 rounded-none bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center overflow-hidden shrink-0">
+                      <div className="w-11 h-11 rounded-lg bg-[#FAF8F5] border border-zinc-200/90 shadow-2xs flex items-center justify-center overflow-hidden shrink-0">
                         <TalentAvatar
                           src={person.avatar}
                           name={person.name}

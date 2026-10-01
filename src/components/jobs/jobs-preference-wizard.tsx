@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import { useState } from "react";
@@ -55,7 +57,7 @@ export function JobsPreferenceWizard({
   onClose,
 }: JobsPreferenceWizardProps) {
   const [step, setStep] = useState<1 | 2 | 3>(1);
-  
+
   // State
   const [selectedRole, setSelectedRole] = useState("AI/ML Engineer");
   const [selectedExperience, setSelectedExperience] = useState<string[]>([
@@ -113,18 +115,17 @@ export function JobsPreferenceWizard({
       />
 
       <div className="max-w-3xl mx-auto relative z-10">
-        
+
         {/* Top Stepper Pill Bar */}
         <div className="flex justify-center mb-10">
           <div className="inline-flex items-center gap-1.5 p-1.5 rounded-full bg-white border border-zinc-200/90 shadow-2xs">
             {/* Step 1 Pill */}
             <button
               onClick={() => setStep(1)}
-              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-bold transition-all cursor-pointer ${
-                step === 1
+              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-bold transition-all cursor-pointer ${step === 1
                   ? "bg-[#E7040D] text-white shadow-xs"
                   : "text-zinc-600 hover:text-zinc-950"
-              }`}
+                }`}
             >
               <MagnifyingGlass size={14} weight="bold" />
               <span>Job title</span>
@@ -135,11 +136,10 @@ export function JobsPreferenceWizard({
             {/* Step 2 Pill */}
             <button
               onClick={() => setStep(2)}
-              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-bold transition-all cursor-pointer ${
-                step === 2
+              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-bold transition-all cursor-pointer ${step === 2
                   ? "bg-[#E7040D] text-white shadow-xs"
                   : "text-zinc-600 hover:text-zinc-950"
-              }`}
+                }`}
             >
               <Briefcase size={14} weight="bold" />
               <span>Experience Level</span>
@@ -150,11 +150,10 @@ export function JobsPreferenceWizard({
             {/* Step 3 Pill */}
             <button
               onClick={() => setStep(3)}
-              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-bold transition-all cursor-pointer ${
-                step === 3
+              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-bold transition-all cursor-pointer ${step === 3
                   ? "bg-[#E7040D] text-white shadow-xs"
                   : "text-zinc-600 hover:text-zinc-950"
-              }`}
+                }`}
             >
               <MapPin size={14} weight="bold" />
               <span>Location</span>
@@ -163,7 +162,7 @@ export function JobsPreferenceWizard({
         </div>
 
         {/* Wizard Main Card Container */}
-        <div className="bg-white rounded-3xl border border-zinc-200/80 p-8 sm:p-12 shadow-[0_16px_40px_-8px_rgba(15,16,18,0.08)]">
+        <div className="bg-white rounded-lg border border-zinc-200/80 p-8 sm:p-12 shadow-[0_16px_40px_-8px_rgba(15,16,18,0.08)]">
           <p className="text-center text-[12px] font-bold uppercase tracking-wider text-zinc-400 mb-2">
             Share your preferences
           </p>
@@ -186,7 +185,7 @@ export function JobsPreferenceWizard({
                     value={selectedRole}
                     onChange={(e) => setSelectedRole(e.target.value)}
                     placeholder="E.g. AI/ML Engineer, Senior Product Designer..."
-                    className="w-full h-14 px-5 rounded-2xl bg-zinc-50 border-2 border-[#E7040D]/30 focus:border-[#E7040D] text-[16px] font-semibold text-zinc-900 focus:outline-hidden transition-all shadow-xs"
+                    className="w-full h-14 px-5 rounded-lg bg-zinc-50 border-2 border-[#E7040D]/30 focus:border-[#E7040D] text-[16px] font-semibold text-zinc-900 focus:outline-hidden transition-all shadow-xs"
                   />
                   {selectedRole && (
                     <button
@@ -205,11 +204,10 @@ export function JobsPreferenceWizard({
                   <button
                     key={role}
                     onClick={() => setSelectedRole(role)}
-                    className={`px-3.5 py-1.5 rounded-xl text-[12px] font-semibold transition-colors cursor-pointer ${
-                      selectedRole.toLowerCase() === role.toLowerCase()
+                    className={`px-3.5 py-1.5 rounded-lg text-[12px] font-semibold transition-colors cursor-pointer ${selectedRole.toLowerCase() === role.toLowerCase()
                         ? "bg-[#fce8e0] text-[#E7040D] border border-[#f5c4ae]"
                         : "bg-zinc-100/80 text-zinc-600 hover:bg-zinc-200/80"
-                    }`}
+                      }`}
                   >
                     {role}
                   </button>
@@ -220,13 +218,13 @@ export function JobsPreferenceWizard({
               <div className="flex items-center gap-3">
                 <button
                   disabled
-                  className="px-8 py-3.5 rounded-xl bg-zinc-100 text-zinc-400 text-[14px] font-bold cursor-not-allowed"
+                  className="px-8 py-3.5 rounded-lg bg-zinc-100 text-zinc-400 text-[14px] font-bold cursor-not-allowed"
                 >
                   Back
                 </button>
                 <button
                   onClick={() => setStep(2)}
-                  className="px-10 py-3.5 rounded-xl bg-[#E7040D] hover:bg-[#CB030B] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all cursor-pointer active:scale-98 inline-flex items-center gap-2"
+                  className="px-10 py-3.5 rounded-lg bg-[#E7040D] hover:bg-[#CB030B] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all cursor-pointer active:scale-98 inline-flex items-center gap-2"
                 >
                   <span>Next</span>
                   <ArrowRight size={14} weight="bold" />
@@ -253,22 +251,20 @@ export function JobsPreferenceWizard({
                     <button
                       key={tier.id}
                       onClick={() => toggleExperience(tier.id)}
-                      className={`w-full p-4 rounded-xl text-left border transition-all duration-200 flex items-center justify-between cursor-pointer ${
-                        isChecked
+                      className={`w-full p-4 rounded-lg text-left border transition-all duration-200 flex items-center justify-between cursor-pointer ${isChecked
                           ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D] shadow-xs"
                           : "bg-zinc-50 hover:bg-zinc-100/80 border-zinc-200/80 text-zinc-800"
-                      }`}
+                        }`}
                     >
                       <div>
                         <p className="text-[14.5px] font-bold leading-tight">{tier.label}</p>
                         <p className="text-[12px] opacity-80 mt-0.5">{tier.desc}</p>
                       </div>
                       <div
-                        className={`w-5 h-5 rounded-md flex items-center justify-center border transition-colors ${
-                          isChecked
+                        className={`w-5 h-5 rounded-lg flex items-center justify-center border transition-colors ${isChecked
                             ? "bg-[#E7040D] border-[#E7040D] text-white"
                             : "border-zinc-300 bg-white"
-                        }`}
+                          }`}
                       >
                         {isChecked && <Check size={13} weight="bold" />}
                       </div>
@@ -281,13 +277,13 @@ export function JobsPreferenceWizard({
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setStep(1)}
-                  className="px-8 py-3.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-700 text-[14px] font-bold transition-colors cursor-pointer"
+                  className="px-8 py-3.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-700 text-[14px] font-bold transition-colors cursor-pointer"
                 >
                   Back
                 </button>
                 <button
                   onClick={() => setStep(3)}
-                  className="px-10 py-3.5 rounded-xl bg-[#E7040D] hover:bg-[#CB030B] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all cursor-pointer active:scale-98 inline-flex items-center gap-2"
+                  className="px-10 py-3.5 rounded-lg bg-[#E7040D] hover:bg-[#CB030B] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all cursor-pointer active:scale-98 inline-flex items-center gap-2"
                 >
                   <span>Next</span>
                   <ArrowRight size={14} weight="bold" />
@@ -320,12 +316,12 @@ export function JobsPreferenceWizard({
                       }
                     }}
                     placeholder="E.g. Lagos, Abuja, Remote Africa..."
-                    className="w-full h-14 px-5 rounded-2xl bg-zinc-50 border-2 border-zinc-200 focus:border-[#E7040D] text-[15px] font-semibold text-zinc-900 focus:outline-hidden transition-all shadow-xs"
+                    className="w-full h-14 px-5 rounded-lg bg-zinc-50 border-2 border-zinc-200 focus:border-[#E7040D] text-[15px] font-semibold text-zinc-900 focus:outline-hidden transition-all shadow-xs"
                   />
                   {locationInput && (
                     <button
                       onClick={() => addLocation(locationInput)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-xl bg-[#E7040D] text-white text-[12px] font-bold"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-[#E7040D] text-white text-[12px] font-bold"
                     >
                       Add
                     </button>
@@ -337,7 +333,7 @@ export function JobsPreferenceWizard({
                   {selectedLocations.map((loc) => (
                     <span
                       key={loc}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#fce8e0] text-[#E7040D] border border-[#f5c4ae] text-[13px] font-bold"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#fce8e0] text-[#E7040D] border border-[#f5c4ae] text-[13px] font-bold"
                     >
                       <span>{loc}</span>
                       <button
@@ -357,7 +353,7 @@ export function JobsPreferenceWizard({
                   <button
                     key={loc}
                     onClick={() => addLocation(loc)}
-                    className="px-3.5 py-1.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-600 text-[12px] font-semibold transition-colors cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-600 text-[12px] font-semibold transition-colors cursor-pointer"
                   >
                     + {loc}
                   </button>
@@ -368,13 +364,13 @@ export function JobsPreferenceWizard({
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setStep(2)}
-                  className="px-8 py-3.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-700 text-[14px] font-bold transition-colors cursor-pointer"
+                  className="px-8 py-3.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-700 text-[14px] font-bold transition-colors cursor-pointer"
                 >
                   Back
                 </button>
                 <button
                   onClick={handleFinish}
-                  className="px-10 py-3.5 rounded-xl bg-[#E7040D] hover:bg-[#CB030B] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all cursor-pointer active:scale-98 inline-flex items-center gap-2"
+                  className="px-10 py-3.5 rounded-lg bg-[#E7040D] hover:bg-[#CB030B] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all cursor-pointer active:scale-98 inline-flex items-center gap-2"
                 >
                   <span>Find job matches</span>
                   <ArrowRight size={14} weight="bold" />

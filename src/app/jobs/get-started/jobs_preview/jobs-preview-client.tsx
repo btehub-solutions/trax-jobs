@@ -87,14 +87,14 @@ function JobsPreviewInner({ jobs }: { jobs: any[] }) {
             <Link href="/" className="flex items-center">
               <Image src="/images/trax-logo.png" alt="Trax" width={120} height={34} className="h-7 w-auto object-contain" priority />
             </Link>
-            <nav className="hidden md:flex items-center gap-1 p-1 rounded-xl bg-white border border-zinc-200/80 shadow-2xs">
+            <nav className="hidden md:flex items-center gap-1 p-1 rounded-lg bg-white border border-zinc-200/80 shadow-2xs">
               <Link href="/jobs" className="px-4 py-1.5 rounded-lg bg-zinc-100 text-zinc-950 text-[13px] font-bold">Find a job</Link>
               <Link href="/talent" className="px-4 py-1.5 rounded-lg text-zinc-600 hover:text-zinc-950 text-[13px] font-semibold transition-colors">Hire a Talent</Link>
               <Link href="/companies" className="px-4 py-1.5 rounded-lg text-zinc-600 hover:text-zinc-950 text-[13px] font-semibold transition-colors">Explore companies</Link>
             </nav>
           </div>
           <div className="flex items-center gap-3">
-            <Link href="/about?tab=post-and-submit&type=job" className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl bg-[#0C1222] hover:bg-[#070b14] active:scale-[0.98] select-none text-white text-[13.5px] font-bold transition-all shadow-2xs">
+            <Link href="/about?tab=post-and-submit&type=job" className="inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-[#0C1222] hover:bg-[#070b14] active:scale-[0.98] select-none text-white text-[13.5px] font-bold transition-all shadow-2xs">
               Post a job
             </Link>
           </div>
@@ -125,7 +125,7 @@ function JobsPreviewInner({ jobs }: { jobs: any[] }) {
 
                 {totalPages > 1 && (
                   <div className="flex justify-center pt-8 pb-4">
-                    <div className="inline-flex items-center gap-1.5 p-1 rounded-xl bg-white border border-zinc-200/90 shadow-2xs">
+                    <div className="inline-flex items-center gap-1.5 p-1 rounded-lg bg-white border border-zinc-200/90 shadow-2xs">
                       <button onClick={() => { if (currentPage > 1) { setCurrentPage((p) => p - 1); window.scrollTo({ top: 0, behavior: "smooth" }); } }} disabled={currentPage === 1} className={`w-9 h-9 flex items-center justify-center rounded-lg transition-all ${currentPage === 1 ? "text-zinc-300 bg-zinc-50 cursor-not-allowed" : "text-zinc-700 hover:bg-zinc-100 cursor-pointer"}`} aria-label="Previous Page">
                         <CaretLeft size={14} weight="bold" />
                       </button>

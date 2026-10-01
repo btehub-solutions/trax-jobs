@@ -22,13 +22,13 @@ import { isValidImageUrl } from "@/lib/utils";
 function CompanyAvatar({ name, logo }: { name: string; logo?: string }) {
   if (isValidImageUrl(logo)) {
     return (
-      <div className="w-11 h-11 rounded-none bg-white border border-zinc-200/90 flex items-center justify-center p-1.5 shrink-0 overflow-hidden shadow-2xs">
+      <div className="w-11 h-11 rounded-lg bg-white border border-zinc-200/90 flex items-center justify-center p-1.5 shrink-0 overflow-hidden shadow-2xs">
         <Image
           src={logo!}
           alt={name}
           width={36}
           height={36}
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain rounded-md"
         />
       </div>
     );
@@ -37,16 +37,16 @@ function CompanyAvatar({ name, logo }: { name: string; logo?: string }) {
   const n = name.toLowerCase();
   if (n.includes("paystack")) {
     return (
-      <div className="w-11 h-11 rounded-none bg-[#00C3F8]/10 border border-[#00C3F8]/20 flex items-center justify-center p-2 shrink-0">
+      <div className="w-11 h-11 rounded-lg bg-[#00C3F8]/10 border border-[#00C3F8]/20 flex items-center justify-center p-2 shrink-0">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full text-[#00C3F8]">
-          <path d="M15 22h70v16H15zM15 44h45v16H15zM15 66h70v16H15z" fill="currentColor" />
+          <path d="M15 22h70v16H15zM15 44h45v16H15zM15 66h70v15H15z" fill="currentColor" />
         </svg>
       </div>
     );
   }
   if (n.includes("flutterwave")) {
     return (
-      <div className="w-11 h-11 rounded-none bg-[#FB4E2D]/10 border border-[#FB4E2D]/20 flex items-center justify-center p-2 shrink-0">
+      <div className="w-11 h-11 rounded-lg bg-[#FB4E2D]/10 border border-[#FB4E2D]/20 flex items-center justify-center p-2 shrink-0">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M20 50c0-16.569 13.431-30 30-30s30 13.431 30 30" stroke="#FB4E2D" strokeWidth="12" strokeLinecap="round" />
           <path d="M32 50c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="#FF9B00" strokeWidth="10" strokeLinecap="round" />
@@ -56,7 +56,7 @@ function CompanyAvatar({ name, logo }: { name: string; logo?: string }) {
   }
   if (n.includes("moniepoint") || n.includes("nomba")) {
     return (
-      <div className="w-11 h-11 rounded-none bg-[#0355D4]/10 border border-[#0355D4]/20 flex items-center justify-center p-2 shrink-0">
+      <div className="w-11 h-11 rounded-lg bg-[#0355D4]/10 border border-[#0355D4]/20 flex items-center justify-center p-2 shrink-0">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M22 22l28 28-28 28V22zM78 22L50 50l28 28V22z" fill="#0355D4" />
         </svg>
@@ -65,7 +65,7 @@ function CompanyAvatar({ name, logo }: { name: string; logo?: string }) {
   }
 
   return (
-    <div className="w-11 h-11 rounded-none bg-[#1F1F1F] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-2xs">
+    <div className="w-11 h-11 rounded-lg bg-[#1F1F1F] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-2xs">
       <Briefcase size={20} weight="fill" className="text-zinc-200" />
     </div>
   );
@@ -219,7 +219,7 @@ export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
             return (
               <div
                 key={job.id}
-                className="w-[280px] sm:w-[295px] md:w-[305px] min-h-[350px] sm:min-h-[365px] bg-white rounded-none border border-zinc-200/90 p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.1)] hover:border-[#E7040D]/40 hover:-translate-y-1 transition-all duration-300 group relative shrink-0 snap-start select-none"
+                className="w-[280px] sm:w-[295px] md:w-[305px] min-h-[350px] sm:min-h-[365px] bg-white rounded-lg border border-zinc-200/90 p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_-6px_rgba(231,4,13,0.1)] hover:border-[#E7040D]/40 hover:-translate-y-1 transition-all duration-300 group relative shrink-0 snap-start select-none"
               >
                 {/* Top Section: Avatar, Title, Company, Status, Bookmark */}
                 <div>
@@ -270,24 +270,24 @@ export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
                   {/* Middle Section: Filter Pill Badges */}
                   <div className="flex flex-wrap items-center gap-1.5 my-2.5">
                     {/* Contract Type */}
-                    <span className="px-2.5 py-1 rounded-none bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
+                    <span className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
                       {job.contractType || "Full-time"}
                     </span>
 
                     {/* Category / Discipline */}
-                    <span className="px-2.5 py-1 rounded-none bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
+                    <span className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
                       {job.roleCategory || job.company.industry || "Technology"}
                     </span>
 
                     {/* Seniority */}
                     {job.experienceLevel && (
-                      <span className="px-2.5 py-1 rounded-none bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
+                      <span className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
                         {job.experienceLevel}
                       </span>
                     )}
 
                     {/* Workplace Policy */}
-                    <span className="px-2.5 py-1 rounded-none bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
+                    <span className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
                       {job.workplaceType || "Onsite"}
                     </span>
                   </div>
@@ -299,7 +299,7 @@ export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
                         {job.tags.slice(0, 3).map((tag) => (
                           <span
                             key={tag}
-                            className="px-2 py-0.5 bg-zinc-100/90 text-zinc-700 text-[10.5px] font-semibold border border-zinc-200/60 rounded-none"
+                            className="px-2 py-0.5 bg-zinc-100/90 text-zinc-700 text-[10.5px] font-semibold border border-zinc-200/60 rounded-lg"
                           >
                             {tag}
                           </span>
@@ -337,7 +337,7 @@ export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
 
                   <Link
                     href={`/jobs/${job.slug || job.id}`}
-                    className="w-full py-2 bg-zinc-950 hover:bg-[#E7040D] text-white text-[12px] font-bold flex items-center justify-center gap-1.5 transition-colors duration-150 rounded-none shadow-2xs"
+                    className="w-full py-2 bg-zinc-950 hover:bg-[#E7040D] text-white text-[12px] font-bold flex items-center justify-center gap-1.5 transition-colors duration-150 rounded-lg shadow-2xs"
                   >
                     <span>View Role</span>
                     <ArrowRight size={13} weight="bold" />

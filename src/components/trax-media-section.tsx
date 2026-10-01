@@ -132,8 +132,8 @@ export function TraxMediaSection({ articles = TRAX_MEDIA_ARTICLES }: TraxMediaSe
                 rel="noopener noreferrer"
                 className="group flex flex-col cursor-pointer select-none shrink-0 snap-center sm:snap-start w-[82vw] max-w-[350px] sm:max-w-none sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]"
               >
-                {/* Horizontal Landscape Media Image Container - 90 Degree Square Geometry */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-none bg-zinc-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-zinc-200/90 group-hover:border-zinc-300 transition-colors">
+                {/* Horizontal Landscape Media Image Container */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-zinc-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-zinc-200/90 group-hover:border-zinc-300 transition-colors">
                   <Image
                     src={card.image}
                     alt={card.title}

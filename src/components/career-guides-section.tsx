@@ -121,7 +121,7 @@ export function CareerGuidesSection({ guides }: CareerGuidesSectionProps = {}) {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-5 py-2.5 rounded-xl text-[13.5px] font-bold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 select-none shrink-0 ${
+                className={`px-5 py-2.5 rounded-lg text-[13.5px] font-bold whitespace-nowrap transition-all duration-150 cursor-pointer active:scale-95 select-none shrink-0 ${
                   isActive
                     ? "bg-[#E7040D] text-white shadow-xs"
                     : "bg-white text-zinc-700 hover:text-zinc-950 border border-zinc-200/80 hover:border-zinc-300 hover:bg-zinc-50"
@@ -146,10 +146,10 @@ export function CareerGuidesSection({ guides }: CareerGuidesSectionProps = {}) {
               <Link
                 key={guide.slug}
                 href={`/guides/${guide.slug}`}
-                className="w-[280px] sm:w-full sm:max-w-[280px] shrink-0 snap-start bg-white rounded-none border border-zinc-200/90 overflow-hidden shadow-[0_4px_16px_-4px_rgba(15,16,18,0.06)] hover:shadow-[0_16px_32px_-6px_rgba(231,4,13,0.12)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col group cursor-pointer"
+                className="w-[280px] sm:w-full sm:max-w-[280px] shrink-0 snap-start bg-white rounded-lg border border-zinc-200/90 overflow-hidden shadow-[0_4px_16px_-4px_rgba(15,16,18,0.06)] hover:shadow-[0_16px_32px_-6px_rgba(231,4,13,0.12)] hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 flex flex-col group cursor-pointer"
               >
-                {/* Image Container with editorial portrait framing and square edges */}
-                <div className="relative h-[260px] sm:h-[280px] md:h-[300px] w-full bg-zinc-100 overflow-hidden rounded-none">
+                {/* Image Container with editorial portrait framing */}
+                <div className="relative h-[260px] sm:h-[280px] md:h-[300px] w-full bg-zinc-100 overflow-hidden">
                   <Image
                     src={imageSrc}
                     alt={guide.title}
@@ -159,8 +159,8 @@ export function CareerGuidesSection({ guides }: CareerGuidesSectionProps = {}) {
                   />
                 </div>
 
-                {/* Minimal Card Title Area with square edges */}
-                <div className="p-5 sm:p-5.5 bg-white rounded-none flex-1 flex flex-col justify-start">
+                {/* Minimal Card Title Area */}
+                <div className="p-5 sm:p-5.5 bg-white flex-1 flex flex-col justify-start">
                   <h3 className="text-[20px] sm:text-[21.5px] font-black text-[#1F1F1F] tracking-[-0.025em] leading-[1.16] whitespace-pre-line group-hover:text-[#E7040D] transition-colors">
                     {displayTitle}
                   </h3>

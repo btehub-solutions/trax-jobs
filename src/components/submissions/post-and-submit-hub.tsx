@@ -2007,7 +2007,7 @@ function CompanyStudio() {
 function SuccessState({ title, email, onReset }: { title: string; email: string; onReset: () => void }) {
   return (
     <div className="py-12 px-4 text-center max-w-lg mx-auto space-y-5 bg-white border border-zinc-200/90 rounded-lg shadow-[0_16px_36px_-6px_rgba(15,16,18,0.06)] p-8">
-      <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-none flex items-center justify-center mx-auto shadow-xs border border-emerald-200">
+      <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center mx-auto shadow-xs border border-emerald-200">
         <CheckCircle size={36} weight="fill" />
       </div>
       <div className="space-y-2">
@@ -2017,20 +2017,20 @@ function SuccessState({ title, email, onReset }: { title: string; email: string;
           A confirmation was sent to <strong className="text-zinc-900">{email}</strong>.
         </p>
       </div>
-      <div className="p-3 bg-[#fce8e0] text-[#E7040D] text-[12.5px] font-bold text-center">
+      <div className="p-3 bg-[#fce8e0] text-[#E7040D] text-[12.5px] font-bold text-center rounded-lg">
         Editorial Review SLA: Under 24 Hours
       </div>
       <div className="pt-3 flex items-center justify-center gap-3">
         <button
           type="button"
           onClick={onReset}
-          className="px-5 py-2.5 bg-white border border-zinc-300 hover:bg-zinc-50 text-zinc-900 text-[13px] font-bold transition-all cursor-pointer"
+          className="px-5 py-2.5 bg-white border border-zinc-300 hover:bg-zinc-50 text-zinc-900 text-[13px] font-bold rounded-lg transition-all cursor-pointer"
         >
           Submit Another Entry
         </button>
         <Link
           href="/jobs"
-          className="px-5 py-2.5 bg-[#0C1222] hover:bg-zinc-800 text-white text-[13px] font-bold transition-all"
+          className="px-5 py-2.5 bg-[#0C1222] hover:bg-zinc-800 text-white text-[13px] font-bold rounded-lg transition-all"
         >
           Browse Verified Jobs
         </Link>

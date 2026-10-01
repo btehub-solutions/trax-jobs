@@ -55,7 +55,7 @@ export function SocialProofSection() {
           ───────────────────────────────────────────────────────────── */}
           <div className="block lg:hidden space-y-5 pt-2">
             {/* Card 1: Trax Warm Peach Canvas (#FDF2EE) with White Index Tab */}
-            <div className="bg-white rounded-2xl border border-zinc-200/90 shadow-[0_6px_20px_-4px_rgba(15,16,18,0.06)] overflow-hidden">
+            <div className="bg-white rounded-lg border border-zinc-200/90 shadow-[0_6px_20px_-4px_rgba(15,16,18,0.06)] overflow-hidden">
               <div className="h-5 bg-white border-b border-black/[0.03]" />
               <div className="bg-[#FDF2EE] p-5 sm:p-6">
                 <h3 className="text-[25px] sm:text-[28px] font-black text-zinc-950 tracking-[-0.03em] leading-tight mb-2">
@@ -68,7 +68,7 @@ export function SocialProofSection() {
             </div>
 
             {/* Card 2: Soft Sky Blue (#E8F5FD) with White Index Tab */}
-            <div className="bg-white rounded-2xl border border-zinc-200/90 shadow-[0_6px_20px_-4px_rgba(15,16,18,0.06)] overflow-hidden">
+            <div className="bg-white rounded-lg border border-zinc-200/90 shadow-[0_6px_20px_-4px_rgba(15,16,18,0.06)] overflow-hidden">
               <div className="h-5 bg-white border-b border-black/[0.03]" />
               <div className="bg-[#E8F5FD] p-5 sm:p-6">
                 <h3 className="text-[25px] sm:text-[28px] font-black text-zinc-950 tracking-[-0.03em] leading-tight mb-2">
@@ -81,7 +81,7 @@ export function SocialProofSection() {
             </div>
 
             {/* Card 3: Soft Celadon Mint (#EDFBEF) with White Index Tab */}
-            <div className="bg-white rounded-2xl border border-zinc-200/90 shadow-[0_6px_20px_-4px_rgba(15,16,18,0.06)] overflow-hidden">
+            <div className="bg-white rounded-lg border border-zinc-200/90 shadow-[0_6px_20px_-4px_rgba(15,16,18,0.06)] overflow-hidden">
               <div className="h-5 bg-white border-b border-black/[0.03]" />
               <div className="bg-[#EDFBEF] p-5 sm:p-6">
                 <h3 className="text-[25px] sm:text-[28px] font-black text-zinc-950 tracking-[-0.03em] leading-tight mb-2">
@@ -96,7 +96,7 @@ export function SocialProofSection() {
             {/* Card 4: Photo Card with Overlapping Physical Post-it Sticky Note */}
             <div className="relative pt-2 pb-4">
               {/* Photo Card with White Index Tab */}
-              <div className="bg-white rounded-2xl border border-zinc-200/90 shadow-[0_8px_24px_-4px_rgba(15,16,18,0.08)] overflow-hidden">
+              <div className="bg-white rounded-lg border border-zinc-200/90 shadow-[0_8px_24px_-4px_rgba(15,16,18,0.08)] overflow-hidden">
                 <div className="h-5 bg-white border-b border-black/[0.03]" />
                 <div className="relative w-full h-[290px] sm:h-[330px]">
                   <Image
@@ -111,7 +111,7 @@ export function SocialProofSection() {
               </div>
 
               {/* Overlapping Physical Post-it Note (Positioned lower to reveal more of the photo) */}
-              <div className="relative -mt-24 sm:-mt-28 ml-auto mr-2 sm:mr-4 w-[88%] max-w-[325px] bg-[#FFF9C6] rounded-[3px] shadow-[0_20px_42px_-6px_rgba(15,16,18,0.22),0_8px_18px_-4px_rgba(15,16,18,0.12)] border border-[#EADB85] rotate-[2.2deg] z-20 overflow-hidden">
+              <div className="relative -mt-24 sm:-mt-28 ml-auto mr-2 sm:mr-4 w-[88%] max-w-[325px] bg-[#FFF9C6] rounded-lg shadow-[0_20px_42px_-6px_rgba(15,16,18,0.22),0_8px_18px_-4px_rgba(15,16,18,0.12)] border border-[#EADB85] rotate-[2.2deg] z-20 overflow-hidden">
                 {/* Darker Yellow Top Adhesive / Glue Strip */}
                 <div className="h-7 sm:h-8 bg-[#F4E47E]/80 border-b border-[#E3CE5E]/60 w-full" />
 
@@ -153,7 +153,7 @@ export function SocialProofSection() {
           <div className="hidden lg:flex lg:col-span-7 relative min-h-[440px] sm:min-h-[540px] items-center justify-center pt-6 sm:pt-8 pb-8 sm:pb-10">
             
             {/* Center Main Photograph */}
-            <div className="relative w-[260px] xs:w-[290px] sm:w-[380px] md:w-[420px] h-[320px] xs:h-[360px] sm:h-[420px] rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-[0_20px_50px_-10px_rgba(15,16,18,0.15)] border-4 border-white">
+            <div className="relative w-[260px] xs:w-[290px] sm:w-[380px] md:w-[420px] h-[320px] xs:h-[360px] sm:h-[420px] rounded-lg overflow-hidden shadow-[0_20px_50px_-10px_rgba(15,16,18,0.15)] border-4 border-white">
               <Image
                 src="/images/social-proof-team.jpg"
                 alt="African tech team collaborating"
@@ -165,7 +165,7 @@ export function SocialProofSection() {
             </div>
 
             {/* Floating Card 1: Top Right (Cream Yellow Post-it) */}
-            <div className="absolute top-0 right-0 sm:right-4 md:right-8 w-[155px] xs:w-[175px] sm:w-[220px] bg-[#FEF6E4] rounded-2xl p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#F6E6BF] hover:-translate-y-1 transition-transform duration-300">
+            <div className="absolute top-0 right-0 sm:right-4 md:right-8 w-[155px] xs:w-[175px] sm:w-[220px] bg-[#FEF6E4] rounded-lg p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#F6E6BF] hover:-translate-y-1 transition-transform duration-300">
               <p className="text-[17px] sm:text-[22px] font-black text-zinc-950 leading-tight mb-1">
                 100%
               </p>
@@ -175,7 +175,7 @@ export function SocialProofSection() {
             </div>
 
             {/* Floating Card 2: Left Side (Editorial Note Card) */}
-            <div className="absolute bottom-8 left-0 sm:bottom-12 sm:left-0 md:left-2 w-[175px] xs:w-[200px] sm:w-[245px] bg-[#FEFBEA] rounded-2xl p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#F4EDB8] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200">
+            <div className="absolute bottom-8 left-0 sm:bottom-12 sm:left-0 md:left-2 w-[175px] xs:w-[200px] sm:w-[245px] bg-[#FEFBEA] rounded-lg p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#F4EDB8] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200">
               <div className="flex items-center gap-1.5 text-zinc-900 mb-1.5 sm:mb-2">
                 <Quotes size={15} weight="fill" className="text-[#E7040D]" />
                 <span className="text-[10.5px] sm:text-[11.5px] font-bold">The Trax Standard</span>
@@ -185,14 +185,14 @@ export function SocialProofSection() {
               </p>
               <Link
                 href="/about"
-                className="inline-block px-2.5 sm:px-3 py-1 rounded-md bg-zinc-950 text-white text-[9.5px] sm:text-[10.5px] font-bold hover:bg-[#E7040D] transition-colors"
+                className="inline-block px-2.5 sm:px-3 py-1 rounded-lg bg-zinc-950 text-white text-[9.5px] sm:text-[10.5px] font-bold hover:bg-[#E7040D] transition-colors"
               >
                 About our review
               </Link>
             </div>
 
             {/* Floating Card 3: Bottom Center-Right (Soft Mint Trust Card) */}
-            <div className="absolute -bottom-2 right-1 sm:-bottom-4 sm:right-12 md:right-20 w-[155px] xs:w-[175px] sm:w-[220px] bg-[#EDFBEF] rounded-2xl p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#D1F2D6] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200 z-20">
+            <div className="absolute -bottom-2 right-1 sm:-bottom-4 sm:right-12 md:right-20 w-[155px] xs:w-[175px] sm:w-[220px] bg-[#EDFBEF] rounded-lg p-3 sm:p-5 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#D1F2D6] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200 z-20">
               <p className="text-[15px] sm:text-[19px] font-black text-zinc-950 leading-tight mb-0.5 sm:mb-1">
                 Zero ghost roles
               </p>
@@ -202,7 +202,7 @@ export function SocialProofSection() {
             </div>
 
             {/* Floating Card 4: Top Left (Soft Ice Blue Direct Contact Card) */}
-            <div className="hidden sm:block absolute top-4 left-4 md:left-10 w-[185px] bg-[#EEF6FC] rounded-2xl p-4 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#D5E8F7] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200">
+            <div className="hidden sm:block absolute top-4 left-4 md:left-10 w-[185px] bg-[#EEF6FC] rounded-lg p-4 shadow-[0_12px_28px_-6px_rgba(15,16,18,0.1)] border border-[#D5E8F7] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200">
               <p className="text-[15px] sm:text-[18px] font-black text-zinc-950 leading-tight mb-1">
                 Direct contact
               </p>

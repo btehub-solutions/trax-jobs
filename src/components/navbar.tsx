@@ -292,7 +292,7 @@ export function Navbar({
                     key={tab.id}
                     type="button"
                     onClick={() => setSearchScope(tab.id)}
-                    className={`px-2.5 py-1 text-[11.5px] font-bold transition-all rounded-[6px] select-none cursor-pointer ${
+                    className={`px-2.5 py-1 text-[11.5px] font-bold transition-all rounded-lg select-none cursor-pointer ${
                       searchScope === tab.id
                         ? "bg-white text-[#1F1F1F] shadow-2xs"
                         : "text-zinc-500 hover:text-zinc-900"
@@ -334,7 +334,7 @@ export function Navbar({
                       ? "Search talent by role, skill..."
                       : "Search jobs, roles, skills..."
                   }
-                  className="w-full bg-[#f3f4f6] text-zinc-900 placeholder:text-zinc-400 pl-10 pr-8 py-2.5 rounded-xl text-[14px] font-normal border-0 focus:outline-none focus:ring-1 focus:ring-[#E7040D]/30 transition-all"
+                  className="w-full bg-[#f3f4f6] text-zinc-900 placeholder:text-zinc-400 pl-10 pr-8 py-2.5 rounded-lg text-[14px] font-normal border-0 focus:outline-none focus:ring-1 focus:ring-[#E7040D]/30 transition-all"
                 />
                 {searchQuery && (
                   <button
@@ -349,7 +349,7 @@ export function Navbar({
               </div>
               <button
                 type="submit"
-                className="px-3.5 py-2.5 rounded-xl bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[13px] font-bold shadow-2xs transition-all cursor-pointer shrink-0"
+                className="px-3.5 py-2.5 rounded-lg bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[13px] font-bold shadow-2xs transition-all cursor-pointer shrink-0"
               >
                 Search
               </button>
@@ -477,7 +477,7 @@ export function Navbar({
           <Link
             href="/about?tab=post-and-submit&type=talent"
             onClick={() => setMobileMenuOpen(false)}
-            className="group block relative w-full aspect-[16/9] overflow-hidden rounded-none border border-zinc-200/90 shadow-2xs hover:shadow-md transition-all active:scale-[0.99] bg-[#FAF8F5]"
+            className="group block relative w-full aspect-[16/9] overflow-hidden rounded-lg border border-zinc-200/90 shadow-2xs hover:shadow-md transition-all active:scale-[0.99] bg-[#FAF8F5]"
           >
             <Image
               src="/images/trax-talent-network-banner.jpg"

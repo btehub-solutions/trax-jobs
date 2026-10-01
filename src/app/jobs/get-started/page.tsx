@@ -47,7 +47,7 @@ function JobTitleContent() {
           </Link>
 
           {/* Stepper Pill Bar */}
-          <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-zinc-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
+          <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-zinc-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
             {/* Step 1: Job Title (Active) */}
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#E7040D] text-white text-[13px] font-bold">
               <MagnifyingGlass size={14} weight="bold" />
@@ -86,7 +86,7 @@ function JobTitleContent() {
 
       {/* Main Center Card (Fixed 1040px x 480px Dimensions for 100% Stability) */}
       <main className="flex-1 flex items-center justify-center px-6 sm:px-8 lg:px-10 py-6 relative z-10">
-        <div className="w-full max-w-[1040px] h-[480px] bg-white rounded-none border border-zinc-200/70 px-6 sm:px-12 shadow-[0_4px_20px_-8px_rgba(15,16,18,0.04)] flex flex-col items-center justify-center text-center">
+        <div className="w-full max-w-[1040px] h-[480px] bg-white rounded-lg border border-zinc-200/70 px-6 sm:px-12 shadow-[0_4px_20px_-8px_rgba(15,16,18,0.04)] flex flex-col items-center justify-center text-center">
           
           {/* Top Label */}
           <p className="text-[12.5px] font-bold tracking-tight text-[#1F1F1F] mb-6">
@@ -115,7 +115,7 @@ function JobTitleContent() {
                 }}
                 placeholder="Product Designer, Full-stack Engineer..."
                 autoFocus
-                className="w-full h-12 px-4 rounded-none bg-[#FAFAF8] border border-zinc-200 text-[14px] font-medium text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-950 focus:bg-white transition-all"
+                className="w-full h-12 px-4 rounded-lg bg-[#FAFAF8] border border-zinc-200 text-[14px] font-medium text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-950 focus:bg-white transition-all"
               />
               {jobTitle && (
                 <button
@@ -129,7 +129,7 @@ function JobTitleContent() {
           </div>
 
           {/* Bottom Dual-Button Pill */}
-          <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
+          <div className="inline-flex items-center gap-1 p-1 rounded-lg bg-white border border-zinc-200/80 shadow-xs">
             <button
               disabled
               className="px-5 py-2 rounded-lg text-[13.5px] font-bold text-zinc-300 cursor-not-allowed bg-transparent"

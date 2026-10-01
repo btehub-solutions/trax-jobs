@@ -37,8 +37,8 @@ function CompanyLogoMark({
 }) {
   if (isValidImageUrl(logo)) {
     return (
-      <div className={`${className} bg-white border border-zinc-200/90 flex items-center justify-center p-1.5 overflow-hidden shrink-0`}>
-        <Image src={logo!} alt={name} width={48} height={48} className="object-contain w-full h-full" unoptimized />
+      <div className={`${className} bg-white border border-zinc-200/90 rounded-lg flex items-center justify-center p-1.5 overflow-hidden shrink-0`}>
+        <Image src={logo!} alt={name} width={48} height={48} className="object-contain w-full h-full rounded-md" unoptimized />
       </div>
     );
   }
@@ -46,7 +46,7 @@ function CompanyLogoMark({
   const n = name.toLowerCase();
   if (n.includes("paystack")) {
     return (
-      <div className={`${className} bg-[#00C3F8]/10 border border-[#00C3F8]/20 flex items-center justify-center p-2 shrink-0`}>
+      <div className={`${className} bg-[#00C3F8]/10 border border-[#00C3F8]/20 rounded-lg flex items-center justify-center p-2 shrink-0`}>
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full text-[#00C3F8]">
           <path d="M15 22h70v16H15zM15 44h45v16H15zM15 66h70v16H15z" fill="currentColor" />
         </svg>
@@ -55,7 +55,7 @@ function CompanyLogoMark({
   }
   if (n.includes("flutterwave")) {
     return (
-      <div className={`${className} bg-[#FB4E2D]/10 border border-[#FB4E2D]/20 flex items-center justify-center p-2 shrink-0`}>
+      <div className={`${className} bg-[#FB4E2D]/10 border border-[#FB4E2D]/20 rounded-lg flex items-center justify-center p-2 shrink-0`}>
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M20 50c0-16.569 13.431-30 30-30s30 13.431 30 30" stroke="#FB4E2D" strokeWidth="12" strokeLinecap="round" />
           <path d="M32 50c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="#FF9B00" strokeWidth="10" strokeLinecap="round" />
@@ -64,7 +64,7 @@ function CompanyLogoMark({
     );
   }
   return (
-    <div className={`${className} bg-[#1F1F1F] text-white flex items-center justify-center font-bold text-sm shrink-0`}>
+    <div className={`${className} bg-[#1F1F1F] text-white flex items-center justify-center font-bold text-sm rounded-lg shrink-0`}>
       {name.slice(0, 2).toUpperCase()}
     </div>
   );
@@ -195,11 +195,11 @@ export default function JobDetailClient({
               </div>
             </div>
             <div className="flex items-center gap-3 shrink-0">
-              <a href={job.applicationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-5 py-2 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] hover:shadow-[0_8px_20px_-4px_rgba(231,4,13,0.35)] text-white text-[13px] font-bold shadow-2xs transition-all cursor-pointer select-none">
+              <a href={job.applicationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-5 py-2 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] hover:shadow-[0_8px_20px_-4px_rgba(231,4,13,0.35)] text-white text-[13px] font-bold rounded-lg shadow-2xs transition-all cursor-pointer select-none">
                 <span>Apply</span>
                 <ArrowSquareOut size={14} weight="bold" />
               </a>
-              <button onClick={toggleSave} className={`inline-flex items-center gap-1.5 px-3.5 py-2 text-[12.5px] font-semibold border active:scale-90 transition-all cursor-pointer select-none ${isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"}`}>
+              <button onClick={toggleSave} className={`inline-flex items-center gap-1.5 px-3.5 py-2 text-[12.5px] font-semibold border rounded-lg active:scale-90 transition-all cursor-pointer select-none ${isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"}`}>
                 <BookmarkSimple size={15} weight={isSaved ? "fill" : "bold"} className={isSaved ? "scale-110 transition-transform" : "transition-transform"} />
                 <span>{isSaved ? "Saved" : "Save"}</span>
               </button>
@@ -218,7 +218,7 @@ export default function JobDetailClient({
           <div className="flex items-center gap-2 flex-1 justify-end">
             <button
               onClick={toggleSave}
-              className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 text-[12.5px] font-semibold border active:scale-90 transition-all cursor-pointer select-none ${
+              className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 text-[12.5px] font-semibold border rounded-lg active:scale-90 transition-all cursor-pointer select-none ${
                 isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"
               }`}
             >
@@ -229,7 +229,7 @@ export default function JobDetailClient({
               href={job.applicationLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 max-w-[180px] inline-flex items-center justify-center gap-1.5 px-5 py-2.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] text-white text-[13px] font-bold shadow-2xs transition-all cursor-pointer select-none"
+              className="flex-1 max-w-[180px] inline-flex items-center justify-center gap-1.5 px-5 py-2.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] text-white text-[13px] font-bold rounded-lg shadow-2xs transition-all cursor-pointer select-none"
             >
               <span>Apply</span>
               <ArrowSquareOut size={14} weight="bold" />
@@ -254,7 +254,7 @@ export default function JobDetailClient({
           <div className="lg:col-span-8 space-y-8">
 
             {/* Hero Card */}
-            <div className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 sm:p-8">
+            <div className="bg-white border border-zinc-200/90 rounded-lg shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 sm:p-8">
               <div className="flex items-center gap-2.5 mb-4">
                 <CompanyLogoMark name={job.company.name} logo={job.company.logo} className="w-8 h-8" />
                 <span className="text-[12.5px] font-black tracking-wider uppercase text-[#1F1F1F]">{job.company.name}</span>
@@ -266,15 +266,15 @@ export default function JobDetailClient({
                 <div className="md:col-span-5 space-y-3">
                   <h3 className="text-[11.5px] font-bold tracking-wider uppercase text-[#1F1F1F]">JOB SUMMARY</h3>
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 rounded-lg">
                       <Briefcase size={13} weight="bold" className="text-zinc-500" />
                       <span>{job.contractType === "Permanent" ? "Permanent contract" : `${job.contractType} contract`}</span>
                     </span>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 rounded-lg">
                       <MapPin size={13} weight="bold" className="text-zinc-500" />
                       <span>{job.location}</span>
                     </span>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 rounded-lg">
                       <span>Salary: {job.salary?.formatted || "Not specified"}</span>
                     </span>
                   </div>
@@ -283,7 +283,7 @@ export default function JobDetailClient({
                   <h3 className="text-[11.5px] font-bold tracking-wider uppercase text-[#1F1F1F]">SKILLS &amp; EXPERTISE</h3>
                   <div className="flex flex-wrap items-center gap-2">
                     {displayTags.map((skill: string, idx: number) => (
-                      <span key={idx} className="inline-flex items-center px-3 py-1.5 bg-[#FAFAFA] hover:bg-zinc-100 text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 transition-colors">{skill}</span>
+                      <span key={idx} className="inline-flex items-center px-3 py-1.5 bg-[#FAFAFA] hover:bg-zinc-100 text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 rounded-lg transition-colors">{skill}</span>
                     ))}
                   </div>
                 </div>
@@ -300,11 +300,11 @@ export default function JobDetailClient({
 
               <div className="pt-6 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <a href={job.applicationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-6 py-2.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] hover:shadow-[0_10px_24px_-4px_rgba(231,4,13,0.35)] text-white text-[13.5px] font-bold shadow-2xs transition-all cursor-pointer select-none">
+                  <a href={job.applicationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-6 py-2.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] hover:shadow-[0_10px_24px_-4px_rgba(231,4,13,0.35)] text-white text-[13.5px] font-bold rounded-lg shadow-2xs transition-all cursor-pointer select-none">
                     <span>Apply</span>
                     <ArrowSquareOut size={15} weight="bold" />
                   </a>
-                  <button onClick={toggleSave} className={`inline-flex items-center gap-1.5 px-4 py-2.5 text-[13px] font-semibold border active:scale-90 transition-all cursor-pointer select-none ${isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"}`}>
+                  <button onClick={toggleSave} className={`inline-flex items-center gap-1.5 px-4 py-2.5 text-[13px] font-semibold border rounded-lg active:scale-90 transition-all cursor-pointer select-none ${isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"}`}>
                     <BookmarkSimple size={15} weight={isSaved ? "fill" : "bold"} className={isSaved ? "scale-110 transition-transform" : "transition-transform"} />
                     <span>{isSaved ? "Saved" : "Save"}</span>
                   </button>
@@ -332,7 +332,7 @@ export default function JobDetailClient({
             </div>
 
             {/* Position Detail Card */}
-            <div className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 sm:p-8 space-y-6">
+            <div className="bg-white border border-zinc-200/90 rounded-lg shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 sm:p-8 space-y-6">
               <div className="flex items-center gap-2">
                 <span className="w-4 h-1 bg-[#E7040D] inline-block" />
                 <h2 className="text-2xl font-black text-[#1F1F1F] tracking-tight">The position</h2>
@@ -392,7 +392,7 @@ export default function JobDetailClient({
                       const bText = typeof b === "string" ? b : (Array.isArray(b?.children) ? b.children.map((c: any) => (typeof c === "string" ? c : c?.text || "")).join("") : b?.text || "");
                       if (!bText) return null;
                       return (
-                        <li key={idx} className="p-3 bg-[#FAFAFA] border border-zinc-200/80 text-[13px] text-zinc-800 font-medium">{bText}</li>
+                        <li key={idx} className="p-3 bg-[#FAFAFA] border border-zinc-200/80 rounded-lg text-[13px] text-zinc-800 font-medium">{bText}</li>
                       );
                     })}
                   </ul>
@@ -406,20 +406,20 @@ export default function JobDetailClient({
           <div className="lg:col-span-4 space-y-6 lg:self-stretch">
 
             {/* Gallery */}
-            <div className="grid grid-cols-2 gap-1.5 bg-white p-2 border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
+            <div className="grid grid-cols-2 gap-1.5 bg-white p-2 border border-zinc-200/90 rounded-lg shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
               {gallery.map((photoUrl, idx) => (
-                <div key={idx} className="relative aspect-[4/3] overflow-hidden bg-zinc-100">
+                <div key={idx} className="relative aspect-[4/3] overflow-hidden bg-zinc-100 rounded-md">
                   <Image src={photoUrl} alt={`${job.company.name} team`} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover hover:scale-105 transition-transform duration-300" />
                 </div>
               ))}
             </div>
 
             {/* Discover Banner */}
-            <div className="bg-[#0C1222] text-white p-6 sm:p-7 shadow-[0_2px_12px_rgba(0,0,0,0.02)] border border-[#0C1222]">
+            <div className="bg-[#0C1222] text-white p-6 sm:p-7 shadow-[0_2px_12px_rgba(0,0,0,0.02)] border border-[#0C1222] rounded-lg">
               <h3 className="text-xl font-black tracking-tight mb-2 text-white">Discover the company</h3>
               <p className="text-[13.5px] font-medium text-white/70 leading-relaxed mb-6">Explore the company&apos;s profile or follow them to find out if they&apos;re the right fit!</p>
               <div className="flex flex-col sm:flex-row items-center gap-3">
-                <Link href={`/companies/${job.company.slug}`} className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] text-white text-[13px] font-bold transition-all text-center cursor-pointer select-none">
+                <Link href={`/companies/${job.company.slug}`} className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] text-white text-[13px] font-bold rounded-lg transition-all text-center cursor-pointer select-none">
                   <span>Explore the company</span>
                   <ArrowUpRight size={14} weight="bold" />
                 </Link>
@@ -427,7 +427,7 @@ export default function JobDetailClient({
             </div>
 
             {/* Company Card (Sticky on desktop so it pins once reached while left column continues scrolling) */}
-            <div className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 space-y-6 lg:sticky lg:top-[76px]">
+            <div className="bg-white border border-zinc-200/90 rounded-lg shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 space-y-6 lg:sticky lg:top-[76px]">
               <div className="flex items-center gap-2">
                 <span className="w-4 h-1 bg-[#E7040D] inline-block" />
                 <h3 className="text-xl font-black text-[#1F1F1F] tracking-tight">The company</h3>
@@ -439,11 +439,11 @@ export default function JobDetailClient({
               </div>
 
               <div className="flex flex-wrap items-center gap-2 text-[12px] text-zinc-700 font-medium">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] border border-zinc-200/80">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] border border-zinc-200/80 rounded-lg">
                   <Tag size={13} weight="bold" className="text-zinc-500" />
                   <span>{job.company.industry}</span>
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] border border-zinc-200/80">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] border border-zinc-200/80 rounded-lg">
                   <Users size={13} weight="bold" className="text-zinc-500" />
                   <span>{job.company.employeesCount} employees</span>
                 </span>
@@ -452,7 +452,7 @@ export default function JobDetailClient({
               <div className="flex items-center gap-3 pt-1 text-[13px] font-bold">
                 <Link href={`/companies/${job.company.slug || job.company.name.toLowerCase().replace(/\s+/g, "-")}?tab=jobs`} className="inline-flex items-center gap-1.5 text-zinc-900 hover:text-[#E7040D] transition-colors">
                   <span>View all jobs</span>
-                  <span className="px-1.5 py-0.5 rounded-none bg-[#fce8e0] text-[#E7040D] text-[11px] font-black border border-[#E7040D]/30">
+                  <span className="px-1.5 py-0.5 rounded-lg bg-[#fce8e0] text-[#E7040D] text-[11px] font-black border border-[#E7040D]/30">
                     {allCompanyJobsCount || 1}
                   </span>
                 </Link>

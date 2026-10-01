@@ -54,7 +54,7 @@ function LocationPreferenceContent() {
           </Link>
 
           {/* Stepper Pill Bar */}
-          <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-zinc-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
+          <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-zinc-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
             {/* Step 1: Job Title */}
             <button
               onClick={() => {
@@ -102,7 +102,7 @@ function LocationPreferenceContent() {
 
       {/* Main Center Card (Fixed 1040px x 480px Dimensions for 100% Stability) */}
       <main className="flex-1 flex items-center justify-center px-6 sm:px-8 lg:px-10 py-6 relative z-10">
-        <div className="w-full max-w-[1040px] h-[480px] bg-white rounded-none border border-zinc-200/70 px-6 sm:px-12 shadow-[0_4px_20px_-8px_rgba(15,16,18,0.04)] flex flex-col items-center justify-center text-center">
+        <div className="w-full max-w-[1040px] h-[480px] bg-white rounded-lg border border-zinc-200/70 px-6 sm:px-12 shadow-[0_4px_20px_-8px_rgba(15,16,18,0.04)] flex flex-col items-center justify-center text-center">
           {/* Top Label */}
           <p className="text-[12.5px] font-bold tracking-tight text-[#1F1F1F] mb-6">
             Share your preferences
@@ -125,7 +125,7 @@ function LocationPreferenceContent() {
                 }}
                 placeholder="E.g. Nigeria, Lagos, Ogun, Remote Africa, Global Remote"
                 autoFocus
-                className="w-full h-12 px-4 rounded-none bg-[#FAFAF8] border border-zinc-200 text-[14px] font-medium text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-950 focus:bg-white transition-all"
+                className="w-full h-12 px-4 rounded-lg bg-[#FAFAF8] border border-zinc-200 text-[14px] font-medium text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-950 focus:bg-white transition-all"
               />
               {location && (
                 <button
@@ -139,7 +139,7 @@ function LocationPreferenceContent() {
           </div>
 
           {/* Bottom Dual-Button Pill */}
-          <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
+          <div className="inline-flex items-center gap-1 p-1 rounded-lg bg-white border border-zinc-200/80 shadow-xs">
             <button
               onClick={handleBack}
               className="px-5 py-2 rounded-lg text-[13.5px] font-bold text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 active:scale-95 transition-all cursor-pointer select-none"

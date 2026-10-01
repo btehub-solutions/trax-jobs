@@ -128,7 +128,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
                 setMessage("");
                 setAgreed(false);
               }}
-              className="w-full sm:w-auto px-6 py-2.5 bg-[#1F1F1F] hover:bg-[#E7040D] text-white text-xs font-bold transition-all rounded-none cursor-pointer"
+              className="w-full sm:w-auto px-6 py-2.5 bg-[#1F1F1F] hover:bg-[#E7040D] text-white text-xs font-bold transition-all rounded-lg cursor-pointer"
             >
               Send Another Inquiry
             </button>
@@ -136,7 +136,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               href="https://wa.me/2347045422815"
               target="_blank"
               rel="noreferrer"
-              className="w-full sm:w-auto px-6 py-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold transition-all rounded-none flex items-center justify-center gap-1.5"
+              className="w-full sm:w-auto px-6 py-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold transition-all rounded-lg flex items-center justify-center gap-1.5"
             >
               <WhatsappLogo size={16} weight="fill" />
               <span>Chat on WhatsApp</span>
@@ -150,17 +150,17 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               Start the conversation
             </h2>
             {(initialTopic === "job" || initialTopic === "hiring") && (
-              <div className="p-3 bg-[#fdf2ee] border-l-2 border-[#E7040D] text-[13px] text-zinc-700 leading-relaxed">
+              <div className="p-3 bg-[#fdf2ee] border-l-2 border-[#E7040D] rounded-r-lg text-[13px] text-zinc-700 leading-relaxed">
                 <span className="font-semibold text-zinc-950">Submitting a Job:</span> You are connecting with the Trax Editorial Desk. Share your company name, role title, and contact details below. Our team will request the complete brief and manage publication.
               </div>
             )}
             {(initialTopic === "profile" || initialTopic === "talent") && (
-              <div className="p-3 bg-[#fdf2ee] border-l-2 border-[#E7040D] text-[13px] text-zinc-700 leading-relaxed">
+              <div className="p-3 bg-[#fdf2ee] border-l-2 border-[#E7040D] rounded-r-lg text-[13px] text-zinc-700 leading-relaxed">
                 <span className="font-semibold text-zinc-950">Submitting a Profile:</span> You are connecting with the Trax Talent Desk. Share your specialty, key metrics, and portfolio links below for editorial review.
               </div>
             )}
             {(initialTopic === "company" || initialTopic === "companies") && (
-              <div className="p-3 bg-[#fdf2ee] border-l-2 border-[#E7040D] text-[13px] text-zinc-700 leading-relaxed">
+              <div className="p-3 bg-[#fdf2ee] border-l-2 border-[#E7040D] rounded-r-lg text-[13px] text-zinc-700 leading-relaxed">
                 <span className="font-semibold text-zinc-950">Submitting a Company Profile:</span> You are connecting with the Trax Editorial Desk. Share your company details, tech stack, and hiring focus below for editorial review.
               </div>
             )}
@@ -176,7 +176,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="First name"
-                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[16px] sm:text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors"
+                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-lg text-[16px] sm:text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors"
               />
             </div>
             <div>
@@ -187,7 +187,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="Last name"
-                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[16px] sm:text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors"
+                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-lg text-[16px] sm:text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors"
               />
             </div>
           </div>
@@ -202,7 +202,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="youremail@website.com"
-              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[16px] sm:text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors"
+              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-lg text-[16px] sm:text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors"
             />
           </div>
 
@@ -212,7 +212,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               required
               value={inquiryType}
               onChange={(e) => setInquiryType(e.target.value)}
-              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[16px] sm:text-[14px] text-zinc-800 focus:outline-hidden focus:border-zinc-400 transition-colors appearance-none cursor-pointer"
+              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-lg text-[16px] sm:text-[14px] text-zinc-800 focus:outline-hidden focus:border-zinc-400 transition-colors appearance-none cursor-pointer"
             >
               <option value="" disabled>Inquiry Type (Hiring, Talent Profile, Company Profile)</option>
               <option value="Hiring / Post a Job">Hiring / Post a Job</option>
@@ -230,7 +230,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               required
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[16px] sm:text-[14px] text-zinc-800 focus:outline-hidden focus:border-zinc-400 transition-colors appearance-none cursor-pointer"
+              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-lg text-[16px] sm:text-[14px] text-zinc-800 focus:outline-hidden focus:border-zinc-400 transition-colors appearance-none cursor-pointer"
             >
               <option value="" disabled>Country</option>
               <option value="Nigeria">Nigeria</option>
@@ -254,7 +254,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Let us know about your project, role, or inquiry"
-              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-none text-[16px] sm:text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors resize-none"
+              className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-lg text-[16px] sm:text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-hidden focus:border-zinc-400 transition-colors resize-none"
             />
           </div>
 
@@ -265,7 +265,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               id="terms"
               checked={agreed}
               onChange={(e) => setAgreed(e.target.checked)}
-              className="w-4 h-4 rounded-none border-zinc-300 text-[#E7040D] accent-[#E7040D] focus:ring-0 cursor-pointer"
+              className="w-4 h-4 rounded-md border-zinc-300 text-[#E7040D] accent-[#E7040D] focus:ring-0 cursor-pointer"
             />
             <label htmlFor="terms" className="text-[13px] text-zinc-600 cursor-pointer select-none">
               I have read and acknowledge the Terms and Conditions
@@ -274,7 +274,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
 
           {/* Error Message Banner */}
           {errorMessage && (
-            <div className="p-3 bg-[#fdf2ee] border-l-2 border-[#E7040D] text-[13px] text-[#E7040D] font-medium leading-relaxed">
+            <div className="p-3 bg-[#fdf2ee] border-l-2 border-[#E7040D] rounded-r-lg text-[13px] text-[#E7040D] font-medium leading-relaxed">
               {errorMessage}
             </div>
           )}
@@ -285,7 +285,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-3.5 px-6 rounded-none bg-[#E7040D] hover:bg-[#CB030B] active:bg-[#A80209] disabled:opacity-70 disabled:cursor-not-allowed text-white text-[15px] font-bold transition-all shadow-xs cursor-pointer flex items-center justify-center gap-2 select-none"
+              className="w-full py-3.5 px-6 rounded-lg bg-[#E7040D] hover:bg-[#CB030B] active:bg-[#A80209] disabled:opacity-70 disabled:cursor-not-allowed text-white text-[15px] font-bold transition-all shadow-xs cursor-pointer flex items-center justify-center gap-2 select-none"
             >
               {isSubmitting ? (
                 <>
@@ -302,7 +302,7 @@ export default function ContactForm({ initialTopic }: ContactFormProps) {
               href="https://wa.me/2347045422815?text=Hello%20Trax%20Jobs%20Desk%2C%20I%20would%20like%20to%20make%20an%20inquiry"
               target="_blank"
               rel="noreferrer"
-              className="w-full py-3.5 px-6 rounded-none bg-[#25D366] hover:bg-[#20bd5a] active:bg-[#1da850] text-white text-[15px] font-bold transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3.5 px-6 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] active:bg-[#1da850] text-white text-[15px] font-bold transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer"
             >
               <WhatsappLogo size={20} weight="fill" />
               <span>Chat directly on WhatsApp</span>

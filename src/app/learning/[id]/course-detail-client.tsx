@@ -84,7 +84,7 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
           <div className="lg:col-span-7 space-y-6">
             
             {/* Feature Banner Container (Clean image matching homepage card) */}
-            <div className="relative w-full h-[280px] sm:h-[340px] md:h-[360px] rounded-none overflow-hidden border border-zinc-200/90 bg-zinc-100">
+            <div className="relative w-full h-[280px] sm:h-[340px] md:h-[360px] rounded-lg overflow-hidden border border-zinc-200/90 bg-zinc-100">
               <Image
                 src={course.bannerImage || course.image}
                 alt={course.title}
@@ -95,7 +95,7 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
               />
 
               {/* Floating Duration Badge (Matching Homepage Card) */}
-              <div className="absolute top-4 right-4 bg-[#FBBF24] text-zinc-950 text-[12px] font-bold px-3 py-1 rounded-none flex items-center gap-1.5 shadow-xs">
+              <div className="absolute top-4 right-4 bg-[#FBBF24] text-zinc-950 text-[12px] font-bold px-3 py-1 rounded-lg flex items-center gap-1.5 shadow-xs">
                 <Clock size={14} weight="bold" className="text-zinc-900" />
                 <span>{course.durationWeeks || course.duration}</span>
               </div>
@@ -212,10 +212,10 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
           </div>
 
           {/* ─────────────────────────────────────────────────────────────
-              Right Column: Single Course Card (100% 90-Degree Square Edges)
+              Right Column: Single Course Card
           ───────────────────────────────────────────────────────────── */}
           <div className="lg:col-span-5">
-            <div className="bg-white rounded-none border border-zinc-200 shadow-none p-6 space-y-6">
+            <div className="bg-white rounded-lg border border-zinc-200 shadow-none p-6 space-y-6">
               
               {/* 1. Metadata Specs Rows */}
               <div className="space-y-3.5 text-[14px]">
@@ -288,7 +288,7 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-3.5 px-4 bg-[#25D366] hover:bg-[#20BD5A] text-white text-[14.5px] font-bold rounded-none flex items-center justify-center gap-2.5 transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md active:scale-[0.99]"
+                  className="w-full py-3.5 px-4 bg-[#25D366] hover:bg-[#20BD5A] text-white text-[14.5px] font-bold rounded-lg flex items-center justify-center gap-2.5 transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md active:scale-[0.99]"
                 >
                   <WhatsappLogo size={21} weight="fill" className="text-white" />
                   <span>Enrol Now Via Whatsapp</span>
@@ -306,7 +306,7 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
                   <button
                     type="button"
                     onClick={handleCopyLink}
-                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-zinc-50 hover:bg-zinc-100 active:scale-95 border border-zinc-200 rounded-none text-[12.5px] font-medium text-zinc-700 transition-all cursor-pointer select-none"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-zinc-50 hover:bg-zinc-100 active:scale-95 border border-zinc-200 rounded-lg text-[12.5px] font-medium text-zinc-700 transition-all cursor-pointer select-none"
                   >
                     {copied ? (
                       <>
@@ -336,7 +336,7 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
                         `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`
                       );
                     }}
-                    className="w-9 h-9 bg-zinc-50 hover:bg-zinc-100 active:scale-90 border border-zinc-200 rounded-none flex items-center justify-center text-zinc-600 transition-all cursor-pointer select-none"
+                    className="w-9 h-9 bg-zinc-50 hover:bg-zinc-100 active:scale-90 border border-zinc-200 rounded-lg flex items-center justify-center text-zinc-600 transition-all cursor-pointer select-none"
                     aria-label="Share on Facebook"
                   >
                     <FacebookLogo size={16} weight="fill" />
@@ -357,7 +357,7 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
                         `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`
                       );
                     }}
-                    className="w-9 h-9 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 rounded-none flex items-center justify-center text-zinc-600 transition-colors cursor-pointer"
+                    className="w-9 h-9 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 rounded-lg flex items-center justify-center text-zinc-600 transition-colors cursor-pointer"
                     aria-label="Share on X"
                   >
                     <XLogo size={15} weight="bold" />
@@ -370,7 +370,7 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
                       const url = window.location.href;
                       window.location.href = `mailto:?subject=${encodeURIComponent(course.title)}&body=Check%20out%20this%20course%20on%20Trax:%20${encodeURIComponent(url)}`;
                     }}
-                    className="w-9 h-9 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 rounded-none flex items-center justify-center text-zinc-600 transition-colors cursor-pointer"
+                    className="w-9 h-9 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 rounded-lg flex items-center justify-center text-zinc-600 transition-colors cursor-pointer"
                     aria-label="Share via Email"
                   >
                     <EnvelopeSimple size={16} weight="regular" />
@@ -383,7 +383,7 @@ export function CourseDetailClient({ course }: CourseDetailClientProps) {
                       const url = window.location.href;
                       window.open(`https://wa.me/?text=${encodeURIComponent(`Check out this course on Trax: ${course.title} at ${url}`)}`, "_blank");
                     }}
-                    className="w-9 h-9 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 rounded-none flex items-center justify-center text-[#25D366] transition-colors cursor-pointer"
+                    className="w-9 h-9 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 rounded-lg flex items-center justify-center text-[#25D366] transition-colors cursor-pointer"
                     aria-label="Share on WhatsApp"
                   >
                     <WhatsappLogo size={17} weight="fill" />

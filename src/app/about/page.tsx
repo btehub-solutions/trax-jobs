@@ -91,6 +91,7 @@ function AboutPageContent() {
               alt="Trax Jobs team collaborating at workspace"
               fill
               priority
+              unoptimized
               sizes="100vw"
               className="object-cover object-[center_32%] brightness-75"
             />
@@ -129,7 +130,7 @@ function AboutPageContent() {
 
                 {/* Founder Photo Card with Cutout Style */}
                 <div className="relative w-full max-w-[320px] mx-auto">
-                  <div className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-zinc-100 border border-zinc-200/80 shadow-[0_16px_36px_-6px_rgba(15,16,18,0.08)]">
+                  <div className="relative aspect-[4/5] w-full rounded-lg overflow-hidden bg-zinc-100 border border-zinc-200/80 shadow-[0_16px_36px_-6px_rgba(15,16,18,0.08)]">
                     <Image
                       src="/images/founder.jpg"
                       alt="Ben Sam Oladoyin, Founder of Trax Media"
@@ -222,7 +223,7 @@ function AboutPageContent() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
               
               {/* Card 1: Looking to hire? */}
-              <div className="bg-[#E7040D] hover:bg-white text-white hover:text-[#1F1F1F] rounded-none p-8 sm:p-12 lg:p-14 flex flex-col justify-between transition-all duration-200 border border-transparent hover:border-zinc-200 shadow-sm hover:shadow-xl group cursor-default">
+              <div className="bg-[#E7040D] hover:bg-white text-white hover:text-[#1F1F1F] rounded-lg p-8 sm:p-12 lg:p-14 flex flex-col justify-between transition-all duration-200 border border-transparent hover:border-zinc-200 shadow-sm hover:shadow-xl group cursor-default">
                 <div className="space-y-6">
                   <div>
                     <span className="block text-[15px] sm:text-[17px] font-black tracking-tight text-white group-hover:text-[#1F1F1F] transition-colors mb-3">
@@ -255,7 +256,7 @@ function AboutPageContent() {
                 <div className="pt-8 sm:pt-10">
                   <Link
                     href="/about?tab=post-and-submit&type=job"
-                    className="inline-flex items-center justify-center px-8 py-3.5 rounded-none bg-[#0C1222] hover:bg-[#070b14] text-white text-[14px] font-bold transition-all shadow-xs cursor-pointer"
+                    className="inline-flex items-center justify-center px-8 py-3.5 rounded-lg bg-[#0C1222] hover:bg-[#070b14] text-white text-[14px] font-bold transition-all shadow-xs cursor-pointer"
                   >
                     Hire with Trax Jobs
                   </Link>
@@ -263,7 +264,7 @@ function AboutPageContent() {
               </div>
 
               {/* Card 2: Looking for a new role? */}
-              <div className="bg-[#E7040D] hover:bg-white text-white hover:text-[#1F1F1F] rounded-none p-8 sm:p-12 lg:p-14 flex flex-col justify-between transition-all duration-200 border border-transparent hover:border-zinc-200 shadow-sm hover:shadow-xl group cursor-default">
+              <div className="bg-[#E7040D] hover:bg-white text-white hover:text-[#1F1F1F] rounded-lg p-8 sm:p-12 lg:p-14 flex flex-col justify-between transition-all duration-200 border border-transparent hover:border-zinc-200 shadow-sm hover:shadow-xl group cursor-default">
                 <div className="space-y-6">
                   <div>
                     <span className="block text-[15px] sm:text-[17px] font-black tracking-tight text-white group-hover:text-[#1F1F1F] transition-colors mb-3">
@@ -286,7 +287,7 @@ function AboutPageContent() {
                 <div className="pt-8 sm:pt-10">
                   <Link
                     href="/jobs"
-                    className="inline-flex items-center justify-center px-8 py-3.5 rounded-none bg-[#0C1222] hover:bg-[#070b14] text-white text-[14px] font-bold transition-all shadow-xs cursor-pointer"
+                    className="inline-flex items-center justify-center px-8 py-3.5 rounded-lg bg-[#0C1222] hover:bg-[#070b14] text-white text-[14px] font-bold transition-all shadow-xs cursor-pointer"
                   >
                     Explore jobs
                   </Link>
@@ -318,10 +319,10 @@ function AboutPageContent() {
                 {/* Photo with Offset Accent Block */}
                 <div className="lg:col-span-5 relative">
                   {/* Offset Color Accent Box */}
-                  <div className="absolute -bottom-3 -right-3 w-full h-full bg-[#fce8e0] border border-[#f9cbb9] z-0" />
+                  <div className="absolute -bottom-3 -right-3 w-full h-full bg-[#fce8e0] border border-[#f9cbb9] rounded-lg z-0" />
                   
                   {/* Image Container */}
-                  <div className="relative aspect-[4/3] w-full bg-zinc-100 border border-zinc-200 overflow-hidden z-10 shadow-xs">
+                  <div className="relative aspect-[4/3] w-full bg-zinc-100 border border-zinc-200 rounded-lg overflow-hidden z-10 shadow-xs">
                     <Image
                       src="/images/trax-core-value-1.jpg"
                       alt="Trax team leadership standing together representing editorial integrity"
@@ -334,7 +335,7 @@ function AboutPageContent() {
                 </div>
 
                 {/* Content Card */}
-                <div className="lg:col-span-7 bg-[#0C1222] text-white p-8 sm:p-12 lg:p-14 rounded-none flex flex-col justify-center text-center space-y-4 shadow-sm min-h-[280px]">
+                <div className="lg:col-span-7 bg-[#0C1222] text-white p-8 sm:p-12 lg:p-14 rounded-lg flex flex-col justify-center text-center space-y-4 shadow-sm min-h-[280px]">
                   <h3 className="text-xl sm:text-2xl lg:text-[26px] font-black tracking-[-0.02em] leading-tight">
                     Editorial Integrity Above All
                   </h3>
@@ -349,7 +350,7 @@ function AboutPageContent() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
                 {/* Content Card (Order on mobile: 2, desktop: 1) */}
-                <div className="order-2 lg:order-1 lg:col-span-7 bg-[#E7040D] text-white p-8 sm:p-12 lg:p-14 rounded-none flex flex-col justify-center text-center space-y-4 shadow-sm min-h-[280px]">
+                <div className="order-2 lg:order-1 lg:col-span-7 bg-[#E7040D] text-white p-8 sm:p-12 lg:p-14 rounded-lg flex flex-col justify-center text-center space-y-4 shadow-sm min-h-[280px]">
                   <h3 className="text-xl sm:text-2xl lg:text-[26px] font-black tracking-[-0.02em] leading-tight">
                     Africa-First Tech Momentum
                   </h3>
@@ -361,10 +362,10 @@ function AboutPageContent() {
                 {/* Photo with Offset Accent Block (Order on mobile: 1, desktop: 2) */}
                 <div className="order-1 lg:order-2 lg:col-span-5 relative">
                   {/* Offset Color Accent Box */}
-                  <div className="absolute -bottom-3 -right-3 w-full h-full bg-[#E7040D]/20 border border-[#E7040D]/30 z-0" />
+                  <div className="absolute -bottom-3 -right-3 w-full h-full bg-[#E7040D]/20 border border-[#E7040D]/30 rounded-lg z-0" />
                   
                   {/* Image Container */}
-                  <div className="relative aspect-[4/3] w-full bg-zinc-100 border border-zinc-200 overflow-hidden z-10 shadow-xs">
+                  <div className="relative aspect-[4/3] w-full bg-zinc-100 border border-zinc-200 rounded-lg overflow-hidden z-10 shadow-xs">
                     <Image
                       src="/images/trax-core-value-2.jpg"
                       alt="African tech community attendees participating in a tech summit"
@@ -384,10 +385,10 @@ function AboutPageContent() {
                 {/* Photo with Offset Accent Block */}
                 <div className="lg:col-span-5 relative">
                   {/* Offset Color Accent Box */}
-                  <div className="absolute -bottom-3 -right-3 w-full h-full bg-[#fce8e0] border border-[#f9cbb9] z-0" />
+                  <div className="absolute -bottom-3 -right-3 w-full h-full bg-[#fce8e0] border border-[#f9cbb9] rounded-lg z-0" />
                   
                   {/* Image Container */}
-                  <div className="relative aspect-[4/3] w-full bg-zinc-100 border border-zinc-200 overflow-hidden z-10 shadow-xs">
+                  <div className="relative aspect-[4/3] w-full bg-zinc-100 border border-zinc-200 rounded-lg overflow-hidden z-10 shadow-xs">
                     <Image
                       src="/images/trax-core-value-3.jpg"
                       alt="Colleagues shaking hands across meeting table representing human relationships over resumes"
@@ -400,7 +401,7 @@ function AboutPageContent() {
                 </div>
 
                 {/* Content Card */}
-                <div className="lg:col-span-7 bg-[#1F1F1F] text-white p-8 sm:p-12 lg:p-14 rounded-none flex flex-col justify-center text-center space-y-4 shadow-sm min-h-[280px]">
+                <div className="lg:col-span-7 bg-[#1F1F1F] text-white p-8 sm:p-12 lg:p-14 rounded-lg flex flex-col justify-center text-center space-y-4 shadow-sm min-h-[280px]">
                   <h3 className="text-xl sm:text-2xl lg:text-[26px] font-black tracking-[-0.02em] leading-tight">
                     Relationships, Not Resumes
                   </h3>
@@ -437,7 +438,7 @@ function AboutPageContent() {
             </div>
 
             {/* Arched Portrait Collage Canvas */}
-            <div className="w-full bg-[#fdf2ee] border border-[#fce8e0] rounded-none pt-12 sm:pt-16 px-4 sm:px-8 overflow-hidden relative shadow-[0_2px_16px_rgba(0,0,0,0.02)]">
+            <div className="w-full bg-[#fdf2ee] border border-[#fce8e0] rounded-lg pt-12 sm:pt-16 px-4 sm:px-8 overflow-hidden relative shadow-[0_2px_16px_rgba(0,0,0,0.02)]">
               
               {/* Subtle Background Fluid SVG Wave Pattern */}
               <div className="absolute inset-0 pointer-events-none opacity-40">

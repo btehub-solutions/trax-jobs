@@ -61,7 +61,7 @@ export default function ErrorBoundary({
         <div className="max-w-xl w-full text-center space-y-6">
           {/* Contextual Icon */}
           <div
-            className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl shadow-xs mb-2 ${
+            className={`inline-flex items-center justify-center w-16 h-16 rounded-lg shadow-xs mb-2 ${
               isNetworkIssue
                 ? "bg-amber-50 text-amber-600 border border-amber-200/80"
                 : "bg-[#fce8e0] text-[#E7040D]"
@@ -114,7 +114,7 @@ export default function ErrorBoundary({
             <button
               type="button"
               onClick={() => reset()}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] text-white text-[13.5px] font-bold shadow-xs hover:shadow-md transition-all duration-150 cursor-pointer select-none"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] text-white text-[13.5px] font-bold shadow-xs hover:shadow-md transition-all duration-150 cursor-pointer select-none"
             >
               <ArrowClockwise size={16} weight="bold" />
               <span>{isNetworkIssue ? "Try reconnecting" : "Try again"}</span>
@@ -122,7 +122,7 @@ export default function ErrorBoundary({
 
             <Link
               href="/"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-zinc-50 active:scale-95 text-[#1F1F1F] text-[13.5px] font-bold border border-zinc-200/90 shadow-2xs transition-all duration-150 select-none"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white hover:bg-zinc-50 active:scale-95 text-[#1F1F1F] text-[13.5px] font-bold border border-zinc-200/90 shadow-2xs transition-all duration-150 select-none"
             >
               <House size={16} weight="bold" />
               <span>Return to Home</span>

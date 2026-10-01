@@ -152,11 +152,11 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
               </div>
             </div>
             <div className="flex items-center gap-3 shrink-0">
-              <a href={hireUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-5 py-2 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] hover:shadow-[0_8px_20px_-4px_rgba(231,4,13,0.35)] text-white text-[13px] font-bold shadow-2xs transition-all cursor-pointer select-none">
+              <a href={hireUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-5 py-2 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] hover:shadow-[0_8px_20px_-4px_rgba(231,4,13,0.35)] text-white text-[13px] font-bold rounded-lg shadow-2xs transition-all cursor-pointer select-none">
                 {talent.preferredContactMethod === "whatsapp" ? <WhatsappLogo size={15} weight="bold" /> : <EnvelopeSimple size={15} weight="bold" />}
                 <span>Hire Talent</span>
               </a>
-              <button onClick={toggleSave} className={`inline-flex items-center gap-1.5 px-3.5 py-2 text-[12.5px] font-semibold border active:scale-90 transition-all cursor-pointer select-none ${isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"}`}>
+              <button onClick={toggleSave} className={`inline-flex items-center gap-1.5 px-3.5 py-2 text-[12.5px] font-semibold border rounded-lg active:scale-90 transition-all cursor-pointer select-none ${isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"}`}>
                 <BookmarkSimple size={15} weight={isSaved ? "fill" : "bold"} className={isSaved ? "scale-110 transition-transform" : "transition-transform"} />
                 <span>{isSaved ? "Saved" : "Save"}</span>
               </button>
@@ -175,7 +175,7 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
           <div className="flex items-center gap-2 flex-1 justify-end">
             <button
               onClick={toggleSave}
-              className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 text-[12.5px] font-semibold border active:scale-90 transition-all cursor-pointer select-none ${
+              className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 text-[12.5px] font-semibold border rounded-lg active:scale-90 transition-all cursor-pointer select-none ${
                 isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"
               }`}
             >
@@ -186,7 +186,7 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
               href={hireUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 max-w-[180px] inline-flex items-center justify-center gap-1.5 px-5 py-2.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] text-white text-[13px] font-bold shadow-2xs transition-all cursor-pointer select-none"
+              className="flex-1 max-w-[180px] inline-flex items-center justify-center gap-1.5 px-5 py-2.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] text-white text-[13px] font-bold rounded-lg shadow-2xs transition-all cursor-pointer select-none"
             >
               {talent.preferredContactMethod === "whatsapp" ? <WhatsappLogo size={15} weight="bold" /> : <EnvelopeSimple size={15} weight="bold" />}
               <span>Hire Talent</span>
@@ -211,14 +211,14 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
           <div className="lg:col-span-8 space-y-8">
 
             {/* Hero Card */}
-            <div className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 sm:p-8">
+            <div className="bg-white border border-zinc-200/90 rounded-lg shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 sm:p-8">
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4 mb-4">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-none bg-zinc-100 border border-zinc-200/90 overflow-hidden relative shrink-0">
+                  <div className="w-12 h-12 rounded-lg bg-zinc-100 border border-zinc-200/90 overflow-hidden relative shrink-0">
                     {!imageError && talent.avatar ? (
-                      <Image src={talent.avatar} alt={talent.name} fill sizes="60px" className="object-cover object-top" onError={() => setImageError(true)} unoptimized />
+                      <Image src={talent.avatar} alt={talent.name} fill sizes="60px" className="object-cover object-top rounded-lg" onError={() => setImageError(true)} unoptimized />
                     ) : (
-                      <div className="w-full h-full bg-[#1F1F1F] text-white font-bold flex items-center justify-center text-sm">
+                      <div className="w-full h-full bg-[#1F1F1F] text-white font-bold flex items-center justify-center text-sm rounded-lg">
                         {talent.name.slice(0, 2).toUpperCase()}
                       </div>
                     )}
@@ -231,7 +231,7 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
                     <span className="text-[11.5px] font-bold text-zinc-500 uppercase tracking-wide">{talent.category} • {talent.experienceYears}</span>
                   </div>
                 </div>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 text-[12px] font-semibold border border-emerald-200/60 self-start sm:self-auto shrink-0">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 text-[12px] font-semibold border border-emerald-200/60 rounded-lg self-start sm:self-auto shrink-0">
                   <Clock size={13} weight="bold" />
                   <span>{talent.availability}</span>
                 </span>
@@ -243,20 +243,20 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
                 <div className="md:col-span-5 space-y-3">
                   <h3 className="text-[11.5px] font-bold tracking-wider uppercase text-[#1F1F1F]">TALENT SUMMARY</h3>
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 rounded-lg">
                       <House size={13} weight="bold" className="text-zinc-500" />
                       <span>{talent.workPreference}</span>
                     </span>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 rounded-lg">
                       <MapPin size={13} weight="bold" className="text-zinc-500" />
                       <span>{talent.location}</span>
                     </span>
                     {talent.rate && (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 rounded-lg">
                         <span>Rate: {talent.rate}</span>
                       </span>
                     )}
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 rounded-lg">
                       <Briefcase size={13} weight="bold" className="text-zinc-500" />
                       <span>{talent.experienceLevel}</span>
                     </span>
@@ -266,7 +266,7 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
                   <h3 className="text-[11.5px] font-bold tracking-wider uppercase text-[#1F1F1F]">SKILLS &amp; EXPERTISE</h3>
                   <div className="flex flex-wrap items-center gap-2">
                     {safeSkills.map((skill: string, idx: number) => (
-                      <span key={idx} className="inline-flex items-center px-3 py-1.5 bg-[#FAFAFA] hover:bg-zinc-100 text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 transition-colors break-words max-w-full">{skill}</span>
+                      <span key={idx} className="inline-flex items-center px-3 py-1.5 bg-[#FAFAFA] hover:bg-zinc-100 text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/80 rounded-lg transition-colors break-words max-w-full">{skill}</span>
                     ))}
                   </div>
                 </div>
@@ -283,11 +283,11 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
 
               <div className="pt-6 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <a href={hireUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] hover:shadow-[0_10px_24px_-4px_rgba(231,4,13,0.35)] text-white text-[13.5px] font-bold shadow-2xs transition-all cursor-pointer select-none">
+                  <a href={hireUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.98] hover:shadow-[0_10px_24px_-4px_rgba(231,4,13,0.35)] text-white text-[13.5px] font-bold rounded-lg shadow-2xs transition-all cursor-pointer select-none">
                     {talent.preferredContactMethod === "whatsapp" ? <WhatsappLogo size={16} weight="bold" /> : <EnvelopeSimple size={16} weight="bold" />}
                     <span>Hire Talent</span>
                   </a>
-                  <button onClick={toggleSave} className={`inline-flex items-center gap-1.5 px-4 py-2.5 text-[13px] font-semibold border active:scale-90 transition-all cursor-pointer select-none ${isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"}`}>
+                  <button onClick={toggleSave} className={`inline-flex items-center gap-1.5 px-4 py-2.5 text-[13px] font-semibold border rounded-lg active:scale-90 transition-all cursor-pointer select-none ${isSaved ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]" : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F]"}`}>
                     <BookmarkSimple size={15} weight={isSaved ? "fill" : "bold"} className={isSaved ? "scale-110 transition-transform" : "transition-transform"} />
                     <span>{isSaved ? "Saved" : "Save"}</span>
                   </button>
@@ -309,7 +309,7 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
             </div>
 
             {/* Profile Details */}
-            <div className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 sm:p-8 space-y-6">
+            <div className="bg-white border border-zinc-200/90 rounded-lg shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 sm:p-8 space-y-6">
               <div className="flex items-center gap-2">
                 <span className="w-4 h-1 bg-[#E7040D] inline-block" />
                 <h2 className="text-2xl font-black text-[#1F1F1F] tracking-tight">Professional Profile</h2>
@@ -330,7 +330,7 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
 
                   <button onClick={() => setShowFullBio(!showFullBio)} className="inline-flex items-center gap-1 text-[13px] font-bold text-zinc-900 hover:text-[#E7040D] pt-2 cursor-pointer transition-colors">
                     <span>{showFullBio ? "View less" : "View more"}</span>
-                    {showFullBio ? <CaretUp size={13} weight="bold" /> : <CaretDown size={13} weight="bold" />}
+                    {showFullBio ? <CaretUp size={13} weight="bold" /> : <CaretDown size={12} weight="bold" />}
                   </button>
                 </div>
               </div>
@@ -360,16 +360,16 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
               <div className="pt-6 border-t border-zinc-100">
                 <h4 className="text-[14px] font-bold text-[#1F1F1F] mb-3">Engagement &amp; Availability</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="p-3 bg-[#FAFAFA] border border-zinc-200/80 text-[13px] text-zinc-800 font-medium">
+                  <div className="p-3 bg-[#FAFAFA] border border-zinc-200/80 rounded-lg text-[13px] text-zinc-800 font-medium">
                     <span className="font-bold text-zinc-950 block mb-1">Status:</span>{talent.availability}
                   </div>
-                  <div className="p-3 bg-[#FAFAFA] border border-zinc-200/80 text-[13px] text-zinc-800 font-medium">
+                  <div className="p-3 bg-[#FAFAFA] border border-zinc-200/80 rounded-lg text-[13px] text-zinc-800 font-medium">
                     <span className="font-bold text-zinc-950 block mb-1">Compensation / Rate:</span>{talent.rate || "Competitive / Open to offers"}
                   </div>
-                  <div className="p-3 bg-[#FAFAFA] border border-zinc-200/80 text-[13px] text-zinc-800 font-medium">
+                  <div className="p-3 bg-[#FAFAFA] border border-zinc-200/80 rounded-lg text-[13px] text-zinc-800 font-medium">
                     <span className="font-bold text-zinc-950 block mb-1">Location &amp; Remote:</span>{talent.location} ({talent.workPreference})
                   </div>
-                  <div className="p-3 bg-[#FAFAFA] border border-zinc-200/80 text-[13px] text-zinc-800 font-medium">
+                  <div className="p-3 bg-[#FAFAFA] border border-zinc-200/80 rounded-lg text-[13px] text-zinc-800 font-medium">
                     <span className="font-bold text-zinc-950 block mb-1">Preferred Contact:</span>Direct {talent.preferredContactMethod === "whatsapp" ? "WhatsApp" : "Email"}
                   </div>
                 </div>
@@ -381,24 +381,24 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
           {/* Right Sidebar */}
           <div className="lg:col-span-4 space-y-6 lg:self-stretch">
 
-            <div className="grid grid-cols-2 gap-1.5 bg-white p-2 border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
+            <div className="grid grid-cols-2 gap-1.5 bg-white p-2 border border-zinc-200/90 rounded-lg shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
               {gallery.map((photoUrl, idx) => (
-                <div key={idx} className="relative aspect-[4/3] overflow-hidden bg-zinc-100">
+                <div key={idx} className="relative aspect-[4/3] overflow-hidden bg-zinc-100 rounded-md">
                   <Image src={photoUrl} alt="African tech professional" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover hover:scale-105 transition-transform duration-300" />
                 </div>
               ))}
             </div>
 
-            <div className="bg-[#0C1222] text-white p-6 sm:p-7 shadow-[0_2px_12px_rgba(0,0,0,0.02)] border border-[#0C1222]">
+            <div className="bg-[#0C1222] text-white p-6 sm:p-7 shadow-[0_2px_12px_rgba(0,0,0,0.02)] border border-[#0C1222] rounded-lg">
               <h3 className="text-xl font-black tracking-tight mb-2 text-white">Hire {talent.name}</h3>
               <p className="text-[13.5px] font-medium text-white/70 leading-relaxed mb-6">Connect directly with this vetted professional for full-time or contract roles with zero platform fees.</p>
               <div className="flex flex-col sm:flex-row items-center gap-3">
-                <a href={hireUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13px] font-bold transition-all text-center cursor-pointer">
+                <a href={hireUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13px] font-bold rounded-lg transition-all text-center cursor-pointer">
                   {talent.preferredContactMethod === "whatsapp" ? <WhatsappLogo size={16} weight="bold" /> : <EnvelopeSimple size={16} weight="bold" />}
                   <span>Hire Talent</span>
                 </a>
                 {talent.portfolioUrl && (
-                  <a href={talent.portfolioUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-3 border border-white/20 hover:border-white hover:bg-white hover:text-[#0C1222] text-white text-[13px] font-bold transition-all text-center cursor-pointer">
+                  <a href={talent.portfolioUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-3 border border-white/20 hover:border-white hover:bg-white hover:text-[#0C1222] text-white text-[13px] font-bold rounded-lg transition-all text-center cursor-pointer">
                     Portfolio
                   </a>
                 )}
@@ -408,16 +408,16 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
             {/* Sticky Group: About the professional + Similar Talent */}
             <div className="lg:sticky lg:top-[76px] space-y-6">
               {/* About the professional */}
-              <div className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 space-y-6">
+              <div className="bg-white border border-zinc-200/90 rounded-lg shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 space-y-6">
                 <div className="flex items-center gap-2">
                   <span className="w-4 h-1 bg-[#E7040D] inline-block" />
                   <h3 className="text-xl font-black text-[#1F1F1F] tracking-tight">About the professional</h3>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 bg-zinc-100 border border-zinc-200/90 overflow-hidden relative shrink-0">
+                  <div className="w-11 h-11 bg-zinc-100 border border-zinc-200/90 rounded-lg overflow-hidden relative shrink-0">
                     {talent.avatar && (
-                      <Image src={talent.avatar} alt={talent.name} fill sizes="60px" className="object-cover object-top" unoptimized />
+                      <Image src={talent.avatar} alt={talent.name} fill sizes="60px" className="object-cover object-top rounded-lg" unoptimized />
                     )}
                   </div>
                   <div>
@@ -427,15 +427,15 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2 text-[12px] text-zinc-700 font-medium">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] border border-zinc-200/80">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] border border-zinc-200/80 rounded-lg">
                     <Tag size={13} weight="bold" className="text-zinc-500" />
                     <span>{talent.category}</span>
                   </span>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] border border-zinc-200/80">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] border border-zinc-200/80 rounded-lg">
                     <MapPin size={13} weight="bold" className="text-zinc-500" />
                     <span>{talent.location}</span>
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[#E7040D] bg-[#fce8e0] px-3 py-1.5 font-bold border border-[#E7040D]/30">
+                  <span className="inline-flex items-center gap-1 text-[#E7040D] bg-[#fce8e0] px-3 py-1.5 font-bold border border-[#E7040D]/30 rounded-lg">
                     <ShieldCheck size={14} weight="fill" />
                     <span>Vetted by Trax</span>
                   </span>
@@ -477,15 +477,15 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
               </div>
 
               {similarTalent.length > 0 && (
-                <div className="bg-white border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 space-y-4">
+                <div className="bg-white border border-zinc-200/90 rounded-lg shadow-[0_2px_12px_rgba(0,0,0,0.02)] p-6 space-y-4">
                   <h3 className="text-base font-black text-[#1F1F1F] tracking-tight">Similar {talent.category} Talent</h3>
                   <div className="space-y-3">
                     {similarTalent.map((simTalent) => (
-                      <Link key={simTalent.id} href={`/talent/${simTalent.slug}`} className="block p-3 border border-zinc-200/70 hover:border-[#E7040D]/40 transition-colors group">
+                      <Link key={simTalent.id} href={`/talent/${simTalent.slug}`} className="block p-3 border border-zinc-200/70 hover:border-[#E7040D]/40 rounded-lg transition-colors group">
                         <div className="flex items-start gap-2.5">
-                          <div className="w-8 h-8 bg-zinc-100 border border-zinc-200 overflow-hidden relative shrink-0">
+                          <div className="w-8 h-8 bg-zinc-100 border border-zinc-200 rounded-md overflow-hidden relative shrink-0">
                             {simTalent.avatar && (
-                              <Image src={simTalent.avatar} alt={simTalent.name} fill sizes="32px" className="object-cover object-top" unoptimized />
+                              <Image src={simTalent.avatar} alt={simTalent.name} fill sizes="32px" className="object-cover object-top rounded-md" unoptimized />
                             )}
                           </div>
                           <div className="min-w-0">

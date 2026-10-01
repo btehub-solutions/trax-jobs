@@ -27,7 +27,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <div className="feed-card-reveal bg-white rounded-[6px] border border-zinc-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px]">
+    <div className="feed-card-reveal bg-white rounded-lg border border-zinc-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px]">
       
       {/* Top Banner Cover Strip */}
       <div className="relative h-[140px] w-full bg-[#E5E7EB] overflow-hidden shrink-0">
@@ -56,18 +56,18 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
             {/* Portrait Avatar */}
             <div className="relative">
               <Link href={`/talent/${talent.slug || talent.id}`} className="block">
-                <div className="w-[76px] h-[76px] rounded-[4px] bg-white p-1 border border-zinc-200 shadow-2xs overflow-hidden flex items-center justify-center group-hover:border-zinc-400 transition-colors">
+                <div className="w-[76px] h-[76px] rounded-lg bg-white p-1 border border-zinc-200 shadow-2xs overflow-hidden flex items-center justify-center group-hover:border-zinc-400 transition-colors">
                   {!imageError ? (
                     <Image
                       src={talent.avatar}
                       alt={talent.name}
                       width={80}
                       height={80}
-                      className="w-full h-full object-cover object-top"
+                      className="w-full h-full object-cover object-top rounded-md"
                       onError={() => setImageError(true)}
                     />
                   ) : (
-                    <div className="w-full h-full bg-[#1F1F1F] text-white font-bold flex items-center justify-center text-lg">
+                    <div className="w-full h-full bg-[#1F1F1F] text-white font-bold flex items-center justify-center text-lg rounded-md">
                       {talent.name.slice(0, 2).toUpperCase()}
                     </div>
                   )}
@@ -75,8 +75,8 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
               </Link>
 
               {/* Status Badge */}
-              <div className="absolute -bottom-1 -right-1 bg-white p-0.5 shadow-xs">
-                <div className="flex items-center gap-1 px-1.5 py-0.5 bg-[#fce8e0] text-[#E7040D] text-[10px] font-bold">
+              <div className="absolute -bottom-1 -right-1 bg-white p-0.5 shadow-xs rounded-md">
+                <div className="flex items-center gap-1 px-1.5 py-0.5 bg-[#fce8e0] text-[#E7040D] text-[10px] font-bold rounded-sm">
                   <SealCheck size={12} weight="fill" />
                   <span>VETTED</span>
                 </div>
@@ -85,7 +85,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
 
             {/* Availability Pill */}
             <div className="text-right">
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 text-[11.5px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/60">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 text-[11.5px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/60 rounded-lg">
                 <Clock size={12} weight="bold" />
                 <span>{talent.availability}</span>
               </span>
@@ -128,7 +128,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
           </div>
 
           {/* Editorial Highlight Metric Badge (No AI Sparkle Icon) */}
-          <div className="mb-3.5 p-2.5 bg-[#FAF8F5] border-l-2 border-[#E7040D] flex items-center justify-between gap-2 min-w-0">
+          <div className="mb-3.5 p-2.5 bg-[#FAF8F5] border-l-2 border-[#E7040D] rounded-r-lg flex items-center justify-between gap-2 min-w-0">
             <div className="flex items-center gap-1.5 text-[12px] text-zinc-700 min-w-0">
               <span className="font-bold text-zinc-900 break-words">{talent.highlightMetric}</span>
             </div>
@@ -156,13 +156,13 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
                 {safeSkills.slice(0, 5).map((skill) => (
                   <span
                     key={skill}
-                    className="px-2 py-0.5 rounded-none bg-[#F5F5F7] text-[#1F1F1F] text-[11.5px] font-medium border border-zinc-200/60 break-words max-w-full"
+                    className="px-2 py-0.5 rounded-lg bg-[#F5F5F7] text-[#1F1F1F] text-[11.5px] font-medium border border-zinc-200/60 break-words max-w-full"
                   >
                     {skill}
                   </span>
                 ))}
                 {safeSkills.length > 5 && (
-                  <span className="px-2 py-0.5 text-zinc-400 text-[11px] font-semibold shrink-0">
+                  <span className="px-2 py-0.5 text-zinc-400 text-[11px] font-semibold shrink-0 rounded-lg">
                     +{safeSkills.length - 5} more
                   </span>
                 )}
@@ -180,7 +180,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
                 href={talent.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="p-1.5 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
+                className="p-1.5 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors"
                 aria-label="GitHub Profile"
               >
                 <GithubLogo size={16} weight="bold" />
@@ -192,7 +192,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
                 href={talent.linkedinUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="p-1.5 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
+                className="p-1.5 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors"
                 aria-label="LinkedIn Profile"
               >
                 <LinkedinLogo size={16} weight="bold" />
@@ -203,7 +203,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
                 href={talent.portfolioUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="p-1.5 hover:text-[#E7040D] hover:bg-red-50 transition-colors"
+                className="p-1.5 hover:text-[#E7040D] hover:bg-red-50 rounded-lg transition-colors"
                 aria-label="Portfolio"
               >
                 <Globe size={16} weight="bold" />
@@ -214,7 +214,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
           {/* Hire Talent CTA Button (Navigates to Talent Preview Page) */}
           <Link
             href={`/talent/${talent.slug || talent.id}`}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-none bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13px] font-bold transition-all shadow-xs cursor-pointer active:scale-98"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-lg bg-[#E7040D] hover:bg-[#CB030B] text-white text-[13px] font-bold transition-all shadow-xs cursor-pointer active:scale-98"
           >
             {talent.preferredContactMethod === "whatsapp" ? (
               <WhatsappLogo size={15} weight="bold" />

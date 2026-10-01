@@ -186,18 +186,18 @@ function CompanySquareMark({
   accentColor,
 }: {
   name: string;
-  logo: string;
+  logo?: string;
   accentColor: string;
 }) {
   if (isValidImageUrl(logo)) {
     return (
-      <div className="w-full h-full rounded-[6px] bg-white flex items-center justify-center p-1 overflow-hidden">
+      <div className="w-full h-full rounded-lg bg-white flex items-center justify-center p-1 overflow-hidden">
         <Image
           src={logo}
           alt={name}
           width={40}
           height={40}
-          className="object-contain w-full h-full"
+          className="object-contain w-full h-full rounded-md"
           unoptimized
         />
       </div>
@@ -207,7 +207,7 @@ function CompanySquareMark({
   const n = name.toLowerCase();
   if (n.includes("paystack")) {
     return (
-      <div className="w-full h-full rounded-[6px] bg-white flex items-center justify-center p-1.5">
+      <div className="w-full h-full rounded-lg bg-white flex items-center justify-center p-1.5">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full text-[#00C3F8]">
           <path d="M15 22h70v16H15zM15 44h45v16H15zM15 66h70v15H15z" fill="currentColor" />
         </svg>
@@ -216,7 +216,7 @@ function CompanySquareMark({
   }
   if (n.includes("flutterwave")) {
     return (
-      <div className="w-full h-full rounded-[6px] bg-white flex items-center justify-center p-1.5">
+      <div className="w-full h-full rounded-lg bg-white flex items-center justify-center p-1.5">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M20 50c0-16.569 13.431-30 30-30s30 13.431 30 30" stroke="#FB4E2D" strokeWidth="12" strokeLinecap="round" />
           <path d="M32 50c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="#FF9B00" strokeWidth="10" strokeLinecap="round" />
@@ -226,7 +226,7 @@ function CompanySquareMark({
   }
   if (n.includes("moniepoint")) {
     return (
-      <div className="w-full h-full rounded-[6px] bg-[#0355D4] flex items-center justify-center p-1.5 text-white">
+      <div className="w-full h-full rounded-lg bg-[#0355D4] flex items-center justify-center p-1.5 text-white">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M22 22l28 28-28 28V22zM78 22L50 50l28 28V22z" fill="white" />
         </svg>
@@ -235,14 +235,14 @@ function CompanySquareMark({
   }
   if (n.includes("andela")) {
     return (
-      <div className="w-full h-full rounded-[6px] bg-white flex items-center justify-center p-1">
+      <div className="w-full h-full rounded-lg bg-white flex items-center justify-center p-1">
         <span className="text-[#3359DF] font-black text-xl tracking-tighter">A</span>
       </div>
     );
   }
   if (n.includes("kuda")) {
     return (
-      <div className="w-full h-full rounded-[6px] bg-[#40196D] flex items-center justify-center p-1">
+      <div className="w-full h-full rounded-lg bg-[#40196D] flex items-center justify-center p-1">
         <span className="text-white font-black text-xs tracking-tight">kuda.</span>
       </div>
     );
@@ -251,7 +251,7 @@ function CompanySquareMark({
   // Generic fallback using accentColor from Sanity
   return (
     <div
-      className="w-full h-full rounded-[6px] flex items-center justify-center text-white font-bold text-xs"
+      className="w-full h-full rounded-lg flex items-center justify-center text-white font-bold text-xs"
       style={{ backgroundColor: accentColor || "#1F1F1F" }}
     >
       {name.slice(0, 2).toUpperCase()}
@@ -526,7 +526,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
             <button
               type="button"
               onClick={() => setMobileFiltersOpen(true)}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-bold border transition-all cursor-pointer shrink-0 select-none ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-bold border transition-all cursor-pointer shrink-0 select-none ${
                 activeFiltersCount > 0
                   ? "bg-[#FDF2EE] border-[#E7040D] text-[#E7040D]"
                   : "bg-zinc-50 border-zinc-200 text-zinc-800 hover:bg-zinc-100"
@@ -592,7 +592,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
               )}
             </button>
             {openDropdown === "location" && (
-              <div className="absolute top-full left-0 mt-1 w-60 bg-white border border-zinc-200/90 shadow-2xl py-1 z-50 animate-in fade-in zoom-in-95 duration-100">
+              <div className="absolute top-full left-0 mt-1 w-60 bg-white border border-zinc-200/90 rounded-lg shadow-2xl py-1 z-50 animate-in fade-in zoom-in-95 duration-100 overflow-hidden">
                 {LOCATIONS.map((loc) => (
                   <button
                     key={loc}
@@ -631,7 +631,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                 )}
               </button>
               {openDropdown === "sector" && (
-                <div className="absolute top-full left-0 mt-1 w-72 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 shadow-2xl py-1 z-50 max-h-72 overflow-y-auto">
+                <div className="absolute top-full left-0 mt-1 w-72 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 rounded-lg shadow-2xl py-1 z-50 max-h-72 overflow-y-auto">
                   {SECTORS.map((sec) => (
                     <button
                       key={sec}
@@ -668,7 +668,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                 )}
               </button>
               {openDropdown === "size" && (
-                <div className="absolute top-full left-0 mt-1 w-64 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 shadow-2xl py-1 z-50">
+                <div className="absolute top-full left-0 mt-1 w-64 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 rounded-lg shadow-2xl py-1 z-50 overflow-hidden">
                   {SIZES.map((sz) => (
                     <button
                       key={sz}
@@ -705,7 +705,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                 )}
               </button>
               {openDropdown === "language" && (
-                <div className="absolute top-full right-0 mt-1 w-56 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 shadow-2xl py-1 z-50">
+                <div className="absolute top-full right-0 mt-1 w-56 max-w-[calc(100vw-2rem)] bg-white border border-zinc-200/90 rounded-lg shadow-2xl py-1 z-50 overflow-hidden">
                   {LANGUAGES.map((lang) => (
                     <button
                       key={lang}
@@ -743,14 +743,14 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
               <h1 className="text-[24px] sm:text-[30px] font-black text-[#1F1F1F] tracking-tight min-w-0">
                 New companies to explore
               </h1>
-              <span className="hidden sm:inline-flex items-center px-2 py-0.5 bg-zinc-100 text-zinc-600 text-[11px] font-bold border border-zinc-200/70">
+              <span className="hidden sm:inline-flex items-center px-2 py-0.5 bg-zinc-100 text-zinc-600 text-[11px] font-bold border border-zinc-200/70 rounded-lg">
                 {filteredCompanies.length}
               </span>
             </div>
             <button
               type="button"
               onClick={handleDiscoverAll}
-              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-none bg-white border border-zinc-200/90 text-[12.5px] font-bold text-[#1F1F1F] hover:bg-zinc-50 hover:border-[#E7040D] hover:text-[#E7040D] active:scale-95 transition-all duration-150 shadow-2xs cursor-pointer shrink-0 whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-lg bg-white border border-zinc-200/90 text-[12.5px] font-bold text-[#1F1F1F] hover:bg-zinc-50 hover:border-[#E7040D] hover:text-[#E7040D] active:scale-95 transition-all duration-150 shadow-2xs cursor-pointer shrink-0 whitespace-nowrap"
               title="View all companies"
             >
               <span>Discover all ({companies.length})</span>
@@ -759,7 +759,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
           </div>
 
           {feedbackMessage && (
-            <div className="mt-3.5 px-4 py-2.5 bg-[#FDF2EE] border border-[#fce8e0] text-[#E7040D] text-[12.5px] font-semibold flex items-center justify-between transition-all">
+            <div className="mt-3.5 px-4 py-2.5 bg-[#FDF2EE] border border-[#fce8e0] rounded-lg text-[#E7040D] text-[12.5px] font-semibold flex items-center justify-between transition-all">
               <span>{feedbackMessage}</span>
               <button
                 type="button"
@@ -777,7 +777,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
               return (
                 <div
                   key={comp.id}
-                  className="bg-white rounded-[6px] border border-zinc-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px]"
+                  className="bg-white rounded-lg border border-zinc-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px]"
                 >
                   {/* Top Cover Banner */}
                   <Link href={`/companies/${comp.slug}`} className="block relative h-[140px] w-full bg-[#E5E7EB] overflow-hidden shrink-0">
@@ -800,14 +800,14 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                     <div>
                       {/* Overlapping Logo Box */}
                       <Link href={`/companies/${comp.slug}`} className="block -mt-10 mb-4 relative z-10">
-                        <div className="w-[76px] h-[76px] rounded-[4px] bg-white p-2 border border-zinc-200 shadow-2xs overflow-hidden flex items-center justify-center group-hover:border-zinc-400 transition-colors">
+                        <div className="w-[76px] h-[76px] rounded-lg bg-white p-2 border border-zinc-200 shadow-2xs overflow-hidden flex items-center justify-center group-hover:border-zinc-400 transition-colors">
                           {isValidImageUrl(comp.logo) ? (
                             <Image
                               src={comp.logo}
                               alt={comp.name}
                               width={60}
                               height={60}
-                              className="object-contain w-full h-full"
+                              className="object-contain w-full h-full rounded-md"
                               unoptimized
                             />
                           ) : (
@@ -872,7 +872,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                           e.stopPropagation();
                           toggleFollow(comp.id);
                         }}
-                        className={`ml-auto px-4 py-1.5 text-[12px] font-medium rounded-[4px] border transition-colors cursor-pointer ${
+                        className={`ml-auto px-4 py-1.5 text-[12px] font-medium rounded-lg border transition-colors cursor-pointer ${
                           isFollowed
                             ? "bg-black text-white border-black"
                             : "bg-white text-black border-black hover:bg-zinc-100"
@@ -916,7 +916,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
               <p className="text-[14.5px] sm:text-[15.5px] text-zinc-600 leading-relaxed max-w-md mt-0.5">Try widening your search or clearing selected filters.</p>
               <button
                 onClick={resetFilters}
-                className="mt-6 px-6 py-2.5 bg-[#0C1222] hover:bg-[#E7040D] text-white text-[13px] font-bold rounded-none transition-colors cursor-pointer shadow-xs active:scale-98"
+                className="mt-6 px-6 py-2.5 bg-[#0C1222] hover:bg-[#E7040D] text-white text-[13px] font-bold rounded-lg transition-colors cursor-pointer shadow-xs active:scale-98"
               >
                 Reset all filters
               </button>
@@ -980,7 +980,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
           {/* Drawer Body - Scrollable Area */}
           <div className="flex-1 overflow-y-auto p-5 space-y-5 custom-scrollbar">
             {/* 1. "Active preferences" Dark Navy Card */}
-            <div className="bg-[#0C1222] border border-[#0C1222] rounded-md p-4 space-y-2.5 shadow-xs">
+            <div className="bg-[#0C1222] border border-[#0C1222] rounded-lg p-4 space-y-2.5 shadow-xs">
               <div className="flex items-center justify-between">
                 <h3 className="text-[13.5px] font-bold text-white tracking-tight">
                   Active preferences
@@ -999,7 +999,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
               {activeFiltersCount > 0 ? (
                 <div className="flex flex-wrap items-center gap-1.5 pt-1">
                   {searchTerm && (
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
                       <Tag size={12} weight="bold" className="text-[#E7040D] shrink-0" />
                       <span className="truncate max-w-[120px]">{searchTerm}</span>
                       <button
@@ -1016,7 +1016,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                   )}
 
                   {selectedSector && selectedSector !== "All Sectors" && (
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
                       <span className="truncate max-w-[130px]">{selectedSector}</span>
                       <button
                         onClick={() => setSelectedSector("")}
@@ -1029,7 +1029,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                   )}
 
                   {selectedSize && selectedSize !== "All Sizes" && (
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
                       <span>{selectedSize}</span>
                       <button
                         onClick={() => setSelectedSize("")}
@@ -1042,7 +1042,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                   )}
 
                   {selectedLanguage && selectedLanguage !== "All Stacks" && (
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
                       <span>{selectedLanguage}</span>
                       <button
                         onClick={() => setSelectedLanguage("")}
@@ -1055,7 +1055,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                   )}
 
                   {selectedLocation && selectedLocation !== "All Locations" && (
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-white/20 text-[11.5px] font-semibold text-[#1F1F1F] shadow-2xs">
                       <MapPin size={12} weight="bold" className="text-[#E7040D] shrink-0" />
                       <span>{selectedLocation}</span>
                       <button
@@ -1109,12 +1109,12 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                           if (e.key === "Enter") handleApplyKeyword();
                         }}
                         placeholder="e.g. Fintech, Payments, Kuda..."
-                        className="flex-1 h-9 px-3 rounded-none bg-white border border-zinc-200 text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
+                        className="flex-1 h-9 px-3 rounded-lg bg-white border border-zinc-200 text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
                       />
                       <button
                         type="button"
                         onClick={handleApplyKeyword}
-                        className="h-9 px-3.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[12px] font-bold transition-all cursor-pointer shadow-2xs"
+                        className="h-9 px-3.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[12px] font-bold rounded-lg transition-all cursor-pointer shadow-2xs"
                       >
                         Apply
                       </button>
@@ -1134,7 +1134,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                             key={sec}
                             type="button"
                             onClick={() => setSelectedSector(isSelected ? "" : sec)}
-                            className={`px-2.5 py-1 text-[11px] font-medium border transition-all cursor-pointer ${
+                            className={`px-2.5 py-1 text-[11px] font-medium rounded-lg border transition-all cursor-pointer ${
                               isSelected
                                 ? "bg-[#fce8e0] text-[#E7040D] border-[#E7040D] font-bold"
                                 : "bg-[#FAFAFA] text-zinc-600 border-zinc-200 hover:border-zinc-300"
@@ -1172,7 +1172,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                           key={sz}
                           type="button"
                           onClick={() => setSelectedSize(isSelected ? "" : sz)}
-                          className={`w-full text-left px-3 py-2 rounded-none text-[12px] font-medium transition-all flex items-center justify-between cursor-pointer ${
+                          className={`w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium transition-all flex items-center justify-between cursor-pointer ${
                             isSelected
                               ? "bg-[#fce8e0] text-[#E7040D] border border-[#E7040D] font-bold"
                               : "bg-[#F9F9FB] hover:bg-[#F0F0F3] text-[#1F1F1F] border border-zinc-200/50"
@@ -1210,7 +1210,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                           key={lang}
                           type="button"
                           onClick={() => setSelectedLanguage(isSelected ? "" : lang)}
-                          className={`w-full text-left px-3 py-2 rounded-none text-[12px] font-medium transition-all flex items-center justify-between cursor-pointer ${
+                          className={`w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium transition-all flex items-center justify-between cursor-pointer ${
                             isSelected
                               ? "bg-[#fce8e0] text-[#E7040D] border border-[#E7040D] font-bold"
                               : "bg-[#F9F9FB] hover:bg-[#F0F0F3] text-[#1F1F1F] border border-zinc-200/50"
@@ -1250,12 +1250,12 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                           if (e.key === "Enter") handleApplyLocation();
                         }}
                         placeholder="e.g. Lagos, Ogun, Remote..."
-                        className="flex-1 h-9 px-3 rounded-none bg-white border border-zinc-200 text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
+                        className="flex-1 h-9 px-3 rounded-lg bg-white border border-zinc-200 text-[13px] text-[#1F1F1F] placeholder:text-zinc-400 focus:outline-hidden focus:border-[#E7040D] transition-all shadow-2xs"
                       />
                       <button
                         type="button"
                         onClick={handleApplyLocation}
-                        className="h-9 px-3.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[12px] font-bold transition-all cursor-pointer shadow-2xs"
+                        className="h-9 px-3.5 bg-[#E7040D] hover:bg-[#CB030B] active:scale-95 text-white text-[12px] font-bold rounded-lg transition-all cursor-pointer shadow-2xs"
                       >
                         Apply
                       </button>
@@ -1273,7 +1273,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                               setSelectedLocation(next);
                               setLocationInput(next);
                             }}
-                            className={`px-2.5 py-1 text-[11px] font-medium border transition-all cursor-pointer ${
+                            className={`px-2.5 py-1 text-[11px] font-medium rounded-lg border transition-all cursor-pointer ${
                               isSelected
                                 ? "bg-[#fce8e0] text-[#E7040D] border-[#E7040D] font-bold"
                                 : "bg-[#FAFAFA] text-zinc-600 border-zinc-200 hover:border-zinc-300"
@@ -1299,7 +1299,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                 const el = document.getElementById("companies-results");
                 if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className="w-full py-3 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.99] text-white text-[13.5px] font-bold rounded-md shadow-2xs transition-all cursor-pointer flex items-center justify-center gap-2"
+              className="w-full py-3 bg-[#E7040D] hover:bg-[#CB030B] active:scale-[0.99] text-white text-[13.5px] font-bold rounded-lg shadow-2xs transition-all cursor-pointer flex items-center justify-center gap-2"
             >
               <span>Show {filteredCompanies.length} {filteredCompanies.length === 1 ? "Company" : "Companies"}</span>
             </button>

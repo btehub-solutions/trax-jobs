@@ -24,15 +24,15 @@ import { SAMPLE_COMPANIES } from "@/data/companies";
 function CompanyMark({ name, logo }: { name: string; logo?: string }) {
   if (isValidImageUrl(logo)) {
     return (
-      <div className="w-12 h-12 rounded-none bg-white border border-zinc-200/90 flex items-center justify-center p-1 shrink-0 overflow-hidden shadow-2xs">
-        <Image src={logo!} alt={name} width={44} height={44} className="w-full h-full object-contain" />
+      <div className="w-12 h-12 rounded-lg bg-white border border-zinc-200/90 flex items-center justify-center p-1 shrink-0 overflow-hidden shadow-2xs">
+        <Image src={logo!} alt={name} width={44} height={44} className="w-full h-full object-contain rounded-md" />
       </div>
     );
   }
   const n = name.toLowerCase();
   if (n.includes("paystack")) {
     return (
-      <div className="w-12 h-12 rounded-none bg-[#00C3F8]/10 border border-[#00C3F8]/20 flex items-center justify-center p-2.5 shrink-0">
+      <div className="w-12 h-12 rounded-lg bg-[#00C3F8]/10 border border-[#00C3F8]/20 flex items-center justify-center p-2.5 shrink-0">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full text-[#00C3F8]">
           <path d="M15 22h70v16H15zM15 44h45v16H15zM15 66h70v16H15z" fill="currentColor" />
         </svg>
@@ -41,7 +41,7 @@ function CompanyMark({ name, logo }: { name: string; logo?: string }) {
   }
   if (n.includes("flutterwave")) {
     return (
-      <div className="w-12 h-12 rounded-none bg-[#FB4E2D]/10 border border-[#FB4E2D]/20 flex items-center justify-center p-2.5 shrink-0">
+      <div className="w-12 h-12 rounded-lg bg-[#FB4E2D]/10 border border-[#FB4E2D]/20 flex items-center justify-center p-2.5 shrink-0">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M20 50c0-16.569 13.431-30 30-30s30 13.431 30 30" stroke="#FB4E2D" strokeWidth="12" strokeLinecap="round" />
           <path d="M32 50c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="#FF9B00" strokeWidth="10" strokeLinecap="round" />
@@ -51,7 +51,7 @@ function CompanyMark({ name, logo }: { name: string; logo?: string }) {
   }
   if (n.includes("moniepoint") || n.includes("nomba")) {
     return (
-      <div className="w-12 h-12 rounded-none bg-[#0355D4]/10 border border-[#0355D4]/20 flex items-center justify-center p-2.5 shrink-0">
+      <div className="w-12 h-12 rounded-lg bg-[#0355D4]/10 border border-[#0355D4]/20 flex items-center justify-center p-2.5 shrink-0">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M22 22l28 28-28 28V22zM78 22L50 50l28 28V22z" fill="#0355D4" />
         </svg>
@@ -60,27 +60,27 @@ function CompanyMark({ name, logo }: { name: string; logo?: string }) {
   }
   if (n.includes("andela")) {
     return (
-      <div className="w-12 h-12 rounded-none bg-[#3359DF]/10 border border-[#3359DF]/20 flex items-center justify-center p-2 shrink-0">
+      <div className="w-12 h-12 rounded-lg bg-[#3359DF]/10 border border-[#3359DF]/20 flex items-center justify-center p-2 shrink-0">
         <span className="text-[#3359DF] font-black text-xl tracking-tighter">A</span>
       </div>
     );
   }
   if (n.includes("kuda")) {
     return (
-      <div className="w-12 h-12 rounded-none bg-[#40196D]/10 border border-[#40196D]/20 flex items-center justify-center p-2 shrink-0">
+      <div className="w-12 h-12 rounded-lg bg-[#40196D]/10 border border-[#40196D]/20 flex items-center justify-center p-2 shrink-0">
         <span className="text-[#40196D] font-black text-sm tracking-tight">kuda.</span>
       </div>
     );
   }
   if (n.includes("piggyvest") || n.includes("cowrywise")) {
     return (
-      <div className="w-12 h-12 rounded-none bg-[#0D60D8]/10 border border-[#0D60D8]/20 flex items-center justify-center p-2 shrink-0">
+      <div className="w-12 h-12 rounded-lg bg-[#0D60D8]/10 border border-[#0D60D8]/20 flex items-center justify-center p-2 shrink-0">
         <span className="text-[#0D60D8] font-bold text-xs">PIGGY</span>
       </div>
     );
   }
   return (
-    <div className="w-12 h-12 rounded-none bg-[#1F1F1F] text-white flex items-center justify-center font-bold text-sm shrink-0">
+    <div className="w-12 h-12 rounded-lg bg-[#1F1F1F] text-white flex items-center justify-center font-bold text-sm shrink-0">
       {name.slice(0, 2).toUpperCase()}
     </div>
   );
@@ -99,7 +99,7 @@ function CompanySquareMark({ name, logo }: { name: string; logo?: string }) {
         alt={name}
         width={72}
         height={72}
-        className="w-full h-full object-contain rounded-[2px]"
+        className="w-full h-full object-contain rounded-lg"
         onError={() => setImageError(true)}
         unoptimized
       />
@@ -108,7 +108,7 @@ function CompanySquareMark({ name, logo }: { name: string; logo?: string }) {
   const n = name.toLowerCase();
   if (n.includes("paystack")) {
     return (
-      <div className="w-full h-full bg-[#00C3F8]/10 flex items-center justify-center p-3 rounded-[2px]">
+      <div className="w-full h-full bg-[#00C3F8]/10 flex items-center justify-center p-3 rounded-lg">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full text-[#00C3F8]">
           <path d="M15 22h70v16H15zM15 44h45v16H15zM15 66h70v16H15z" fill="currentColor" />
         </svg>
@@ -117,7 +117,7 @@ function CompanySquareMark({ name, logo }: { name: string; logo?: string }) {
   }
   if (n.includes("flutterwave")) {
     return (
-      <div className="w-full h-full bg-[#FB4E2D]/10 flex items-center justify-center p-3 rounded-[2px]">
+      <div className="w-full h-full bg-[#FB4E2D]/10 flex items-center justify-center p-3 rounded-lg">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M20 50c0-16.569 13.431-30 30-30s30 13.431 30 30" stroke="#FB4E2D" strokeWidth="12" strokeLinecap="round" />
           <path d="M32 50c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="#FF9B00" strokeWidth="10" strokeLinecap="round" />
@@ -127,7 +127,7 @@ function CompanySquareMark({ name, logo }: { name: string; logo?: string }) {
   }
   if (n.includes("moniepoint") || n.includes("nomba")) {
     return (
-      <div className="w-full h-full bg-[#0355D4]/10 flex items-center justify-center p-3 rounded-[2px]">
+      <div className="w-full h-full bg-[#0355D4]/10 flex items-center justify-center p-3 rounded-lg">
         <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
           <path d="M22 22l28 28-28 28V22zM78 22L50 50l28 28V22z" fill="#0355D4" />
         </svg>
@@ -136,27 +136,27 @@ function CompanySquareMark({ name, logo }: { name: string; logo?: string }) {
   }
   if (n.includes("andela")) {
     return (
-      <div className="w-full h-full bg-[#3359DF]/10 flex items-center justify-center p-2 rounded-[2px]">
+      <div className="w-full h-full bg-[#3359DF]/10 flex items-center justify-center p-2 rounded-lg">
         <span className="text-[#3359DF] font-black text-2xl tracking-tighter">A</span>
       </div>
     );
   }
   if (n.includes("kuda")) {
     return (
-      <div className="w-full h-full bg-[#40196D]/10 flex items-center justify-center p-2 rounded-[2px]">
+      <div className="w-full h-full bg-[#40196D]/10 flex items-center justify-center p-2 rounded-lg">
         <span className="text-[#40196D] font-black text-base tracking-tight">kuda.</span>
       </div>
     );
   }
   if (n.includes("piggyvest") || n.includes("cowrywise")) {
     return (
-      <div className="w-full h-full bg-[#0D60D8]/10 flex items-center justify-center p-2 rounded-[2px]">
+      <div className="w-full h-full bg-[#0D60D8]/10 flex items-center justify-center p-2 rounded-lg">
         <span className="text-[#0D60D8] font-bold text-xs">PIGGY</span>
       </div>
     );
   }
   return (
-    <div className="w-full h-full bg-[#1F1F1F] text-white flex items-center justify-center font-bold text-lg rounded-[2px]">
+    <div className="w-full h-full bg-[#1F1F1F] text-white flex items-center justify-center font-bold text-lg rounded-lg">
       {name.slice(0, 2).toUpperCase()}
     </div>
   );
@@ -249,7 +249,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
           <div>
             {/* Overlapping Logo / Avatar Box */}
             <Link href={`/jobs/${job.slug || job.id}`} className="block -mt-10 mb-4 relative z-10">
-              <div className="w-[76px] h-[76px] rounded-[4px] bg-white p-1 border border-zinc-200 shadow-2xs overflow-hidden flex items-center justify-center group-hover:border-zinc-400 transition-colors">
+              <div className="w-[76px] h-[76px] rounded-lg bg-white p-1 border border-zinc-200 shadow-2xs overflow-hidden flex items-center justify-center group-hover:border-zinc-400 transition-colors">
                 <CompanySquareMark name={job.company.name} logo={job.company.logo} />
               </div>
             </Link>
@@ -293,7 +293,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
             <button
               type="button"
               onClick={toggleSave}
-              className={`px-3 py-2 rounded-none text-[12px] font-semibold border transition-all duration-150 cursor-pointer select-none active:scale-95 shrink-0 flex items-center gap-1.5 ${
+              className={`px-3 py-2 rounded-lg text-[12px] font-semibold border transition-all duration-150 cursor-pointer select-none active:scale-95 shrink-0 flex items-center gap-1.5 ${
                 isSaved
                   ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]"
                   : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F] shadow-2xs"
@@ -310,7 +310,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
 
             <Link
               href={`/jobs/${job.slug || job.id}`}
-              className="flex-1 py-2 rounded-md text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] active:scale-[0.98] transition-all duration-150 cursor-pointer text-center group-hover:border-[#E7040D] whitespace-nowrap"
+              className="flex-1 py-2 rounded-lg text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs hover:shadow-[0_4px_14px_-2px_rgba(231,4,13,0.35)] active:scale-[0.98] transition-all duration-150 cursor-pointer text-center group-hover:border-[#E7040D] whitespace-nowrap"
             >
               View Job
             </Link>
@@ -356,7 +356,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
             {showCollage && (
               <div className="hidden md:flex items-center gap-1 shrink-0">
                 <div className="flex items-center -space-x-4">
-                  <div className="relative w-14 h-20 rounded-none overflow-hidden bg-zinc-100 border-2 border-white shadow-2xs z-30">
+                  <div className="relative w-14 h-20 rounded-lg overflow-hidden bg-zinc-100 border-2 border-white shadow-2xs z-30">
                     <Image
                       src={photoSet[0]}
                       alt="Team culture"
@@ -365,7 +365,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
                       className="object-cover"
                     />
                   </div>
-                  <div className="relative w-14 h-20 rounded-none overflow-hidden bg-zinc-100 border-2 border-white shadow-2xs z-20">
+                  <div className="relative w-14 h-20 rounded-lg overflow-hidden bg-zinc-100 border-2 border-white shadow-2xs z-20">
                     <Image
                       src={photoSet[1]}
                       alt="Team culture"
@@ -374,7 +374,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
                       className="object-cover"
                     />
                   </div>
-                  <div className="relative w-14 h-20 rounded-none overflow-hidden bg-zinc-100 border-2 border-white shadow-2xs z-10">
+                  <div className="relative w-14 h-20 rounded-lg overflow-hidden bg-zinc-100 border-2 border-white shadow-2xs z-10">
                     <Image
                       src={photoSet[2]}
                       alt="Team culture"
@@ -393,34 +393,34 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
             {job.summary}
           </p>
 
-          {/* Metadata Badges Row (90-degree square badges with Trax styling) */}
+          {/* Metadata Badges Row (8px rounded badges with Trax styling) */}
           <div className="flex flex-wrap items-center gap-2 mb-5">
             {/* Contract */}
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-none bg-[#F5F5F7] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/50">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#F5F5F7] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/50">
               <Briefcase size={13} weight="bold" className="text-zinc-500" />
               <span>{job.contractType}</span>
             </span>
 
             {/* Remote Policy */}
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-none bg-[#F5F5F7] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/50">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#F5F5F7] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/50">
               <House size={13} weight="bold" className="text-zinc-500" />
               <span>Remote: {job.workplaceType}</span>
             </span>
 
             {/* Location */}
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-none bg-[#F5F5F7] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/50">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#F5F5F7] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/50">
               <MapPin size={13} weight="bold" className="text-zinc-500" />
               <span>{job.location}</span>
             </span>
 
             {/* Employees */}
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-none bg-[#F5F5F7] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/50">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#F5F5F7] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/50">
               <Users size={13} weight="bold" className="text-zinc-500" />
               <span>{job.company.employeesCount} employees</span>
             </span>
 
             {/* Industry Tag */}
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-none bg-[#F5F5F7] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/50">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#F5F5F7] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/50">
               <Tag size={13} weight="bold" className="text-zinc-500" />
               <span>{job.company.industry}</span>
             </span>
@@ -429,7 +429,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
             {job.tags.slice(0, 1).map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center gap-1 px-3 py-1 rounded-none bg-[#F5F5F7] hover:bg-[#ECECF0] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/50 hover:border-zinc-300 transition-colors duration-150 select-none cursor-default"
+                className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-[#F5F5F7] hover:bg-[#ECECF0] text-[#1F1F1F] text-[12px] font-medium border border-zinc-200/50 hover:border-zinc-300 transition-colors duration-150 select-none cursor-default"
               >
                 <span>{tag}</span>
               </span>
@@ -444,7 +444,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
             <button
               type="button"
               onClick={toggleSave}
-              className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-md text-[12px] sm:text-[12.5px] font-semibold border transition-all duration-150 cursor-pointer select-none active:scale-90 shrink-0 whitespace-nowrap ${
+              className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-[12px] sm:text-[12.5px] font-semibold border transition-all duration-150 cursor-pointer select-none active:scale-90 shrink-0 whitespace-nowrap ${
                 isSaved
                   ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]"
                   : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F] shadow-2xs"

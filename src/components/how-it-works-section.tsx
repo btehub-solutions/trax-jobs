@@ -150,12 +150,12 @@ export function HowItWorksSection() {
           {steps.map((step) => (
             <div
               key={step.id}
-              className="flex flex-col group shrink-0 snap-start w-[280px] sm:w-[300px] md:w-auto"
+              className="flex flex-col group shrink-0 snap-start w-[84vw] max-w-[335px] sm:w-[320px] md:w-auto"
             >
               {/* Media Card Container (Clickable to target page) */}
               <Link
                 href={step.href}
-                className="relative aspect-[16/11] sm:aspect-[4/3] rounded-[24px] overflow-hidden bg-zinc-100 shadow-xs group-hover:shadow-lg transition-all duration-300 transform group-hover:-translate-y-1 block"
+                className="relative aspect-[16/11] sm:aspect-[4/3] rounded-lg overflow-hidden bg-zinc-100 shadow-xs group-hover:shadow-lg transition-all duration-300 transform group-hover:-translate-y-1 block"
               >
                 {step.type === "brand-media" ? (
                   step.brandVariant === "hiring" ? (

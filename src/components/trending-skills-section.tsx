@@ -64,14 +64,14 @@ export function TrendingSkillsSection({ courses }: TrendingSkillsSectionProps = 
           <div className="flex items-center gap-2.5 shrink-0 self-start md:self-end">
             <button
               onClick={() => handleScroll("left")}
-              className="w-10 h-10 rounded-none bg-white border border-zinc-200/90 hover:bg-zinc-100 hover:border-zinc-300 text-zinc-700 flex items-center justify-center transition-all cursor-pointer shadow-2xs"
+              className="w-10 h-10 rounded-lg bg-white border border-zinc-200/90 hover:bg-zinc-100 hover:border-zinc-300 text-zinc-700 flex items-center justify-center transition-all cursor-pointer shadow-2xs"
               aria-label="Previous courses"
             >
               <CaretLeft size={16} weight="bold" />
             </button>
             <button
               onClick={() => handleScroll("right")}
-              className="w-10 h-10 rounded-none bg-[#E7040D] hover:bg-[#CB030B] text-white flex items-center justify-center transition-all cursor-pointer shadow-2xs"
+              className="w-10 h-10 rounded-lg bg-[#E7040D] hover:bg-[#CB030B] text-white flex items-center justify-center transition-all cursor-pointer shadow-2xs"
               aria-label="Next courses"
             >
               <CaretRight size={16} weight="bold" />
@@ -88,7 +88,7 @@ export function TrendingSkillsSection({ courses }: TrendingSkillsSectionProps = 
             <Link
               key={course.id || course.slug}
               href={`/learning/${course.slug || course.id}`}
-              className="w-[300px] sm:w-[360px] md:w-[380px] shrink-0 bg-white rounded-none border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start cursor-pointer block"
+              className="w-[300px] sm:w-[360px] md:w-[380px] shrink-0 bg-white rounded-lg border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group snap-start cursor-pointer block"
             >
               <div>
                 {/* 1. Top Image Thumbnail Container */}
@@ -102,7 +102,7 @@ export function TrendingSkillsSection({ courses }: TrendingSkillsSectionProps = 
                   />
 
                   {/* Top-Right Floating Duration Badge (Yellow Accent) */}
-                  <div className="absolute top-3 right-3 bg-[#FBBF24] text-zinc-950 text-[11.5px] font-bold px-2.5 py-1 rounded-none flex items-center gap-1 shadow-xs">
+                  <div className="absolute top-3 right-3 bg-[#FBBF24] text-zinc-950 text-[11.5px] font-bold px-2.5 py-1 rounded-lg flex items-center gap-1 shadow-xs">
                     <Clock size={13} weight="bold" className="text-zinc-900" />
                     <span>{course.durationWeeks}</span>
                   </div>
@@ -112,7 +112,7 @@ export function TrendingSkillsSection({ courses }: TrendingSkillsSectionProps = 
                 <div className="p-5 space-y-3.5">
                   {/* Level Pill Tag (Light Blue) */}
                   <div>
-                    <span className="inline-block px-3 py-1 bg-[#E0F2FE] text-[#0284C7] text-[12px] font-bold rounded-none">
+                    <span className="inline-block px-3 py-1 bg-[#E0F2FE] text-[#0284C7] text-[12px] font-bold rounded-lg">
                       {course.level}
                     </span>
                   </div>
