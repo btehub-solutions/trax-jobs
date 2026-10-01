@@ -114,6 +114,8 @@ const COMPANY_SECTORS = [
   "HealthTech & Electronic Records",
   "E-Commerce & Digital Retail",
   "AI, Data & Cloud Solutions",
+  "Digital Media & Publishing",
+  "Other / Custom",
 ];
 
 const COMPANY_SIZES = [
@@ -1514,6 +1516,7 @@ function CompanyStudio() {
   const [website, setWebsite] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [industry, setIndustry] = useState(COMPANY_SECTORS[0]);
+  const [customIndustry, setCustomIndustry] = useState("");
   const [headquarters, setHeadquarters] = useState(AFRICAN_LOCATIONS[0]);
   const [employeesCount, setEmployeesCount] = useState(COMPANY_SIZES[1]);
   const [description, setDescription] = useState("");
@@ -1545,6 +1548,10 @@ function CompanyStudio() {
       setError("Please complete Company Name and Contact Email to continue.");
       return false;
     }
+    if (industry === "Other / Custom" && !customIndustry.trim()) {
+      setError("Please specify your company's sector or vertical to continue.");
+      return false;
+    }
     setError(null);
     return true;
   };
@@ -1556,11 +1563,13 @@ function CompanyStudio() {
     setLoading(true);
 
     try {
+      const finalIndustry =
+        industry === "Other / Custom" ? customIndustry.trim() || "Other" : industry;
       const formData = new FormData();
       formData.append("name", name.trim());
       formData.append("website", website.trim());
       formData.append("contactEmail", contactEmail.trim());
-      formData.append("industry", industry);
+      formData.append("industry", finalIndustry);
       formData.append("headquarters", headquarters);
       formData.append("employeesCount", employeesCount);
       formData.append("description", description.trim());
@@ -1596,6 +1605,7 @@ function CompanyStudio() {
           setStep(1);
           setName("");
           setWebsite("");
+          setCustomIndustry("");
           setDescription("");
           setLogoFile(null);
           setLogoPreview(null);
@@ -1736,6 +1746,21 @@ function CompanyStudio() {
                   </button>
                 ))}
               </div>
+
+              {industry === "Other / Custom" && (
+                <div className="mt-3">
+                  <label className="block text-[11px] font-bold text-zinc-600 uppercase tracking-wider mb-1.5">
+                    Specify Sector / Vertical Name
+                  </label>
+                  <input
+                    type="text"
+                    value={customIndustry}
+                    onChange={(e) => setCustomIndustry(e.target.value)}
+                    placeholder="e.g. Media & Technology, CleanTech, EdTech..."
+                    className="w-full px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-300 text-zinc-900 text-[16px] sm:text-[13.5px] font-medium placeholder:text-zinc-400 focus:bg-white focus:border-[#E7040D] focus:outline-none transition-all rounded-lg"
+                  />
+                </div>
+              )}
             </div>
 
             {/* Next Step */}
@@ -1972,7 +1997,7 @@ function CompanyStudio() {
             {/* Badges */}
             <div className="flex flex-wrap gap-2 pt-2 border-t border-zinc-100">
               <span className="px-2.5 py-1 bg-zinc-100 text-zinc-700 text-[11.5px] font-bold rounded-md">
-                {industry}
+                {industry === "Other / Custom" ? (customIndustry.trim() || "Custom Sector") : industry}
               </span>
               <span className="px-2.5 py-1 bg-zinc-100 text-zinc-700 text-[11.5px] font-medium rounded-md">
                 {employeesCount.split(" ")[0]}

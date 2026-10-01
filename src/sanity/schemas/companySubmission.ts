@@ -38,6 +38,8 @@ export const companySubmission = defineType({
           { title: "HealthTech & Electronic Records", value: "HealthTech" },
           { title: "E-Commerce & Digital Retail", value: "E-Commerce" },
           { title: "AI, Data & Cloud Solutions", value: "AI & Data" },
+          { title: "Digital Media & Publishing", value: "Digital Media & Publishing" },
+          { title: "Other / Custom Sector", value: "Other" },
         ],
       },
     }),
