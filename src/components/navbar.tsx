@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,9 +16,12 @@ const desktopNavLinks = [
   { name: "Find Jobs", href: "/jobs" },
   { name: "Hire a Talent", href: "/talent" },
   { name: "Companies", href: "/companies" },
-  { name: "Courses", href: "/learning" },
-  { name: "Guides", href: "/guides" },
-  { name: "About Us", href: "/about" },
+];
+
+const resourcesLinks = [
+  { name: "Courses & Learning", href: "/learning", desc: "Free and curated tech courses" },
+  { name: "Career Guides", href: "/guides", desc: "Playbooks for African tech careers" },
+  { name: "About Trax", href: "/about", desc: "Our story, team, and mission" },
 ];
 
 export interface NavbarProps {
@@ -39,11 +42,30 @@ export function Navbar({
   const pathname = usePathname() || "";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
+  const [desktopResourcesOpen, setDesktopResourcesOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const resourcesDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Close desktop Resources dropdown on click outside
+  useEffect(() => {
+    if (!desktopResourcesOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (resourcesDropdownRef.current && !resourcesDropdownRef.current.contains(e.target as Node)) {
+        setDesktopResourcesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [desktopResourcesOpen]);
+
+  // Close desktop Resources dropdown on route change
+  useEffect(() => {
+    setDesktopResourcesOpen(false);
+  }, [pathname]);
 
   // Context-aware CTA button calculation
   const isTalentPage = activeTab === "talent" || pathname.startsWith("/talent");
@@ -85,16 +107,23 @@ export function Navbar({
   // Close drawer on ESC key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMobileMenuOpen(false);
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+        setDesktopResourcesOpen(false);
+      }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Check if Resources dropdown has an active child
+  const isResourcesActive = pathname.startsWith("/learning") || pathname.startsWith("/guides") || pathname.startsWith("/about") ||
+    activeTab === "learning" || activeTab === "guides" || activeTab === "about";
+
   return (
     <header className={`w-full bg-white/95 backdrop-blur-md border-b border-zinc-100 sticky top-0 z-40 ${className}`}>
       <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           {/* Left: Brand Logo & Desktop Nav Links */}
           <div className="flex items-center gap-10 lg:gap-14">
             <Link href="/" className="flex items-center group" aria-label="Trax Home">
@@ -114,10 +143,7 @@ export function Navbar({
                 const isActive = activeTab
                   ? (activeTab === "jobs" && link.href === "/jobs") ||
                     (activeTab === "talent" && link.href === "/talent") ||
-                    (activeTab === "companies" && link.href === "/companies") ||
-                    (activeTab === "learning" && link.href === "/learning") ||
-                    (activeTab === "guides" && link.href === "/guides") ||
-                    (activeTab === "about" && link.href === "/about")
+                    (activeTab === "companies" && link.href === "/companies")
                   : pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
                 return (
                   <Link
@@ -133,6 +159,59 @@ export function Navbar({
                   </Link>
                 );
               })}
+
+              {/* Resources Dropdown */}
+              <div ref={resourcesDropdownRef} className="relative">
+                <button
+                  type="button"
+                  onClick={() => setDesktopResourcesOpen(!desktopResourcesOpen)}
+                  className={`inline-flex items-center gap-1 text-[15px] font-medium transition-colors cursor-pointer ${
+                    isResourcesActive
+                      ? "text-[#e7040d] font-semibold"
+                      : "text-[#333333] hover:text-[#000000]"
+                  }`}
+                >
+                  <span>Resources</span>
+                  <CaretDown
+                    size={13}
+                    weight="bold"
+                    className={`transition-transform duration-200 ${desktopResourcesOpen ? "rotate-180" : ""} ${
+                      isResourcesActive ? "text-[#e7040d]" : "text-zinc-400"
+                    }`}
+                  />
+                </button>
+
+                {desktopResourcesOpen && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[260px] bg-white rounded-xl border border-zinc-200/90 shadow-[0_12px_36px_-8px_rgba(0,0,0,0.1)] py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                    {resourcesLinks.map((link) => {
+                      const isChildActive = pathname.startsWith(link.href) ||
+                        (activeTab === "learning" && link.href === "/learning") ||
+                        (activeTab === "guides" && link.href === "/guides") ||
+                        (activeTab === "about" && link.href === "/about");
+                      return (
+                        <Link
+                          key={link.name}
+                          href={link.href}
+                          onClick={() => setDesktopResourcesOpen(false)}
+                          className={`block px-4 py-2.5 transition-colors ${
+                            isChildActive
+                              ? "bg-[#fdf2ee]"
+                              : "hover:bg-zinc-50"
+                          }`}
+                        >
+                          <span className={`block text-[14px] font-semibold ${
+                            isChildActive ? "text-[#E7040D]" : "text-zinc-900"
+                          }`}>
+                            {link.name}
+                          </span>
+                          <span className="block text-[12px] text-zinc-500 mt-0.5">{link.desc}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
               <a
                 href="https://trax.ng"
                 target="_blank"
