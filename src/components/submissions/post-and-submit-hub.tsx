@@ -1571,6 +1571,7 @@ function CompanyStudio() {
       formData.append("contactEmail", contactEmail.trim());
       formData.append("industry", finalIndustry);
       formData.append("headquarters", headquarters);
+      formData.append("location", headquarters);
       formData.append("employeesCount", employeesCount);
       formData.append("description", description.trim());
 

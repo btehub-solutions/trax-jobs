@@ -21,7 +21,10 @@ export async function POST(request: Request) {
       name = (formData.get("name") as string) || "";
       contactEmail = (formData.get("contactEmail") as string) || "";
       industry = (formData.get("industry") as string) || "";
-      location = (formData.get("location") as string) || "";
+      location =
+        (formData.get("location") as string) ||
+        (formData.get("headquarters") as string) ||
+        "";
       website = (formData.get("website") as string) || "";
       employeesCount = (formData.get("employeesCount") as string) || "";
       accentColor = (formData.get("accentColor") as string) || "#E7040D";
@@ -63,7 +66,7 @@ export async function POST(request: Request) {
       name = body.name || "";
       contactEmail = body.contactEmail || "";
       industry = body.industry || "";
-      location = body.location || "";
+      location = body.location || body.headquarters || "";
       website = body.website || "";
       employeesCount = body.employeesCount || "";
       accentColor = body.accentColor || "#E7040D";

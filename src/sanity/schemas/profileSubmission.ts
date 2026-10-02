@@ -57,6 +57,9 @@ export const profileSubmission = defineType({
           { title: "Design", value: "Design" },
           { title: "Data & AI", value: "Data & AI" },
           { title: "DevOps & Cloud", value: "DevOps & Cloud" },
+          { title: "Marketing & Growth", value: "Marketing & Growth" },
+          { title: "Operations & Support", value: "Operations & Support" },
+          { title: "Finance & Legal", value: "Finance & Legal" },
         ],
       },
     }),
@@ -91,8 +94,9 @@ export const profileSubmission = defineType({
     defineField({
       name: "skills",
       title: "Top Skills",
-      type: "text",
-      description: "Comma-separated list of skills",
+      type: "array",
+      of: [{ type: "string" }],
+      options: { layout: "tags" },
     }),
     defineField({
       name: "bio",

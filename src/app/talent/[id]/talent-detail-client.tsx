@@ -106,7 +106,12 @@ export default function TalentDetailClient({ talent, similarTalent }: { talent: 
   }, [talent]);
 
   const safeSkills = useMemo(() => {
-    return (talent.skills || [])
+    const rawSkills = Array.isArray(talent.skills)
+      ? talent.skills
+      : typeof talent.skills === "string"
+      ? [talent.skills]
+      : [];
+    return rawSkills
       .flatMap((s: any) => {
         const str = typeof s === "string" ? s : (s?.title || s?.name || s?.text || "");
         return str.split(/[,;\n]+/).map((x: string) => x.trim());

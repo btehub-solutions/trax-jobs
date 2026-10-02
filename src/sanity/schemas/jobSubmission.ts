@@ -48,6 +48,34 @@ export const jobSubmission = defineType({
           { title: "DevOps & Cloud", value: "DevOps & Cloud" },
           { title: "Marketing & Growth", value: "Marketing & Growth" },
           { title: "Operations & Support", value: "Operations & Support" },
+          { title: "Finance & Legal", value: "Finance & Legal" },
+        ],
+      },
+    }),
+    defineField({
+      name: "employmentType",
+      title: "Employment Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Full-time", value: "Full-time" },
+          { title: "Contract", value: "Contract" },
+          { title: "Part-time", value: "Part-time" },
+          { title: "Internship", value: "Internship" },
+        ],
+      },
+    }),
+    defineField({
+      name: "experienceLevel",
+      title: "Experience Level",
+      type: "string",
+      options: {
+        list: [
+          { title: "Junior (1-2 years)", value: "Junior (1-2 years)" },
+          { title: "Mid-Level (3-5 years)", value: "Mid-Level (3-5 years)" },
+          { title: "Senior (5-8 years)", value: "Senior (5-8 years)" },
+          { title: "Staff / Principal (8+ years)", value: "Staff / Principal (8+ years)" },
+          { title: "Executive / Director", value: "Executive / Director" },
         ],
       },
     }),

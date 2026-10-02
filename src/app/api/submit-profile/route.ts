@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     let location = "";
     let workPreference = "";
     let highlightMetric = "";
-    let skills = "";
+    let skillsList: string[] = [];
     let bio = "";
     let portfolioUrl = "";
     let githubUrl = "";
@@ -34,7 +34,11 @@ export async function POST(request: Request) {
       location = (formData.get("location") as string) || "";
       workPreference = (formData.get("workPreference") as string) || "";
       highlightMetric = (formData.get("highlightMetric") as string) || "";
-      skills = (formData.get("skills") as string) || "";
+      const rawSkills = (formData.get("skills") as string) || "";
+      skillsList = rawSkills
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean);
       bio = (formData.get("bio") as string) || "";
       portfolioUrl = (formData.get("portfolioUrl") as string) || "";
       githubUrl = (formData.get("githubUrl") as string) || "";
@@ -67,14 +71,20 @@ export async function POST(request: Request) {
       location = body.location || "";
       workPreference = body.workPreference || "";
       highlightMetric = body.highlightMetric || "";
-      skills = body.skills || "";
+      if (Array.isArray(body.skills)) {
+        skillsList = body.skills.map((s: any) => String(s).trim()).filter(Boolean);
+      } else if (typeof body.skills === "string") {
+        skillsList = body.skills.split(",").map((s: string) => s.trim()).filter(Boolean);
+      } else {
+        skillsList = [];
+      }
       bio = body.bio || "";
       portfolioUrl = body.portfolioUrl || "";
       githubUrl = body.githubUrl || "";
       linkedinUrl = body.linkedinUrl || "";
     }
 
-    if (!fullName || !email || !roleTitle || !skills || !bio) {
+    if (!fullName || !email || !roleTitle || skillsList.length === 0 || !bio) {
       return NextResponse.json(
         {
           error:
@@ -97,7 +107,7 @@ export async function POST(request: Request) {
       location,
       workPreference,
       highlightMetric,
-      skills,
+      skills: skillsList,
       bio,
       portfolioUrl,
       githubUrl,
@@ -133,7 +143,7 @@ export async function POST(request: Request) {
           location,
           workPreference,
           highlightMetric,
-          skills,
+          skills: skillsList.join(", "),
           bio,
           portfolioUrl,
           githubUrl,

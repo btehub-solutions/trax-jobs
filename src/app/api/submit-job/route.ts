@@ -10,6 +10,8 @@ export async function POST(request: Request) {
     let jobTitle = "";
     let roleCategory = "";
     let workplaceType = "";
+    let employmentType = "";
+    let experienceLevel = "";
     let location = "";
     let salaryRange = "";
     let applicationLink = "";
@@ -25,6 +27,8 @@ export async function POST(request: Request) {
       jobTitle = (formData.get("jobTitle") as string) || "";
       roleCategory = (formData.get("roleCategory") as string) || "";
       workplaceType = (formData.get("workplaceType") as string) || "";
+      employmentType = (formData.get("employmentType") as string) || "";
+      experienceLevel = (formData.get("experienceLevel") as string) || "";
       location = (formData.get("location") as string) || "";
       salaryRange = (formData.get("salaryRange") as string) || "";
       applicationLink = (formData.get("applicationLink") as string) || "";
@@ -69,6 +73,8 @@ export async function POST(request: Request) {
       jobTitle = body.jobTitle || "";
       roleCategory = body.roleCategory || "";
       workplaceType = body.workplaceType || "";
+      employmentType = body.employmentType || "";
+      experienceLevel = body.experienceLevel || "";
       location = body.location || "";
       salaryRange = body.salaryRange || "";
       applicationLink = body.applicationLink || "";
@@ -94,6 +100,8 @@ export async function POST(request: Request) {
       jobTitle,
       roleCategory,
       workplaceType,
+      employmentType,
+      experienceLevel,
       location,
       salaryRange,
       applicationLink,
@@ -128,6 +136,8 @@ export async function POST(request: Request) {
           _replyto: contactEmail,
           roleCategory,
           workplaceType,
+          employmentType,
+          experienceLevel,
           location,
           salaryRange,
           applicationLink,

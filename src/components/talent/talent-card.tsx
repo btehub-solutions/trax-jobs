@@ -145,7 +145,12 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
 
           {/* Skill Badges */}
           {(() => {
-            const safeSkills = (talent.skills || [])
+            const rawSkills = Array.isArray(talent.skills)
+              ? talent.skills
+              : typeof talent.skills === "string"
+              ? [talent.skills]
+              : [];
+            const safeSkills = rawSkills
               .flatMap((s: any) => {
                 const str = typeof s === "string" ? s : (s?.title || s?.name || s?.text || "");
                 return str.split(/[,;\n]+/).map((x: string) => x.trim());
