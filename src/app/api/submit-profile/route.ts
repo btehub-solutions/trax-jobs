@@ -109,12 +109,19 @@ export async function POST(request: Request) {
       highlightMetric,
       skills: skillsList,
       bio,
-      portfolioUrl,
-      githubUrl,
-      linkedinUrl,
       status: "pending",
       submittedAt: new Date().toISOString(),
     };
+
+    if (portfolioUrl) {
+      doc.portfolioUrl = portfolioUrl;
+    }
+    if (githubUrl) {
+      doc.githubUrl = githubUrl;
+    }
+    if (linkedinUrl) {
+      doc.linkedinUrl = linkedinUrl;
+    }
 
     if (avatarAsset) {
       doc.avatar = avatarAsset;

@@ -93,13 +93,16 @@ export async function POST(request: Request) {
       contactEmail,
       industry,
       location,
-      website,
       employeesCount,
       accentColor,
       description,
       status: "pending",
       submittedAt: new Date().toISOString(),
     };
+
+    if (website) {
+      doc.website = website;
+    }
 
     if (logoAsset) {
       doc.logo = logoAsset;
