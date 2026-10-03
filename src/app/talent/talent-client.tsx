@@ -565,7 +565,7 @@ function TalentPageInner({ talent }: { talent: SanityTalentItem[] }) {
             {filteredTalent.map((item) => (
               <div
                 key={item.id}
-                className="bg-white rounded-lg border border-zinc-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px]"
+                className="bg-white rounded-lg border border-zinc-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px] w-full max-w-[320px] mx-auto sm:max-w-none"
               >
                 {/* Top Cover Banner */}
                 <Link href={`/talent/${item.slug}`} className="block relative h-[140px] w-full bg-[#E5E7EB] overflow-hidden shrink-0">
