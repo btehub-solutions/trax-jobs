@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -13,6 +13,7 @@ import {
   CalendarBlank,
   ArrowUpRight,
   SealCheck,
+  Clock,
 } from "@phosphor-icons/react";
 import { Job } from "@/types";
 import { isValidImageUrl } from "@/lib/utils";
@@ -228,92 +229,139 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
     photoSet[0] ||
     "/images/trax-talent-cover-default.jpg";
 
+  const daysLeft = useMemo(() => {
+    if (!job.postedDate) return "44 days left";
+    const posted = new Date(job.postedDate).getTime();
+    if (isNaN(posted)) return "44 days left";
+    const now = Date.now();
+    const diffDays = Math.floor((now - posted) / (1000 * 60 * 60 * 24));
+    const remaining = Math.max(1, 45 - diffDays);
+    return `${remaining} days left`;
+  }, [job.postedDate]);
+
+  const mobileTags = useMemo(() => {
+    const list: string[] = [];
+
+    if (job.contractType) {
+      list.push(job.contractType);
+    }
+
+    if (job.company?.industry) {
+      list.push(job.company.industry);
+    } else if (job.roleCategory) {
+      list.push(job.roleCategory);
+    }
+
+    if (job.experienceLevel) {
+      const exp = job.experienceLevel.toLowerCase();
+      if (exp.includes("senior")) list.push("Senior Level");
+      else if (exp.includes("mid")) list.push("Mid Level");
+      else if (exp.includes("junior")) list.push("Junior Level");
+      else if (exp.includes("entry")) list.push("Entry Level");
+      else if (exp.includes("expert") || exp.includes("lead")) list.push("Lead / Expert");
+      else list.push(job.experienceLevel.split(".")[0]);
+    }
+
+    if (job.workplaceType) {
+      const wp = job.workplaceType.toLowerCase();
+      if (wp.includes("remote")) list.push("Remote");
+      else if (wp.includes("hybrid")) list.push("Hybrid");
+      else list.push("Onsite");
+    }
+
+    if (list.length < 4 && job.tags && job.tags.length > 0) {
+      for (const t of job.tags) {
+        if (!list.includes(t)) {
+          list.push(t);
+          if (list.length >= 4) break;
+        }
+      }
+    }
+
+    return list;
+  }, [job.contractType, job.company?.industry, job.roleCategory, job.experienceLevel, job.workplaceType, job.tags]);
+
   return (
     <>
-      {/* Mobile Card Design (block md:hidden) - Mirrors the Talent Card design */}
-      <div className="block md:hidden bg-white rounded-lg border border-zinc-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px] w-full max-w-[320px] mx-auto">
-        {/* Top Cover Banner (Clean brand image, zero overlay clutter) */}
-        <Link href={`/jobs/${job.slug || job.id}`} className="block relative h-[140px] w-full bg-[#E5E7EB] overflow-hidden shrink-0">
-          <Image
-            src={resolvedCover}
-            alt={job.company.name}
-            fill
-            sizes="(max-width: 768px) 100vw, 320px"
-            className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
-            unoptimized
-          />
-        </Link>
-
-        {/* Card Content Area */}
-        <div className="px-6 pb-5 pt-0 flex-1 flex flex-col justify-between">
-          <div>
-            {/* Overlapping Logo / Avatar Box */}
-            <Link href={`/jobs/${job.slug || job.id}`} className="block -mt-10 mb-4 relative z-10">
-              <div className="w-[76px] h-[76px] rounded-lg bg-white p-1 border border-zinc-200 shadow-2xs overflow-hidden flex items-center justify-center group-hover:border-zinc-400 transition-colors">
+      {/* Mobile Card Design (block md:hidden) - Neat reference layout */}
+      <div className="block md:hidden relative bg-white rounded-2xl border border-zinc-200/90 shadow-2xs hover:shadow-xs transition-all duration-200 p-4 sm:p-5 group">
+        {/* Top Row: Logo + Info (Title, Company, Time left) + Bookmark */}
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-start gap-3 min-w-0 flex-1">
+            {/* Square Company Mark */}
+            <Link href={`/jobs/${job.slug || job.id}`} className="shrink-0 relative z-10">
+              <div className="w-12 h-12 rounded-xl bg-zinc-50 border border-zinc-200/90 flex items-center justify-center p-1.5 overflow-hidden shadow-2xs group-hover:border-zinc-300 transition-colors">
                 <CompanySquareMark name={job.company.name} logo={job.company.logo} />
               </div>
             </Link>
 
-            {/* Job Title + Verified Check */}
-            <div className="flex items-center gap-1.5 mb-3">
-              <Link href={`/jobs/${job.slug || job.id}`} className="min-w-0">
-                <h2 className="text-[18px] font-bold text-black group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
-                  {job.title}
-                </h2>
+            {/* Title, Company Name, Time Info */}
+            <div className="min-w-0 flex-1">
+              <Link href={`/jobs/${job.slug || job.id}`} className="block">
+                <div className="flex items-center gap-1.5">
+                  <h3 className="text-[16px] sm:text-[17px] font-bold text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
+                    {job.title}
+                  </h3>
+                  {job.isVerified && (
+                    <SealCheck size={15} weight="fill" className="text-[#E7040D] shrink-0" />
+                  )}
+                </div>
               </Link>
-              {job.isVerified && <SealCheck size={16} weight="fill" className="text-[#E7040D] shrink-0" />}
-            </div>
 
-            {/* 3-Row Vertical Metadata List */}
-            <div className="space-y-2 text-[13px] text-zinc-600">
-              <div className="flex items-center gap-2.5">
-                <Tag size={15} weight="bold" className="text-zinc-500 shrink-0" />
-                <span className="truncate">
-                  {job.company.name}{job.contractType ? ` • ${job.contractType}` : ""}
-                </span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <MapPin size={15} weight="bold" className="text-zinc-500 shrink-0" />
-                <span className="truncate">
-                  {job.location || "Nigeria"}
-                  {job.workplaceType && !job.location?.toLowerCase().includes(job.workplaceType.toLowerCase()) ? ` (${job.workplaceType})` : ""}
-                </span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Users size={15} weight="bold" className="text-zinc-500 shrink-0" />
-                <span className="truncate">
-                  {job.experienceLevel || "Mid-Senior"}{job.company.employeesCount ? ` • ${job.company.employeesCount} employees` : ""}
-                </span>
+              <Link
+                href={`/companies/${job.company.slug || job.company.name.toLowerCase()}`}
+                className="text-[13px] sm:text-[13.5px] font-medium text-zinc-600 hover:text-[#E7040D] transition-colors block truncate mt-0.5"
+              >
+                {job.company.name}
+              </Link>
+
+              <div className="flex items-center gap-1.5 text-[12px] text-zinc-500 font-medium mt-1">
+                <Clock size={13.5} weight="bold" className="text-zinc-400 shrink-0" />
+                <span>{daysLeft}</span>
               </div>
             </div>
           </div>
 
-          {/* Bottom Action Area: Save bookmark + Direct link to job details */}
-          <div className="pt-6 mt-auto flex items-center gap-2">
-            <button
-              type="button"
-              onClick={toggleSave}
-              className={`px-3 py-2 rounded-lg text-[12px] font-semibold border transition-all duration-150 cursor-pointer select-none active:scale-95 shrink-0 flex items-center gap-1.5 ${
-                isSaved
-                  ? "bg-[#fce8e0] border-[#E7040D] text-[#E7040D]"
-                  : "bg-white hover:bg-zinc-50 border-zinc-200 text-[#1F1F1F] shadow-2xs"
-              }`}
-              aria-label={isSaved ? "Saved" : "Save job"}
-            >
-              <BookmarkSimple
-                size={15}
-                weight={isSaved ? "fill" : "bold"}
-                className={isSaved ? "text-[#E7040D]" : "text-zinc-600"}
-              />
-              <span>{isSaved ? "Saved" : "Save"}</span>
-            </button>
+          {/* Bookmark Button (Top Right) */}
+          <button
+            type="button"
+            onClick={toggleSave}
+            className={`p-1.5 -mr-1 -mt-1 rounded-lg transition-colors cursor-pointer select-none active:scale-90 shrink-0 relative z-10 ${
+              isSaved ? "text-[#E7040D]" : "text-zinc-400 hover:text-zinc-600"
+            }`}
+            aria-label={isSaved ? "Saved" : "Save job"}
+          >
+            <BookmarkSimple
+              size={20}
+              weight={isSaved ? "fill" : "bold"}
+              className={isSaved ? "text-[#E7040D]" : "text-zinc-400"}
+            />
+          </button>
+        </div>
 
-            <Link
-              href={`/jobs/${job.slug || job.id}`}
-              className="flex-1 py-2 rounded-lg text-[12.5px] font-bold border border-zinc-200 bg-white hover:bg-[#E7040D] hover:text-white hover:border-[#E7040D] text-[#1F1F1F] shadow-2xs hover:shadow-xs active:scale-[0.98] transition-all duration-150 cursor-pointer text-center group-hover:border-[#E7040D] whitespace-nowrap"
+        {/* Middle Row: Tag Pills */}
+        <div className="flex flex-wrap items-center gap-1.5 mt-3.5">
+          {mobileTags.map((tagItem) => (
+            <span
+              key={tagItem}
+              className="px-3 py-1 rounded-full text-[12px] font-medium bg-[#F5F5F7] text-zinc-700 border border-zinc-200/60 leading-none whitespace-nowrap"
             >
-              View Job
-            </Link>
+              {tagItem}
+            </span>
+          ))}
+        </div>
+
+        {/* Bottom Row: Location (Left) + Salary (Right) */}
+        <div className="flex items-center justify-between gap-3 pt-1 mt-3.5">
+          <div className="flex items-center gap-1.5 text-zinc-600 text-[13px] font-medium min-w-0">
+            <MapPin size={15} weight="bold" className="text-zinc-400 shrink-0" />
+            <span className="truncate">
+              {(job.location || "Nigeria").replace(/\s*\([^)]*(hybrid|remote|onsite)[^)]*\)/gi, "").trim() || job.location || "Nigeria"}
+            </span>
+          </div>
+
+          <div className="text-[13.5px] font-bold text-[#E7040D] whitespace-nowrap shrink-0">
+            {job.salary?.formatted || "Competitive"}
           </div>
         </div>
       </div>
