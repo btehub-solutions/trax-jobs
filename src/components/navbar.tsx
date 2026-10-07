@@ -268,16 +268,28 @@ export function Navbar({
             aria-hidden={!mobileMenuOpen}
           >
         {/* Top Header Bar inside Drawer */}
-        <div className="relative flex items-center justify-center px-6 h-14 border-b border-zinc-100 shrink-0 bg-white">
-          <span className="text-[16px] font-bold text-zinc-900 tracking-tight">
-            Main menu
-          </span>
+        <div className="flex items-center justify-between px-6 h-16 border-b border-zinc-100 shrink-0 bg-white">
+          <Link
+            href="/"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center"
+            aria-label="Trax Home"
+          >
+            <Image
+              src="/images/trax-logo.png"
+              alt="Trax"
+              width={110}
+              height={32}
+              className="h-7 w-auto object-contain"
+              priority
+            />
+          </Link>
           <button
             onClick={() => setMobileMenuOpen(false)}
-            className="absolute right-4 w-7 h-7 rounded border border-zinc-200/90 text-[#E7040D] hover:bg-zinc-50 flex items-center justify-center transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-lg border border-zinc-200/90 text-[#E7040D] hover:bg-zinc-50 flex items-center justify-center transition-colors cursor-pointer"
             aria-label="Close menu"
           >
-            <X size={15} weight="bold" />
+            <X size={16} weight="bold" />
           </button>
         </div>
 

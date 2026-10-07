@@ -270,24 +270,24 @@ export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
                   {/* Middle Section: Filter Pill Badges */}
                   <div className="flex flex-wrap items-center gap-1.5 my-2.5">
                     {/* Contract Type */}
-                    <span className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
+                    <span className="px-2.5 py-1 rounded-full bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
                       {job.contractType || "Full-time"}
                     </span>
 
                     {/* Category / Discipline */}
-                    <span className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
+                    <span className="px-2.5 py-1 rounded-full bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
                       {job.roleCategory || job.company.industry || "Technology"}
                     </span>
 
                     {/* Seniority */}
                     {job.experienceLevel && (
-                      <span className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
+                      <span className="px-2.5 py-1 rounded-full bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
                         {job.experienceLevel}
                       </span>
                     )}
 
                     {/* Workplace Policy */}
-                    <span className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
+                    <span className="px-2.5 py-1 rounded-full bg-[#FAF8F5] border border-zinc-200/80 text-zinc-700 text-[11px] font-semibold">
                       {job.workplaceType || "Onsite"}
                     </span>
                   </div>
@@ -299,7 +299,7 @@ export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
                         {job.tags.slice(0, 3).map((tag) => (
                           <span
                             key={tag}
-                            className="px-2 py-0.5 bg-zinc-100/90 text-zinc-700 text-[10.5px] font-semibold border border-zinc-200/60 rounded-lg"
+                            className="px-2.5 py-0.5 bg-zinc-100/90 text-zinc-700 text-[10.5px] font-semibold border border-zinc-200/60 rounded-full"
                           >
                             {tag}
                           </span>
@@ -327,7 +327,9 @@ export function FeaturedJobsSection({ jobs }: FeaturedJobsSectionProps) {
                   <div className="flex items-center justify-between gap-3 text-[12.5px]">
                     <div className="flex items-center gap-1.5 text-zinc-500 font-medium min-w-0 flex-1 pr-1 overflow-hidden">
                       <MapPin size={14} weight="regular" className="shrink-0 text-zinc-400" />
-                      <span className="truncate">{job.location}</span>
+                      <span className="truncate">
+                        {(job.location || "Nigeria").replace(/\s*\([^)]*(hybrid|remote|onsite)[^)]*\)/gi, "").trim() || job.location}
+                      </span>
                     </div>
 
                     <div className="text-[#E7040D] font-extrabold text-[14px] sm:text-[14.5px] shrink-0 whitespace-nowrap">

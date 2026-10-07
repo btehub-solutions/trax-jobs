@@ -448,7 +448,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                       <div className="flex flex-wrap gap-1 mt-2.5 md:mt-2">
                         {/* Team Size Tag */}
                         {company.size ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#F4F4F6] text-zinc-700 text-[10.5px] sm:text-[11px] md:text-[10px] font-medium rounded-md">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-[#F4F4F6] text-zinc-700 text-[10.5px] sm:text-[11px] md:text-[10px] font-medium rounded-full border border-zinc-200/60">
                             <Users size={11} weight="regular" className="text-zinc-500 shrink-0" />
                             <span className="truncate max-w-[110px] md:max-w-[95px]">
                               {company.size.toLowerCase().includes("team") || company.size.toLowerCase().includes("employee")
@@ -462,7 +462,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
                         {locations.map((loc) => (
                           <span
                             key={loc}
-                            className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#F4F4F6] text-zinc-700 text-[10.5px] sm:text-[11px] md:text-[10px] font-medium rounded-md"
+                            className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-[#F4F4F6] text-zinc-700 text-[10.5px] sm:text-[11px] md:text-[10px] font-medium rounded-full border border-zinc-200/60"
                           >
                             <MapPin size={11} weight="regular" className="text-zinc-500 shrink-0" />
                             <span>{loc}</span>
@@ -471,7 +471,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
 
                         {/* Primary Industry Tag */}
                         {company.industry || company.category ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#F4F4F6] text-zinc-700 text-[10.5px] sm:text-[11px] md:text-[10px] font-medium rounded-md truncate max-w-[130px] md:max-w-[110px]">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-[#F4F4F6] text-zinc-700 text-[10.5px] sm:text-[11px] md:text-[10px] font-medium rounded-full border border-zinc-200/60 truncate max-w-[130px] md:max-w-[110px]">
                             <Tag size={11} weight="regular" className="text-zinc-500 shrink-0" />
                             <span className="truncate">{company.industry || company.category}</span>
                           </span>
@@ -479,7 +479,7 @@ export function FeaturedCompaniesSection({ companies: dynamicCompanies }: { comp
 
                         {/* Sub-industry Tag if distinct */}
                         {company.subIndustry && company.subIndustry !== company.industry ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#F4F4F6] text-zinc-700 text-[10.5px] sm:text-[11px] md:text-[10px] font-medium rounded-md truncate max-w-[130px] md:max-w-[110px]">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-[#F4F4F6] text-zinc-700 text-[10.5px] sm:text-[11px] md:text-[10px] font-medium rounded-full border border-zinc-200/60 truncate max-w-[130px] md:max-w-[110px]">
                             <Tag size={11} weight="regular" className="text-zinc-500 shrink-0" />
                             <span className="truncate">{company.subIndustry}</span>
                           </span>

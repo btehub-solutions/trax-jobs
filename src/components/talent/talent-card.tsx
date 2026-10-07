@@ -28,7 +28,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <div className="feed-card-reveal bg-white rounded-lg border border-zinc-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px]">
+    <div className="feed-card-reveal bg-white rounded-lg border border-zinc-200/90 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px]">
       
       {/* Top Banner Cover Strip */}
       <div className="relative h-[140px] w-full bg-[#E5E7EB] overflow-hidden shrink-0">
@@ -86,7 +86,7 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
 
             {/* Availability Pill */}
             <div className="text-right">
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 text-[11.5px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/60 rounded-lg">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 text-[11.5px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/60 rounded-full">
                 <Clock size={12} weight="bold" />
                 <span>{talent.availability}</span>
               </span>
@@ -162,13 +162,13 @@ export function TalentCard({ talent, onHireClick }: TalentCardProps) {
                 {safeSkills.slice(0, 5).map((skill) => (
                   <span
                     key={skill}
-                    className="px-2 py-0.5 rounded-lg bg-[#F5F5F7] text-[#1F1F1F] text-[11.5px] font-medium border border-zinc-200/60 break-words max-w-full"
+                    className="px-2.5 py-0.5 rounded-full bg-[#F5F5F7] text-[#1F1F1F] text-[11.5px] font-medium border border-zinc-200/60 break-words max-w-full"
                   >
                     {skill}
                   </span>
                 ))}
                 {safeSkills.length > 5 && (
-                  <span className="px-2 py-0.5 text-zinc-400 text-[11px] font-semibold shrink-0 rounded-lg">
+                  <span className="px-2 py-0.5 text-zinc-400 text-[11px] font-semibold shrink-0 rounded-full">
                     +{safeSkills.length - 5} more
                   </span>
                 )}

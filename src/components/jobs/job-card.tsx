@@ -284,7 +284,14 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
   return (
     <>
       {/* Mobile Card Design (block md:hidden) - Neat reference layout */}
-      <div className="block md:hidden relative bg-white rounded-2xl border border-zinc-200/90 shadow-2xs hover:shadow-xs transition-all duration-200 p-4 sm:p-5 group">
+      <div className="block md:hidden relative bg-white rounded-2xl border border-zinc-200/90 shadow-[0_2px_14px_rgba(0,0,0,0.03)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-150 p-4 sm:p-5 group">
+        {/* Full Surface Tap Link */}
+        <Link
+          href={`/jobs/${job.slug || job.id}`}
+          className="absolute inset-0 z-0"
+          aria-label={job.title}
+        />
+
         {/* Top Row: Logo + Info (Title, Company, Time left) + Bookmark */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-start gap-3 min-w-0 flex-1">
@@ -297,20 +304,18 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
 
             {/* Title, Company Name, Time Info */}
             <div className="min-w-0 flex-1">
-              <Link href={`/jobs/${job.slug || job.id}`} className="block">
-                <div className="flex items-center gap-1.5">
-                  <h3 className="text-[16px] sm:text-[17px] font-bold text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
-                    {job.title}
-                  </h3>
-                  {job.isVerified && (
-                    <SealCheck size={15} weight="fill" className="text-[#E7040D] shrink-0" />
-                  )}
-                </div>
-              </Link>
+              <div className="flex items-center gap-1.5">
+                <h3 className="text-[16px] sm:text-[17px] font-bold text-[#1F1F1F] group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
+                  {job.title}
+                </h3>
+                {job.isVerified && (
+                  <SealCheck size={15} weight="fill" className="text-[#E7040D] shrink-0" />
+                )}
+              </div>
 
               <Link
                 href={`/companies/${job.company.slug || job.company.name.toLowerCase()}`}
-                className="text-[13px] sm:text-[13.5px] font-medium text-zinc-600 hover:text-[#E7040D] transition-colors block truncate mt-0.5"
+                className="text-[13px] sm:text-[13.5px] font-medium text-zinc-600 hover:text-[#E7040D] transition-colors inline-block truncate mt-0.5 relative z-10"
               >
                 {job.company.name}
               </Link>
@@ -326,7 +331,7 @@ export function JobCard({ job, showCollage = true }: { job: Job; showCollage?: b
           <button
             type="button"
             onClick={toggleSave}
-            className={`p-1.5 -mr-1 -mt-1 rounded-lg transition-colors cursor-pointer select-none active:scale-90 shrink-0 relative z-10 ${
+            className={`p-1.5 -mr-1 -mt-1 rounded-lg transition-colors cursor-pointer select-none active:scale-90 shrink-0 relative z-20 ${
               isSaved ? "text-[#E7040D]" : "text-zinc-400 hover:text-zinc-600"
             }`}
             aria-label={isSaved ? "Saved" : "Save job"}
