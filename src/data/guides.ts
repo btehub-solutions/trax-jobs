@@ -15,6 +15,7 @@ export interface GuideArticle {
     linkedin?: string;
     twitter?: string;
     facebook?: string;
+    instagram?: string;
   };
   content: {
     heading?: string;

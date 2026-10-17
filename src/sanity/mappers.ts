@@ -47,6 +47,7 @@ export function mapSanityGuide(g: any, allGuides?: any[]): GuideArticle {
         "/images/authors/ben-sam-oladoyin.jpg",
       linkedin: g.author?.linkedin || fallbackGuide?.author.linkedin,
       twitter: g.author?.twitter || fallbackGuide?.author.twitter,
+      instagram: g.author?.instagram || fallbackGuide?.author.instagram,
       facebook: g.author?.facebook || fallbackGuide?.author.facebook,
     },
     content:

@@ -10,6 +10,7 @@ import {
   FacebookLogo,
   XLogo,
   LinkedinLogo,
+  InstagramLogo,
   WhatsappLogo,
   Clock,
   Check,
@@ -333,6 +334,18 @@ export function GuideDetailClient({ article }: GuideDetailClientProps) {
                           title="Author on LinkedIn"
                         >
                           <LinkedinLogo size={14} weight="fill" />
+                        </a>
+                      )}
+                      {article.author.instagram && (
+                        <a
+                          href={article.author.instagram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-zinc-900 transition-colors"
+                          aria-label={`${article.author.name} on Instagram`}
+                          title="Author on Instagram"
+                        >
+                          <InstagramLogo size={14} weight="fill" />
                         </a>
                       )}
                       {article.author.facebook && (

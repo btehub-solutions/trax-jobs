@@ -151,6 +151,11 @@ export const guide = defineType({
           type: "url",
         }),
         defineField({
+          name: "instagram",
+          title: "Instagram Profile URL",
+          type: "url",
+        }),
+        defineField({
           name: "facebook",
           title: "Facebook URL",
           type: "url",

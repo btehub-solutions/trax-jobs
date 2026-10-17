@@ -81,6 +81,9 @@ async function main() {
         },
       },
       avatar: "/images/authors/john-kent-adebayo.png",
+      linkedin: "https://www.linkedin.com/in/thejohnadebayo",
+      twitter: "https://www.x.com/johnkent94",
+      instagram: "https://www.instagram.com/johnkent94_",
     },
     content: [
       {
