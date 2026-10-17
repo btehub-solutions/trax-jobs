@@ -88,33 +88,73 @@ export const guide = defineType({
     }),
     defineField({
       name: "image",
-      title: "Header / Card Image",
+      title: "Cover Image / Header Art",
       type: "image",
       options: {
         hotspot: true,
       },
-      description: "Primary cover image for the guide.",
-      validation: (Rule) => Rule.required(),
+      description: "Primary cover image for the guide. Displayed on the guide card and article header.",
+      validation: (Rule) => Rule.required().error("A cover image is required for every guide."),
     }),
     defineField({
       name: "lead",
       title: "Lead Intro Paragraph",
       type: "text",
       rows: 4,
-      description: "Opening hook paragraph displayed in prominent font size.",
+      description: "Opening hook paragraph displayed in prominent editorial font size.",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "author",
-      title: "Author Details",
+      title: "Writer & Author Details",
       type: "object",
+      description: "Information about the guide's writer or contributor.",
       fields: [
-        { name: "name", title: "Author Name", type: "string", initialValue: "Ben Sam Oladoyin" },
-        { name: "role", title: "Author Role", type: "string", initialValue: "AI/ML Engineer, Founder Trax Media Ltd" },
-        { name: "avatar", title: "Avatar Image URL or path", type: "string", initialValue: "/images/authors/ben-sam-oladoyin.jpg" },
-        { name: "linkedin", title: "LinkedIn Profile URL", type: "url" },
-        { name: "twitter", title: "X (Twitter) URL", type: "url" },
-        { name: "facebook", title: "Facebook URL", type: "url" },
+        defineField({
+          name: "name",
+          title: "Writer Full Name",
+          type: "string",
+          initialValue: "Ben Sam Oladoyin",
+          validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+          name: "role",
+          title: "Writer Role / Title",
+          type: "string",
+          description: "e.g. AI/ML Engineer, Founder Trax Media Ltd",
+          initialValue: "AI/ML Engineer, Founder Trax Media Ltd",
+        }),
+        defineField({
+          name: "avatarImage",
+          title: "Writer Photo (Upload Image)",
+          type: "image",
+          options: {
+            hotspot: true,
+          },
+          description: "Upload portrait photo of the writer (PNG, JPG, WebP). Recommended 1:1 square ratio.",
+        }),
+        defineField({
+          name: "avatar",
+          title: "Writer Photo URL / Static Path (Fallback)",
+          type: "string",
+          description: "Optional fallback path or external image URL if not uploading an image directly above.",
+          initialValue: "/images/authors/ben-sam-oladoyin.jpg",
+        }),
+        defineField({
+          name: "linkedin",
+          title: "LinkedIn Profile URL",
+          type: "url",
+        }),
+        defineField({
+          name: "twitter",
+          title: "X (Twitter) URL",
+          type: "url",
+        }),
+        defineField({
+          name: "facebook",
+          title: "Facebook URL",
+          type: "url",
+        }),
       ],
     }),
     defineField({
@@ -155,13 +195,14 @@ export const guide = defineType({
     select: {
       title: "title",
       subtitle: "categoryLabel",
+      authorName: "author.name",
       media: "image",
       status: "status",
     },
-    prepare({ title, subtitle, media, status }) {
+    prepare({ title, subtitle, authorName, media, status }) {
       return {
-        title,
-        subtitle: `${subtitle || "Guide"} · ${status || "published"}`,
+        title: title || "Untitled Guide",
+        subtitle: `${subtitle || "Guide"} · By ${authorName || "Trax"} · ${status || "published"}`,
         media,
       };
     },

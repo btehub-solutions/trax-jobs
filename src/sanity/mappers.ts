@@ -39,7 +39,12 @@ export function mapSanityGuide(g: any, allGuides?: any[]): GuideArticle {
     author: {
       name: g.author?.name || fallbackGuide?.author.name || "Ben Sam Oladoyin",
       role: g.author?.role || fallbackGuide?.author.role || "AI/ML Engineer, Founder Trax Media Ltd",
-      avatar: g.author?.avatar || fallbackGuide?.author.avatar || "/images/authors/ben-sam-oladoyin.jpg",
+      avatar:
+        (g.author?.avatarImage ? urlForImage(g.author.avatarImage, { width: 300, quality: 90 }) : null) ||
+        (typeof g.author?.avatar === "object" && g.author?.avatar !== null ? urlForImage(g.author.avatar, { width: 300, quality: 90 }) : null) ||
+        (typeof g.author?.avatar === "string" && g.author.avatar.trim() ? g.author.avatar : null) ||
+        fallbackGuide?.author.avatar ||
+        "/images/authors/ben-sam-oladoyin.jpg",
       linkedin: g.author?.linkedin || fallbackGuide?.author.linkedin,
       twitter: g.author?.twitter || fallbackGuide?.author.twitter,
       facebook: g.author?.facebook || fallbackGuide?.author.facebook,
