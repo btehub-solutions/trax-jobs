@@ -771,22 +771,22 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
             </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 pt-6">
             {filteredCompanies.map((comp) => {
               const isFollowed = !!followedCompanies[comp.id];
               return (
                 <div
                   key={comp.id}
-                  className="bg-white rounded-lg border border-zinc-200/90 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[410px] w-full max-w-[320px] mx-auto sm:max-w-none"
+                  className="bg-white rounded-lg border border-zinc-200/90 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between overflow-hidden group min-h-[320px] sm:min-h-[410px] w-full"
                 >
                   {/* Top Cover Banner */}
-                  <Link href={`/companies/${comp.slug}`} className="block relative h-[140px] w-full bg-[#E5E7EB] overflow-hidden shrink-0">
+                  <Link href={`/companies/${comp.slug}`} className="block relative h-[100px] sm:h-[140px] w-full bg-[#E5E7EB] overflow-hidden shrink-0">
                     {comp.coverImage ? (
                       <Image
                         src={comp.coverImage}
                         alt={comp.name}
                         fill
-                        sizes="320px"
+                        sizes="(max-width: 639px) 50vw, 320px"
                         className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
                         unoptimized
                       />
@@ -796,11 +796,11 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                   </Link>
 
                   {/* Card Content Area */}
-                  <div className="px-6 pb-5 pt-0 flex-1 flex flex-col justify-between">
+                  <div className="px-3 sm:px-6 pb-3 sm:pb-5 pt-0 flex-1 flex flex-col justify-between">
                     <div>
                       {/* Overlapping Logo Box */}
-                      <Link href={`/companies/${comp.slug}`} className="block -mt-10 mb-4 relative z-10">
-                        <div className="w-[76px] h-[76px] rounded-lg bg-white p-2 border border-zinc-200 shadow-2xs overflow-hidden flex items-center justify-center group-hover:border-zinc-400 transition-colors">
+                      <Link href={`/companies/${comp.slug}`} className="block -mt-8 sm:-mt-10 mb-2.5 sm:mb-4 relative z-10">
+                        <div className="w-[56px] h-[56px] sm:w-[76px] sm:h-[76px] rounded-lg bg-white p-1.5 sm:p-2 border border-zinc-200 shadow-2xs overflow-hidden flex items-center justify-center group-hover:border-zinc-400 transition-colors">
                           {isValidImageUrl(comp.logo) ? (
                             <Image
                               src={comp.logo}
@@ -817,29 +817,35 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                       </Link>
 
                       {/* Company Name */}
-                      <div className="flex items-center gap-1.5 mb-3">
+                      <div className="flex items-center gap-1 sm:gap-1.5 mb-2 sm:mb-3">
                         <Link href={`/companies/${comp.slug}`} className="min-w-0">
-                          <h2 className="text-[18px] font-bold text-black group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
+                          <h2 className="text-[14px] sm:text-[18px] font-bold text-black group-hover:text-[#E7040D] transition-colors leading-snug tracking-tight truncate">
                             {comp.name}
                           </h2>
                         </Link>
                         {comp.verified && (
-                          <SealCheck size={16} weight="fill" className="text-[#E7040D] shrink-0" />
+                          <>
+                            <SealCheck size={14} className="sm:hidden text-[#E7040D] shrink-0" weight="fill" />
+                            <SealCheck size={16} className="hidden sm:block text-[#E7040D] shrink-0" weight="fill" />
+                          </>
                         )}
                       </div>
 
                       {/* 3-Row Vertical Metadata List */}
-                      <div className="space-y-2 text-[13px] text-zinc-600">
-                        <div className="flex items-center gap-2.5">
-                          <Tag size={15} weight="bold" className="text-zinc-500 shrink-0" />
+                      <div className="space-y-1.5 sm:space-y-2 text-[11px] sm:text-[13px] text-zinc-600">
+                        <div className="flex items-center gap-1.5 sm:gap-2.5">
+                          <Tag size={13} weight="bold" className="text-zinc-500 shrink-0 sm:hidden" />
+                          <Tag size={15} weight="bold" className="text-zinc-500 shrink-0 hidden sm:block" />
                           <span className="truncate">{comp.industry || "Technology"}</span>
                         </div>
-                        <div className="flex items-center gap-2.5">
-                          <MapPin size={15} weight="bold" className="text-zinc-500 shrink-0" />
+                        <div className="flex items-center gap-1.5 sm:gap-2.5">
+                          <MapPin size={13} weight="bold" className="text-zinc-500 shrink-0 sm:hidden" />
+                          <MapPin size={15} weight="bold" className="text-zinc-500 shrink-0 hidden sm:block" />
                           <span className="truncate">{comp.location?.split("•")[0]?.split(",")?.slice(0, 2)?.join(",")?.trim() || "Nigeria"}</span>
                         </div>
-                        <div className="flex items-center gap-2.5">
-                          <Users size={15} weight="bold" className="text-zinc-500 shrink-0" />
+                        <div className="flex items-center gap-1.5 sm:gap-2.5">
+                          <Users size={13} weight="bold" className="text-zinc-500 shrink-0 sm:hidden" />
+                          <Users size={15} weight="bold" className="text-zinc-500 shrink-0 hidden sm:block" />
                           <span className="truncate">
                             {comp.employeesCount
                               ? comp.employeesCount.toLowerCase().includes("team") ||
@@ -852,13 +858,13 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                       </div>
                     </div>
 
-                    {/* Bottom Action Area (Generous white space, pinned Follow button on bottom right) */}
-                    <div className="pt-6 mt-auto flex items-center justify-between">
-                      <div>
+                    {/* Bottom Action Area */}
+                    <div className="pt-3 sm:pt-6 mt-auto flex items-center justify-between gap-2">
+                      <div className="min-w-0">
                         {typeof comp.openJobsCount === "number" && comp.openJobsCount > 0 ? (
                           <Link
                             href={`/companies/${comp.slug}`}
-                            className="text-[12px] font-bold text-[#E7040D] hover:underline"
+                            className="text-[10px] sm:text-[12px] font-bold text-[#E7040D] hover:underline whitespace-nowrap"
                           >
                             {comp.openJobsCount} open {comp.openJobsCount === 1 ? "role" : "roles"}
                           </Link>
@@ -872,7 +878,7 @@ function CompaniesPageInner({ companies }: { companies: SanityCompany[] }) {
                           e.stopPropagation();
                           toggleFollow(comp.id);
                         }}
-                        className={`ml-auto px-4 py-1.5 text-[12px] font-medium rounded-lg border transition-colors cursor-pointer ${
+                        className={`ml-auto px-2.5 sm:px-4 py-1 sm:py-1.5 text-[10px] sm:text-[12px] font-medium rounded-lg border transition-colors cursor-pointer shrink-0 ${
                           isFollowed
                             ? "bg-black text-white border-black"
                             : "bg-white text-black border-black hover:bg-zinc-100"
